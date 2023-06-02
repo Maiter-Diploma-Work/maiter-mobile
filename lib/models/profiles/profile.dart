@@ -1,4 +1,5 @@
-import 'package:maiter/models/location.dart';
+import 'package:maiter/models/shared/location.dart';
+import 'package:maiter/models/shared/interest.dart';
 
 abstract class Profile {
   int id;
@@ -6,6 +7,13 @@ abstract class Profile {
   String description;
   String photo;
   Location location;
+  List<Interest> interests;
 
-  Profile(this.name, this.description, this.id, this.location, this.photo);
+  Profile(
+      {required this.name,
+      required this.description,
+      required this.id,
+      required this.location,
+      required this.photo,
+      required this.interests});
 }

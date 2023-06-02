@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:maiter/shared/profile/description.dart';
+import 'package:maiter/shared/profile/interests.dart';
+import 'package:maiter/shared/profile/location.dart';
+import 'package:maiter/user_profile_view/user_profile_name.dart';
 import '../models/profiles/user_profile.dart';
 import '../shared/profile/profile_action_panel.dart';
 import '../shared/profile/profile_picture.dart';
@@ -13,79 +17,57 @@ class UserProfileView extends StatefulWidget {
 }
 
 class _UserProfileViewState extends State<UserProfileView> {
+  RoundedRectangleBorder shape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(14.0),
+  );
+
   void dislikePressed() {}
 
   void settingsPressed() {}
 
   void likePressed() {}
 
+  List<Widget> bodyContentGenerator() {
+    return [
+      UserProfileName(name: widget.profile.name, age: widget.profile.age),
+      LocationView(location: widget.profile.location),
+      ProfileDescription(description: widget.profile.description),
+      Interests(interests: widget.profile.interests)
+    ];
+  }
+
+  Widget bodyGenerator() {
+    return Card(
+      shape: shape,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
+        child: Column(
+          children: bodyContentGenerator(),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 42.0, right: 42.0, top: 14.0),
-      child: Column(
+    return Center(
+      child: ListView(
+        padding: const EdgeInsets.only(
+          left: 42.0,
+          right: 42.0,
+          top: 14.0,
+          bottom: 64.0,
+        ),
         children: [
           const ProfilePicture(pictureUrl: 'assets/anna_shapovalova.PNG'),
-          //Profile info
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: 8.0, left: 30, right: 30, top: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(widget.profile.name,
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w500,
-                            )),
-                        Text(widget.profile.age.toString(),
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w500,
-                            ))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(left: 26),
-                          child: Icon(Icons.place_outlined),
-                        ),
-                        Text(
-                          widget.profile.location.name,
-                          style: const TextStyle(fontSize: 18.0),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 8.0, left: 30, right: 30),
-                    child: Text(
-                      widget.profile.description,
-                      style: const TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          bodyGenerator(),
           ProfileActionPanel(
             iconButtons: [
               IconButton(
-                icon: const Icon(Icons.thumb_down, color: Colors.indigo),
+                icon: Icon(
+                  Icons.thumb_down,
+                  color: Theme.of(context).colorScheme.error,
+                ),
                 onPressed: dislikePressed,
               ),
               IconButton(
@@ -93,7 +75,10 @@ class _UserProfileViewState extends State<UserProfileView> {
                 onPressed: settingsPressed,
               ),
               IconButton(
-                icon: const Icon(Icons.thumb_up, color: Colors.pink),
+                icon: Icon(
+                  Icons.thumb_up,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
                 onPressed: likePressed,
               ),
             ],
