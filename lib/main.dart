@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:maiter/user_profile_view/anna_shapovalova.dart';
 import 'package:maiter/user_profile_view/user_profile_view.dart';
+import 'package:maiter/welcome_view/welcome_view.dart';
+
+import './routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,15 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
           primary: Color(0xFF303F9F),
-          secondary: Color(0xFFFAD300),
-          error: Color(0xFFb43f3f),
+          secondary: Color(0xFFffbc58),
+          tertiary: Color(0xFFe95184),
+          error: Color(0xFFe95184),
           background: Color(0xFFD9D9D9),
           surface: Color(0xFFD9D9D9),
           onPrimary: Colors.white,
@@ -29,7 +33,8 @@ class MyApp extends StatelessWidget {
           onSecondary: Colors.black,
         ),
       ),
-      home: const MyHomePage(title: 'Maiter'),
+
+      routerConfig: router,
     );
   }
 }
@@ -56,41 +61,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.centerRight,
-          child: Text(widget.title),
-        ),
-      ),
-      body: UserProfileView(profile: AnnaShapovalova),
-      bottomSheet: Container(
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Center(
-          child: Text(
-            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
-            '',
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
-        selectedItemColor: Theme.of(context).colorScheme.secondary,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'search'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'chat'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle), label: 'create'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'likes'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: navigationBarItemTapped,
-      ),
+    return const Scaffold(
+      // appBar: AppBar(
+      //   title: Align(
+      //     alignment: Alignment.center,
+      //     child: Text(widget.title),
+      //   ),
+      // ),
+      extendBody: true,
+      body: WelcomeScreen(),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   type: BottomNavigationBarType.fixed,
+      //   backgroundColor: Theme.of(context).colorScheme.primary,
+      //   unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
+      //   selectedItemColor: Theme.of(context).colorScheme.secondary,
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'search'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'chat'),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.add_circle), label: 'create'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'likes'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   onTap: navigationBarItemTapped,
+      // ),
     );
   }
 }

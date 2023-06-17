@@ -27,7 +27,7 @@ class _MaiterButtonState extends State<MaiterButton> {
               widget.color ?? Theme.of(context).colorScheme.error),
           foregroundColor: MaterialStateProperty.all(
               widget.textColor ?? Theme.of(context).colorScheme.onError),
-          minimumSize: MaterialStateProperty.all(const Size(185, 38))),
+          minimumSize: MaterialStateProperty.all(const Size(145, 38))),
       child: Text(
         widget.text,
         textAlign: TextAlign.center,

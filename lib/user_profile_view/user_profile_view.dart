@@ -48,42 +48,56 @@ class _UserProfileViewState extends State<UserProfileView> {
     );
   }
 
+  void onDrag(DragUpdateDetails details) {
+    int sensitivity = 8;
+    if (details.delta.dx > sensitivity) {
+      // Right Swipe
+      debugPrint('Right Swipe, $sensitivity');
+    } else if(details.delta.dx < -sensitivity){
+      //Left Swipe
+      debugPrint('Left Swipe, $sensitivity');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ListView(
-        padding: const EdgeInsets.only(
-          left: 42.0,
-          right: 42.0,
-          top: 14.0,
-          bottom: 64.0,
+      child: GestureDetector(
+        onHorizontalDragUpdate: onDrag,
+        child: ListView(
+          padding: const EdgeInsets.only(
+            left: 42.0,
+            right: 42.0,
+            top: 14.0,
+            bottom: 64.0,
+          ),
+          children: [
+            const ProfilePicture(pictureUrl: 'assets/anna_shapovalova.PNG'),
+            bodyGenerator(),
+            ProfileActionPanel(
+              iconButtons: [
+                IconButton(
+                  icon: Icon(
+                    Icons.thumb_down,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  onPressed: dislikePressed,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.more_horiz),
+                  onPressed: settingsPressed,
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.thumb_up,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  onPressed: likePressed,
+                ),
+              ],
+            )
+          ],
         ),
-        children: [
-          const ProfilePicture(pictureUrl: 'assets/anna_shapovalova.PNG'),
-          bodyGenerator(),
-          ProfileActionPanel(
-            iconButtons: [
-              IconButton(
-                icon: Icon(
-                  Icons.thumb_down,
-                  color: Theme.of(context).colorScheme.error,
-                ),
-                onPressed: dislikePressed,
-              ),
-              IconButton(
-                icon: const Icon(Icons.settings),
-                onPressed: settingsPressed,
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.thumb_up,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                onPressed: likePressed,
-              ),
-            ],
-          )
-        ],
       ),
     );
   }
