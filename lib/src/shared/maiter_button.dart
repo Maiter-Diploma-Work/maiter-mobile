@@ -23,11 +23,16 @@ class _MaiterButtonState extends State<MaiterButton> {
     return TextButton(
       onPressed: widget.onPressed,
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-              widget.color ?? Theme.of(context).colorScheme.error),
-          foregroundColor: MaterialStateProperty.all(
-              widget.textColor ?? Theme.of(context).colorScheme.onError),
-          minimumSize: MaterialStateProperty.all(const Size(145, 38))),
+        backgroundColor: MaterialStateProperty.all(
+          widget.color ?? Theme.of(context).colorScheme.tertiary,
+        ),
+        foregroundColor: MaterialStateProperty.all(
+          widget.textColor ?? Theme.of(context).colorScheme.onError,
+        ),
+        minimumSize: MaterialStateProperty.all(
+          const Size(145, 38),
+        ),
+      ),
       child: Text(
         widget.text,
         textAlign: TextAlign.center,

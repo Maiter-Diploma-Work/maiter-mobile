@@ -17,7 +17,6 @@ class MaiterTextFormInput extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(0),
       child: Column(
         children: [
-          //TODO: validators
           Text(
             fieldName,
             style: const TextStyle(
@@ -27,9 +26,12 @@ class MaiterTextFormInput extends StatelessWidget {
             ),
             textAlign: TextAlign.left,
           ),
-          TextFormField(
+          TextField(
             decoration: InputDecoration(
-                hintText: hintText, fillColor: Colors.white, filled: true),
+              hintText: hintText,
+              fillColor: Colors.white,
+              filled: true,
+            ),
           ),
         ],
       ),

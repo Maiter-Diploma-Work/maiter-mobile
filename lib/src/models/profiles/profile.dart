@@ -1,5 +1,5 @@
-import 'package:maiter/models/shared/location.dart';
-import 'package:maiter/models/shared/interest.dart';
+import '../shared/interest.dart';
+import '../shared/location.dart';
 
 abstract class Profile {
   int id;

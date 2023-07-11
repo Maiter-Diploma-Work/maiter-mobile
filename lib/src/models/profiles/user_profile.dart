@@ -1,4 +1,4 @@
-import 'package:maiter/models/profiles/profile.dart';
+import 'package:maiter/src/models/profiles/profile.dart';
 
 class UserProfile extends Profile {
   int age;

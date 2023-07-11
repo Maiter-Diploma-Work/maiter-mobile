@@ -1,13 +1,14 @@
+import '../models/profiles/user_profile.dart';
 import '../models/shared/interest.dart';
 import '../models/shared/location.dart';
-import '../../models/profiles/user_profile.dart';
 
 final UserProfile AnnaShapovalova = UserProfile(
     id: 1,
     age: 20,
     tag: '@shapokanyutko',
     name: "Анна Шаповалова",
-    description: "Центр чи майже він\nШукаю спілкування та прогулянки під місяцем\nНе проти?",
+    description:
+        "Центр чи майже він\nШукаю спілкування та прогулянки під місяцем\nНе проти?",
     location: Location(
         postcode: 69001,
         name: "Zaporizhzhia",

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../shared/gap.dart';
-import '../../shared/maiter_text_form_input.dart';
-import '../../shared/title.dart' as title;
-import '../../shared/maiter_button.dart';
+import 'package:maiter/src/layouts/start_screen.dart';
+import 'package:maiter/src/shared/gap.dart';
+import 'package:maiter/src/shared/maiter_button.dart';
+import 'package:maiter/src/shared/maiter_text_form_input.dart';
+import 'package:maiter/src/shared/title.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
+  void _onLoginClick(BuildContext context) {
+    context.go('/search/user');
+  }
 
   Form formGenerator(BuildContext context) {
     return Form(
@@ -26,7 +30,10 @@ class LoginScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              MaiterButton(onPressed: () => {}, text: "log in"),
+              MaiterButton(
+                onPressed: () => _onLoginClick(context),
+                text: "log in",
+              ),
               const Gap.cubic(15),
               MaiterButton(
                   onPressed: () => context.go('/auth/register'),
@@ -40,22 +47,24 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            //TODO: remove the magic strings
-            const title.Title(text: "Welcome to"),
-            const Gap.cubic(20.0),
-            const title.Title(text: "Maiter"),
-            const Gap.cubic(60.0),
-            formGenerator(context),
-          ],
-        ),
+    return StartScreen(
+      screenBody: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //TODO: remove the magic strings
+          const MaiterTitle(text: "Welcome to"),
+          const Gap(
+            horizontalGap: 20.0,
+            verticalGap: 20.0,
+          ),
+          const MaiterTitle(text: "Maiter"),
+          const Gap(
+            horizontalGap: 20.0,
+            verticalGap: 20.0,
+          ),
+          formGenerator(context),
+        ],
       ),
     );
   }
