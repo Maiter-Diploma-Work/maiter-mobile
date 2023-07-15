@@ -4,16 +4,17 @@ import '../shared/location.dart';
 abstract class Profile {
   int id;
   String name;
-  String description;
+  String? description;
   String photo;
   Location location;
   List<Interest> interests;
 
-  Profile(
-      {required this.name,
-      required this.description,
-      required this.id,
-      required this.location,
-      required this.photo,
-      required this.interests});
+  Profile({
+    required this.name,
+    required this.id,
+    required this.location,
+    required this.photo,
+    required this.interests,
+    this.description,
+  });
 }

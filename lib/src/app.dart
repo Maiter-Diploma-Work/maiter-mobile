@@ -13,14 +13,7 @@ class Maiter extends StatefulWidget {
 }
 
 class _MaiterState extends State<Maiter> {
-  int _selectedIndex = 0;
   final MaiterAuth _auth = MaiterAuth();
-
-  void navigationBarItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   void _handleAuthStateChanged() {
     if (!_auth.signedIn) {
@@ -39,25 +32,47 @@ class _MaiterState extends State<Maiter> {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = const Color(0xFF303F9F);
+    Color secondaryColor = const Color(0xFF7E18FF);
+    Color tertiaryColor = const Color(0xFFFFBC58);
+    Color errorColor = const Color(0xFFe95184);
+    Color backgroundColor = const Color(0xFF222222);
+    Color surfaceColor = const Color(0xFF131111);
+    Color onPrimaryColor = Colors.white;
+    Color onBackgroundColor = Colors.white;
+    Color onErrorColor = Colors.white;
+    Color onSurfaceColor = Colors.white;
+    Color onSecondaryColor = Colors.black;
+
     return MaiterAuthScope(
       notifier: _auth,
       child: MaterialApp.router(
         title: widget.title,
         theme: ThemeData(
           primarySwatch: Colors.indigo,
-          colorScheme: const ColorScheme(
-            brightness: Brightness.light,
-            primary: Color(0xFF303F9F),
-            secondary: Color(0xFF7E18FF),
-            tertiary: Color(0xFFFFBC58),
-            error: Color(0xFFe95184),
-            background: Color(0xFFFFFFFF),
-            surface: Color(0xFF131111),
-            onPrimary: Colors.white,
-            onBackground: Colors.white,
-            onError: Colors.white,
-            onSurface: Colors.black,
-            onSecondary: Colors.black,
+          colorScheme: ColorScheme(
+            brightness: Brightness.dark,
+            primary: primaryColor,
+            secondary: secondaryColor,
+            tertiary: tertiaryColor,
+            error: errorColor,
+            background: backgroundColor,
+            surface: surfaceColor,
+            onPrimary: onPrimaryColor,
+            onBackground: onBackgroundColor,
+            onError: onErrorColor,
+            onSurface: onSurfaceColor,
+            onSecondary: onSecondaryColor,
+          ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: primaryColor,
+            selectedItemColor: tertiaryColor,
+            selectedLabelStyle: TextStyle(
+              color: tertiaryColor,
+              fontWeight: FontWeight.w500,
+            ),
+            unselectedItemColor: onPrimaryColor,
+            type: BottomNavigationBarType.fixed,
           ),
           pageTransitionsTheme: const PageTransitionsTheme(
             builders: {

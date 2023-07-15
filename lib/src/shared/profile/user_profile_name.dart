@@ -4,9 +4,15 @@ class UserProfileName extends StatefulWidget {
   final String name;
   final String tag;
   final int age;
+  EdgeInsets? padding;
 
-  const UserProfileName(
-      {super.key, required this.name, required this.age, required this.tag});
+  UserProfileName({
+    super.key,
+    required this.name,
+    required this.age,
+    required this.tag,
+    this.padding,
+  });
 
   @override
   State<StatefulWidget> createState() => _UserProfileNameState();
@@ -22,7 +28,11 @@ class _UserProfileNameState extends State<UserProfileName> {
           textGenerator(widget.name),
           Text(
             widget.tag,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
         ],
       ),
@@ -33,24 +43,22 @@ class _UserProfileNameState extends State<UserProfileName> {
   Widget textGenerator(String text) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.w500,
+        color: Theme.of(context).colorScheme.onPrimary,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(
-            bottom: 8.0, left: 20.0, right: 20.0, top: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: getProfileName(),
-        ),
+    return Padding(
+      padding: widget.padding ?? const EdgeInsets.all(0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: getProfileName(),
       ),
     );
   }

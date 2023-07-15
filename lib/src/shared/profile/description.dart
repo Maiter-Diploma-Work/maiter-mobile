@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:maiter/src/shared/delimeter.dart';
 
 class ProfileDescription extends StatefulWidget {
-  final String description;
+  final String? description;
 
   const ProfileDescription({super.key, required this.description});
 
@@ -12,11 +13,13 @@ class ProfileDescription extends StatefulWidget {
 class _ProfileDescriptionState extends State<ProfileDescription> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
-      child: Text(
-        widget.description,
-        style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
+    return Text(
+      widget.description ?? '',
+      style: TextStyle(
+        fontSize: 18.0,
+        fontWeight: FontWeight.w300,
+        height: 1.25,
+        color: Theme.of(context).colorScheme.onPrimary,
       ),
     );
   }

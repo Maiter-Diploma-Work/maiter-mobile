@@ -6,12 +6,13 @@ class ProfilePicture extends StatefulWidget {
   bool? hasBoxShadow;
   bool? isRound;
 
-  ProfilePicture(
-      {super.key,
-      required this.pictureUrl,
-      this.padding,
-      this.hasBoxShadow,
-      this.isRound});
+  ProfilePicture({
+    super.key,
+    required this.pictureUrl,
+    this.padding,
+    this.hasBoxShadow,
+    this.isRound,
+  });
 
   @override
   State<StatefulWidget> createState() => _ProfilePictureState();
@@ -38,9 +39,10 @@ class _ProfilePictureState extends State<ProfilePicture> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(68.0),
           child: const Image(
-              //TODO: make the image dynamic instead of constants
-              image: AssetImage('assets/anna_shapovalova.PNG'),
-              fit: BoxFit.fill),
+            //TODO: make the image dynamic instead of constants
+            image: AssetImage('assets/anna_shapovalova.PNG'),
+            fit: BoxFit.cover,
+          ),
         ),
       );
     } else {
@@ -53,13 +55,9 @@ class _ProfilePictureState extends State<ProfilePicture> {
 
   @override
   Widget build(BuildContext context) {
-    bool hasBoxShadow = widget.hasBoxShadow ?? true;
-    return Expanded(
-      // decoration: hasBoxShadow ? boxDecoration : const BoxDecoration(),
-      child: Padding(
-        padding: widget.padding ?? const EdgeInsets.all(0),
-        child: imageGenerator(widget.isRound ?? false),
-      ),
+    return Padding(
+      padding: widget.padding ?? const EdgeInsets.all(0),
+      child: imageGenerator(widget.isRound ?? false),
     );
   }
 }

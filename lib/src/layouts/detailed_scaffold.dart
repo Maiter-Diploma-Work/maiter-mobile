@@ -1,28 +1,31 @@
 import 'package:adaptive_navigation/adaptive_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/shared/maiter_bottom_navigation_bar.dart';
 
-class MaiterScaffold extends StatefulWidget {
+import '../shared/maiter_bottom_navigation_bar.dart';
+
+class MaiterDetailedScaffold extends StatefulWidget {
   final String title;
   final Widget scaffoldBody;
 
-  const MaiterScaffold({
+  const MaiterDetailedScaffold({
     super.key,
     required this.title,
     required this.scaffoldBody,
   });
 
   @override
-  State<MaiterScaffold> createState() => _MaiterScaffoldState();
+  State<MaiterDetailedScaffold> createState() => _MaiterDetailedScaffoldState();
 }
 
-class _MaiterScaffoldState extends State<MaiterScaffold> {
+class _MaiterDetailedScaffoldState extends State<MaiterDetailedScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,7 +33,7 @@ class _MaiterScaffoldState extends State<MaiterScaffold> {
           children: [
             IconButton(
               icon: const Icon(Icons.arrow_back),
-              onPressed: () => {},
+              onPressed: () => context.go('/search/user'),
             ),
             Text(widget.title),
             IconButton(

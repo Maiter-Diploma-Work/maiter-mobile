@@ -15,12 +15,11 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
-            Theme.of(context).colorScheme.secondary,
-            Theme.of(context).colorScheme.error
-            // const Color(0xFF7C18FF)
-          ], transform: const GradientRotation(1.5)),
+            Color(0xFF7E18FF),
+            Color(0xFFe95184),
+          ], transform: GradientRotation(1.5)),
         ),
         child: widget.screenBody,
       ),
