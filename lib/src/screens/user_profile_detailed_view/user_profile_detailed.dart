@@ -78,8 +78,6 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          education,
-          generateDelimeter(widget.profile.education != null),
           location,
           const Delimeter(
             bottomMargin: 12,
@@ -87,6 +85,9 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
           ),
           socialNetworks,
           generateDelimeter(widget.profile.socialNetworks != null),
+          //Should it even be?
+          education,
+          generateDelimeter(widget.profile.education != null),
           ProfileDescription(
             description: widget.profile.description,
           ),
@@ -140,12 +141,18 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
     String? education = widget.profile.education;
     if (education == null) return Container();
 
-    return Row(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        // textGenerator('education: ', FontWeight.w500),
-        const Gap(verticalGap: 0, horizontalGap: 14.0),
-        textGenerator(education),
+        Text(
+          education,
+          style: const TextStyle(
+            fontSize: 18,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ],
     );
   }

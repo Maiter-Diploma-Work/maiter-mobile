@@ -1,24 +1,22 @@
-import 'package:adaptive_navigation/adaptive_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../shared/maiter_bottom_navigation_bar.dart';
 
-class MaiterDetailedScaffold extends StatefulWidget {
+class MaiterDetailedScaffold extends StatelessWidget {
   final String title;
+  final String backRoute;
   final Widget scaffoldBody;
+  final int selectedNavigationItemIndex;
 
   const MaiterDetailedScaffold({
     super.key,
     required this.title,
     required this.scaffoldBody,
+    required this.selectedNavigationItemIndex,
+    required this.backRoute,
   });
 
-  @override
-  State<MaiterDetailedScaffold> createState() => _MaiterDetailedScaffoldState();
-}
-
-class _MaiterDetailedScaffoldState extends State<MaiterDetailedScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +31,9 @@ class _MaiterDetailedScaffoldState extends State<MaiterDetailedScaffold> {
           children: [
             IconButton(
               icon: const Icon(Icons.arrow_back),
-              onPressed: () => context.go('/search/user'),
+              onPressed: () => context.go(backRoute),
             ),
-            Text(widget.title),
+            Text(title),
             IconButton(
               icon: const Icon(Icons.menu),
               onPressed: () => {},
@@ -43,8 +41,10 @@ class _MaiterDetailedScaffoldState extends State<MaiterDetailedScaffold> {
           ],
         ),
       ),
-      bottomNavigationBar: const MaiterBottomNavigationBar(),
-      body: widget.scaffoldBody,
+      bottomNavigationBar: MaiterBottomNavigationBar(
+        selectedIndex: selectedNavigationItemIndex,
+      ),
+      body: scaffoldBody,
     );
   }
 }

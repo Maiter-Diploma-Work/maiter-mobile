@@ -3,21 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maiter/src/shared/maiter_bottom_navigation_bar.dart';
 
-class MaiterScaffold extends StatefulWidget {
+class MaiterScaffold extends StatelessWidget {
   final String title;
   final Widget scaffoldBody;
+  final int selectedNavigationItemIndex;
 
   const MaiterScaffold({
     super.key,
     required this.title,
     required this.scaffoldBody,
+    required this.selectedNavigationItemIndex,
   });
 
-  @override
-  State<MaiterScaffold> createState() => _MaiterScaffoldState();
-}
-
-class _MaiterScaffoldState extends State<MaiterScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +29,7 @@ class _MaiterScaffoldState extends State<MaiterScaffold> {
               icon: const Icon(Icons.arrow_back),
               onPressed: () => {},
             ),
-            Text(widget.title),
+            Text(title),
             IconButton(
               icon: const Icon(Icons.menu),
               onPressed: () => {},
@@ -40,8 +37,10 @@ class _MaiterScaffoldState extends State<MaiterScaffold> {
           ],
         ),
       ),
-      bottomNavigationBar: const MaiterBottomNavigationBar(),
-      body: widget.scaffoldBody,
+      bottomNavigationBar: MaiterBottomNavigationBar(
+        selectedIndex: selectedNavigationItemIndex,
+      ),
+      body: scaffoldBody,
     );
   }
 }

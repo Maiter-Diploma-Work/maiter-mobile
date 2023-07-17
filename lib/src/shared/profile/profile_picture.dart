@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 
 class ProfilePicture extends StatefulWidget {
   final String pictureUrl;
+  final double? radius;
   EdgeInsets? padding;
   bool? hasBoxShadow;
   bool? isRound;
 
-  ProfilePicture({
-    super.key,
-    required this.pictureUrl,
-    this.padding,
-    this.hasBoxShadow,
-    this.isRound,
-  });
+  ProfilePicture(
+      {super.key,
+      required this.pictureUrl,
+      this.padding,
+      this.hasBoxShadow,
+      this.isRound,
+      this.radius});
 
   @override
   State<StatefulWidget> createState() => _ProfilePictureState();
@@ -46,9 +47,9 @@ class _ProfilePictureState extends State<ProfilePicture> {
         ),
       );
     } else {
-      return const CircleAvatar(
-        radius: 25,
-        backgroundImage: AssetImage('assets/anna_shapovalova.PNG'),
+      return CircleAvatar(
+        radius: widget.radius,
+        backgroundImage: const AssetImage('assets/anna_shapovalova.PNG'),
       );
     }
   }

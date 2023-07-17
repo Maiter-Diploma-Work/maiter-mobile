@@ -7,6 +7,9 @@ final UserProfile AnnaShapovalova = UserProfile(
   age: 20,
   tag: '@shapokanyutko',
   name: "Анна Шаповалова",
+  gender: 'Female',
+  birthDate: DateTime(2003, 4, 23),
+  education: 'Zaporizhzhian National University',
   description:
       "Центр чи майже він\nШукаю спілкування та прогулянки під місяцем\nНе проти?",
   location: Location(

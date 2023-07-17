@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 class MaiterTextFormInput extends StatelessWidget {
   final String fieldName;
   final String hintText;
+  final String? initialValue;
   final EdgeInsets? padding;
+  final int? maxLines;
 
-  const MaiterTextFormInput(
-      {super.key,
-      required this.fieldName,
-      required this.hintText,
-      this.padding});
+  const MaiterTextFormInput({
+    super.key,
+    required this.fieldName,
+    required this.hintText,
+    this.padding,
+    this.maxLines,
+    this.initialValue,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +31,13 @@ class MaiterTextFormInput extends StatelessWidget {
             ),
             textAlign: TextAlign.left,
           ),
-          TextField(
+          TextFormField(
+            initialValue: initialValue,
+            maxLines: maxLines ?? 1,
             decoration: InputDecoration(
               hintText: hintText,
-              fillColor: Colors.white,
               filled: true,
+              hintStyle: const TextStyle(color: Color(0x99FFFFFF)),
             ),
           ),
         ],

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MaiterBottomNavigationBar extends StatefulWidget {
-  const MaiterBottomNavigationBar({Key? key}) : super(key: key);
+  final int selectedIndex;
+
+  const MaiterBottomNavigationBar({
+    Key? key,
+    required this.selectedIndex,
+  }) : super(key: key);
 
   @override
   _MaiterBottomNavigationBarState createState() =>
@@ -9,16 +15,10 @@ class MaiterBottomNavigationBar extends StatefulWidget {
 }
 
 class _MaiterBottomNavigationBarState extends State<MaiterBottomNavigationBar> {
-  int _selectedIndex = 0;
-
   void _onDestinationSelected(int idx, BuildContext context) {
-    setState(() {
-      _selectedIndex = idx;
-    });
-
     switch (idx) {
       case 0:
-        // context.go('/search/user');
+        context.go('/search/user');
         break;
       case 1:
         // context.go('/likes');
@@ -27,7 +27,7 @@ class _MaiterBottomNavigationBarState extends State<MaiterBottomNavigationBar> {
         // context.go('/chat');
         break;
       case 3:
-        // context.go('/profile');
+        context.go('/profile');
         break;
       default:
         break;
@@ -37,7 +37,7 @@ class _MaiterBottomNavigationBarState extends State<MaiterBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: _selectedIndex,
+      currentIndex: widget.selectedIndex ?? 0,
       onTap: (value) => _onDestinationSelected(value, context),
       items: const [
         BottomNavigationBarItem(
