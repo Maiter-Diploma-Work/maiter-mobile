@@ -1,12 +1,11 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:maiter/src/data/anna_shapovalova.dart';
 import 'package:maiter/src/models/profiles/user_profile.dart';
 import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/maiter_button.dart';
-import 'package:maiter/src/shared/maiter_datepicker.dart';
-import 'package:maiter/src/shared/maiter_select.dart';
-import 'package:maiter/src/shared/maiter_text_form_input.dart';
+import 'package:maiter/src/shared/inputs/maiter_button.dart';
+import 'package:maiter/src/shared/inputs/maiter_datepicker.dart';
+import 'package:maiter/src/shared/inputs/maiter_select.dart';
+import 'package:maiter/src/shared/inputs/maiter_text_form_input.dart';
 
 class ProfileEditView extends StatefulWidget {
   final UserProfile profile;

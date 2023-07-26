@@ -4,7 +4,7 @@ import 'package:maiter/src/models/profiles/user_profile.dart';
 import 'package:maiter/src/screens/profile_view/link_button.dart';
 import 'package:maiter/src/screens/profile_view/short_profile_overview.dart';
 import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/maiter_button.dart';
+import 'package:maiter/src/shared/inputs/maiter_button.dart';
 
 class ProfileView extends StatefulWidget {
   final UserProfile profile;

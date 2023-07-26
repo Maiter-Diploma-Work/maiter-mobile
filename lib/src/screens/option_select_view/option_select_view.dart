@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maiter/src/screens/option_select_view/option_select_item.dart';
 import 'package:maiter/src/screens/profile_view/link_button.dart';
 import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/maiter_button.dart';
+import 'package:maiter/src/shared/inputs/maiter_button.dart';
 
 class OptionSelect<T extends OptionSelectItem> extends StatefulWidget {
   final List<T> options;

@@ -38,6 +38,7 @@ dependencies:
   go_router: ^8.0.2
   adaptive_navigation: ^0.0.9
   file_picker: ^5.3.2
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -72,11 +73,12 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
-    - assets/anna_shapovalova.PNG
-    - assets/anna_shapovalova_1.jpg
-    - assets/anna_shapovalova_2.jpg
-    - assets/anna_shapovalova_3.jpg
-    - assets/anna_shapovalova_4.jpg
+    - assets/valentyn_kushnirow.jpg
+    - assets/valentyn_kushnirow_1.jpg
+    - assets/valentyn_kushnirow_2.jpg
+    - assets/valentyn_kushnirow_3.jpg
+    - assets/valentyn_kushnirow_4.jpg
+    - assets/mock_users.json
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

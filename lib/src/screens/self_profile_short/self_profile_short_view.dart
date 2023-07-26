@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maiter/src/data/anna_shapovalova.dart';
+import 'package:maiter/src/models/profiles/user_profile.dart';
 import 'package:maiter/src/shared/profile/profile_picture.dart';
 import 'package:maiter/src/shared/profile/user_profile_name.dart';
 
 class SelfProfileShortView extends StatefulWidget {
-  const SelfProfileShortView({super.key});
+  final UserProfile profile;
+  const SelfProfileShortView({super.key, required this.profile});
 
   @override
   State<StatefulWidget> createState() => _SelfProfileShortViewState();
@@ -35,16 +36,16 @@ class _SelfProfileShortViewState extends State<SelfProfileShortView> {
             width: 64,
             decoration: const BoxDecoration(shape: BoxShape.circle),
             child: ProfilePicture(
-              pictureUrl: AnnaShapovalova.photo,
+              pictureUrl: widget.profile.photo,
               hasBoxShadow: false,
               isRound: true,
             ),
           ),
           Expanded(
             child: UserProfileName(
-              name: AnnaShapovalova.name,
-              age: AnnaShapovalova.age,
-              tag: AnnaShapovalova.tag,
+              name: widget.profile.name,
+              age: widget.profile.age,
+              tag: widget.profile.tag,
             ),
           ),
         ],

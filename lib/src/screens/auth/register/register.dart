@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/maiter_button.dart';
-import 'package:maiter/src/shared/maiter_text_form_input.dart';
-import 'package:maiter/src/shared/title.dart';
+import 'package:maiter/src/shared/inputs/maiter_button.dart';
+import 'package:maiter/src/shared/inputs/maiter_text_form_input.dart';
+import 'package:maiter/src/screens/auth/title.dart';
 
 import '../../../layouts/start_screen.dart';
 

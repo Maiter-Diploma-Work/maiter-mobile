@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../layouts/start_screen.dart';
 import '../../shared/gap.dart';
-import '../../shared/maiter_button.dart';
-import '../../shared/title.dart' as title;
+import '../../shared/inputs/maiter_button.dart';
+import '../auth/title.dart' as title;
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

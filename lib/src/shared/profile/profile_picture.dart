@@ -41,7 +41,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
           borderRadius: BorderRadius.circular(68.0),
           child: const Image(
             //TODO: make the image dynamic instead of constants
-            image: AssetImage('assets/anna_shapovalova.PNG'),
+            image: AssetImage('assets/valentyn_kushnirow.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -49,7 +49,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
     } else {
       return CircleAvatar(
         radius: widget.radius,
-        backgroundImage: const AssetImage('assets/anna_shapovalova.PNG'),
+        backgroundImage: const AssetImage('assets/valentyn_kushnirow.jpg'),
       );
     }
   }

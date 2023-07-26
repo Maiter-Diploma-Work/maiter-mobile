@@ -1,8 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/data/anna_shapovalova.dart';
+import 'package:maiter/src/data/valentyn_kushniow.dart';
 import 'package:maiter/src/layouts/scaffold.dart';
 import 'package:maiter/src/screens/auth/login/login.dart';
 import 'package:maiter/src/screens/auth/register/register.dart';
+import 'package:maiter/src/screens/chat/chat-list.dart';
+import 'package:maiter/src/screens/chat/chat.dart';
+import 'package:maiter/src/screens/chat/chat_app_bar_title.dart';
 import 'package:maiter/src/screens/option_select_view/option_select_item.dart';
 import 'package:maiter/src/screens/option_select_view/option_select_view.dart';
 import 'package:maiter/src/screens/profile_view/profile_edit_view/profile_edit_view.dart';
@@ -11,114 +15,136 @@ import 'package:maiter/src/screens/user_profile_detailed_view/user_profile_detai
 import 'package:maiter/src/screens/user_profile_view/user_profile_view.dart';
 import 'package:maiter/src/screens/welcome_view/welcome_view.dart';
 
-import 'layouts/detailed_scaffold.dart';
+//TODO: State management
 
 final searchUser = GoRoute(
-  path: '/search/user',
+  path: 'search/user',
   builder: (context, state) => MaiterScaffold(
     title: "User Search",
     scaffoldBody: UserProfileView(
-      profile: AnnaShapovalova,
+      profile: ValentynKushnirow,
     ),
     selectedNavigationItemIndex: 0,
+    isDetailed: false,
   ),
-);
-
-final detailedUser = GoRoute(
-  path: '/search/user/details',
-  builder: (context, state) => MaiterDetailedScaffold(
-    title: "",
-    scaffoldBody: UserProfileDetailed(
-      profile: AnnaShapovalova,
-    ),
-    selectedNavigationItemIndex: 0,
-    backRoute: '/search/user',
-  ),
-);
-
-final search = GoRoute(
-  path: '/search',
   routes: [
-    searchUser,
-    //searchEvent,
-    //searchGroup
+    GoRoute(
+      path: 'details',
+      builder: (context, state) => MaiterScaffold(
+        isDetailed: true,
+        title: "",
+        scaffoldBody: UserProfileDetailed(
+          profile: ValentynKushnirow,
+        ),
+        selectedNavigationItemIndex: 0,
+      ),
+    ),
   ],
 );
 
 final login = GoRoute(
-  path: '/auth/login',
+  path: 'auth/login',
   builder: (context, state) => const LoginScreen(),
 );
 final register = GoRoute(
-  path: '/auth/register',
+  path: 'auth/register',
   builder: (context, state) => const RegisterScreen(),
 );
 
 final profile = GoRoute(
-  path: '/profile',
+  path: 'profile',
   builder: (context, state) => MaiterScaffold(
     title: 'Your Profile',
-    scaffoldBody: ProfileView(profile: AnnaShapovalova),
+    scaffoldBody: ProfileView(profile: ValentynKushnirow),
     selectedNavigationItemIndex: 3,
+    isDetailed: false,
   ),
-);
-
-final profileSelectTheme = GoRoute(
-  path: '/profile/theme',
-  builder: (context, state) => MaiterDetailedScaffold(
-    backRoute: '/profile',
-    selectedNavigationItemIndex: 3,
-    title: 'Theme selection',
-    scaffoldBody: OptionSelect(
-      options: [
-        OptionSelectItem("light"),
-        OptionSelectItem("dark"),
-        OptionSelectItem("summer"),
-        OptionSelectItem("fall"),
-        OptionSelectItem("winter"),
-        OptionSelectItem("spring"),
-      ],
+  routes: [
+    GoRoute(
+      path: 'edit',
+      builder: (context, state) => MaiterScaffold(
+        isDetailed: true,
+        title: 'Edit Profile',
+        scaffoldBody: ProfileEditView(profile: ValentynKushnirow),
+        selectedNavigationItemIndex: 3,
+      ),
     ),
-  ),
-);
-
-//TODO: REMOVE THE HARCODE
-final profileSelectLanguage = GoRoute(
-  path: '/profile/language',
-  builder: (context, state) => MaiterDetailedScaffold(
-    backRoute: '/profile',
-    selectedNavigationItemIndex: 3,
-    title: 'Language selection',
-    scaffoldBody: OptionSelect(
-      options: [
-        OptionSelectItem("English"),
-        OptionSelectItem("Українська"),
-      ],
+    //TODO: remove the hardcode
+    GoRoute(
+      path: 'theme',
+      builder: (context, state) => MaiterScaffold(
+        isDetailed: true,
+        selectedNavigationItemIndex: 3,
+        title: 'Theme selection',
+        scaffoldBody: OptionSelect(
+          options: [
+            OptionSelectItem("light"),
+            OptionSelectItem("dark"),
+            OptionSelectItem("summer"),
+            OptionSelectItem("fall"),
+            OptionSelectItem("winter"),
+            OptionSelectItem("spring"),
+          ],
+        ),
+      ),
     ),
-  ),
+    GoRoute(
+      path: 'language',
+      builder: (context, state) => MaiterScaffold(
+        isDetailed: true,
+        selectedNavigationItemIndex: 3,
+        title: 'Language selection',
+        scaffoldBody: OptionSelect(
+          options: [
+            OptionSelectItem("English"),
+            OptionSelectItem("Українська"),
+          ],
+        ),
+      ),
+    ),
+  ],
 );
 
-final profileEdit = GoRoute(
-  path: '/profile/edit',
-  builder: (context, state) => MaiterDetailedScaffold(
-    title: 'Edit Profile',
-    scaffoldBody: ProfileEditView(profile: AnnaShapovalova),
-    selectedNavigationItemIndex: 3,
-    backRoute: '/profile',
+final chat = GoRoute(
+  path: 'chat-list',
+  builder: (context, state) => const MaiterScaffold(
+    title: 'Chats',
+    scaffoldBody: ChatListView(
+      chats: [],
+    ),
+    selectedNavigationItemIndex: 2,
+    isDetailed: false,
   ),
+  routes: [
+    GoRoute(
+      path: ':user_id',
+      builder: (context, state) => MaiterScaffold(
+        title: '',
+        scaffoldAppBarTitle:
+            ChatAppBarTitle(userId: state.pathParameters['user_id']!),
+        scaffoldBody: ChatView(
+          userId: state.pathParameters['user_id']!,
+        ),
+        selectedNavigationItemIndex: 2,
+        isDetailed: false,
+      ),
+    )
+  ],
 );
 
 // GoRouter configuration
 final router = GoRouter(
   routes: [
-    GoRoute(path: '/', builder: (context, state) => const WelcomeScreen()),
-    searchUser,
-    detailedUser,
-    profile,
-    profileEdit,
-    profileSelectTheme,
-    profileSelectLanguage,
-    login,
-    register,
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const WelcomeScreen(),
+      routes: [
+        login,
+        register,
+        searchUser,
+        chat,
+        profile,
+      ],
+    ),
   ],
 );

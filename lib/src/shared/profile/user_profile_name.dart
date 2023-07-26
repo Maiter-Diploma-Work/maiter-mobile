@@ -4,14 +4,16 @@ class UserProfileName extends StatefulWidget {
   final String name;
   final String tag;
   final int age;
-  EdgeInsets? padding;
+  final Color? textColor;
+  final EdgeInsets? padding;
 
-  UserProfileName({
+  const UserProfileName({
     super.key,
     required this.name,
     required this.age,
     required this.tag,
     this.padding,
+    this.textColor,
   });
 
   @override
@@ -46,7 +48,7 @@ class _UserProfileNameState extends State<UserProfileName> {
       style: TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.w500,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: widget.textColor ?? Colors.white,
       ),
     );
   }

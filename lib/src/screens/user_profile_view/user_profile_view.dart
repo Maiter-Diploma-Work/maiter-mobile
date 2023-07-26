@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maiter/src/models/profiles/user_profile.dart';
-import 'package:maiter/src/models/shared/interest.dart';
 import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/maiter_round_icon_button.dart';
-import 'package:maiter/src/shared/profile/description.dart';
+import 'package:maiter/src/shared/inputs/maiter_round_icon_button.dart';
 import 'package:maiter/src/shared/profile/interests.dart';
-import 'package:maiter/src/shared/profile/location.dart';
 import 'package:maiter/src/shared/profile/profile_picture.dart';
 import 'package:maiter/src/shared/profile/user_profile_name.dart';
 
@@ -75,7 +72,7 @@ class _UserProfileViewState extends State<UserProfileView> {
           children: [
             Center(
               child: ProfilePicture(
-                pictureUrl: 'assets/anna_shapovalova.PNG',
+                pictureUrl: 'assets/valentyn_kushnirow.jpg',
               ),
             ),
             Positioned(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maiter/src/models/profiles/user_profile.dart';
 import 'package:maiter/src/shared/delimeter.dart';
-import 'package:maiter/src/shared/maiter_button.dart';
+import 'package:maiter/src/shared/inputs/maiter_button.dart';
 import 'package:maiter/src/shared/profile/profile_picture.dart';
 import 'package:maiter/src/shared/profile/user_profile_name.dart';
 
@@ -115,11 +115,3 @@ class _ShortProfileOverviewState extends State<ShortProfileOverview> {
     );
   }
 }
-
-/*
-MaiterButton(
-  onPressed: () {},
-  text: 'Edit profile',
-  color: Theme.of(context).colorScheme.primary,
-),
-*/

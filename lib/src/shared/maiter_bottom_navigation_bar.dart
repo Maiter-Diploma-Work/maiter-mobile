@@ -24,7 +24,7 @@ class _MaiterBottomNavigationBarState extends State<MaiterBottomNavigationBar> {
         // context.go('/likes');
         break;
       case 2:
-        // context.go('/chat');
+        context.go('/chat-list');
         break;
       case 3:
         context.go('/profile');

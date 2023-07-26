@@ -1,9 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maiter/src/models/profiles/user_profile.dart';
 import 'package:maiter/src/models/shared/location.dart';
+import 'package:maiter/src/models/shared/social_network.dart';
 import 'package:maiter/src/screens/user_profile_detailed_view/blured_photo_bg.dart';
 import 'package:maiter/src/shared/delimeter.dart';
 import 'package:maiter/src/shared/gap.dart';
@@ -107,10 +106,10 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
       spacing: 20,
       runSpacing: 20,
       children: [
-        generateAdditionalPhoto('assets/anna_shapovalova_1.jpg'),
-        generateAdditionalPhoto('assets/anna_shapovalova_2.jpg'),
-        generateAdditionalPhoto('assets/anna_shapovalova_3.jpg'),
-        generateAdditionalPhoto('assets/anna_shapovalova_4.jpg'),
+        generateAdditionalPhoto('assets/valentyn_kushnirow_1.jpg'),
+        generateAdditionalPhoto('assets/valentyn_kushnirow_2.jpg'),
+        generateAdditionalPhoto('assets/valentyn_kushnirow_3.jpg'),
+        generateAdditionalPhoto('assets/valentyn_kushnirow_4.jpg'),
       ],
     );
   }
@@ -169,7 +168,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
   }
 
   Widget get socialNetworks {
-    final Map<String, String>? socialNetworks = widget.profile.socialNetworks;
+    final List<SocialNetwork>? socialNetworks = widget.profile.socialNetworks;
     if (socialNetworks == null) return Container();
 
     List<Widget> networks = List.generate(
@@ -179,12 +178,12 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
         children: [
           const Gap.cubic(16),
           textGenerator(
-            '- ${socialNetworks.keys.elementAt(index)}:',
+            '- ${socialNetworks[index].name}:',
             FontWeight.w500,
           ),
           const Gap(verticalGap: 0, horizontalGap: 14.0),
           textGenerator(
-            socialNetworks.values.elementAt(index),
+            socialNetworks[index].userName,
           ),
         ],
       ),
@@ -206,7 +205,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
             alignment: Alignment.centerLeft,
             child: CircleAvatar(
               radius: 75,
-              backgroundImage: AssetImage('assets/anna_shapovalova.PNG'),
+              backgroundImage: AssetImage('assets/valentyn_kushnirow.jpg'),
             ),
           ),
           UserProfileName(
