@@ -19,7 +19,7 @@ class _BLuredPhotoBgState extends State<BLuredPhotoBg> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/valentyn_kushnirow.jpg'),
+          image: AssetImage('assets/valery_doe.jpg'),
           fit: BoxFit.cover,
         ),
       ),

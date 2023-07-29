@@ -34,7 +34,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
           width: (MediaQuery.of(context).size.width - 64) * 0.44,
           child: MaiterSelect<String>(
             initialValue: widget.profile.gender,
-            options: Genders.values,
+            options: genders.values,
             fieldName: 'Gender',
           ),
         ),

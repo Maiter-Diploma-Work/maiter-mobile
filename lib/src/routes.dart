@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/data/valentyn_kushniow.dart';
+import 'package:maiter/src/data/valery_doe.dart';
 import 'package:maiter/src/layouts/scaffold.dart';
 import 'package:maiter/src/screens/auth/login/login.dart';
 import 'package:maiter/src/screens/auth/register/register.dart';
@@ -22,7 +22,7 @@ final searchUser = GoRoute(
   builder: (context, state) => MaiterScaffold(
     title: "User Search",
     scaffoldBody: UserProfileView(
-      profile: ValentynKushnirow,
+      profile: ValeryDoe,
     ),
     selectedNavigationItemIndex: 0,
     isDetailed: false,
@@ -34,7 +34,7 @@ final searchUser = GoRoute(
         isDetailed: true,
         title: "",
         scaffoldBody: UserProfileDetailed(
-          profile: ValentynKushnirow,
+          profile: ValeryDoe,
         ),
         selectedNavigationItemIndex: 0,
       ),
@@ -55,7 +55,7 @@ final profile = GoRoute(
   path: 'profile',
   builder: (context, state) => MaiterScaffold(
     title: 'Your Profile',
-    scaffoldBody: ProfileView(profile: ValentynKushnirow),
+    scaffoldBody: ProfileView(profile: ValeryDoe),
     selectedNavigationItemIndex: 3,
     isDetailed: false,
   ),
@@ -65,7 +65,7 @@ final profile = GoRoute(
       builder: (context, state) => MaiterScaffold(
         isDetailed: true,
         title: 'Edit Profile',
-        scaffoldBody: ProfileEditView(profile: ValentynKushnirow),
+        scaffoldBody: ProfileEditView(profile: ValeryDoe),
         selectedNavigationItemIndex: 3,
       ),
     ),

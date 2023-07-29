@@ -4,12 +4,12 @@ import '../../models/shared/interest.dart';
 
 class Interests extends StatefulWidget {
   final List<Interest> interests;
-  final int displayAmount;
+  final int? displayAmount;
 
   const Interests({
     super.key,
     required this.interests,
-    required this.displayAmount,
+    this.displayAmount,
   });
 
   @override
@@ -37,9 +37,9 @@ class _InterestsState extends State<Interests> {
 
   List<Widget> listGenerator() {
     return List.generate(
-      widget.displayAmount,
+      widget.displayAmount ?? widget.interests.length,
       (index) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 18.0),
         decoration: boxDecoration,
         child: interestTextGenerator(index),
       ),
@@ -49,10 +49,10 @@ class _InterestsState extends State<Interests> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.end,
-      runSpacing: 5.0,
-      spacing: 10,
-      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      runSpacing: 7,
+      spacing: 20,
+      alignment: WrapAlignment.spaceBetween,
       runAlignment: WrapAlignment.spaceBetween,
       children: listGenerator(),
     );

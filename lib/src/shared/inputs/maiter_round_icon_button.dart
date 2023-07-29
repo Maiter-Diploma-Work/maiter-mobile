@@ -23,7 +23,7 @@ class MaiterRoundIconButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
         backgroundColor: fillColor,
-        padding: padding ?? const EdgeInsets.all(16.0),
+        padding: padding ?? const EdgeInsets.all(8.0),
       ),
       child: icon,
     );

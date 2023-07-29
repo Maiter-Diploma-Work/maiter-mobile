@@ -4,87 +4,77 @@ import 'package:maiter/src/models/profiles/user_profile.dart';
 import 'package:maiter/src/shared/gap.dart';
 import 'package:maiter/src/shared/inputs/maiter_round_icon_button.dart';
 import 'package:maiter/src/shared/profile/interests.dart';
+import 'package:maiter/src/shared/profile/location.dart';
 import 'package:maiter/src/shared/profile/profile_picture.dart';
 import 'package:maiter/src/shared/profile/user_profile_name.dart';
 
-class UserProfileView extends StatefulWidget {
+class UserProfileView extends StatelessWidget {
+  final int _sensitivity = 8;
   final UserProfile profile;
 
   const UserProfileView({super.key, required this.profile});
 
-  @override
-  State<StatefulWidget> createState() => _UserProfileViewState();
-}
+  void _dislikePressed() {}
 
-class _UserProfileViewState extends State<UserProfileView> {
-  RoundedRectangleBorder shape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(14.0),
-  );
+  void _detailsPressed(BuildContext context) {
+    context.go('/search/user/details');
+  }
 
-  void dislikePressed() {}
+  void _likePressed() {}
 
-  void detailsPressed() {}
-
-  void likePressed() {}
-
-  void onHorizontalDrag(DragUpdateDetails details) {
-    int sensitivity = 8;
-    if (details.delta.dx > sensitivity) {
+  void _onHorizontalDrag(DragUpdateDetails details) {
+    if (details.delta.dx > _sensitivity) {
       // Right Swipe
-      debugPrint('Right Swipe, $sensitivity');
-    } else if (details.delta.dx < -sensitivity) {
+      debugPrint('Right Swipe, $_sensitivity');
+      _likePressed();
+    } else if (details.delta.dx < -_sensitivity) {
       //Left Swipe
-      debugPrint('Left Swipe, $sensitivity');
+      debugPrint('Left Swipe, $_sensitivity');
+      _dislikePressed();
     }
   }
 
-  void onVerticalDrag(DragUpdateDetails details, BuildContext context) {
-    int sensitivity = 8;
-    if (details.delta.dy > sensitivity) {
+  void _onVerticalDrag(DragUpdateDetails details, BuildContext context) {
+    if (details.delta.dy > _sensitivity) {
       // Right Swipe
-      debugPrint('Up Swipe, $sensitivity');
-    } else if (details.delta.dy < -sensitivity) {
+      debugPrint('Up Swipe, $_sensitivity');
+    } else if (details.delta.dy < -_sensitivity) {
       //Left Swipe
-      debugPrint('Down Swipe, $sensitivity');
-      context.go('/search/user/details');
+      debugPrint('Down Swipe, $_sensitivity');
+      _detailsPressed(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onHorizontalDragUpdate: (details) => onHorizontalDrag(details),
-      onVerticalDragUpdate: (details) => onVerticalDrag(details, context),
+      onHorizontalDragUpdate: (details) => _onHorizontalDrag(details),
+      onVerticalDragUpdate: (details) => _onVerticalDrag(details, context),
       child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 6,
+        ),
         decoration: BoxDecoration(
-          // gradient: LinearGradient(
-          //   begin: Alignment.topCenter,
-          //   end: Alignment.bottomCenter,
-          //   colors: [
-          //     Color(0xFF131111),
-          //     Color(0xFF110E32),
-          //     Color(0xFF161E6C),
-          //   ],
-          // ),
           color: Theme.of(context).colorScheme.background,
         ),
         child: Stack(
           children: [
             Center(
               child: ProfilePicture(
-                pictureUrl: 'assets/valentyn_kushnirow.jpg',
+                pictureUrl: 'assets/valery_doe.jpg',
               ),
             ),
-            Positioned(
-              bottom: 16.0,
-              left: 16.0,
-              child: generateProfileInfo(context),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: generateProfileInfo(context),
+              ),
             ),
-            Positioned(
-              bottom: 48.0,
-              right: 16.0,
-              child: generateActions(context),
-            )
+            _dislikeButton(context),
+            _detailsButton(context),
+            _likeButton(context),
           ],
         ),
       ),
@@ -92,62 +82,74 @@ class _UserProfileViewState extends State<UserProfileView> {
   }
 
   Widget generateProfileInfo(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.70,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          UserProfileName(
-            name: widget.profile.name,
-            age: widget.profile.age,
-            tag: widget.profile.tag,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 8.0,
-            ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        UserProfileName.fromProfile(
+          profile,
+          padding: const EdgeInsets.only(
+            right: 32,
           ),
-          Interests(
-            interests: widget.profile.interests,
-            displayAmount: 4,
-          )
-        ],
-      ),
+        ),
+        LocationView(location: profile.location),
+        Interests(
+          interests: profile.interests,
+          displayAmount:
+              profile.interests.length <= 6 ? profile.interests.length : 6,
+        ),
+      ],
     );
   }
 
-  Widget generateActions(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        MaiterRoundIconButton(
-          onTap: () => {},
-          fillColor: Theme.of(context).colorScheme.error,
+  Widget _dislikeButton(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: MaiterRoundIconButton(
+          onTap: () => _dislikePressed,
+          fillColor: Theme.of(context).colorScheme.error.withOpacity(0.5),
           icon: const Icon(
             Icons.close,
             color: Colors.white,
           ),
         ),
-        const Gap.cubic(28),
-        MaiterRoundIconButton(
+      ),
+    );
+  }
+
+  Widget _detailsButton(BuildContext context) {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: MaiterRoundIconButton(
           onTap: () => context.go('/search/user/details'),
-          fillColor: Theme.of(context).colorScheme.tertiary,
+          fillColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
           icon: const Icon(
             Icons.person,
             color: Colors.white,
           ),
         ),
-        const Gap.cubic(28),
-        MaiterRoundIconButton(
-          onTap: () => {},
-          fillColor: const Color(0xFF2AB5AE),
+      ),
+    );
+  }
+
+  Widget _likeButton(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: MaiterRoundIconButton(
+          onTap: () => _likePressed,
+          fillColor: Color.fromARGB(127, 42, 181, 174),
           icon: const Icon(
             Icons.favorite,
             color: Colors.white,
           ),
         ),
-      ],
+      ),
     );
   }
 }

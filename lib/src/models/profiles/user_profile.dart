@@ -13,7 +13,7 @@ List<UserProfile> usersFromJson(String str) =>
 
 UserProfile userFromJson(String str) => UserProfile.fromJson(json.decode(str));
 
-Map<int, String> Genders = {
+Map<int, String> genders = {
   1: 'Male',
   2: 'Female',
   3: 'Non-binary',
@@ -22,9 +22,11 @@ Map<int, String> Genders = {
 class UserProfile extends Profile {
   late int age;
   late String tag;
-  late String gender;
   late DateTime birthDate;
+  late String gender;
   late String? education;
+  late String? favoriteSong;
+  late double? height;
   late List<SocialNetwork>? socialNetworks;
 
   UserProfile({
@@ -38,6 +40,8 @@ class UserProfile extends Profile {
     required this.tag,
     required this.gender,
     required this.birthDate,
+    this.height,
+    this.favoriteSong,
     this.education,
     this.socialNetworks,
   });
@@ -55,6 +59,7 @@ class UserProfile extends Profile {
         birthDate: DateFormat.yMd().parse(json['birthDate']),
         education: json['education'],
         socialNetworks: socialNetworksFromJson(json['socialNetworks']),
+        height: json['height'],
       );
 
   Map<String, dynamic> toJson() {

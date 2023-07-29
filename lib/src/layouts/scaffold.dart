@@ -21,6 +21,14 @@ class MaiterScaffold extends StatelessWidget {
     this.scaffoldAppBarTitle,
   });
 
+  Widget get _title {
+    if (scaffoldAppBarTitle != null) {
+      return scaffoldAppBarTitle!;
+    }
+
+    return Text(title);
+  }
+
   Color getAppBarBackgroundColor(BuildContext context) {
     if (appBarBackgroundColor != null) {
       return appBarBackgroundColor!;
@@ -47,7 +55,7 @@ class MaiterScaffold extends StatelessWidget {
           ),
         ],
         centerTitle: true,
-        title: scaffoldAppBarTitle,
+        title: _title,
       ),
       bottomNavigationBar: MaiterBottomNavigationBar(
         selectedIndex: selectedNavigationItemIndex,

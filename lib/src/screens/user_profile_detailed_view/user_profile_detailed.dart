@@ -106,10 +106,11 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
       spacing: 20,
       runSpacing: 20,
       children: [
-        generateAdditionalPhoto('assets/valentyn_kushnirow_1.jpg'),
-        generateAdditionalPhoto('assets/valentyn_kushnirow_2.jpg'),
-        generateAdditionalPhoto('assets/valentyn_kushnirow_3.jpg'),
-        generateAdditionalPhoto('assets/valentyn_kushnirow_4.jpg'),
+        generateAdditionalPhoto('assets/valery_doe_1.jpg'),
+        generateAdditionalPhoto('assets/valery_doe_2.jpg'),
+        generateAdditionalPhoto('assets/valery_doe_3.jpg'),
+        generateAdditionalPhoto('assets/valery_doe_4.jpg'),
+        generateAdditionalPhoto('assets/valery_doe_5.jpg'),
       ],
     );
   }
@@ -205,7 +206,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
             alignment: Alignment.centerLeft,
             child: CircleAvatar(
               radius: 75,
-              backgroundImage: AssetImage('assets/valentyn_kushnirow.jpg'),
+              backgroundImage: AssetImage('assets/valery_doe.jpg'),
             ),
           ),
           UserProfileName(

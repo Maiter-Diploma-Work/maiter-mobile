@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maiter/src/models/profiles/user_profile.dart';
 
 class UserProfileName extends StatefulWidget {
   final String name;
@@ -15,6 +16,21 @@ class UserProfileName extends StatefulWidget {
     this.padding,
     this.textColor,
   });
+
+  factory UserProfileName.fromProfile(
+    UserProfile profile, {
+    Key? key,
+    EdgeInsets? padding,
+    Color? textColor,
+  }) =>
+      UserProfileName(
+        name: profile.name,
+        age: profile.age,
+        tag: profile.tag,
+        key: key,
+        padding: padding,
+        textColor: textColor,
+      );
 
   @override
   State<StatefulWidget> createState() => _UserProfileNameState();

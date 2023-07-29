@@ -73,11 +73,12 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
-    - assets/valentyn_kushnirow.jpg
-    - assets/valentyn_kushnirow_1.jpg
-    - assets/valentyn_kushnirow_2.jpg
-    - assets/valentyn_kushnirow_3.jpg
-    - assets/valentyn_kushnirow_4.jpg
+    - assets/valery_doe.jpg
+    - assets/valery_doe_1.jpg
+    - assets/valery_doe_2.jpg
+    - assets/valery_doe_3.jpg
+    - assets/valery_doe_4.jpg
+    - assets/valery_doe_5.jpg
     - assets/mock_users.json
 
   # To add custom fonts to your application, add a fonts section here,

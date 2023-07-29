@@ -14,10 +14,7 @@ class LocationView extends StatefulWidget {
 class _LocationState extends State<LocationView> {
   List<Widget> textGenerator() {
     return [
-      const Padding(
-        padding: EdgeInsets.only(left: 16),
-        child: Icon(Icons.place_outlined),
-      ),
+      const Icon(Icons.place_outlined),
       Text(
         widget.location.name,
         style: const TextStyle(fontSize: 18.0),
@@ -28,7 +25,9 @@ class _LocationState extends State<LocationView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+      ),
       child: Row(
         children: textGenerator(),
       ),
