@@ -1,9 +1,7 @@
-import 'package:adaptive_navigation/adaptive_navigation.dart';
+import 'package:amica/src/shared/amica_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:maiter/src/shared/maiter_bottom_navigation_bar.dart';
 
-class MaiterScaffold extends StatelessWidget {
+class AmicaScaffold extends StatelessWidget {
   final String title;
   final Widget scaffoldBody;
   final Widget? scaffoldAppBarTitle;
@@ -11,7 +9,7 @@ class MaiterScaffold extends StatelessWidget {
   final bool isDetailed;
   final Color? appBarBackgroundColor;
 
-  const MaiterScaffold({
+  const AmicaScaffold({
     super.key,
     required this.title,
     required this.scaffoldBody,
@@ -57,7 +55,7 @@ class MaiterScaffold extends StatelessWidget {
         centerTitle: true,
         title: _title,
       ),
-      bottomNavigationBar: MaiterBottomNavigationBar(
+      bottomNavigationBar: AmicaBottomNavigationBar(
         selectedIndex: selectedNavigationItemIndex,
       ),
       body: scaffoldBody,

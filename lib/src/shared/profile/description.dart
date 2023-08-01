@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:maiter/src/shared/delimeter.dart';
 
 class ProfileDescription extends StatefulWidget {
   final String? description;

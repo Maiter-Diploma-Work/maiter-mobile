@@ -1,12 +1,11 @@
+import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
+import 'package:amica/src/shared/profile/interests.dart';
+import 'package:amica/src/shared/profile/location.dart';
+import 'package:amica/src/shared/profile/profile_picture.dart';
+import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/models/profiles/user_profile.dart';
-import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/inputs/maiter_round_icon_button.dart';
-import 'package:maiter/src/shared/profile/interests.dart';
-import 'package:maiter/src/shared/profile/location.dart';
-import 'package:maiter/src/shared/profile/profile_picture.dart';
-import 'package:maiter/src/shared/profile/user_profile_name.dart';
 
 class UserProfileView extends StatelessWidget {
   final int _sensitivity = 8;
@@ -107,7 +106,7 @@ class UserProfileView extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: MaiterRoundIconButton(
+        child: AmicaRoundIconButton(
           onTap: () => _dislikePressed,
           fillColor: Theme.of(context).colorScheme.error.withOpacity(0.5),
           icon: const Icon(
@@ -124,7 +123,7 @@ class UserProfileView extends StatelessWidget {
       alignment: Alignment.topRight,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: MaiterRoundIconButton(
+        child: AmicaRoundIconButton(
           onTap: () => context.go('/search/user/details'),
           fillColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
           icon: const Icon(
@@ -141,9 +140,9 @@ class UserProfileView extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: MaiterRoundIconButton(
+        child: AmicaRoundIconButton(
           onTap: () => _likePressed,
-          fillColor: Color.fromARGB(127, 42, 181, 174),
+          fillColor: const Color.fromARGB(126, 42, 181, 49),
           icon: const Icon(
             Icons.favorite,
             color: Colors.white,

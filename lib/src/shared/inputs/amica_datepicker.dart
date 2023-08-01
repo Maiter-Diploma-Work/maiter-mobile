@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class MaiterDatepicker extends StatefulWidget {
+class AmicaDatepicker extends StatefulWidget {
   final DateTime initialDate;
   final String fieldName;
 
-  const MaiterDatepicker({
+  const AmicaDatepicker({
     super.key,
     required this.initialDate,
     required this.fieldName,
   });
 
   @override
-  State<MaiterDatepicker> createState() => _MaiterDatepickerState();
+  State<AmicaDatepicker> createState() => _AmicaDatepickerState();
 }
 
-class _MaiterDatepickerState extends State<MaiterDatepicker> {
+class _AmicaDatepickerState extends State<AmicaDatepicker> {
   DateTime? inputDate;
 
   String get date {

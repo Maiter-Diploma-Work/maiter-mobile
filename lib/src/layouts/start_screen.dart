@@ -16,10 +16,15 @@ class _StartScreenState extends State<StartScreen> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color(0xFF7E18FF),
-            Color(0xFFe95184),
-          ], transform: GradientRotation(1.5)),
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF303F9F),
+              Color(0xFF3344B0),
+              Color(0xFF7128E9),
+              Color(0xFF7E18FF),
+            ],
+            transform: GradientRotation(1.5),
+          ),
         ),
         child: widget.screenBody,
       ),

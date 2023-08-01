@@ -1,19 +1,19 @@
+import 'package:amica/src/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/auth.dart';
-import 'package:maiter/src/routes.dart';
+import 'package:amica/src/routes.dart';
 
-class Maiter extends StatefulWidget {
+class Amica extends StatefulWidget {
   final String title;
 
-  const Maiter({Key? key, required this.title}) : super(key: key);
+  const Amica({Key? key, required this.title}) : super(key: key);
 
   @override
-  _MaiterState createState() => _MaiterState();
+  _AmicaState createState() => _AmicaState();
 }
 
-class _MaiterState extends State<Maiter> {
-  final MaiterAuth _auth = MaiterAuth();
+class _AmicaState extends State<Amica> {
+  final AmicaAuth _auth = AmicaAuth();
 
   void _handleAuthStateChanged() {
     if (!_auth.signedIn) {
@@ -44,7 +44,7 @@ class _MaiterState extends State<Maiter> {
     Color onSurfaceColor = Colors.white;
     Color onSecondaryColor = Colors.black;
 
-    return MaiterAuthScope(
+    return AmicaAuthScope(
       notifier: _auth,
       child: MaterialApp.router(
         title: widget.title,

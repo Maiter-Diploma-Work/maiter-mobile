@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 typedef ButtonCallback = void Function();
 
-class MaiterRoundIconButton extends StatelessWidget {
+class AmicaRoundIconButton extends StatelessWidget {
   final ButtonCallback onTap;
   final Widget icon;
   Color? fillColor;
   EdgeInsetsGeometry? padding;
 
-  MaiterRoundIconButton({
+  AmicaRoundIconButton({
     Key? key,
     required this.onTap,
     required this.icon,

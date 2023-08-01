@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MaiterSelect<T> extends StatefulWidget {
+class AmicaSelect<T> extends StatefulWidget {
   final Iterable<T> options;
   final T initialValue;
   final String fieldName;
 
-  const MaiterSelect({
+  const AmicaSelect({
     super.key,
     required this.options,
     required this.initialValue,
@@ -13,10 +13,10 @@ class MaiterSelect<T> extends StatefulWidget {
   });
 
   @override
-  State<MaiterSelect> createState() => _MaiterSelectState<T>();
+  State<AmicaSelect> createState() => _AmicaSelectState<T>();
 }
 
-class _MaiterSelectState<T> extends State<MaiterSelect<T>> {
+class _AmicaSelectState<T> extends State<AmicaSelect<T>> {
   T? _value;
 
   void _selectItem(value) {

@@ -1,10 +1,10 @@
+import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/screens/profile_view/link_button.dart';
+import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:maiter/src/models/profiles/user_profile.dart';
-import 'package:maiter/src/screens/profile_view/link_button.dart';
-import 'package:maiter/src/screens/profile_view/short_profile_overview.dart';
-import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/inputs/maiter_button.dart';
+
+import 'short_profile_overview.dart';
 
 class ProfileView extends StatefulWidget {
   final UserProfile profile;
@@ -83,7 +83,7 @@ class _ProfileViewState extends State<ProfileView> {
         const Gap(verticalGap: 100, horizontalGap: 0),
         Column(
           children: [
-            MaiterButton(
+            AmicaButton(
               onPressed: () {},
               text: 'Deactivate Profile',
               color: Theme.of(context).colorScheme.error,

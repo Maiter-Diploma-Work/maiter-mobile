@@ -1,14 +1,19 @@
+import 'package:amica/src/models/profiles/character_trait.dart';
+import 'package:amica/src/models/profiles/expectancies.dart';
+import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/models/shared/location.dart';
+import 'package:amica/src/models/shared/social_network.dart';
+import 'package:amica/src/screens/auth/title.dart';
+import 'package:amica/src/screens/user_profile_detailed_view/character_trait_view.dart';
+import 'package:amica/src/shared/delimeter.dart';
+import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/profile/description.dart';
+import 'package:amica/src/shared/profile/interests.dart';
+import 'package:amica/src/shared/profile/location.dart';
+import 'package:amica/src/shared/profile/user_profile_name.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/models/profiles/user_profile.dart';
-import 'package:maiter/src/models/shared/location.dart';
-import 'package:maiter/src/models/shared/social_network.dart';
-import 'package:maiter/src/screens/user_profile_detailed_view/blured_photo_bg.dart';
-import 'package:maiter/src/shared/delimeter.dart';
-import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/profile/description.dart';
-import 'package:maiter/src/shared/profile/interests.dart';
-import 'package:maiter/src/shared/profile/user_profile_name.dart';
 
 class UserProfileDetailed extends StatefulWidget {
   final UserProfile profile;
@@ -20,6 +25,14 @@ class UserProfileDetailed extends StatefulWidget {
 }
 
 class _UserProfileDetailedState extends State<UserProfileDetailed> {
+  final List<String> assetImages = [
+    'assets/valery_doe.jpg',
+    'assets/valery_doe_1.jpg',
+    'assets/valery_doe_2.jpg',
+    'assets/valery_doe_3.jpg',
+    'assets/valery_doe_4.jpg',
+  ];
+
   void onDrag(DragUpdateDetails details, BuildContext context) {
     int sensitivity = 8;
     if (details.delta.dx > sensitivity) {
@@ -32,8 +45,11 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
     }
   }
 
-  Widget textGenerator(String text,
-      [FontWeight? fontWeight, double? fontSize]) {
+  Widget textGenerator(
+    String text, [
+    FontWeight? fontWeight,
+    double? fontSize,
+  ]) {
     return Text(
       text,
       style: TextStyle(
@@ -49,82 +65,104 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
     return GestureDetector(
       onHorizontalDragUpdate: (DragUpdateDetails details) =>
           onDrag(details, context),
-      child: ListView(
-        padding: const EdgeInsets.only(top: 0),
-        children: [
-          BLuredPhotoBg(
-            profile: widget.profile,
-            child: generateBasicInfo(),
-          ),
-          generateAdditionalInfo(context),
-        ],
-      ),
-    );
-  }
-
-  Widget generateAdditionalInfo(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-        top: 24,
-        left: 50,
-        right: 50,
-        bottom: 52,
-      ),
-      decoration: BoxDecoration(
+      child: Container(
         color: Theme.of(context).colorScheme.background,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          location,
-          const Delimeter(
-            bottomMargin: 12,
-            topMargin: 2,
-          ),
-          socialNetworks,
-          generateDelimeter(widget.profile.socialNetworks != null),
-          //Should it even be?
-          education,
-          generateDelimeter(widget.profile.education != null),
-          ProfileDescription(
-            description: widget.profile.description,
-          ),
-          const Gap(
-            verticalGap: 46,
-            horizontalGap: 0,
-          ),
-          generateAdditionalPhotos(),
-        ],
+        child: ListView(
+          padding: const EdgeInsets.only(top: 0),
+          children: [
+            // BluredPhotoBg(
+            //   profile: widget.profile,
+            //   child: generateBasicInfo(),
+            // ),
+            _generateBasicInfo(),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 24,
+                left: 50,
+                right: 50,
+                bottom: 52,
+              ),
+              child: Column(
+                children: [
+                  Interests(
+                    interests: widget.profile.interests,
+                  ),
+                  const Gap.cubic(26),
+                  generateAdditionalInfo(context),
+                  const Gap.cubic(26),
+                  expectancies,
+                  const Gap.cubic(26),
+                  characterTraits
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  //TODO: Fetch all the data from the backend
-  Widget generateAdditionalPhotos() {
-    return Wrap(
-      spacing: 20,
-      runSpacing: 20,
+  Widget _generateBasicInfo() {
+    return Stack(
       children: [
-        generateAdditionalPhoto('assets/valery_doe_1.jpg'),
-        generateAdditionalPhoto('assets/valery_doe_2.jpg'),
-        generateAdditionalPhoto('assets/valery_doe_3.jpg'),
-        generateAdditionalPhoto('assets/valery_doe_4.jpg'),
-        generateAdditionalPhoto('assets/valery_doe_5.jpg'),
+        CarouselSlider(
+          items: List.from(
+            assetImages.map(
+              (e) => ClipRRect(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(30),
+                ),
+                child: Image.asset(e, fit: BoxFit.contain),
+              ),
+            ),
+          ),
+          options: CarouselOptions(
+            height: 600,
+            enlargeCenterPage: false,
+          ),
+        ),
+        Positioned.fill(
+          bottom: 0,
+          left: 72,
+          right: 72,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              LocationView(location: widget.profile.location),
+              UserProfileName.fromProfile(
+                widget.profile,
+                padding: const EdgeInsets.symmetric(vertical: 7.0),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
 
-  Widget generateAdditionalPhoto(String path) {
-    return Container(
-      alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width * 0.35,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20),
+  Widget generateAdditionalInfo(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // location,
+        // const Delimeter(
+        //   bottomMargin: 12,
+        //   topMargin: 2,
+        // ),
+        socialNetworks,
+        generateDelimeter(widget.profile.socialNetworks != null),
+        //Should it even be?
+        education,
+        generateDelimeter(widget.profile.education != null),
+        ProfileDescription(
+          description: widget.profile.description,
         ),
-        child: Image.asset(path),
-      ),
+        const Gap(
+          verticalGap: 46,
+          horizontalGap: 0,
+        ),
+      ],
     );
   }
 
@@ -134,6 +172,62 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
     return const Delimeter(
       bottomMargin: 12,
       topMargin: 4,
+    );
+  }
+
+  Widget get expectancies {
+    List<Expectancy> expectancies = widget.profile.expectancies;
+
+    if (expectancies.isEmpty) {
+      return Container();
+    }
+
+    return Column(
+      children: [
+        const AmicaTitle(text: 'Expectations'),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: List.from(
+            expectancies.map(
+              (e) => Row(
+                children: [
+                  const Icon(Icons.chevron_right),
+                  Text(
+                    e.text,
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      height: 2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget get characterTraits {
+    List<CharacterTrait> characterTraits = widget.profile.characterTraits;
+
+    if (characterTraits.isEmpty) {
+      return Container();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const AmicaTitle(text: 'Character'),
+        ...List.from(
+          characterTraits.map(
+            (e) => CharacterTraitView(
+              characterTrait: e,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -202,25 +296,19 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: CircleAvatar(
-              radius: 75,
-              backgroundImage: AssetImage('assets/valery_doe.jpg'),
-            ),
-          ),
-          UserProfileName(
-            name: widget.profile.name,
-            age: widget.profile.age,
-            tag: widget.profile.tag,
+          // const Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: CircleAvatar(
+          //     radius: 75,
+          //     backgroundImage: AssetImage('assets/valery_doe.jpg'),
+          //   ),
+          // ),
+          UserProfileName.fromProfile(
+            widget.profile,
             padding: const EdgeInsets.symmetric(
               horizontal: 0,
               vertical: 16.0,
             ),
-          ),
-          Interests(
-            interests: widget.profile.interests,
-            displayAmount: widget.profile.interests.length,
           ),
         ],
       ),

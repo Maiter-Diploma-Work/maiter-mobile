@@ -8,14 +8,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:maiter/src/app.dart';
+import 'package:amica/src/app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      const Maiter(
-        title: 'Maiter',
+      const Amica(
+        title: 'Amica',
       ),
     );
 

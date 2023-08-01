@@ -1,6 +1,6 @@
-# maiter
+# Amica
 
-A maiter is an App that suppose to connect people with same interests in the area
+A Amica is an App that suppose to connect people with same interests in the area
 
 ## Getting Started
 

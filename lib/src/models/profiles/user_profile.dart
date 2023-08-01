@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:amica/src/models/profiles/character_trait.dart';
+import 'package:amica/src/models/profiles/expectancies.dart';
+import 'package:amica/src/models/shared/interest.dart';
+import 'package:amica/src/models/shared/location.dart';
+import 'package:amica/src/models/shared/social_network.dart';
 import 'package:intl/intl.dart';
-import 'package:maiter/src/models/profiles/profile.dart';
-import 'package:maiter/src/models/shared/interest.dart';
-import 'package:maiter/src/models/shared/location.dart';
-import 'package:maiter/src/models/shared/social_network.dart';
+
+import 'profile.dart';
 
 List<UserProfile> usersFromJson(String str) =>
     List<UserProfile>.from(json.decode(str).map(
@@ -23,6 +26,8 @@ class UserProfile extends Profile {
   late int age;
   late String tag;
   late DateTime birthDate;
+  late List<Expectancy> expectancies;
+  late List<CharacterTrait> characterTraits;
   late String gender;
   late String? education;
   late String? favoriteSong;
@@ -40,6 +45,8 @@ class UserProfile extends Profile {
     required this.tag,
     required this.gender,
     required this.birthDate,
+    required this.characterTraits,
+    required this.expectancies,
     this.height,
     this.favoriteSong,
     this.education,
@@ -60,6 +67,8 @@ class UserProfile extends Profile {
         education: json['education'],
         socialNetworks: socialNetworksFromJson(json['socialNetworks']),
         height: json['height'],
+        characterTraits: characterTraitsFromJson(json['characterTraits']),
+        expectancies: expectanciesFromJson(json['expectancies']),
       );
 
   Map<String, dynamic> toJson() {
@@ -84,6 +93,8 @@ class UserProfile extends Profile {
             socialNetworks!.length,
             (index) => socialNetworks![index].toJson(),
           );
+    data['characterTraits'] = characterTraitsToJson(characterTraits);
+    data['expectancies'] = expectanciesToJson(expectancies);
 
     return data;
   }

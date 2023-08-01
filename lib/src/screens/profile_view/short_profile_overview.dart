@@ -1,27 +1,22 @@
+import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/shared/delimeter.dart';
+import 'package:amica/src/shared/inputs/amica_button.dart';
+import 'package:amica/src/shared/profile/profile_picture.dart';
+import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/models/profiles/user_profile.dart';
-import 'package:maiter/src/shared/delimeter.dart';
-import 'package:maiter/src/shared/inputs/maiter_button.dart';
-import 'package:maiter/src/shared/profile/profile_picture.dart';
-import 'package:maiter/src/shared/profile/user_profile_name.dart';
 
-class ShortProfileOverview extends StatefulWidget {
+class ShortProfileOverview extends StatelessWidget {
+  final TextStyle textStyle = const TextStyle(
+    fontSize: 14,
+  );
+
   final UserProfile profile;
 
   const ShortProfileOverview({
     Key? key,
     required this.profile,
   }) : super(key: key);
-
-  @override
-  _ShortProfileOverviewState createState() => _ShortProfileOverviewState();
-}
-
-class _ShortProfileOverviewState extends State<ShortProfileOverview> {
-  final TextStyle textStyle = const TextStyle(
-    fontSize: 14,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +39,12 @@ class _ShortProfileOverviewState extends State<ShortProfileOverview> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
           children: [
-            MaiterButton(
+            AmicaButton(
               onPressed: () => context.go('/profile/edit'),
               text: 'Edit profile',
               color: Theme.of(context).colorScheme.primary,
             ),
-            MaiterButton(
+            AmicaButton(
               onPressed: () {},
               text: 'Save',
               color: Theme.of(context).colorScheme.primary,
@@ -67,7 +62,7 @@ class _ShortProfileOverviewState extends State<ShortProfileOverview> {
       mainAxisSize: MainAxisSize.max,
       children: [
         ProfilePicture(
-          pictureUrl: widget.profile.photo,
+          pictureUrl: profile.photo,
           isRound: true,
           radius: 50,
         ),
@@ -85,12 +80,12 @@ class _ShortProfileOverviewState extends State<ShortProfileOverview> {
   }
 
   Column generateProfileInfo() {
-    int birthYear = widget.profile.birthDate.year,
-        birthMonth = widget.profile.birthDate.month,
-        birthDay = widget.profile.birthDate.day;
+    int birthYear = profile.birthDate.year,
+        birthMonth = profile.birthDate.month,
+        birthDay = profile.birthDate.day;
 
-    String locationName = widget.profile.location.name,
-        countryName = widget.profile.location.countryName;
+    String locationName = profile.location.name,
+        countryName = profile.location.countryName;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,9 +93,9 @@ class _ShortProfileOverviewState extends State<ShortProfileOverview> {
       mainAxisSize: MainAxisSize.max,
       children: [
         UserProfileName(
-          name: widget.profile.name,
-          age: widget.profile.age,
-          tag: widget.profile.tag,
+          name: profile.name,
+          age: profile.age,
+          tag: profile.tag,
         ),
         const Delimeter(bottomMargin: 12, topMargin: 6),
         Text(

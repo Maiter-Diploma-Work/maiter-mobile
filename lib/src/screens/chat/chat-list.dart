@@ -1,11 +1,11 @@
+import 'package:amica/src/models/profiles/profile.dart';
+import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/screens/chat/maiter_search_bar.dart';
+import 'package:amica/src/shared/delimeter.dart';
+import 'package:amica/src/shared/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/models/profiles/profile.dart';
-import 'package:maiter/src/models/profiles/user_profile.dart';
-import 'package:maiter/src/screens/chat/maiter_search_bar.dart';
-import 'package:maiter/src/shared/delimeter.dart';
-import 'package:maiter/src/shared/gap.dart';
 
 class ChatListView extends StatefulWidget {
   final List<Profile> chats;
@@ -38,7 +38,7 @@ class _ChatListViewState extends State<ChatListView> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const MaiterSearchBar(),
+        const AmicaSearchBar(),
         ...generateContacts(context),
       ],
     );

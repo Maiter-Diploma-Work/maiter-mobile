@@ -1,7 +1,7 @@
+import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/shared/profile/profile_picture.dart';
+import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
-import 'package:maiter/src/models/profiles/user_profile.dart';
-import 'package:maiter/src/shared/profile/profile_picture.dart';
-import 'package:maiter/src/shared/profile/user_profile_name.dart';
 
 class SelfProfileShortView extends StatefulWidget {
   final UserProfile profile;

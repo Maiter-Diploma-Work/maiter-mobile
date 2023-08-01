@@ -1,6 +1,6 @@
+import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:maiter/src/models/profiles/user_profile.dart';
 
 class ChatAppBarTitle extends StatefulWidget {
   final String userId;

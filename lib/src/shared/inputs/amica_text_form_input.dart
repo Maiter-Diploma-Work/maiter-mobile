@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MaiterTextFormInput extends StatelessWidget {
+class AmicaTextFormInput extends StatelessWidget {
   final String fieldName;
   final String hintText;
   final String? initialValue;
   final EdgeInsets? padding;
   final int? maxLines;
 
-  const MaiterTextFormInput({
+  const AmicaTextFormInput({
     super.key,
     required this.fieldName,
     required this.hintText,

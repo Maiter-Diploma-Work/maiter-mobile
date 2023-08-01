@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:maiter/src/app.dart';
+import 'package:amica/src/app.dart';
 
 void main() {
-  runApp(const Maiter(
-    title: "Maiter",
+  runApp(const Amica(
+    title: "Amica",
   ));
 }

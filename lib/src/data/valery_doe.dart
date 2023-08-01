@@ -1,4 +1,6 @@
-import 'package:maiter/src/models/shared/social_network.dart';
+import 'package:amica/src/models/profiles/character_trait.dart';
+import 'package:amica/src/models/profiles/expectancies.dart';
+import 'package:amica/src/models/shared/social_network.dart';
 
 import '../models/profiles/user_profile.dart';
 import '../models/shared/interest.dart';
@@ -6,7 +8,7 @@ import '../models/shared/location.dart';
 
 final UserProfile ValeryDoe = UserProfile(
   id: 2,
-  age: 22,
+  age: 27,
   tag: '@the-only-v',
   name: "Valery Doe",
   height: 1.75,
@@ -66,4 +68,82 @@ final UserProfile ValeryDoe = UserProfile(
     SocialNetwork(id: 1, userId: 2, name: "Instagram", userName: "@theonlyv"),
   ],
   favoriteSong: 'Nomico - Bad Apple',
+  characterTraits: [
+    CharacterTrait(
+      id: 1,
+      userId: 1,
+      bottomName: 'Introvert',
+      topName: 'Extravert',
+      degree: 8,
+    ),
+    CharacterTrait(
+      id: 2,
+      userId: 1,
+      bottomName: 'Analytic',
+      topName: 'Creative',
+      degree: 5,
+    ),
+    CharacterTrait(
+      id: 3,
+      userId: 1,
+      bottomName: 'Busy',
+      topName: 'Time rich',
+      degree: 1,
+    ),
+    CharacterTrait(
+      id: 5,
+      userId: 1,
+      bottomName: 'Messy',
+      topName: 'Organized',
+      degree: 5,
+    ),
+    CharacterTrait(
+      id: 6,
+      userId: 1,
+      bottomName: 'Independent',
+      topName: 'Team Player',
+      degree: 5,
+    ),
+    CharacterTrait(
+      id: 7,
+      userId: 1,
+      bottomName: 'Passive',
+      topName: 'Active',
+      degree: 5,
+    ),
+    CharacterTrait(
+      id: 8,
+      userId: 1,
+      bottomName: 'Safe',
+      topName: 'Risky',
+      degree: 10,
+    ),
+  ],
+  expectancies: [
+    Expectancy(
+      id: 1,
+      userId: 1,
+      text: 'Respect me and my time',
+    ),
+    Expectancy(
+      id: 2,
+      userId: 1,
+      text: 'No separation anxiety',
+    ),
+    Expectancy(
+      id: 3,
+      userId: 1,
+      text: 'Be quite',
+    ),
+    Expectancy(
+      id: 4,
+      userId: 1,
+      text: 'Similar interests',
+    ),
+    Expectancy(
+      id: 5,
+      userId: 1,
+      text: 'Adequate reaction to critisism',
+    ),
+  ],
 );

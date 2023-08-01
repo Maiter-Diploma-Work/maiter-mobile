@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../layouts/start_screen.dart';
 import '../../shared/gap.dart';
-import '../../shared/inputs/maiter_button.dart';
+import '../../shared/inputs/amica_button.dart';
 import '../auth/title.dart' as title;
 
 class WelcomeScreen extends StatelessWidget {
@@ -17,17 +17,17 @@ class WelcomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //TODO: remove the magic strings
-          const title.MaiterTitle(text: "Welcome to"),
+          const title.AmicaTitle(text: "Welcome to"),
           const Gap(
             horizontalGap: 0,
             verticalGap: 20.0,
           ),
-          const title.MaiterTitle(text: "Maiter"),
+          const title.AmicaTitle(text: "Amica"),
           const Gap(horizontalGap: 0, verticalGap: 60.0),
-          MaiterButton(
+          AmicaButton(
               onPressed: () => context.go('/auth/login'), text: "Login"),
           const Gap(horizontalGap: 0, verticalGap: 20.0),
-          MaiterButton(
+          AmicaButton(
               onPressed: () => context.go('/auth/register'), text: "Register"),
         ],
       ),

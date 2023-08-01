@@ -1,11 +1,11 @@
+import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/inputs/amica_button.dart';
+import 'package:amica/src/shared/inputs/amica_datepicker.dart';
+import 'package:amica/src/shared/inputs/amica_select.dart';
+import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:maiter/src/models/profiles/user_profile.dart';
-import 'package:maiter/src/shared/gap.dart';
-import 'package:maiter/src/shared/inputs/maiter_button.dart';
-import 'package:maiter/src/shared/inputs/maiter_datepicker.dart';
-import 'package:maiter/src/shared/inputs/maiter_select.dart';
-import 'package:maiter/src/shared/inputs/maiter_text_form_input.dart';
 
 class ProfileEditView extends StatefulWidget {
   final UserProfile profile;
@@ -25,14 +25,14 @@ class _ProfileEditViewState extends State<ProfileEditView> {
       children: [
         SizedBox(
           width: (MediaQuery.of(context).size.width - 64) * 0.44,
-          child: MaiterDatepicker(
+          child: AmicaDatepicker(
             initialDate: widget.profile.birthDate,
             fieldName: 'Birthdate',
           ),
         ),
         SizedBox(
           width: (MediaQuery.of(context).size.width - 64) * 0.44,
-          child: MaiterSelect<String>(
+          child: AmicaSelect<String>(
             initialValue: widget.profile.gender,
             options: genders.values,
             fieldName: 'Gender',
@@ -59,7 +59,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
                     radius: 66,
                     foregroundImage: AssetImage(widget.profile.photo),
                   ),
-                  MaiterButton(
+                  AmicaButton(
                     onPressed: () async {
                       var picked = await FilePicker.platform.pickFiles();
 
@@ -73,7 +73,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
                 ],
               ),
               const Gap.cubic(38),
-              MaiterTextFormInput(
+              AmicaTextFormInput(
                 fieldName: 'Name',
                 hintText: 'Your Name',
                 initialValue: widget.profile.name,
@@ -81,14 +81,14 @@ class _ProfileEditViewState extends State<ProfileEditView> {
               const Gap.cubic(24),
               _birthDateAndGenderInputs(context),
               const Gap.cubic(24),
-              MaiterTextFormInput(
+              AmicaTextFormInput(
                 fieldName: 'About me',
                 hintText: 'I love cats!..',
                 maxLines: 10,
                 initialValue: widget.profile.description,
               ),
               const Gap.cubic(24),
-              MaiterTextFormInput(
+              AmicaTextFormInput(
                 fieldName: 'Education',
                 hintText: 'Hogwartz - Griffindor',
                 initialValue: widget.profile.education,

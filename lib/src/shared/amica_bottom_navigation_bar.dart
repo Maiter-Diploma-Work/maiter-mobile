@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MaiterBottomNavigationBar extends StatefulWidget {
+class AmicaBottomNavigationBar extends StatefulWidget {
   final int selectedIndex;
 
-  const MaiterBottomNavigationBar({
+  const AmicaBottomNavigationBar({
     Key? key,
     required this.selectedIndex,
   }) : super(key: key);
 
   @override
-  _MaiterBottomNavigationBarState createState() =>
-      _MaiterBottomNavigationBarState();
+  _AmicaBottomNavigationBarState createState() =>
+      _AmicaBottomNavigationBarState();
 }
 
-class _MaiterBottomNavigationBarState extends State<MaiterBottomNavigationBar> {
+class _AmicaBottomNavigationBarState extends State<AmicaBottomNavigationBar> {
   void _onDestinationSelected(int idx, BuildContext context) {
     switch (idx) {
       case 0:

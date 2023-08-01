@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MaiterButton extends StatefulWidget {
+class AmicaButton extends StatefulWidget {
   final void Function()? onPressed;
   final String text;
   final double? minWidth;
@@ -9,7 +9,7 @@ class MaiterButton extends StatefulWidget {
   final Color? textColor;
   final TextStyle? textStyle;
 
-  const MaiterButton({
+  const AmicaButton({
     super.key,
     required this.onPressed,
     required this.text,
@@ -21,10 +21,10 @@ class MaiterButton extends StatefulWidget {
   });
 
   @override
-  State<MaiterButton> createState() => _MaiterButtonState();
+  State<AmicaButton> createState() => _AmicaButtonState();
 }
 
-class _MaiterButtonState extends State<MaiterButton> {
+class _AmicaButtonState extends State<AmicaButton> {
   TextStyle get textStyle {
     if (widget.textStyle == null) {
       return const TextStyle(

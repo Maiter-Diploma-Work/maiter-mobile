@@ -1,25 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maiter/src/data/valery_doe.dart';
-import 'package:maiter/src/layouts/scaffold.dart';
-import 'package:maiter/src/screens/auth/login/login.dart';
-import 'package:maiter/src/screens/auth/register/register.dart';
-import 'package:maiter/src/screens/chat/chat-list.dart';
-import 'package:maiter/src/screens/chat/chat.dart';
-import 'package:maiter/src/screens/chat/chat_app_bar_title.dart';
-import 'package:maiter/src/screens/option_select_view/option_select_item.dart';
-import 'package:maiter/src/screens/option_select_view/option_select_view.dart';
-import 'package:maiter/src/screens/profile_view/profile_edit_view/profile_edit_view.dart';
-import 'package:maiter/src/screens/profile_view/profile_view.dart';
-import 'package:maiter/src/screens/user_profile_detailed_view/user_profile_detailed.dart';
-import 'package:maiter/src/screens/user_profile_view/user_profile_view.dart';
-import 'package:maiter/src/screens/welcome_view/welcome_view.dart';
+import 'package:amica/src/data/valery_doe.dart';
+import 'package:amica/src/layouts/scaffold.dart';
+import 'package:amica/src/screens/auth/login/login.dart';
+import 'package:amica/src/screens/auth/register/register.dart';
+import 'package:amica/src/screens/chat/chat-list.dart';
+import 'package:amica/src/screens/chat/chat.dart';
+import 'package:amica/src/screens/chat/chat_app_bar_title.dart';
+import 'package:amica/src/screens/option_select_view/option_select_item.dart';
+import 'package:amica/src/screens/option_select_view/option_select_view.dart';
+import 'package:amica/src/screens/profile_view/profile_edit_view/profile_edit_view.dart';
+import 'package:amica/src/screens/profile_view/profile_view.dart';
+import 'package:amica/src/screens/user_profile_detailed_view/user_profile_detailed.dart';
+import 'package:amica/src/screens/user_profile_view/user_profile_view.dart';
+import 'package:amica/src/screens/welcome_view/welcome_view.dart';
 
 //TODO: State management
 
 final searchUser = GoRoute(
   path: 'search/user',
-  builder: (context, state) => MaiterScaffold(
+  builder: (context, state) => AmicaScaffold(
     title: "User Search",
     scaffoldBody: UserProfileView(
       profile: ValeryDoe,
@@ -30,7 +29,7 @@ final searchUser = GoRoute(
   routes: [
     GoRoute(
       path: 'details',
-      builder: (context, state) => MaiterScaffold(
+      builder: (context, state) => AmicaScaffold(
         isDetailed: true,
         title: "",
         scaffoldBody: UserProfileDetailed(
@@ -53,7 +52,7 @@ final register = GoRoute(
 
 final profile = GoRoute(
   path: 'profile',
-  builder: (context, state) => MaiterScaffold(
+  builder: (context, state) => AmicaScaffold(
     title: 'Your Profile',
     scaffoldBody: ProfileView(profile: ValeryDoe),
     selectedNavigationItemIndex: 3,
@@ -62,7 +61,7 @@ final profile = GoRoute(
   routes: [
     GoRoute(
       path: 'edit',
-      builder: (context, state) => MaiterScaffold(
+      builder: (context, state) => AmicaScaffold(
         isDetailed: true,
         title: 'Edit Profile',
         scaffoldBody: ProfileEditView(profile: ValeryDoe),
@@ -72,7 +71,7 @@ final profile = GoRoute(
     //TODO: remove the hardcode
     GoRoute(
       path: 'theme',
-      builder: (context, state) => MaiterScaffold(
+      builder: (context, state) => AmicaScaffold(
         isDetailed: true,
         selectedNavigationItemIndex: 3,
         title: 'Theme selection',
@@ -90,7 +89,7 @@ final profile = GoRoute(
     ),
     GoRoute(
       path: 'language',
-      builder: (context, state) => MaiterScaffold(
+      builder: (context, state) => AmicaScaffold(
         isDetailed: true,
         selectedNavigationItemIndex: 3,
         title: 'Language selection',
@@ -107,7 +106,7 @@ final profile = GoRoute(
 
 final chat = GoRoute(
   path: 'chat-list',
-  builder: (context, state) => const MaiterScaffold(
+  builder: (context, state) => const AmicaScaffold(
     title: 'Chats',
     scaffoldBody: ChatListView(
       chats: [],
@@ -118,7 +117,7 @@ final chat = GoRoute(
   routes: [
     GoRoute(
       path: ':user_id',
-      builder: (context, state) => MaiterScaffold(
+      builder: (context, state) => AmicaScaffold(
         title: '',
         scaffoldAppBarTitle:
             ChatAppBarTitle(userId: state.pathParameters['user_id']!),

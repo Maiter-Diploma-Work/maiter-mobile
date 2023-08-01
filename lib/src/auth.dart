@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class MaiterAuth extends ChangeNotifier {
+class AmicaAuth extends ChangeNotifier {
   bool _signedIn = false;
   bool get signedIn => _signedIn;
 
@@ -20,19 +20,19 @@ class MaiterAuth extends ChangeNotifier {
 
   @override
   bool operator ==(Object other) =>
-      other is MaiterAuth && other._signedIn == _signedIn;
+      other is AmicaAuth && other._signedIn == _signedIn;
 
   @override
   int get hashCode => _signedIn.hashCode;
 }
 
-class MaiterAuthScope extends InheritedNotifier<MaiterAuth> {
-  const MaiterAuthScope({
+class AmicaAuthScope extends InheritedNotifier<AmicaAuth> {
+  const AmicaAuthScope({
     required super.notifier,
     required super.child,
     super.key,
   });
 
-  static MaiterAuth of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<MaiterAuthScope>()!.notifier!;
+  static AmicaAuth of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<AmicaAuthScope>()!.notifier!;
 }

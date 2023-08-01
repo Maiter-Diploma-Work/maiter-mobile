@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class MaiterTitle extends StatelessWidget {
+class AmicaTitle extends StatelessWidget {
   final String text;
 
-  const MaiterTitle({
+  const AmicaTitle({
     super.key,
     required this.text,
   });

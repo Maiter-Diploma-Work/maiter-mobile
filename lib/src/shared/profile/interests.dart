@@ -50,10 +50,11 @@ class _InterestsState extends State<Interests> {
   Widget build(BuildContext context) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
+      alignment: WrapAlignment.center,
       runSpacing: 7,
-      spacing: 20,
-      alignment: WrapAlignment.spaceBetween,
-      runAlignment: WrapAlignment.spaceBetween,
+      spacing: 10,
+      // alignment: WrapAlignment.spaceBetween,
+      // runAlignment: WrapAlignment.spaceBetween,
       children: listGenerator(),
     );
   }
