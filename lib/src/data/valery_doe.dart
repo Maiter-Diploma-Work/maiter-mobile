@@ -11,9 +11,9 @@ final UserProfile ValeryDoe = UserProfile(
   age: 27,
   tag: '@the-only-v',
   name: "Valery Doe",
-  height: 1.75,
+  height: 175,
   gender: 'Female',
-  birthDate: DateTime(2055, 1, 1),
+  birthDate: DateTime(2050, 1, 1),
   education: 'Unknown',
   description:
       "You could tell me what to say, you could tell where to go\nBut I doubt that I would care and my heart would never know",

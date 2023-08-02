@@ -26,7 +26,7 @@ class CharacterTraitView extends StatelessWidget {
           ],
         ),
         Slider(
-          value: characterTrait.degree,
+          value: characterTrait.degree.toDouble(),
           min: 0,
           max: 10,
           activeColor: Theme.of(context).colorScheme.onBackground,

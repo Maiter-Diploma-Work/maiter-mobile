@@ -16,30 +16,40 @@ class LoginScreen extends StatelessWidget {
   Form formGenerator(BuildContext context) {
     return Form(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const AmicaTextFormInput(
             fieldName: "Email",
             hintText: "Enter your email",
-            padding: EdgeInsets.only(left: 60, right: 60, bottom: 15, top: 0),
           ),
+          const Gap(horizontalGap: 0, verticalGap: 30.0),
           const AmicaTextFormInput(
             fieldName: "Password",
             hintText: "Enter your password",
-            padding: EdgeInsets.only(left: 60, right: 60, bottom: 15, top: 0),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AmicaButton(
-                onPressed: () => _onLoginClick(context),
-                text: "log in",
-              ),
-              const Gap.cubic(15),
-              AmicaButton(
-                  onPressed: () => context.go('/auth/register'),
-                  text: "register"),
-            ],
-          )
+          const Gap(horizontalGap: 0, verticalGap: 132.0),
+          AmicaButton(
+            onPressed: () => context.go('/search/user'),
+            text: "Login",
+            color: Theme.of(context).colorScheme.onPrimary,
+            textColor: Theme.of(context).colorScheme.primary,
+            textStyle: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const Gap(horizontalGap: 0, verticalGap: 40.0),
+          AmicaButton(
+            onPressed: () => context.go('/auth/register'),
+            text: "Register",
+            color: Theme.of(context).colorScheme.onPrimary,
+            textColor: Theme.of(context).colorScheme.primary,
+            textStyle: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );
@@ -48,22 +58,17 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StartScreen(
-      screenBody: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      screenBody: ListView(
         children: [
-          //TODO: remove the magic strings
-          const AmicaTitle(text: "Welcome to"),
-          const Gap(
-            horizontalGap: 20.0,
-            verticalGap: 20.0,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const AmicaTitle(text: "Login"),
+              const Gap(horizontalGap: 0, verticalGap: 64.0),
+              formGenerator(context)
+            ],
           ),
-          const AmicaTitle(text: "Amica"),
-          const Gap(
-            horizontalGap: 20.0,
-            verticalGap: 20.0,
-          ),
-          formGenerator(context),
         ],
       ),
     );

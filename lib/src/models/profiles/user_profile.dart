@@ -31,7 +31,7 @@ class UserProfile extends Profile {
   late String gender;
   late String? education;
   late String? favoriteSong;
-  late double? height;
+  late int? height;
   late List<SocialNetwork>? socialNetworks;
 
   UserProfile({

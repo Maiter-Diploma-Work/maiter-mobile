@@ -5,9 +5,8 @@ CharacterTrait characterTraitFromJson(String str) =>
 
 String characterTraitToJson(CharacterTrait data) => json.encode(data.toJson());
 
-List<CharacterTrait> characterTraitsFromJson(String str) =>
-    List<CharacterTrait>.from(
-        json.decode(str).map((x) => CharacterTrait.fromJson(x)));
+List<CharacterTrait> characterTraitsFromJson(List<dynamic> items) =>
+    List.from(items.map((e) => CharacterTrait.fromJson(e)));
 
 String characterTraitsToJson(List<CharacterTrait> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -17,7 +16,7 @@ class CharacterTrait {
   int userId;
   String bottomName;
   String topName;
-  double degree;
+  int degree;
 
   CharacterTrait({
     required this.id,

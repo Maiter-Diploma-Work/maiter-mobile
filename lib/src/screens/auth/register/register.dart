@@ -17,32 +17,49 @@ class RegisterScreen extends StatelessWidget {
   Form formGenerator(BuildContext context) {
     return Form(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const AmicaTextFormInput(
             fieldName: "Email",
             hintText: "Enter your email",
-            padding: EdgeInsets.only(left: 60, right: 60, bottom: 15, top: 0),
           ),
+          const Gap(horizontalGap: 0, verticalGap: 30),
           const AmicaTextFormInput(
             fieldName: "Username",
             hintText:
                 "Enter your username (will be displayed with @ at the start)",
-            padding: EdgeInsets.only(left: 60, right: 60, bottom: 15, top: 0),
           ),
+          const Gap(horizontalGap: 0, verticalGap: 30),
           const AmicaTextFormInput(
             fieldName: "Password",
             hintText: "Enter your password",
-            padding: EdgeInsets.only(left: 60, right: 60, bottom: 15, top: 0),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AmicaButton(
-                  onPressed: () => context.go('/auth/login'), text: "log in"),
-              const Gap.cubic(15),
-              AmicaButton(
-                  onPressed: () => _onRegisterClick(context), text: "register"),
-            ],
+          const Gap(horizontalGap: 0, verticalGap: 30),
+          const AmicaTextFormInput(
+            fieldName: "Password",
+            hintText: "Repeat your password",
+          ),
+          const Gap(horizontalGap: 0, verticalGap: 70),
+          AmicaButton(
+            onPressed: () => context.go('/auth/login'),
+            text: "log in",
+            color: Theme.of(context).colorScheme.onPrimary,
+            textColor: Theme.of(context).colorScheme.primary,
+            textStyle: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const Gap.cubic(40),
+          AmicaButton(
+            onPressed: () => _onRegisterClick(context),
+            text: "register",
+            color: Theme.of(context).colorScheme.onPrimary,
+            textColor: Theme.of(context).colorScheme.primary,
+            textStyle: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
           )
         ],
       ),
@@ -52,16 +69,18 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StartScreen(
-      screenBody: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      screenBody: ListView(
         children: [
-          //TODO: remove the magic strings
-          const AmicaTitle(text: "Welcome to"),
-          const Gap.cubic(20.0),
-          const AmicaTitle(text: "Amica"),
-          const Gap.cubic(60.0),
-          formGenerator(context),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              //TODO: remove the magic strings
+              const AmicaTitle(text: "Register"),
+              const Gap.cubic(60.0),
+              formGenerator(context),
+            ],
+          ),
         ],
       ),
     );

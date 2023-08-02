@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AmicaButton extends StatefulWidget {
+class AmicaButton extends StatelessWidget {
   final void Function()? onPressed;
   final String text;
   final double? minWidth;
@@ -8,6 +8,7 @@ class AmicaButton extends StatefulWidget {
   final Color? color;
   final Color? textColor;
   final TextStyle? textStyle;
+  final Size? maximumSize;
 
   const AmicaButton({
     super.key,
@@ -18,36 +19,30 @@ class AmicaButton extends StatefulWidget {
     this.textStyle,
     this.minWidth,
     this.height,
+    this.maximumSize,
   });
 
   @override
-  State<AmicaButton> createState() => _AmicaButtonState();
-}
-
-class _AmicaButtonState extends State<AmicaButton> {
-  TextStyle get textStyle {
-    if (widget.textStyle == null) {
-      return const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-      );
-    } else {
-      return widget.textStyle!;
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      color: widget.color ?? Theme.of(context).colorScheme.tertiary,
-      textColor: widget.textColor ?? Theme.of(context).colorScheme.onError,
-      minWidth: widget.minWidth ?? 145,
-      height: widget.height,
-      onPressed: widget.onPressed,
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color ?? Theme.of(context).colorScheme.tertiary,
+        foregroundColor: textColor ?? Theme.of(context).colorScheme.onError,
+        minimumSize: Size(minWidth ?? 145, height ?? 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        maximumSize: maximumSize,
+      ),
+      onPressed: onPressed,
       child: Text(
-        widget.text,
+        text,
         textAlign: TextAlign.center,
-        style: textStyle,
+        style: textStyle ??
+            const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
       ),
     );
   }

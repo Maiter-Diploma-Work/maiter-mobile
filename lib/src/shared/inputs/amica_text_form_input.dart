@@ -37,8 +37,22 @@ class AmicaTextFormInput extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               filled: true,
-              hintStyle: const TextStyle(color: Color(0x99FFFFFF)),
+              fillColor: Colors.white,
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(30),
+                ),
+              ),
+              hintStyle: const TextStyle(
+                color: Color(0x99FFFFFF),
+              ),
             ),
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
