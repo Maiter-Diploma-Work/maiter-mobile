@@ -32,17 +32,19 @@ class _AmicaState extends State<Amica> {
 
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = const Color(0xFF303F9F);
+    Color primaryColor = const Color(0xFF282B67);
     Color secondaryColor = const Color(0xFF7E18FF);
     Color tertiaryColor = const Color(0xFFFFBC58);
     Color errorColor = const Color(0xFFe95184);
-    Color backgroundColor = const Color(0xFF222222);
+    Color backgroundColor = const Color(0xFF080D20);
     Color surfaceColor = const Color(0xFF131111);
+    Color inverseSurface = Colors.white;
     Color onPrimaryColor = Colors.white;
     Color onBackgroundColor = Colors.white;
     Color onErrorColor = Colors.white;
     Color onSurfaceColor = Colors.white;
     Color onSecondaryColor = Colors.black;
+    Color onInverseSurface = Colors.black;
 
     return AmicaAuthScope(
       notifier: _auth,
@@ -58,11 +60,13 @@ class _AmicaState extends State<Amica> {
             error: errorColor,
             background: backgroundColor,
             surface: surfaceColor,
+            inverseSurface: inverseSurface,
             onPrimary: onPrimaryColor,
             onBackground: onBackgroundColor,
             onError: onErrorColor,
             onSurface: onSurfaceColor,
             onSecondary: onSecondaryColor,
+            onInverseSurface: onInverseSurface,
           ),
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: primaryColor,

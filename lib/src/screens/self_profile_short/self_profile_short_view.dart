@@ -44,7 +44,7 @@ class _SelfProfileShortViewState extends State<SelfProfileShortView> {
           Expanded(
             child: UserProfileName(
               name: widget.profile.name,
-              age: widget.profile.age,
+              birthdate: widget.profile.age,
               tag: widget.profile.tag,
             ),
           ),

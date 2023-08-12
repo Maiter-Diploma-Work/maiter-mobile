@@ -94,7 +94,7 @@ class ShortProfileOverview extends StatelessWidget {
       children: [
         UserProfileName(
           name: profile.name,
-          age: profile.age,
+          birthdate: profile.birthDate,
           tag: profile.tag,
         ),
         const Delimeter(bottomMargin: 12, topMargin: 6),

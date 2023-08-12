@@ -13,7 +13,6 @@ class AmicaSearchBar extends StatelessWidget {
         right: 32,
         bottom: 12,
       ),
-      color: Theme.of(context).colorScheme.primary,
       child: SizedBox(
         height: 32,
         child: TextField(

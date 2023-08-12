@@ -8,7 +8,6 @@ import '../models/shared/location.dart';
 
 final UserProfile ValeryDoe = UserProfile(
   id: 2,
-  age: 27,
   tag: '@the-only-v',
   name: "Valery Doe",
   height: 175,
@@ -18,13 +17,16 @@ final UserProfile ValeryDoe = UserProfile(
   description:
       "You could tell me what to say, you could tell where to go\nBut I doubt that I would care and my heart would never know",
   location: Location(
-      postcode: "10000",
-      name: "Night City",
-      id: 1,
-      countryName: "Night City",
-      longitude: 0.0,
-      latitude: 0.0),
-  photo: "assets/the_v.jpg",
+    postcode: "10000",
+    name: "Night City",
+    id: 1,
+    countryName: "Night City",
+    longitude: 0.0,
+    latitude: 0.0,
+  ),
+  status: 'Free',
+  lookingFor: 'Anyone',
+  photo: "assets/valery_doe.jpg",
   interests: [
     Interest(
       id: 5,
@@ -67,7 +69,6 @@ final UserProfile ValeryDoe = UserProfile(
     SocialNetwork(id: 1, userId: 2, name: "Telegram", userName: "@theonlyv"),
     SocialNetwork(id: 1, userId: 2, name: "Instagram", userName: "@theonlyv"),
   ],
-  favoriteSong: 'Nomico - Bad Apple',
   characterTraits: [
     CharacterTrait(
       id: 1,

@@ -1,3 +1,5 @@
+import 'package:amica/src/shared/inputs/amica_button.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:amica/src/data/valery_doe.dart';
 import 'package:amica/src/layouts/scaffold.dart';
@@ -25,18 +27,29 @@ final searchUser = GoRoute(
     ),
     selectedNavigationItemIndex: 0,
     isDetailed: false,
+    actions: [
+      IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: () => {},
+      ),
+    ],
   ),
   routes: [
     GoRoute(
       path: 'details',
       builder: (context, state) => AmicaScaffold(
-        isDetailed: true,
-        title: "",
-        scaffoldBody: UserProfileDetailed(
-          profile: ValeryDoe,
-        ),
-        selectedNavigationItemIndex: 0,
-      ),
+          isDetailed: true,
+          title: "",
+          scaffoldBody: UserProfileDetailed(
+            profile: ValeryDoe,
+          ),
+          selectedNavigationItemIndex: 0,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () => {},
+            ),
+          ]),
     ),
   ],
 );
@@ -113,6 +126,7 @@ final chat = GoRoute(
     ),
     selectedNavigationItemIndex: 2,
     isDetailed: false,
+    appBarBackgroundColor: Color(0xFF080D20),
   ),
   routes: [
     GoRoute(
@@ -126,6 +140,8 @@ final chat = GoRoute(
         ),
         selectedNavigationItemIndex: 2,
         isDetailed: false,
+        appBarBackgroundColor: Theme.of(context).colorScheme.inverseSurface,
+        appBarForegroundColor: Theme.of(context).colorScheme.onInverseSurface,
       ),
     )
   ],

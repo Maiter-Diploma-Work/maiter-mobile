@@ -54,9 +54,6 @@ class UserProfileView extends StatelessWidget {
           horizontal: 12,
           vertical: 6,
         ),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
-        ),
         child: Stack(
           children: [
             Center(

@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class UserProfileName extends StatefulWidget {
   final String name;
   final String tag;
-  final int age;
+  final DateTime birthdate;
   final Color? textColor;
   final EdgeInsets? padding;
 
   const UserProfileName({
     super.key,
     required this.name,
-    required this.age,
+    required this.birthdate,
     required this.tag,
     this.padding,
     this.textColor,
@@ -25,7 +25,7 @@ class UserProfileName extends StatefulWidget {
   }) =>
       UserProfileName(
         name: profile.name,
-        age: profile.age,
+        birthdate: profile.birthDate,
         tag: profile.tag,
         key: key,
         padding: padding,
@@ -54,7 +54,7 @@ class _UserProfileNameState extends State<UserProfileName> {
           ),
         ],
       ),
-      textGenerator(widget.age.toString())
+      textGenerator((DateTime.now().year - widget.birthdate.year).toString()),
     ];
   }
 

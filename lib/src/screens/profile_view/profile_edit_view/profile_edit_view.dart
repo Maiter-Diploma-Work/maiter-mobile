@@ -42,6 +42,32 @@ class _ProfileEditViewState extends State<ProfileEditView> {
     );
   }
 
+  Widget _statusAndLookingForInputs(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        SizedBox(
+          width: (MediaQuery.of(context).size.width - 64) * 0.44,
+          child: AmicaSelect<String>(
+            initialValue: widget.profile.status,
+            options: statuses.values,
+            fieldName: 'Status',
+          ),
+        ),
+        SizedBox(
+          width: (MediaQuery.of(context).size.width - 64) * 0.44,
+          child: AmicaSelect<String>(
+            initialValue: widget.profile.lookingFor,
+            options: lookingFors.values,
+            fieldName: 'Looking for',
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -80,6 +106,10 @@ class _ProfileEditViewState extends State<ProfileEditView> {
               ),
               const Gap.cubic(24),
               _birthDateAndGenderInputs(context),
+              const Gap.cubic(24),
+              _statusAndLookingForInputs(context),
+              const Gap.cubic(24),
+
               const Gap.cubic(24),
               AmicaTextFormInput(
                 fieldName: 'About me',

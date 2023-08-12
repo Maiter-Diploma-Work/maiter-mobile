@@ -24,7 +24,6 @@ class _ChatAppBarTitleState extends State<ChatAppBarTitle> {
     setState(() {
       _user = data.firstWhere((element) => element.id == userId);
     });
-    print(_user);
   }
 
   @override
@@ -36,12 +35,14 @@ class _ChatAppBarTitleState extends State<ChatAppBarTitle> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Text(
+          _user == null ? '' : _user!.name,
+        ),
         CircleAvatar(
-          backgroundColor: Colors.white,
           child: Image.network(_user == null ? '' : _user!.photo),
         ),
-        Text(_user == null ? '' : _user!.name),
       ],
     );
   }

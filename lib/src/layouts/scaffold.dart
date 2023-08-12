@@ -5,9 +5,11 @@ class AmicaScaffold extends StatelessWidget {
   final String title;
   final Widget scaffoldBody;
   final Widget? scaffoldAppBarTitle;
+  final List<Widget>? actions;
   final int selectedNavigationItemIndex;
   final bool isDetailed;
   final Color? appBarBackgroundColor;
+  final Color? appBarForegroundColor;
 
   const AmicaScaffold({
     super.key,
@@ -17,6 +19,8 @@ class AmicaScaffold extends StatelessWidget {
     required this.isDetailed,
     this.appBarBackgroundColor,
     this.scaffoldAppBarTitle,
+    this.actions,
+    this.appBarForegroundColor,
   });
 
   Widget get _title {
@@ -27,7 +31,7 @@ class AmicaScaffold extends StatelessWidget {
     return Text(title);
   }
 
-  Color getAppBarBackgroundColor(BuildContext context) {
+  Color _getAppBarBackgroundColor(BuildContext context) {
     if (appBarBackgroundColor != null) {
       return appBarBackgroundColor!;
     }
@@ -39,22 +43,31 @@ class AmicaScaffold extends StatelessWidget {
     return Theme.of(context).colorScheme.primary;
   }
 
+  Color _getAppBarForegroundColor(BuildContext context) {
+    if (appBarForegroundColor != null) {
+      return appBarForegroundColor!;
+    }
+
+    if (isDetailed) {
+      return Theme.of(context).colorScheme.onBackground;
+    }
+
+    return Theme.of(context).colorScheme.onPrimary;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: isDetailed,
       appBar: AppBar(
-        backgroundColor: getAppBarBackgroundColor(context),
+        backgroundColor: _getAppBarBackgroundColor(context),
+        foregroundColor: _getAppBarForegroundColor(context),
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => {},
-          ),
-        ],
+        actions: actions ?? [],
         centerTitle: true,
         title: _title,
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
       bottomNavigationBar: AmicaBottomNavigationBar(
         selectedIndex: selectedNavigationItemIndex,
       ),

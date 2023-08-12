@@ -22,13 +22,27 @@ Map<int, String> genders = {
   3: 'Non-binary',
 };
 
+Map<int, String> lookingFors = {
+  1: 'Male',
+  2: 'Female',
+  3: 'Non-binary',
+  4: 'Anyone',
+};
+
+Map<int, String> statuses = {
+  1: 'Free',
+  2: 'Have relationship',
+  3: 'Free relationship',
+};
+
 class UserProfile extends Profile {
-  late int age;
   late String tag;
   late DateTime birthDate;
   late List<Expectancy> expectancies;
   late List<CharacterTrait> characterTraits;
   late String gender;
+  late String status;
+  late String lookingFor;
   late String? education;
   late String? favoriteSong;
   late int? height;
@@ -41,9 +55,10 @@ class UserProfile extends Profile {
     required super.location,
     required super.photo,
     required super.interests,
-    required this.age,
     required this.tag,
     required this.gender,
+    required this.lookingFor,
+    required this.status,
     required this.birthDate,
     required this.characterTraits,
     required this.expectancies,
@@ -60,7 +75,6 @@ class UserProfile extends Profile {
         location: Location.fromJson(json['location']),
         photo: json['photo'],
         interests: interestsFromJson(json['interests']),
-        age: json['age'],
         tag: json['tag'],
         gender: json['gender'],
         birthDate: DateFormat.yMd().parse(json['birthDate']),
@@ -69,18 +83,21 @@ class UserProfile extends Profile {
         height: json['height'],
         characterTraits: characterTraitsFromJson(json['characterTraits']),
         expectancies: expectanciesFromJson(json['expectancies']),
+        status: json['status'],
+        lookingFor: json['lookingFor'],
       );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['age'] = age;
     data['tag'] = tag;
     data['name'] = name;
     data['gender'] = gender;
     data['birthDate'] = birthDate;
     data['education'] = education;
     data['description'] = description;
+    data['status'] = status;
+    data['lookingFor'] = lookingFor;
     data['location'] = location.toJson();
     data['photo'] = photo;
     data['interests'] = List.generate(
