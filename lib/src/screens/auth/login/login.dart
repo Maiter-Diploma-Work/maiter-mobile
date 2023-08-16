@@ -16,8 +16,7 @@ class LoginScreen extends StatelessWidget {
   Form formGenerator(BuildContext context) {
     return Form(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const AmicaTextFormInput(
             fieldName: "Email",
