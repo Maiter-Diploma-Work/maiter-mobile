@@ -1,32 +1,28 @@
+import 'package:amica/src/models/profiles/expectancies.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:flutter/material.dart';
 
 typedef OnRemove = void Function(int index);
 typedef OnAdd = void Function();
 
-class Expectation extends StatefulWidget {
-  final int index;
+class Expectation extends StatelessWidget {
+  final Expectancy expectancy;
   final OnRemove? onRemove;
   final OnAdd? onAdd;
   const Expectation({
     super.key,
-    required this.index,
     required this.onRemove,
     required this.onAdd,
+    required this.expectancy,
   });
 
-  @override
-  State<Expectation> createState() => _ExpectationState();
-}
-
-class _ExpectationState extends State<Expectation> {
-  Widget get removeButton {
-    if (widget.onRemove == null) {
+  Widget getRemoveButton(BuildContext context) {
+    if (onRemove == null) {
       return Container();
     }
 
     return IconButton(
-      onPressed: () => widget.onRemove!(widget.index),
+      onPressed: () => onRemove!(expectancy.id),
       icon: Icon(
         Icons.remove,
         color: Theme.of(context).colorScheme.inverseSurface,
@@ -34,13 +30,13 @@ class _ExpectationState extends State<Expectation> {
     );
   }
 
-  Widget get addButton {
-    if (widget.onAdd == null) {
+  Widget getAddButton(BuildContext context) {
+    if (onAdd == null) {
       return Container();
     }
 
     return IconButton(
-      onPressed: widget.onAdd!,
+      onPressed: onAdd!,
       icon: Icon(
         Icons.add,
         color: Theme.of(context).colorScheme.inverseSurface,
@@ -54,12 +50,13 @@ class _ExpectationState extends State<Expectation> {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const AmicaTextFormInput.expanded(
+        AmicaTextFormInput.expanded(
           fieldName: '',
           hintText: 'What do you expect?',
+          initialValue: expectancy.text,
         ),
-        removeButton,
-        addButton,
+        getRemoveButton(context),
+        getAddButton(context),
       ],
     );
   }

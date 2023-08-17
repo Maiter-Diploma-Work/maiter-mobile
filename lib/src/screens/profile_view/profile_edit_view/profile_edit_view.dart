@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:amica/src/models/profiles/expectancies.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/screens/auth/title.dart';
 import 'package:amica/src/screens/profile_view/profile_edit_view/expectation.dart';
@@ -18,33 +21,32 @@ class ProfileEditView extends StatefulWidget {
 }
 
 class _ProfileEditViewState extends State<ProfileEditView> {
-  late List<Widget> _expectations = [];
+  late List<Expectancy> _expectationsSource = widget.profile.expectancies;
+  late int _newExpectancyId;
 
   void addExpectation() {
-    final int newIndex = _expectations.length;
     setState(() {
-      _expectations = [
-        ..._expectations,
-        Expectation(
-          index: newIndex,
-          onRemove: (index) => removeExpectations(index),
-          onAdd: addExpectation,
+      _expectationsSource = [
+        ..._expectationsSource,
+        Expectancy(
+          id: _newExpectancyId + 1,
+          userId: widget.profile.id,
+          text: '',
         ),
       ];
+      _newExpectancyId++;
     });
   }
 
   void removeExpectations(int expectationId) {
+    //TODO: fix this method. It removes the right item, but the display is incorect unless user reentering this view
     setState(() {
-      _expectations = _expectations
-          .where((element) => (element as Expectation).index != expectationId)
-          .toList();
+      _expectationsSource.removeWhere((element) => element.id == expectationId);
     });
-    // _expectations.removeAt(expectationId);
   }
 
-  Widget get expectations {
-    if (_expectations.isEmpty) {
+  Widget expectations() {
+    if (_expectationsSource.isEmpty) {
       return Column(
         children: [
           const Text('Add your expectations!'),
@@ -63,10 +65,14 @@ class _ProfileEditViewState extends State<ProfileEditView> {
         const Text('Expectations'),
         const Gap(verticalGap: 16, horizontalGap: 0),
         ...List.from(
-          _expectations.map(
+          _expectationsSource.map(
             (e) => Column(
               children: [
-                e,
+                Expectation(
+                  onRemove: removeExpectations,
+                  onAdd: addExpectation,
+                  expectancy: e,
+                ),
                 const Gap(verticalGap: 16, horizontalGap: 0),
               ],
             ),
@@ -128,6 +134,12 @@ class _ProfileEditViewState extends State<ProfileEditView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _newExpectancyId = _expectationsSource.length;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       child: Center(
@@ -173,7 +185,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
               initialValue: widget.profile.description,
             ),
             const Gap.cubic(24),
-            expectations,
+            expectations(),
           ],
         ),
       ),
