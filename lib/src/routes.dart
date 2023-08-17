@@ -82,6 +82,8 @@ final profile = GoRoute(
       ),
     ),
     //TODO: remove the hardcode
+    // Is it even necessary? Maybe it can be configured with select input?
+    // Maybe the whoe /profile page can be drawn in another way?
     GoRoute(
       path: 'theme',
       builder: (context, state) => AmicaScaffold(
@@ -92,10 +94,6 @@ final profile = GoRoute(
           options: [
             OptionSelectItem("light"),
             OptionSelectItem("dark"),
-            OptionSelectItem("summer"),
-            OptionSelectItem("fall"),
-            OptionSelectItem("winter"),
-            OptionSelectItem("spring"),
           ],
         ),
       ),

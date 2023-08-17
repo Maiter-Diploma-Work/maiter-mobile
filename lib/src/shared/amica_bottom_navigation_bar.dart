@@ -41,12 +41,12 @@ class _AmicaBottomNavigationBarState extends State<AmicaBottomNavigationBar> {
       onTap: (value) => _onDestinationSelected(value, context),
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'home',
+          icon: Icon(Icons.search),
+          label: 'people',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          label: 'likes',
+          icon: Icon(Icons.explore),
+          label: 'discover',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.chat),
