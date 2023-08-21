@@ -47,6 +47,7 @@ class UserProfile extends Profile {
   late String? favoriteSong;
   late int? height;
   late List<SocialNetwork>? socialNetworks;
+  late List<String>? photos;
 
   UserProfile({
     required super.id,
@@ -66,26 +67,27 @@ class UserProfile extends Profile {
     this.favoriteSong,
     this.education,
     this.socialNetworks,
+    this.photos,
   });
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
-        id: json['id'],
-        name: json['name'],
-        description: json['description'],
-        location: Location.fromJson(json['location']),
-        photo: json['photo'],
-        interests: interestsFromJson(json['interests']),
-        tag: json['tag'],
-        gender: json['gender'],
-        birthDate: DateFormat.yMd().parse(json['birthDate']),
-        education: json['education'],
-        socialNetworks: socialNetworksFromJson(json['socialNetworks']),
-        height: json['height'],
-        characterTraits: characterTraitsFromJson(json['characterTraits']),
-        expectancies: expectanciesFromJson(json['expectancies']),
-        status: json['status'],
-        lookingFor: json['lookingFor'],
-      );
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      location: Location.fromJson(json['location']),
+      photo: json['photo'],
+      interests: interestsFromJson(json['interests']),
+      tag: json['tag'],
+      gender: json['gender'],
+      birthDate: DateFormat.yMd().parse(json['birthDate']),
+      education: json['education'],
+      socialNetworks: socialNetworksFromJson(json['socialNetworks']),
+      height: json['height'],
+      characterTraits: characterTraitsFromJson(json['characterTraits']),
+      expectancies: expectanciesFromJson(json['expectancies']),
+      status: json['status'],
+      lookingFor: json['lookingFor'],
+      photos: json['photos']);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -100,6 +102,7 @@ class UserProfile extends Profile {
     data['lookingFor'] = lookingFor;
     data['location'] = location.toJson();
     data['photo'] = photo;
+    data['photo'] = photos;
     data['interests'] = List.generate(
       interests.length,
       (index) => interests[index].toJson(),

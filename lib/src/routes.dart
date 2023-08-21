@@ -1,3 +1,4 @@
+import 'package:amica/src/screens/profile_view/profile_photo_edit_view/profile_photo_edit_view.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,7 +20,7 @@ import 'package:amica/src/screens/welcome_view/welcome_view.dart';
 //TODO: State management
 
 final searchUser = GoRoute(
-  path: 'search/user',
+  path: '/search/user',
   builder: (context, state) => AmicaScaffold(
     title: "User Search",
     scaffoldBody: UserProfileView(
@@ -64,7 +65,7 @@ final register = GoRoute(
 );
 
 final profile = GoRoute(
-  path: 'profile',
+  path: '/profile',
   builder: (context, state) => AmicaScaffold(
     title: 'Your Profile',
     scaffoldBody: ProfileView(profile: ValeryDoe),
@@ -78,6 +79,15 @@ final profile = GoRoute(
         isDetailed: true,
         title: 'Edit Profile',
         scaffoldBody: ProfileEditView(profile: ValeryDoe),
+        selectedNavigationItemIndex: 3,
+      ),
+    ),
+    GoRoute(
+      path: 'photos',
+      builder: (context, state) => AmicaScaffold(
+        isDetailed: true,
+        title: 'Edit Profile',
+        scaffoldBody: ProfilePhotoEditView(userProfile: ValeryDoe),
         selectedNavigationItemIndex: 3,
       ),
     ),
@@ -116,7 +126,7 @@ final profile = GoRoute(
 );
 
 final chat = GoRoute(
-  path: 'chat-list',
+  path: '/chat-list',
   builder: (context, state) => const AmicaScaffold(
     title: 'Chats',
     scaffoldBody: ChatListView(
@@ -154,10 +164,10 @@ final router = GoRouter(
       routes: [
         login,
         register,
-        searchUser,
-        chat,
-        profile,
       ],
     ),
+    searchUser,
+    chat,
+    profile,
   ],
 );
