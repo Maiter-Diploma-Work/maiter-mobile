@@ -1,7 +1,3 @@
-import 'package:amica/src/screens/profile_view/profile_photo_edit_view/profile_photo_edit_view.dart';
-import 'package:amica/src/shared/inputs/amica_button.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:amica/src/data/valery_doe.dart';
 import 'package:amica/src/layouts/scaffold.dart';
 import 'package:amica/src/screens/auth/login/login.dart';
@@ -9,15 +5,19 @@ import 'package:amica/src/screens/auth/register/register.dart';
 import 'package:amica/src/screens/chat/chat-list.dart';
 import 'package:amica/src/screens/chat/chat.dart';
 import 'package:amica/src/screens/chat/chat_app_bar_title.dart';
+import 'package:amica/src/screens/filters/user_search_filter/user_search_filter.dart';
 import 'package:amica/src/screens/option_select_view/option_select_item.dart';
 import 'package:amica/src/screens/option_select_view/option_select_view.dart';
 import 'package:amica/src/screens/profile_view/profile_edit_view/profile_edit_view.dart';
+import 'package:amica/src/screens/profile_view/profile_photo_edit_view/profile_photo_edit_view.dart';
 import 'package:amica/src/screens/profile_view/profile_view.dart';
 import 'package:amica/src/screens/user_profile_detailed_view/user_profile_detailed.dart';
 import 'package:amica/src/screens/user_profile_view/user_profile_view.dart';
 import 'package:amica/src/screens/welcome_view/welcome_view.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-//TODO: State management
+//TODO: State management?
 
 final searchUser = GoRoute(
   path: '/search/user',
@@ -31,7 +31,7 @@ final searchUser = GoRoute(
     actions: [
       IconButton(
         icon: const Icon(Icons.menu),
-        onPressed: () => {},
+        onPressed: () => context.go('/search/user/filter'),
       ),
     ],
   ),
@@ -39,19 +39,31 @@ final searchUser = GoRoute(
     GoRoute(
       path: 'details',
       builder: (context, state) => AmicaScaffold(
-          isDetailed: true,
-          title: "",
-          scaffoldBody: UserProfileDetailed(
-            profile: ValeryDoe,
+        isDetailed: true,
+        title: "",
+        scaffoldBody: UserProfileDetailed(
+          profile: ValeryDoe,
+        ),
+        selectedNavigationItemIndex: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => {},
           ),
-          selectedNavigationItemIndex: 0,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () => {},
-            ),
-          ]),
+        ],
+      ),
     ),
+    GoRoute(
+      path: 'filter',
+      builder: (context, state) => AmicaScaffold(
+        title: 'filter',
+        scaffoldBody: UserSearchFilter(
+          profile: ValeryDoe,
+        ),
+        selectedNavigationItemIndex: 0,
+        isDetailed: true,
+      ),
+    )
   ],
 );
 
@@ -91,9 +103,6 @@ final profile = GoRoute(
         selectedNavigationItemIndex: 3,
       ),
     ),
-    //TODO: remove the hardcode
-    // Is it even necessary? Maybe it can be configured with select input?
-    // Maybe the whoe /profile page can be drawn in another way?
     GoRoute(
       path: 'theme',
       builder: (context, state) => AmicaScaffold(

@@ -7,6 +7,7 @@ class AmicaTextFormInput extends StatelessWidget {
   final EdgeInsets? padding;
   final int? maxLines;
   final TextInputType? textInputType;
+  final TextEditingController? controller;
   final bool? isExpanded;
 
   const AmicaTextFormInput({
@@ -17,6 +18,7 @@ class AmicaTextFormInput extends StatelessWidget {
     this.maxLines,
     this.initialValue,
     this.textInputType,
+    this.controller,
   }) : isExpanded = false;
 
   const AmicaTextFormInput.expanded({
@@ -27,6 +29,7 @@ class AmicaTextFormInput extends StatelessWidget {
     this.maxLines,
     this.initialValue,
     this.textInputType,
+    this.controller,
   }) : isExpanded = true;
 
   Widget get input {
@@ -52,6 +55,7 @@ class AmicaTextFormInput extends StatelessWidget {
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ),
+      controller: controller,
       textAlign: TextAlign.center,
     );
 
