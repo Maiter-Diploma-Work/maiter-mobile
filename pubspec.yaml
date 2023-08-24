@@ -35,4 +35,5 @@ flutter:
     - assets/valery_doe_3.jpg
     - assets/valery_doe_4.jpg
     - assets/mock_users.json
+    - assets/mock_interests.json
     - assets/logo/logo.png

@@ -19,6 +19,10 @@ class _ProfileViewState extends State<ProfileView> {
   final List<LinkButton> interactionOptions = [
     //TODO: dynamic items!
     const LinkButton(
+      title: 'Interests',
+      location: '/profile/interests',
+    ),
+    const LinkButton(
       title: 'Theme',
       selectedTitle: 'Standart',
       location: '/profile/theme',

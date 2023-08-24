@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "group_name": "Sport",
+    "interests": [
+      "football",
+      "basketball",
+      "volleyball",
+      "baseball",
+      "ping-pong",
+      "running",
+      "bodybuilding",
+      "golf",
+      "hockey",
+      "swimming",
+      "boxing",
+      "karate",
+      "judo",
+      "darts",
+      "rugby",
+      "bowling",
+      "chess",
+      "calisthenic",
+      "heavy athletics",
+      "light athletics",
+      "horse-riding",
+      "skiing",
+      "snowboard",
+      "figure skating"
+    ]
+  },
+  {
+    "id": 2,
+    "group_name": "Cyber-sport",
+    "interests": [
+      "counter strike",
+      "dota 2",
+      "league of legends",
+      "valorant",
+      "OSU!",
+      "Apex Legends"
+    ]
+  },
+  {
+    "id": 3,
+    "group_name": "Music",
+    "interests": [
+      "rock",
+      "hip-hop",
+      "metal",
+      "classical",
+      "classical rock",
+      "country",
+      "reggae",
+      "jaz",
+      "phonk",
+      "electronic",
+      "folk",
+      "indie",
+      "k-pop/k-rock",
+      "j-pop/j-rock"
+    ]
+  },
+  {
+    "id": 4,
+    "group_name": "Fitness",
+    "interests": [
+      "Yoga",
+      "gym",
+      "crossfit",
+      "pilates",
+      "zumba",
+      "dance",
+      "healthy lifestyle",
+      "gymnastics"
+    ]
+  },
+  {
+    "id": 5,
+    "group_name": "Books",
+    "interests": [
+      "novels",
+      "fantasy",
+      "sci-fi",
+      "detectives",
+      "poetry",
+      "biography",
+      "philosophy",
+      "comic books",
+      "science pop",
+      "history",
+      "adventures",
+      "psychology",
+      "science"
+    ]
+  },
+  {
+    "id": 6,
+    "group_name": "Art & hobbies",
+    "interests": [
+      "anime",
+      "calligraphy",
+      "circus",
+      "oratory",
+      "movies",
+      "theaters",
+      "caricatures",
+      "memes",
+      "sculptures",
+      "photography",
+      "painting",
+      "digital art",
+      "programming",
+      "dogs",
+      "cats",
+      "true crime"
+    ]
+  }
+]

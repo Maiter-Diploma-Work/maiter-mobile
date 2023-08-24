@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:amica/src/shared/amica_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,7 @@ class AmicaScaffold extends StatelessWidget {
   final List<Widget>? actions;
   final int selectedNavigationItemIndex;
   final bool isDetailed;
+  final bool? hasBlurOnAppBar;
   final Color? appBarBackgroundColor;
   final Color? appBarForegroundColor;
 
@@ -21,6 +24,7 @@ class AmicaScaffold extends StatelessWidget {
     this.scaffoldAppBarTitle,
     this.actions,
     this.appBarForegroundColor,
+    this.hasBlurOnAppBar,
   });
 
   Widget get _title {
@@ -37,7 +41,7 @@ class AmicaScaffold extends StatelessWidget {
     }
 
     if (isDetailed) {
-      return Colors.transparent;
+      return Theme.of(context).colorScheme.primary.withAlpha(25);
     }
 
     return Theme.of(context).colorScheme.primary;
@@ -55,11 +59,26 @@ class AmicaScaffold extends StatelessWidget {
     return Theme.of(context).colorScheme.onPrimary;
   }
 
+  Widget _flexibleSpace(BuildContext context) {
+    bool hasBlur = (hasBlurOnAppBar != null && hasBlurOnAppBar!);
+    if (isDetailed && hasBlur) {
+      return ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(color: Colors.transparent),
+        ),
+      );
+    }
+
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: isDetailed,
       appBar: AppBar(
+        flexibleSpace: _flexibleSpace(context),
         backgroundColor: _getAppBarBackgroundColor(context),
         foregroundColor: _getAppBarForegroundColor(context),
         elevation: 0,
