@@ -1,3 +1,4 @@
+import 'package:amica/src/shared/interest_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/shared/interest.dart';
@@ -17,35 +18,6 @@ class Interests extends StatefulWidget {
 }
 
 class _InterestsState extends State<Interests> {
-  BoxDecoration boxDecoration = const BoxDecoration(
-    borderRadius: BorderRadius.all(
-      Radius.circular(30.0),
-    ),
-    color: Color(0x99616161),
-  );
-
-  Widget interestTextGenerator(int index) {
-    return Text(
-      widget.interests[index].name,
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 16.0,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-  }
-
-  List<Widget> listGenerator() {
-    return List.generate(
-      widget.displayAmount ?? widget.interests.length,
-      (index) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 18.0),
-        decoration: boxDecoration,
-        child: interestTextGenerator(index),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -55,7 +27,12 @@ class _InterestsState extends State<Interests> {
       spacing: 10,
       // alignment: WrapAlignment.spaceBetween,
       // runAlignment: WrapAlignment.spaceBetween,
-      children: listGenerator(),
+      children: List.generate(
+        widget.displayAmount ?? widget.interests.length,
+        (index) => InterestView(
+          interest: widget.interests[index],
+        ),
+      ),
     );
   }
 }

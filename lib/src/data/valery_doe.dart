@@ -147,4 +147,11 @@ final UserProfile ValeryDoe = UserProfile(
       text: 'Adequate reaction to critisism',
     ),
   ],
+  photos: [
+    'assets/valery_doe.jpg',
+    'assets/valery_doe_1.jpg',
+    'assets/valery_doe_2.jpg',
+    'assets/valery_doe_3.jpg',
+    'assets/valery_doe_4.jpg',
+  ],
 );

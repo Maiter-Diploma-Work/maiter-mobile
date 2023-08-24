@@ -45,8 +45,8 @@ class ShortProfileOverview extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
             AmicaButton(
-              onPressed: () {},
-              text: 'Save',
+              onPressed: () => context.go('/profile/photos'),
+              text: 'Edit photos',
               color: Theme.of(context).colorScheme.primary,
             ),
           ],
