@@ -34,6 +34,18 @@ flutter:
     - assets/valery_doe_2.jpg
     - assets/valery_doe_3.jpg
     - assets/valery_doe_4.jpg
+    - assets/girl_1.jpeg
+    - assets/girl_1.1.jpeg
+    - assets/girl_1.2.jpeg
+    - assets/girl_2.jpeg
+    - assets/girl_3.jpeg
+    - assets/girl_3.1.jpeg
+    - assets/guy_1.jpeg
+    - assets/guy_2.jpeg
+    - assets/guy_3.jpeg
+    - assets/guy_3.1.jpeg
+    - assets/guy_3.2.jpeg
+    - assets/guy_3.3.jpeg
     - assets/mock_users.json
     - assets/mock_interests.json
     - assets/logo/logo.png

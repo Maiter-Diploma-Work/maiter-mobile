@@ -71,23 +71,24 @@ class UserProfile extends Profile {
   });
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      location: Location.fromJson(json['location']),
-      photo: json['photo'],
-      interests: interestsFromJson(json['interests']),
-      tag: json['tag'],
-      gender: json['gender'],
-      birthDate: DateFormat.yMd().parse(json['birthDate']),
-      education: json['education'],
-      socialNetworks: socialNetworksFromJson(json['socialNetworks']),
-      height: json['height'],
-      characterTraits: characterTraitsFromJson(json['characterTraits']),
-      expectancies: expectanciesFromJson(json['expectancies']),
-      status: json['status'],
-      lookingFor: json['lookingFor'],
-      photos: json['photos']);
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        location: Location.fromJson(json['location']),
+        photo: json['photo'],
+        interests: interestsFromJson(json['interests']),
+        tag: json['tag'],
+        gender: json['gender'],
+        birthDate: DateFormat.yMd().parse(json['birthDate']),
+        education: json['education'],
+        socialNetworks: socialNetworksFromJson(json['socialNetworks']),
+        height: json['height'],
+        characterTraits: characterTraitsFromJson(json['characterTraits']),
+        expectancies: expectanciesFromJson(json['expectancies']),
+        status: json['status'],
+        lookingFor: json['lookingFor'],
+        photos: List<String>.from(json['photos']),
+      );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

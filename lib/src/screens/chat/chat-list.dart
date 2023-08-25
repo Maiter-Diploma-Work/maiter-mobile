@@ -90,9 +90,8 @@ class _ChatListViewState extends State<ChatListView> {
               (e) => CircleAvatar(
                 radius: 25,
                 backgroundColor: Theme.of(context).colorScheme.background,
-                child: Image.network(
-                  e.photo,
-                ),
+                backgroundImage: AssetImage(e.photo),
+                // child: Image.network(e.photo),
               ),
             ),
           )
@@ -145,7 +144,8 @@ class _ChatListViewState extends State<ChatListView> {
           CircleAvatar(
             radius: 25,
             backgroundColor: Theme.of(context).colorScheme.background,
-            child: Image.network(profile.photo),
+            backgroundImage: AssetImage(profile.photo),
+            // child: Image.network(profile.photo),
           ),
           const Gap.cubic(16),
           generateContactName(profile, context),

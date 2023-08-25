@@ -41,7 +41,8 @@ class _ChatAppBarTitleState extends State<ChatAppBarTitle> {
           _user == null ? '' : _user!.name,
         ),
         CircleAvatar(
-          child: Image.network(_user == null ? '' : _user!.photo),
+          // child: Image.network(_user == null ? '' : _user!.photo),
+          backgroundImage: AssetImage(_user == null ? '' : _user!.photo),
         ),
       ],
     );
