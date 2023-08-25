@@ -28,7 +28,7 @@ class ShortProfileOverview extends StatelessWidget {
               Radius.circular(16),
             ),
           ),
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: generateCardBody(),
@@ -40,12 +40,12 @@ class ShortProfileOverview extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             AmicaButton(
-              onPressed: () => context.go('/profile/edit'),
+              onPressed: () => context.go('/profile/edit-menu/edit'),
               text: 'Edit profile',
               color: Theme.of(context).colorScheme.primary,
             ),
             AmicaButton(
-              onPressed: () => context.go('/profile/photos'),
+              onPressed: () => context.go('/profile/edit-menu/photos'),
               text: 'Edit photos',
               color: Theme.of(context).colorScheme.primary,
             ),

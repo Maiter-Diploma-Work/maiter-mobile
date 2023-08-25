@@ -20,33 +20,33 @@ class _ProfileViewState extends State<ProfileView> {
     //TODO: dynamic items!
     const LinkButton(
       title: 'Interests',
-      location: '/profile/interests',
+      location: '/profile/edit-menu/interests',
     ),
     const LinkButton(
       title: 'Theme',
       selectedTitle: 'Standart',
-      location: '/profile/theme',
+      location: '/profile/edit-menu/theme',
     ),
     const LinkButton(
       title: 'Language',
       selectedTitle: 'English',
-      location: '/profile/language',
+      location: '/profile/edit-menu/language',
     ),
     const LinkButton(
       title: 'Contacts',
-      location: '/profile',
+      location: '/profile/edit-menu',
     ),
     const LinkButton(
       title: 'Devices',
-      location: '/profile',
+      location: '/profile/edit-menu',
     ),
     const LinkButton(
       title: 'Status',
-      location: '/profile',
+      location: '/profile/edit-menu',
     ),
     const LinkButton(
       title: 'Privacy',
-      location: '/profile',
+      location: '/profile/edit-menu',
     ),
   ];
 
@@ -67,7 +67,7 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.only(top: 128, left: 32, right: 32, bottom: 32),
       children: [
         ShortProfileOverview(profile: widget.profile),
         const Gap.cubic(26),

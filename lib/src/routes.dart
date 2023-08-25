@@ -83,73 +83,85 @@ final profile = GoRoute(
   path: '/profile',
   builder: (context, state) => AmicaScaffold(
     title: 'Your Profile',
-    scaffoldBody: ProfileView(profile: ValeryDoe),
+    scaffoldBody: UserProfileDetailed(profile: ValeryDoe, isOwnProfile: true),
     selectedNavigationItemIndex: 3,
     isDetailed: false,
   ),
   routes: [
     GoRoute(
-      path: 'edit',
+      path: 'edit-menu',
       builder: (context, state) => AmicaScaffold(
         hasBlurOnAppBar: true,
         isDetailed: true,
         title: 'Edit Profile',
-        scaffoldBody: ProfileEditView(profile: ValeryDoe),
+        scaffoldBody: ProfileView(profile: ValeryDoe),
         selectedNavigationItemIndex: 3,
       ),
-    ),
-    GoRoute(
-      path: 'interests',
-      builder: (context, state) => AmicaScaffold(
-        hasBlurOnAppBar: true,
-        isDetailed: true,
-        title: 'Edit interests',
-        scaffoldBody: InterestsListSelect(
-          selectedInterests: ValeryDoe.interests,
-          isRegistrations: false,
+      routes: [
+        GoRoute(
+          path: 'edit',
+          builder: (context, state) => AmicaScaffold(
+            hasBlurOnAppBar: true,
+            isDetailed: true,
+            title: 'Edit Profile',
+            scaffoldBody: ProfileEditView(profile: ValeryDoe),
+            selectedNavigationItemIndex: 3,
+          ),
         ),
-        selectedNavigationItemIndex: 3,
-      ),
-    ),
-    GoRoute(
-      path: 'photos',
-      builder: (context, state) => AmicaScaffold(
-        hasBlurOnAppBar: true,
-        isDetailed: true,
-        title: 'Edit Profile',
-        scaffoldBody: ProfilePhotoEditView(userProfile: ValeryDoe),
-        selectedNavigationItemIndex: 3,
-      ),
-    ),
-    GoRoute(
-      path: 'theme',
-      builder: (context, state) => AmicaScaffold(
-        hasBlurOnAppBar: true,
-        isDetailed: true,
-        selectedNavigationItemIndex: 3,
-        title: 'Theme selection',
-        scaffoldBody: OptionSelect(
-          options: [
-            OptionSelectItem("light"),
-            OptionSelectItem("dark"),
-          ],
+        GoRoute(
+          path: 'interests',
+          builder: (context, state) => AmicaScaffold(
+            hasBlurOnAppBar: true,
+            isDetailed: true,
+            title: 'Edit interests',
+            scaffoldBody: InterestsListSelect(
+              selectedInterests: ValeryDoe.interests,
+              isRegistrations: false,
+            ),
+            selectedNavigationItemIndex: 3,
+          ),
         ),
-      ),
-    ),
-    GoRoute(
-      path: 'language',
-      builder: (context, state) => AmicaScaffold(
-        hasBlurOnAppBar: true,
-        isDetailed: true,
-        selectedNavigationItemIndex: 3,
-        title: 'Language selection',
-        scaffoldBody: OptionSelect(
-          options: [
-            OptionSelectItem("English"),
-            OptionSelectItem("Українська"),
-          ],
+        GoRoute(
+          path: 'photos',
+          builder: (context, state) => AmicaScaffold(
+            hasBlurOnAppBar: true,
+            isDetailed: true,
+            title: 'Edit Profile',
+            scaffoldBody: ProfilePhotoEditView(userProfile: ValeryDoe),
+            selectedNavigationItemIndex: 3,
+          ),
         ),
-      ),
+        GoRoute(
+          path: 'theme',
+          builder: (context, state) => AmicaScaffold(
+            hasBlurOnAppBar: true,
+            isDetailed: true,
+            selectedNavigationItemIndex: 3,
+            title: 'Theme selection',
+            scaffoldBody: OptionSelect(
+              options: [
+                OptionSelectItem("light"),
+                OptionSelectItem("dark"),
+              ],
+            ),
+          ),
+        ),
+        GoRoute(
+          path: 'language',
+          builder: (context, state) => AmicaScaffold(
+            hasBlurOnAppBar: true,
+            isDetailed: true,
+            selectedNavigationItemIndex: 3,
+            title: 'Language selection',
+            scaffoldBody: OptionSelect(
+              options: [
+                OptionSelectItem("English"),
+                OptionSelectItem("Українська"),
+              ],
+            ),
+          ),
+        ),
+      ],
     ),
   ],
 );

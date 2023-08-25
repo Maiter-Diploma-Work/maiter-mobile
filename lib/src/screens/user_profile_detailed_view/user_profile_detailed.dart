@@ -7,6 +7,7 @@ import 'package:amica/src/screens/auth/title.dart';
 import 'package:amica/src/screens/user_profile_detailed_view/character_trait_view.dart';
 import 'package:amica/src/shared/delimeter.dart';
 import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/profile/description.dart';
 import 'package:amica/src/shared/profile/interests.dart';
 import 'package:amica/src/shared/profile/location.dart';
@@ -17,8 +18,13 @@ import 'package:go_router/go_router.dart';
 
 class UserProfileDetailed extends StatefulWidget {
   final UserProfile profile;
+  final bool? isOwnProfile;
 
-  const UserProfileDetailed({super.key, required this.profile});
+  const UserProfileDetailed({
+    super.key,
+    required this.profile,
+    this.isOwnProfile,
+  });
 
   @override
   State<StatefulWidget> createState() => _UserProfileDetailedState();
@@ -84,6 +90,8 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
               ),
               child: Column(
                 children: [
+                  editButton,
+                  const Gap.cubic(26),
                   Interests(
                     interests: widget.profile.interests,
                   ),
@@ -100,6 +108,22 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
         ),
       ),
     );
+  }
+
+  Widget get editButton {
+    if (widget.isOwnProfile != null && widget.isOwnProfile!) {
+      return Column(
+        children: [
+          const Gap(verticalGap: 16, horizontalGap: 0),
+          AmicaButton(
+            onPressed: () => context.go('/profile/edit-menu'),
+            text: 'Edit profile',
+          ),
+        ],
+      );
+    }
+
+    return Container();
   }
 
   Widget _generateBasicInfo() {
