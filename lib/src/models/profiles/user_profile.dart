@@ -103,7 +103,7 @@ class UserProfile extends Profile {
     data['lookingFor'] = lookingFor;
     data['location'] = location.toJson();
     data['photo'] = photo;
-    data['photo'] = photos;
+    data['photos'] = photos;
     data['interests'] = List.generate(
       interests.length,
       (index) => interests[index].toJson(),

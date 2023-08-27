@@ -7,6 +7,7 @@ import 'package:amica/src/screens/chat/chat.dart';
 import 'package:amica/src/screens/chat/chat_app_bar_title.dart';
 import 'package:amica/src/screens/filters/user_search_filter/user_search_filter.dart';
 import 'package:amica/src/screens/interests_list/interests_list.dart';
+import 'package:amica/src/screens/likes_view/likes_view.dart';
 import 'package:amica/src/screens/option_select_view/option_select_item.dart';
 import 'package:amica/src/screens/option_select_view/option_select_view.dart';
 import 'package:amica/src/screens/profile_view/profile_edit_view/profile_edit_view.dart';
@@ -34,6 +35,10 @@ final searchUser = GoRoute(
         icon: const Icon(Icons.menu),
         onPressed: () => context.go('/search/user/filter'),
       ),
+      IconButton(
+        icon: const Icon(Icons.favorite),
+        onPressed: () => context.go('/search/user/liked'),
+      ),
     ],
   ),
   routes: [
@@ -47,12 +52,6 @@ final searchUser = GoRoute(
           profile: ValeryDoe,
         ),
         selectedNavigationItemIndex: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => {},
-          ),
-        ],
       ),
     ),
     GoRoute(
@@ -65,6 +64,24 @@ final searchUser = GoRoute(
         selectedNavigationItemIndex: 0,
         isDetailed: true,
         hasBlurOnAppBar: true,
+      ),
+    ),
+    GoRoute(
+      path: 'liked',
+      builder: (context, state) => AmicaScaffold(
+        title: 'likes',
+        scaffoldBody: AmicaLikesView(
+          userId: ValeryDoe.id,
+        ),
+        selectedNavigationItemIndex: 0,
+        isDetailed: false,
+        hasBlurOnAppBar: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => context.go('/search/user/filter'),
+          ),
+        ],
       ),
     )
   ],

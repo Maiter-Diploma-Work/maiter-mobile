@@ -48,4 +48,5 @@ flutter:
     - assets/guy_3.3.jpeg
     - assets/mock_users.json
     - assets/mock_interests.json
+    - assets/mock_likes.json
     - assets/logo/logo.png

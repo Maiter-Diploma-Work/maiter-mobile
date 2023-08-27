@@ -7,7 +7,7 @@ import '../models/shared/interest.dart';
 import '../models/shared/location.dart';
 
 final UserProfile ValeryDoe = UserProfile(
-  id: 2,
+  id: 1,
   tag: '@the-only-v',
   name: "Valery Doe",
   height: 175,
