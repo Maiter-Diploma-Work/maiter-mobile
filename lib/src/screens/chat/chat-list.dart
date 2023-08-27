@@ -18,6 +18,7 @@ class ChatListView extends StatefulWidget {
 }
 
 class _ChatListViewState extends State<ChatListView> {
+  final TextEditingController controller = TextEditingController();
   List<UserProfile> _users = [];
 
   final int _maximumQuickChats = 4;
@@ -41,7 +42,9 @@ class _ChatListViewState extends State<ChatListView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const AmicaSearchBar(),
+        AmicaSearchBar(
+          controller: controller,
+        ),
         _generateChatList(context),
       ],
     );

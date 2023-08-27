@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:amica/src/models/shared/interest.dart';
 import 'package:amica/src/models/shared/interest_list.dart';
 import 'package:amica/src/screens/chat/maiter_search_bar.dart';
@@ -21,14 +23,17 @@ class InterestsListSelect extends StatefulWidget {
 }
 
 class _InterestsListSelectState extends State<InterestsListSelect> {
-  List<InterestList> _interestList = [];
+  TextEditingController controller = TextEditingController();
+  late List<InterestList> _interestListsSource = [];
+  List<InterestList> _interestLists = [];
 
   Future<void> readMockInterestsFromJson() async {
     final String response =
         await rootBundle.loadString('assets/mock_interests.json');
 
     setState(() {
-      _interestList = interestListsFromMockJson(response);
+      _interestListsSource = interestListsFromMockJson(response);
+      _interestLists = _interestListsSource;
     });
   }
 
@@ -64,10 +69,34 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
     );
   }
 
+  void _transformInterestsList() {
+    setState(() {
+      _interestLists = List.from(
+        _interestListsSource.map(
+          (e) => InterestList(
+            id: e.id,
+            groupName: e.groupName,
+            interests: List.from(
+              e.interests
+                  .where((element) => element.name.contains(controller.text)),
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     readMockInterestsFromJson();
+    controller.addListener(_transformInterestsList);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -81,9 +110,11 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
       ),
       child: ListView(
         children: [
-          const AmicaSearchBar(),
+          AmicaSearchBar(
+            controller: controller,
+          ),
           ...List.from(
-            _interestList.map(
+            _interestLists.map(
               (interestList) => _interestsListGenerator(interestList),
             ),
           ),

@@ -101,7 +101,6 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
           child: InterestsChipList(
             interests: interests,
             onUpdate: (interests) {
-              debugPrint('--> $controller.text}');
               setState(() {
                 this.interests = interests;
               });

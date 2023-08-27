@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class AmicaSearchBar extends StatelessWidget {
+typedef OnChanged = void Function(String vlaue);
+
+class AmicaSearchBar extends StatefulWidget {
+  final TextEditingController controller;
+  final OnChanged? onChanged;
+
   const AmicaSearchBar({
     super.key,
+    required this.controller,
+    this.onChanged,
   });
 
+  @override
+  State<AmicaSearchBar> createState() => _AmicaSearchBarState();
+}
+
+class _AmicaSearchBarState extends State<AmicaSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +28,9 @@ class AmicaSearchBar extends StatelessWidget {
       ),
       child: SizedBox(
         height: 32,
-        child: TextField(
+        child: TextFormField(
+          controller: widget.controller,
+          onChanged: widget.onChanged,
           autocorrect: true,
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSecondary,
