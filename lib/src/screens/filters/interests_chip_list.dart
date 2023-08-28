@@ -42,14 +42,14 @@ class _InterestsChipListState extends State<InterestsChipList> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(21),
             ),
           ),
           content: Container(
             width: MediaQuery.of(context).size.width - 64,
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 8,
             ),
@@ -61,7 +61,7 @@ class _InterestsChipListState extends State<InterestsChipList> {
                   hintText: 'sport?',
                   controller: widget.newItemController,
                 ),
-                Gap(verticalGap: 16, horizontalGap: 0),
+                const Gap(verticalGap: 16, horizontalGap: 0),
                 AmicaButton(
                   color: Theme.of(context).colorScheme.secondary,
                   onPressed: () {
@@ -112,7 +112,7 @@ class _InterestsChipListState extends State<InterestsChipList> {
         ),
         AmicaRoundIconButton(
           onTap: () => _dialogBuilder(context),
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           fillColor: Colors.transparent,
         ),
       ],

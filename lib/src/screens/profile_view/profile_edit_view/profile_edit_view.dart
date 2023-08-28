@@ -1,8 +1,6 @@
-import 'dart:math';
 
 import 'package:amica/src/models/profiles/expectancies.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
-import 'package:amica/src/screens/auth/title.dart';
 import 'package:amica/src/screens/profile_view/profile_edit_view/expectation.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_checkbox.dart';
