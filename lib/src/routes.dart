@@ -1,7 +1,9 @@
 import 'package:amica/src/data/valery_doe.dart';
+import 'package:amica/src/layouts/registration_screen.dart';
 import 'package:amica/src/layouts/scaffold.dart';
 import 'package:amica/src/screens/auth/login/login.dart';
 import 'package:amica/src/screens/auth/register/register.dart';
+import 'package:amica/src/screens/auth/register/steps/step_1.dart';
 import 'package:amica/src/screens/chat/chat-list/chat-list.dart';
 import 'package:amica/src/screens/chat/chat.dart';
 import 'package:amica/src/screens/chat/chat_app_bar_title.dart';
@@ -94,6 +96,38 @@ final login = GoRoute(
 final register = GoRoute(
   path: 'auth/register',
   builder: (context, state) => const RegisterScreen(),
+  routes: [
+    GoRoute(
+      path: 'step-1',
+      builder: (context, state) => RegistrationScreen(
+        title: 'Fill your profile',
+        stepTitle: 'Step 1: Personal Info',
+        body: const RegistrationFirstStep(),
+        onBackTapped: () => context.go('/auth/register'),
+        onForwardTapped: () => context.go('/auth/register/step-2'),
+      ),
+    ),
+    GoRoute(
+      path: 'step-2',
+      builder: (context, state) => RegistrationScreen(
+        title: 'Fill your profile',
+        stepTitle: 'Step 2: Your goal',
+        body: const RegistrationFirstStep(),
+        onBackTapped: () => context.go('/auth/register/step-1'),
+        onForwardTapped: () => context.go('/auth/register/step-3'),
+      ),
+    ),
+    GoRoute(
+      path: 'step-3',
+      builder: (context, state) => RegistrationScreen(
+        title: 'Fill your profile',
+        stepTitle: 'Step 3: Interests',
+        body: const RegistrationFirstStep(),
+        onBackTapped: () => context.go('/auth/register/step-2'),
+        onForwardTapped: () {},
+      ),
+    ),
+  ],
 );
 
 final profile = GoRoute(

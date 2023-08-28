@@ -11,7 +11,7 @@ class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   void _onRegisterClick(BuildContext context) {
-    context.go('/search/user');
+    context.go('/auth/register/step-1');
   }
 
   Form formGenerator(BuildContext context) {
