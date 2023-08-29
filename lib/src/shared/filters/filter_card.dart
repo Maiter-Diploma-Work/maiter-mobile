@@ -1,5 +1,5 @@
 import 'package:amica/src/models/shared/interest.dart';
-import 'package:amica/src/screens/filters/interests_chip_list.dart';
+import 'package:amica/src/shared/filters/interests_chip_list.dart';
 import 'package:amica/src/shared/card.dart';
 import 'package:amica/src/shared/inputs/amica_switch.dart';
 import 'package:flutter/material.dart';

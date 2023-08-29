@@ -1,5 +1,5 @@
 import 'package:amica/src/models/profiles/user_profile.dart';
-import 'package:amica/src/screens/filters/filter_card.dart';
+import 'package:amica/src/shared/filters/filter_card.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_select.dart';
 import 'package:flutter/material.dart';

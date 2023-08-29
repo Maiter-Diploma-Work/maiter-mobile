@@ -1,8 +1,8 @@
-import 'package:amica/src/screens/option_select_view/option_select_item.dart';
+import 'package:amica/src/screens/profile_view/option_select_view/option_select_item.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/gap.dart';
+import '../../../shared/gap.dart';
 
 class OptionSelect<T extends OptionSelectItem> extends StatefulWidget {
   final List<T> options;
