@@ -1,0 +1,36 @@
+[
+    {
+        "id": 1,
+        "creator_id": 2,
+        "creation_date": "31/08/2023",
+        "creator_photo": "assets/girl_2.jpeg",
+        "location": {
+            "id": "1",
+            "postcode": 69001,
+            "name": "ТЦ Україна",
+            "countryName": "Ukraine",
+            "longitude": 47.84269503381282,
+            "latitude": 35.13119597498678
+        },
+        "description": "Привіт, якщо ти не проти зустрітися і випити кави, то я чекаю тебе біля ТЦ “Україна”  :) ",
+        "name": "Inessa",
+        "interests": []
+    },
+    {
+        "id": 2,
+        "creator_id": 3,
+        "creation_date": "31/08/2023",
+        "creator_photo": "assets/guy_1.jpeg",
+        "location": {
+            "id": "1",
+            "postcode": 69001,
+            "name": "ТЦ Україна",
+            "countryName": "Ukraine",
+            "longitude": 47.84269503381282,
+            "latitude": 35.13119597498678
+        },
+        "description": "Привіт, якщо ти не проти зустрітися і випити кави, то я чекаю тебе біля ТЦ “Україна”  :) ",
+        "name": "Richie",
+        "interests": []
+    }
+]
