@@ -116,6 +116,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
         children: [
           const Gap(verticalGap: 16, horizontalGap: 0),
           AmicaButton(
+            color: Theme.of(context).colorScheme.primary,
             onPressed: () => context.go('/profile/edit-menu'),
             text: 'Edit profile',
           ),
@@ -130,16 +131,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
     return Stack(
       children: [
         CarouselSlider(
-          items: List.from(
-            assetImages.map(
-              (e) => ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(30),
-                ),
-                child: Image.asset(e, fit: BoxFit.contain),
-              ),
-            ),
-          ),
+          items: _carouselElemenets,
           options: CarouselOptions(
             height: 600,
             enlargeCenterPage: false,
@@ -161,6 +153,30 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
           ),
         )
       ],
+    );
+  }
+
+  List<Widget> get _carouselElemenets {
+    if (widget.profile.photos == null) {
+      return [
+        ClipRRect(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(30),
+          ),
+          child: Image.asset(widget.profile.photo, fit: BoxFit.contain),
+        ),
+      ];
+    }
+
+    return List.from(
+      widget.profile.photos!.map(
+        (e) => ClipRRect(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(30),
+          ),
+          child: Image.asset(e, fit: BoxFit.contain),
+        ),
+      ),
     );
   }
 
