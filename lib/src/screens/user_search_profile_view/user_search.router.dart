@@ -44,7 +44,7 @@ final searchUserRouter = GoRoute(
     GoRoute(
       path: 'filter',
       builder: (context, state) => AmicaScaffold(
-        title: 'filter',
+        title: 'search filter',
         scaffoldBody: UserSearchFilter(
           profile: ValeryDoe,
         ),

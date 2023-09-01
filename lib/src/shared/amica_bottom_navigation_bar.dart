@@ -21,7 +21,7 @@ class _AmicaBottomNavigationBarState extends State<AmicaBottomNavigationBar> {
         context.go('/search/user');
         break;
       case 1:
-        // context.go('/likes');
+        context.go('/events');
         break;
       case 2:
         context.go('/chat-list');

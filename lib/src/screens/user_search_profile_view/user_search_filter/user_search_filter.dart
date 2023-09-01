@@ -11,11 +11,12 @@ class UserSearchFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 36),
-      child: Form(
+    return Form(
+      child: Align(
+        alignment: Alignment.center,
         child: ListView(
-          shrinkWrap: false,
+          padding: const EdgeInsets.symmetric(horizontal: 36),
+          shrinkWrap: true,
           children: [
             const AmicaFilterCard(
               title: 'Distance',

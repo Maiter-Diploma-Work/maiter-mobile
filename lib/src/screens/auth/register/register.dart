@@ -17,6 +17,7 @@ class RegisterScreen extends StatelessWidget {
   Form formGenerator(BuildContext context) {
     return Form(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const AmicaTextFormInput(
@@ -69,7 +70,9 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StartScreen(
-      screenBody: ListView(
+      screenBody: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

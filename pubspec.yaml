@@ -49,5 +49,6 @@ flutter:
     - assets/mock_users.json
     - assets/mock_interests.json
     - assets/mock_likes.json
+    - assets/mock_events.json
     - assets/logo/logo.png
     - assets/welcome_screen_bg_image.webp

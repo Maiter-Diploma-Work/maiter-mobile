@@ -4,18 +4,19 @@ import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_select.dart';
 import 'package:flutter/material.dart';
 
-class UserSearchFilter extends StatelessWidget {
-  final UserProfile profile;
+class EventSearchFilter extends StatelessWidget {
+  final String lookingFor;
 
-  const UserSearchFilter({super.key, required this.profile});
+  const EventSearchFilter({super.key, required this.lookingFor});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 36),
-      child: Form(
+    return Form(
+      child: Align(
+        alignment: Alignment.center,
         child: ListView(
-          shrinkWrap: false,
+          padding: const EdgeInsets.symmetric(horizontal: 36),
+          shrinkWrap: true,
           children: [
             const AmicaFilterCard(
               title: 'Distance',
@@ -36,7 +37,7 @@ class UserSearchFilter extends StatelessWidget {
             ),
             const Gap(verticalGap: 16, horizontalGap: 0),
             AmicaSelect<String>(
-              initialValue: profile.lookingFor,
+              initialValue: lookingFor,
               options: lookingFors.values,
               fieldName: 'Show me events created by',
             ),

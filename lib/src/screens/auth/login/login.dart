@@ -17,6 +17,7 @@ class LoginScreen extends StatelessWidget {
     return Form(
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const AmicaTextFormInput(
             fieldName: "Email",
@@ -57,17 +58,13 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StartScreen(
-      screenBody: ListView(
+      screenBody: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const AmicaTitle(text: "Login"),
-              const Gap(horizontalGap: 0, verticalGap: 64.0),
-              formGenerator(context)
-            ],
-          ),
+          const AmicaTitle(text: "Login"),
+          const Gap(horizontalGap: 0, verticalGap: 64.0),
+          formGenerator(context),
         ],
       ),
     );
