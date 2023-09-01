@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:amica/src/models/profiles/profile.dart';
+import 'package:amica/src/models/shared/location.dart';
+import 'package:intl/intl.dart';
 
 Event eventFromJson(String str) => Event.fromJson(json.decode(str));
 
@@ -30,9 +32,9 @@ class Event extends Profile {
   factory Event.fromJson(Map<String, dynamic> json) => Event(
         id: json["id"],
         creatorId: json["creator_id"],
-        creationDate: json["creation_date"],
+        creationDate: DateFormat.yMd().parse(json["creation_date"]),
         photo: json['creator_photo'],
-        location: json["location"],
+        location: Location.fromJson(json["location"]),
         description: json["description"],
         name: json['name'],
         interests: json['interests'],
