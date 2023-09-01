@@ -3,6 +3,7 @@ import 'package:amica/src/screens/auth/login/login.dart';
 import 'package:amica/src/screens/auth/register/steps/interest_step.dart';
 import 'package:amica/src/screens/auth/register/steps/step_1.dart';
 import 'package:amica/src/screens/auth/register/steps/step_2.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'register/register.dart';
@@ -45,6 +46,7 @@ final registerRouter = GoRoute(
         ),
         onBackTapped: () => context.go('/auth/register/step-2'),
         onForwardTapped: () => context.go('/search/user'),
+        padding: const EdgeInsets.all(0),
       ),
     ),
   ],

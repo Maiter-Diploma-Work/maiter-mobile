@@ -3,6 +3,7 @@ import 'package:amica/src/models/profiles/expectancies.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/models/shared/social_network.dart';
+import 'package:amica/src/shared/character_traits/character_traits.dart';
 import 'package:amica/src/shared/title.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_detailed_view/character_trait_view.dart';
 import 'package:amica/src/shared/delimeter.dart';
@@ -76,10 +77,6 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
         child: ListView(
           padding: const EdgeInsets.only(top: 0),
           children: [
-            // BluredPhotoBg(
-            //   profile: widget.profile,
-            //   child: generateBasicInfo(),
-            // ),
             _generateBasicInfo(),
             Padding(
               padding: const EdgeInsets.only(
@@ -100,7 +97,10 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
                   const Gap.cubic(26),
                   expectancies,
                   const Gap.cubic(26),
-                  characterTraits
+                  CharacterTraits(
+                    characterTraits: widget.profile.characterTraits,
+                    isEditable: false,
+                  ),
                 ],
               ),
             ),
@@ -228,29 +228,6 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
             ),
           ),
         )
-      ],
-    );
-  }
-
-  Widget get characterTraits {
-    List<CharacterTrait> characterTraits = widget.profile.characterTraits;
-
-    if (characterTraits.isEmpty) {
-      return Container();
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const AmicaTitle(text: 'Character'),
-        ...List.from(
-          characterTraits.map(
-            (e) => CharacterTraitView(
-              characterTrait: e,
-            ),
-          ),
-        ),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/title.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ class RegistrationScreen extends StatefulWidget {
   final OnTap onBackTapped;
   final OnTap onForwardTapped;
 
+  final EdgeInsets? padding;
+
   const RegistrationScreen({
     super.key,
     required this.title,
@@ -19,6 +22,7 @@ class RegistrationScreen extends StatefulWidget {
     required this.body,
     required this.onBackTapped,
     required this.onForwardTapped,
+    this.padding,
   });
 
   @override
@@ -26,11 +30,24 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  EdgeInsets? get _paddings {
+    if (widget.padding == null) {
+      return const EdgeInsets.only(
+        top: 64,
+        left: 32,
+        right: 32,
+        bottom: 64,
+      );
+    }
+
+    return widget.padding;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 64, left: 32, right: 32),
+        padding: _paddings,
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           color: Color(0xFF192142),
@@ -39,6 +56,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           children: [
             AmicaTitle(text: widget.stepTitle),
             Text(widget.stepTitle),
+            const Gap(verticalGap: 32, horizontalGap: 0),
             Expanded(child: widget.body),
             Row(
               mainAxisSize: MainAxisSize.max,

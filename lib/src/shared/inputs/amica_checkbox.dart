@@ -43,7 +43,6 @@ class _AmicaCheckboxState extends State<AmicaCheckbox> {
             widget.onCheck(isChecked);
           },
         ),
-        const Gap(verticalGap: 0, horizontalGap: 10),
         Text(widget.label),
       ],
     );

@@ -1,13 +1,21 @@
 import 'package:amica/src/models/profiles/character_trait.dart';
 import 'package:flutter/material.dart';
 
-class CharacterTraitView extends StatelessWidget {
+class CharacterTraitView extends StatefulWidget {
   final CharacterTrait characterTrait;
+  final bool isEditable;
+
   const CharacterTraitView({
     super.key,
     required this.characterTrait,
+    required this.isEditable,
   });
 
+  @override
+  State<CharacterTraitView> createState() => _CharacterTraitViewState();
+}
+
+class _CharacterTraitViewState extends State<CharacterTraitView> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,23 +24,29 @@ class CharacterTraitView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              characterTrait.bottomName,
+              widget.characterTrait.bottomName,
               style: const TextStyle(fontSize: 16.0),
             ),
             Text(
-              characterTrait.topName,
+              widget.characterTrait.topName,
               style: const TextStyle(fontSize: 16.0),
             )
           ],
         ),
         Slider(
-          value: characterTrait.degree.toDouble(),
-          min: 0,
+          value: widget.characterTrait.degree.toDouble(),
+        min: 0,
           max: 10,
           activeColor: Theme.of(context).colorScheme.onBackground,
           thumbColor: Theme.of(context).colorScheme.onBackground,
           inactiveColor: Theme.of(context).colorScheme.onBackground,
-          onChanged: (double val) {},
+          onChanged: (double val) {
+            if (widget.isEditable) {
+              setState(() {
+                widget.characterTrait.degree = val.toInt();
+              });
+            }
+          },
         ),
       ],
     );
