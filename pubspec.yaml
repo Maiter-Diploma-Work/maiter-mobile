@@ -50,3 +50,4 @@ flutter:
     - assets/mock_interests.json
     - assets/mock_likes.json
     - assets/logo/logo.png
+    - assets/welcome_screen_bg_image.webp

@@ -1,5 +1,5 @@
 import 'package:amica/src/layouts/start_screen.dart';
-import 'package:amica/src/screens/auth/title.dart';
+import 'package:amica/src/shared/title.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';

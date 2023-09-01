@@ -1,4 +1,4 @@
-import 'package:amica/src/screens/auth/title.dart';
+import 'package:amica/src/shared/title.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
@@ -11,7 +11,7 @@ class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   void _onRegisterClick(BuildContext context) {
-    context.go('/search/user');
+    context.go('/auth/register/step-1');
   }
 
   Form formGenerator(BuildContext context) {

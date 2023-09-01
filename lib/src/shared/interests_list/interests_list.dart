@@ -1,9 +1,8 @@
-import 'dart:math';
 
 import 'package:amica/src/models/shared/interest.dart';
 import 'package:amica/src/models/shared/interest_list.dart';
-import 'package:amica/src/screens/chat/maiter_search_bar.dart';
-import 'package:amica/src/screens/interests_list/expandable_interest_list.dart';
+import 'package:amica/src/shared/inputs/maiter_search_bar.dart';
+import 'package:amica/src/shared/interests_list/expandable_interest_list.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../layouts/start_screen.dart';
 import '../../shared/gap.dart';
 import '../../shared/inputs/amica_button.dart';
-import '../auth/title.dart' as title;
+import '../../shared/title.dart' as title;
 
 class WelcomeScreen extends StatelessWidget {
   final TextStyle titleTextStyle = const TextStyle(
@@ -18,6 +18,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StartScreen(
+      hasBackgroundImage: true,
       screenBody: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,

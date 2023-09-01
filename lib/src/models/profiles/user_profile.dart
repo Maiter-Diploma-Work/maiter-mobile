@@ -90,6 +90,77 @@ class UserProfile extends Profile {
         photos: List<String>.from(json['photos']),
       );
 
+  factory UserProfile.empty() => UserProfile(
+        id: -1,
+        name: '',
+        location: Location(
+          name: '',
+          id: -1,
+          countryName: '',
+          longitude: 0.0,
+          latitude: 0.0,
+        ),
+        photo: '',
+        interests: [],
+        tag: '',
+        gender: genders.values.first,
+        lookingFor: lookingFors.values.last,
+        status: statuses.values.first,
+        birthDate: DateTime.now(),
+        characterTraits: [
+          CharacterTrait(
+            id: -1,
+            userId: -1,
+            bottomName: 'Introvert',
+            topName: 'Extravert',
+            degree: 0,
+          ),
+          CharacterTrait(
+            id: -1,
+            userId: -1,
+            bottomName: 'Analytical',
+            topName: 'Creative',
+            degree: 0,
+          ),
+          CharacterTrait(
+            id: -1,
+            userId: -1,
+            bottomName: 'Busy',
+            topName: 'Time Rich',
+            degree: 0,
+          ),
+          CharacterTrait(
+            id: -1,
+            userId: -1,
+            bottomName: 'Messy',
+            topName: 'Organized',
+            degree: 0,
+          ),
+          CharacterTrait(
+            id: -1,
+            userId: -1,
+            bottomName: 'Independent',
+            topName: 'Team Player',
+            degree: 0,
+          ),
+          CharacterTrait(
+            id: -1,
+            userId: -1,
+            bottomName: 'Passive',
+            topName: 'Active',
+            degree: 0,
+          ),
+          CharacterTrait(
+            id: -1,
+            userId: -1,
+            bottomName: 'Safe',
+            topName: 'Risky',
+            degree: 0,
+          ),
+        ],
+        expectancies: [],
+      );
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;

@@ -1,7 +1,6 @@
 import 'package:amica/src/models/profiles/profile.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
-import 'package:amica/src/screens/chat/maiter_search_bar.dart';
-import 'package:amica/src/shared/delimeter.dart';
+import 'package:amica/src/shared/inputs/maiter_search_bar.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
