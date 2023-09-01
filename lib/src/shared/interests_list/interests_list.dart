@@ -1,4 +1,3 @@
-
 import 'package:amica/src/models/shared/interest.dart';
 import 'package:amica/src/models/shared/interest_list.dart';
 import 'package:amica/src/shared/inputs/maiter_search_bar.dart';
@@ -8,13 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class InterestsListSelect extends StatefulWidget {
-  final bool isRegistrations;
   final List<Interest> selectedInterests;
 
   const InterestsListSelect({
     super.key,
     required this.selectedInterests,
-    required this.isRegistrations,
   });
 
   @override
@@ -102,9 +99,6 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        left: 32,
-        right: 32,
-        bottom: 64,
         top: 32,
       ),
       child: ListView(
@@ -120,6 +114,7 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
           const AmicaTextFormInput(
             fieldName: 'Favorite song',
             hintText: 'your favorite track',
+            padding: EdgeInsets.only(bottom: 64),
           ),
         ],
       ),

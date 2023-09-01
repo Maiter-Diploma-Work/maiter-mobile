@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
@@ -27,15 +29,21 @@ class _EventSearchViewState extends State<EventSearchView> {
   List<Widget> get events {
     return List.from(
       _events.map(
-        (e) => Column(
-          children: [
-            ProfilePicture(
-              pictureUrl: e.photo,
-              isRound: true,
-              radius: 51.5,
-            ),
-            Text(e.name),
-          ],
+        (e) => Positioned(
+          top: e.location.latitude.round().toDouble() +
+              Random(DateTime.now().millisecond).nextDouble() * 10,
+          left: e.location.longitude.round().toDouble() +
+              Random(DateTime.now().millisecond).nextDouble() * 10,
+          child: Column(
+            children: [
+              ProfilePicture(
+                pictureUrl: e.photo,
+                isRound: true,
+                radius: 51.5,
+              ),
+              Text(e.name),
+            ],
+          ),
         ),
       ),
     );

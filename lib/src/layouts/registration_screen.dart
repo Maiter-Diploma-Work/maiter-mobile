@@ -33,10 +33,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   EdgeInsets? get _paddings {
     if (widget.padding == null) {
       return const EdgeInsets.only(
-        top: 64,
+        // top: 64,
         left: 32,
         right: 32,
-        bottom: 64,
+        // bottom: 64,
       );
     }
 
@@ -46,6 +46,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF192142),
+        title: AmicaTitle(text: widget.stepTitle),
+      ),
       body: Container(
         padding: _paddings,
         width: MediaQuery.of(context).size.width,
@@ -54,25 +58,28 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
         child: Column(
           children: [
-            AmicaTitle(text: widget.stepTitle),
-            Text(widget.stepTitle),
-            const Gap(verticalGap: 32, horizontalGap: 0),
             Expanded(child: widget.body),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AmicaRoundIconButton(
-                  onTap: widget.onBackTapped,
-                  icon: const Icon(Icons.chevron_left),
-                ),
-                AmicaRoundIconButton(
-                  onTap: widget.onForwardTapped,
-                  icon: const Icon(Icons.chevron_right),
-                ),
-              ],
-            )
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: const Color(0xFF192142),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              AmicaRoundIconButton(
+                onTap: widget.onBackTapped,
+                icon: const Icon(Icons.chevron_left),
+              ),
+              AmicaRoundIconButton(
+                onTap: widget.onForwardTapped,
+                icon: const Icon(Icons.chevron_right),
+              ),
+            ],
+          ),
         ),
       ),
     );

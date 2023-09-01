@@ -18,7 +18,6 @@ class _RegistrationInterestsState extends State<RegistrationInterests> {
   @override
   Widget build(BuildContext context) {
     return InterestsListSelect(
-      isRegistrations: true,
       selectedInterests: widget.selectedInterests,
     );
   }

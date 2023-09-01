@@ -46,7 +46,7 @@ final registerRouter = GoRoute(
         ),
         onBackTapped: () => context.go('/auth/register/step-2'),
         onForwardTapped: () => context.go('/search/user'),
-        padding: const EdgeInsets.all(0),
+        // padding: const EdgeInsets.all(0),
       ),
     ),
   ],
