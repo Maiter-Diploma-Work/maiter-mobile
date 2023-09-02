@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:amica/src/models/profiles/profile.dart';
+import 'package:amica/src/models/shared/interest.dart';
 import 'package:amica/src/models/shared/location.dart';
 import 'package:intl/intl.dart';
 
@@ -8,8 +9,9 @@ Event eventFromJson(String str) => Event.fromJson(json.decode(str));
 
 String eventToJson(Event data) => json.encode(data.toJson());
 
-List<Event> eventsFromJson(String str) =>
-    List<Event>.from(json.decode(str).map((x) => Event.fromJson(x)));
+List<Event> eventsFromJson(String str) => List<Event>.from(
+      json.decode(str).map((x) => Event.fromJson(x)),
+    );
 
 String eventsToJson(List<Event> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -37,7 +39,7 @@ class Event extends Profile {
         location: Location.fromJson(json["location"]),
         description: json["description"],
         name: json['name'],
-        interests: json['interests'],
+        interests: List<Interest>.from(json['interests']),
       );
 
   Map<String, dynamic> toJson() => {

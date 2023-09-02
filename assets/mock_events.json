@@ -6,7 +6,7 @@
         "creator_photo": "assets/girl_2.jpeg",
         "location": {
             "id": 1,
-            "postcode": 69001,
+            "postcode": "69001",
             "name": "ТЦ Україна",
             "countryName": "Ukraine",
             "longitude": 47.84269503381282,
@@ -23,11 +23,11 @@
         "creator_photo": "assets/guy_1.jpeg",
         "location": {
             "id": 2,
-            "postcode": 69001,
+            "postcode": "69001",
             "name": "Кінотеатр ім. довженка",
             "countryName": "Ukraine",
-            "longitude": 47.8419855969187,
-            "latitude": 35.133050572166674
+            "longitude": 207.8419855969187,
+            "latitude": 459.133050572166674
         },
         "description": "Привіт, хотів би сходити в кіно та не маю з ким. Приєднуйся, буду радий познайомитись",
         "name": "Richie",

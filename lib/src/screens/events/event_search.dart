@@ -30,10 +30,8 @@ class _EventSearchViewState extends State<EventSearchView> {
     return List.from(
       _events.map(
         (e) => Positioned(
-          top: e.location.latitude.round().toDouble() +
-              Random(DateTime.now().millisecond).nextDouble() * 10,
-          left: e.location.longitude.round().toDouble() +
-              Random(DateTime.now().millisecond).nextDouble() * 10,
+          top: e.location.latitude,
+          left: e.location.longitude,
           child: Column(
             children: [
               ProfilePicture(
