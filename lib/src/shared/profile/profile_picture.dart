@@ -39,9 +39,8 @@ class _ProfilePictureState extends State<ProfilePicture> {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(68.0),
-          child: const Image(
-            //TODO: make the image dynamic instead of constants
-            image: AssetImage('assets/valery_doe.jpg'),
+          child: Image(
+            image: AssetImage(widget.pictureUrl),
             fit: BoxFit.cover,
           ),
         ),
@@ -49,7 +48,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
     } else {
       return CircleAvatar(
         radius: widget.radius,
-        backgroundImage: const AssetImage('assets/valery_doe.jpg'),
+        backgroundImage: AssetImage(widget.pictureUrl),
       );
     }
   }

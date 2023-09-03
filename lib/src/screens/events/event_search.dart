@@ -5,6 +5,7 @@ import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class EventSearchView extends StatefulWidget {
   final UserProfile user;
@@ -32,15 +33,18 @@ class _EventSearchViewState extends State<EventSearchView> {
         (e) => Positioned(
           top: e.location.latitude,
           left: e.location.longitude,
-          child: Column(
-            children: [
-              ProfilePicture(
-                pictureUrl: e.photo,
-                isRound: true,
-                radius: 51.5,
-              ),
-              Text(e.name),
-            ],
+          child: GestureDetector(
+            onTap: () => context.go('/events/detailed', extra: e),
+            child: Column(
+              children: [
+                ProfilePicture(
+                  pictureUrl: e.photo,
+                  isRound: true,
+                  radius: 51.5,
+                ),
+                Text(e.name),
+              ],
+            ),
           ),
         ),
       ),
@@ -60,10 +64,13 @@ class _EventSearchViewState extends State<EventSearchView> {
       children: [
         Align(
           alignment: Alignment.center,
-          child: ProfilePicture(
-            pictureUrl: widget.user.photo,
-            isRound: true,
-            radius: 51.5,
+          child: GestureDetector(
+            onTap: () => context.go('/events/create'),
+            child: ProfilePicture(
+              pictureUrl: widget.user.photo,
+              isRound: true,
+              radius: 51.5,
+            ),
           ),
         ),
         ...events,

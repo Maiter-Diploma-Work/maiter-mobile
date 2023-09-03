@@ -2,6 +2,13 @@
     {
         "id": 1,
         "creator_id": 2,
+        "amount_of_people": 1,
+        "looking_for": "Anyone",
+        "age_constraints": {
+            "min_age": 20,
+            "max_age": 25
+        },
+        "radius": 2.4,
         "creation_date": "31/08/2023",
         "creator_photo": "assets/girl_2.jpeg",
         "location": {
@@ -19,6 +26,13 @@
     {
         "id": 2,
         "creator_id": 3,
+        "amount_of_people": 1,
+        "looking_for": "Anyone",
+        "age_constraints": {
+            "min_age": 20,
+            "max_age": 25
+        },
+        "radius": 2.4,
         "creation_date": "31/08/2023",
         "creator_photo": "assets/guy_1.jpeg",
         "location": {
