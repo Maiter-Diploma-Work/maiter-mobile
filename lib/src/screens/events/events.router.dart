@@ -52,9 +52,9 @@ final eventsRouter = GoRoute(
     ),
     GoRoute(
       path: 'create',
-      builder: (context, state) => const AmicaScaffold(
+      builder: (context, state) => AmicaScaffold(
         title: 'Create event',
-        scaffoldBody: EventCreate(),
+        scaffoldBody: EventCreate(profileLocation: ValeryDoe.location),
         selectedNavigationItemIndex: 1,
         isDetailed: false,
         hasBlurOnAppBar: true,

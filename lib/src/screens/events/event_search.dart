@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';

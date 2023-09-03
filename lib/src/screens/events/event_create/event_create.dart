@@ -1,19 +1,42 @@
 import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/google_maps.dart';
+import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_range.dart';
 import 'package:amica/src/shared/inputs/amica_select.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class EventCreate extends StatefulWidget {
-  const EventCreate({super.key});
+  final Location profileLocation;
+
+  const EventCreate({super.key, required this.profileLocation});
 
   @override
   State<EventCreate> createState() => _EventCreateState();
 }
 
 class _EventCreateState extends State<EventCreate> {
+  Future<String?> _dialogBuilder(BuildContext context) {
+    return showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 500,
+            child: AmicaGoogleMaps(
+              location: widget.profileLocation,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -34,7 +57,7 @@ class _EventCreateState extends State<EventCreate> {
             AmicaSelect<String>(
               initialValue: lookingFors.values.last,
               options: lookingFors.values,
-              fieldName: 'Looking for',
+              fieldName: 'Gender',
             ),
             const Gap(verticalGap: 16, horizontalGap: 0),
             const AmicaRange(
@@ -54,7 +77,10 @@ class _EventCreateState extends State<EventCreate> {
               max: 90,
               min: 18,
             ),
-            //TODO: location
+            AmicaButton(
+              onPressed: () => _dialogBuilder(context),
+              text: 'Choose location',
+            ),
           ],
         ),
       ),

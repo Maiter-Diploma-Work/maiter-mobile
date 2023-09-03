@@ -1,4 +1,3 @@
-import 'package:amica/src/shared/gap.dart';
 import 'package:flutter/material.dart';
 
 typedef OnCheck = void Function(bool isChecked);

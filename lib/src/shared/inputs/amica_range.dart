@@ -1,4 +1,3 @@
-import 'package:amica/src/screens/events/event_create/event_create.dart';
 import 'package:flutter/material.dart';
 
 class AmicaRange extends StatefulWidget {

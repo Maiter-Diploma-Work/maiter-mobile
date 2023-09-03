@@ -1,11 +1,9 @@
-import 'package:amica/src/models/profiles/character_trait.dart';
 import 'package:amica/src/models/profiles/expectancies.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/models/shared/social_network.dart';
 import 'package:amica/src/shared/character_traits/character_traits.dart';
 import 'package:amica/src/shared/title.dart';
-import 'package:amica/src/screens/user_search_profile_view/user_profile_detailed_view/character_trait_view.dart';
 import 'package:amica/src/shared/delimeter.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
