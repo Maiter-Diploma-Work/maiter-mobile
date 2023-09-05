@@ -1,13 +1,18 @@
 import 'package:amica/src/models/profiles/event.dart';
+import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/google_maps.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:amica/src/shared/title.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EventDetailsView extends StatelessWidget {
+  final Location userLocation;
   final Event event;
-  const EventDetailsView({super.key, required this.event});
+  const EventDetailsView(
+      {super.key, required this.event, required this.userLocation});
 
   Widget _details(BuildContext context) {
     return Row(
@@ -58,7 +63,16 @@ class EventDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        //TODO: map
+        AmicaGoogleMaps(
+          location: LatLng(
+            userLocation.latitude,
+            userLocation.longitude,
+          ),
+          destination: LatLng(
+            event.location.latitude,
+            event.location.longitude,
+          ),
+        ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(

@@ -6,9 +6,8 @@ import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_range.dart';
 import 'package:amica/src/shared/inputs/amica_select.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EventCreate extends StatefulWidget {
   final Location profileLocation;
@@ -35,7 +34,10 @@ class _EventCreateState extends State<EventCreate> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.5,
             child: AmicaGoogleMaps(
-              location: widget.profileLocation,
+              location: LatLng(
+                widget.profileLocation.latitude,
+                widget.profileLocation.longitude,
+              ),
             ),
           ),
         );

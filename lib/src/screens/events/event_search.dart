@@ -1,4 +1,3 @@
-
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
@@ -26,12 +25,21 @@ class _EventSearchViewState extends State<EventSearchView> {
     });
   }
 
+  double _getLastThreeDecimalDigits(double position) {
+    String positionString = position.toString();
+    String lastDigits = positionString.characters
+        .getRange(positionString.length - 2)
+        .toString();
+
+    return double.parse(lastDigits);
+  }
+
   List<Widget> get events {
     return List.from(
       _events.map(
         (e) => Positioned(
-          top: e.location.latitude,
-          left: e.location.longitude,
+          top: _getLastThreeDecimalDigits(e.location.longitude),
+          left: _getLastThreeDecimalDigits(e.location.latitude),
           child: GestureDetector(
             onTap: () => context.go('/events/detailed', extra: e),
             child: Column(

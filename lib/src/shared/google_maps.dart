@@ -6,8 +6,14 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AmicaGoogleMaps extends StatefulWidget {
-  final Location location;
-  const AmicaGoogleMaps({super.key, required this.location});
+  final LatLng location;
+  final LatLng? destination;
+
+  const AmicaGoogleMaps({
+    super.key,
+    required this.location,
+    this.destination,
+  });
 
   @override
   State<AmicaGoogleMaps> createState() => _AmicaGoogleMapsState();
@@ -56,50 +62,6 @@ class _AmicaGoogleMapsState extends State<AmicaGoogleMaps> {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _kGooglePlex = CameraPosition(
-      target: LatLng(widget.location.latitude, widget.location.longitude),
-      zoom: 17,
-    );
-
-    _markers.clear();
-    _markers.add(
-      Marker(
-        markerId: const MarkerId('myAmicaMarkerId'),
-        position: LatLng(
-          widget.location.latitude,
-          widget.location.longitude,
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(30),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(
-          16,
-        ),
-      ),
-      child: GoogleMap(
-        initialCameraPosition: _kGooglePlex,
-        mapType: MapType.normal,
-        onTap: _onTap,
-        polylines: _polylines,
-        markers: _markers,
-        myLocationButtonEnabled: true,
-        myLocationEnabled: true,
-        onMapCreated: (controller) {
-          _controller.complete(controller);
-        },
-      ),
-    );
-  }
-
   void _onTap(LatLng destinationLocation) {
     setState(() {
       _markers.clear();
@@ -127,6 +89,53 @@ class _AmicaGoogleMapsState extends State<AmicaGoogleMaps> {
         widget.location.longitude,
       ),
       destinationLocation,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _kGooglePlex = CameraPosition(
+      target: LatLng(widget.location.latitude, widget.location.longitude),
+      zoom: 17,
+    );
+
+    if (widget.destination != null) {
+      _onTap(widget.destination!);
+    } else {
+      _markers.add(
+        Marker(
+          markerId: const MarkerId('myAmicaMarkerId'),
+          position: LatLng(
+            widget.location.latitude,
+            widget.location.longitude,
+          ),
+          icon: BitmapDescriptor.defaultMarkerWithHue(30),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(
+          16,
+        ),
+      ),
+      child: GoogleMap(
+        initialCameraPosition: _kGooglePlex,
+        mapType: MapType.normal,
+        onTap: _onTap,
+        polylines: _polylines,
+        markers: _markers,
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
+        onMapCreated: (controller) {
+          _controller.complete(controller);
+        },
+      ),
     );
   }
 }

@@ -43,7 +43,10 @@ final eventsRouter = GoRoute(
         Event event = state.extra as Event;
         return AmicaScaffold(
           title: event.name,
-          scaffoldBody: EventDetailsView(event: event),
+          scaffoldBody: EventDetailsView(
+            event: event,
+            userLocation: ValeryDoe.location,
+          ),
           selectedNavigationItemIndex: 1,
           isDetailed: true,
           hasBlurOnAppBar: true,
