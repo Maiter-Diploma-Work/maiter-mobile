@@ -25,9 +25,15 @@ class _EventCreateState extends State<EventCreate> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
+          ),
+          backgroundColor: Colors.transparent,
           content: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 500,
+            height: MediaQuery.of(context).size.height * 0.5,
             child: AmicaGoogleMaps(
               location: widget.profileLocation,
             ),
@@ -77,9 +83,11 @@ class _EventCreateState extends State<EventCreate> {
               max: 90,
               min: 18,
             ),
+            const Gap(verticalGap: 16, horizontalGap: 0),
             AmicaButton(
               onPressed: () => _dialogBuilder(context),
               text: 'Choose location',
+              color: Theme.of(context).colorScheme.primary,
             ),
           ],
         ),
