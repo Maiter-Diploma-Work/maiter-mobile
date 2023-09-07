@@ -1,9 +1,12 @@
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/screens/events/event_serach_google-maps.dart';
+import 'package:amica/src/shared/google_maps.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EventSearchView extends StatefulWidget {
   final UserProfile user;
@@ -47,7 +50,7 @@ class _EventSearchViewState extends State<EventSearchView> {
                 ProfilePicture(
                   pictureUrl: e.photo,
                   isRound: true,
-                  radius: 51.5,
+                  radius: 32,
                 ),
                 Text(e.name),
               ],
@@ -66,22 +69,30 @@ class _EventSearchViewState extends State<EventSearchView> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Align(
-          alignment: Alignment.center,
-          child: GestureDetector(
-            onTap: () => context.go('/events/create'),
-            child: ProfilePicture(
-              pictureUrl: widget.user.photo,
-              isRound: true,
-              radius: 51.5,
-            ),
-          ),
-        ),
-        ...events,
-      ],
+    // LatLng location = LatLng(
+    //   widget.user.location.latitude,
+    //   widget.user.location.longitude,
+    // );
+    // return Stack(
+    //   fit: StackFit.expand,
+    //   children: [
+    //     AmicaGoogleMaps(location: location),
+    //     Align(
+    //       alignment: Alignment.center,
+          // child: GestureDetector(
+          //   onTap: () => context.go('/events/create'),
+          //   child: ProfilePicture(
+          //     pictureUrl: widget.user.photo,
+          //     isRound: true,
+          //     radius: 32,
+          //   ),
+          // ),
+    //     ),
+    //   ],
+    // );
+    return AmicaEventSearchGoogleMaps.withUserProfile(
+      profile: widget.user,
+      eventMarkers: Set.from(_events),
     );
   }
 }

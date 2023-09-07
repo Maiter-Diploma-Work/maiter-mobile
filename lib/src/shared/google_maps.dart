@@ -63,6 +63,10 @@ class _AmicaGoogleMapsState extends State<AmicaGoogleMaps> {
   }
 
   void _onTap(LatLng destinationLocation) {
+    if (widget.destination != null) {
+      return;
+    }
+
     setState(() {
       _markers.clear();
       _markers.add(
@@ -102,6 +106,28 @@ class _AmicaGoogleMapsState extends State<AmicaGoogleMaps> {
 
     if (widget.destination != null) {
       _onTap(widget.destination!);
+      _markers.addAll({
+        Marker(
+          markerId: const MarkerId('newAmicaMarkerId'),
+          position: widget.destination!,
+          icon: BitmapDescriptor.defaultMarker,
+        ),
+        Marker(
+          markerId: const MarkerId('myAmicaMarkerId'),
+          position: LatLng(
+            widget.location.latitude,
+            widget.location.longitude,
+          ),
+          icon: BitmapDescriptor.defaultMarkerWithHue(30),
+        ),
+      });
+      _setPolylines(
+        LatLng(
+          widget.location.latitude,
+          widget.location.longitude,
+        ),
+        widget.destination!,
+      );
     } else {
       _markers.add(
         Marker(
