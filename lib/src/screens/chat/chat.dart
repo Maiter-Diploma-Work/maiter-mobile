@@ -1,4 +1,8 @@
 import 'package:amica/src/models/chat_message.dart';
+import 'package:amica/src/screens/chat/message/message.dart';
+import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
+import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -46,12 +50,50 @@ class _ChatViewState extends State<ChatView> {
       onHorizontalDragUpdate: (details) => _onDrag(details, context),
       child: Container(
         color: Theme.of(context).colorScheme.inverseSurface,
-        child: ListView(
-          children: List.from(
-            _chatMessages.map(
-              (e) => generateMessage(context, e),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ListView(
+              shrinkWrap: true,
+              children: List.from(
+                _chatMessages.map(
+                  (e) => generateMessage(context, e),
+                ),
+              ),
             ),
-          ),
+            Wrap(
+              children: [
+                AmicaRoundIconButton(
+                  icon: const Icon(Icons.attach_file),
+                  onTap: () {},
+                ),
+                AmicaRoundIconButton(
+                  icon: const Icon(Icons.emoji_emotions_outlined),
+                  onTap: () {},
+                ),
+                TextFormField(
+                  autocorrect: true,
+                  autofocus: true,
+                  minLines: 1,
+                  maxLines: 10,
+                  decoration: const InputDecoration(
+                    constraints: BoxConstraints(maxWidth: 230),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+                AmicaRoundIconButton(
+                  icon: const Icon(Icons.send),
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -62,43 +104,7 @@ class _ChatViewState extends State<ChatView> {
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 11),
       child: Wrap(
         children: [
-          Align(
-            alignment: widget.userId != message.userId.toString()
-                ? Alignment.centerLeft
-                : Alignment.centerRight,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                bottomLeft: widget.userId == message.userId.toString()
-                    ? const Radius.circular(21)
-                    : Radius.zero,
-                bottomRight: widget.userId != message.userId.toString()
-                    ? const Radius.circular(21)
-                    : Radius.zero,
-                topRight: const Radius.circular(21),
-                topLeft: const Radius.circular(21),
-              ),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 25,
-                  vertical: 9,
-                ),
-                constraints: const BoxConstraints(maxWidth: 204.0),
-                color: widget.userId != message.userId.toString()
-                    ? const Color(0xFFC3CCD7)
-                    : Theme.of(context).colorScheme.primary,
-                child: Text(
-                  message.text,
-                  style: TextStyle(
-                    color: widget.userId != message.userId.toString()
-                        ? Colors.black
-                        : Theme.of(context).colorScheme.onPrimary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          AmicaChatMessage(message: message, userId: widget.userId),
         ],
       ),
     );
