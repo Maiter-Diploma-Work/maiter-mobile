@@ -1,4 +1,5 @@
 import 'package:amica/src/models/chat_message.dart';
+import 'package:amica/src/screens/chat/message-input/message_input.dart';
 import 'package:amica/src/screens/chat/message/message.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
@@ -30,7 +31,6 @@ class _ChatViewState extends State<ChatView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     //TODO: Fetch Messages from backend
     super.initState();
   }
@@ -63,36 +63,7 @@ class _ChatViewState extends State<ChatView> {
                 ),
               ),
             ),
-            Wrap(
-              children: [
-                AmicaRoundIconButton(
-                  icon: const Icon(Icons.attach_file),
-                  onTap: () {},
-                ),
-                AmicaRoundIconButton(
-                  icon: const Icon(Icons.emoji_emotions_outlined),
-                  onTap: () {},
-                ),
-                TextFormField(
-                  autocorrect: true,
-                  autofocus: true,
-                  minLines: 1,
-                  maxLines: 10,
-                  decoration: const InputDecoration(
-                    constraints: BoxConstraints(maxWidth: 230),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
-                AmicaRoundIconButton(
-                  icon: const Icon(Icons.send),
-                  onTap: () {},
-                ),
-              ],
-            ),
+            MessageInput(control: TextEditingController()),
           ],
         ),
       ),
