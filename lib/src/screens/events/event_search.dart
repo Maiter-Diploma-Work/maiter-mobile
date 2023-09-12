@@ -69,30 +69,27 @@ class _EventSearchViewState extends State<EventSearchView> {
 
   @override
   Widget build(BuildContext context) {
-    // LatLng location = LatLng(
-    //   widget.user.location.latitude,
-    //   widget.user.location.longitude,
-    // );
-    // return Stack(
-    //   fit: StackFit.expand,
-    //   children: [
-    //     AmicaGoogleMaps(location: location),
-    //     Align(
-    //       alignment: Alignment.center,
-          // child: GestureDetector(
-          //   onTap: () => context.go('/events/create'),
-          //   child: ProfilePicture(
-          //     pictureUrl: widget.user.photo,
-          //     isRound: true,
-          //     radius: 32,
-          //   ),
-          // ),
-    //     ),
-    //   ],
-    // );
-    return AmicaEventSearchGoogleMaps.withUserProfile(
-      profile: widget.user,
-      eventMarkers: Set.from(_events),
+    LatLng location = LatLng(
+      widget.user.location.latitude,
+      widget.user.location.longitude,
+    );
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        // AmicaGoogleMaps(location: location),
+        Align(
+          alignment: Alignment.center,
+          child: GestureDetector(
+            onTap: () => context.go('/events/create'),
+            child: ProfilePicture(
+              pictureUrl: widget.user.photo,
+              isRound: true,
+              radius: 32,
+            ),
+          ),
+        ),
+        ...events,
+      ],
     );
   }
 }

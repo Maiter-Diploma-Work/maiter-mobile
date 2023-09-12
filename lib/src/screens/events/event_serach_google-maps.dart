@@ -42,14 +42,6 @@ class _AmicaEventSearchGoogleMapsState
 
   final Set<Marker> _markers = {};
 
-  Future<BitmapDescriptor> _transformImageToCircleAvatar(String imageUrl) {
-    final pictureRecorder = ui.PictureRecorder();
-    final canvas = Canvas(pictureRecorder);
-    final paint = Paint();
-
-    paint.isAntiAlias = true;
-  }
-
   Future<void> _initState() async {
     setState(() async {
       _markers.add(
