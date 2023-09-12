@@ -21,6 +21,8 @@ class Location {
     required this.latitude,
   });
 
+  Location.empty() : id = -1, name = '', countryName = '', longitude = 0, latitude = 0, postcode = '';
+
   factory Location.fromJson(Map<String, dynamic> json) => Location(
         id: json["id"],
         postcode: json["postcode"],

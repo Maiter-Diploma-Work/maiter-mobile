@@ -1,5 +1,6 @@
 import 'package:amica/src/data/valery_doe.dart';
 import 'package:amica/src/layouts/scaffold.dart';
+import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_search_filter/user_search_filter.dart';
 import 'package:amica/src/screens/user_search_profile_view/likes_view/likes_view.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_view.dart';
@@ -9,11 +10,11 @@ import 'package:go_router/go_router.dart';
 import 'user_profile_detailed_view/user_profile_detailed.dart';
 
 final searchUserRouter = GoRoute(
-  path: '/search/user',
+  path: '/search/:user_id',
   builder: (context, state) => AmicaScaffold(
     title: "User Search",
     scaffoldBody: UserProfileView(
-      profile: ValeryDoe,
+      profileId: state.pathParameters['user_id']!,
     ),
     selectedNavigationItemIndex: 0,
     isDetailed: false,
@@ -31,15 +32,18 @@ final searchUserRouter = GoRoute(
   routes: [
     GoRoute(
       path: 'details',
-      builder: (context, state) => AmicaScaffold(
-        isDetailed: true,
-        hasBlurOnAppBar: false,
-        title: "",
-        scaffoldBody: UserProfileDetailed(
-          profile: ValeryDoe,
-        ),
-        selectedNavigationItemIndex: 0,
-      ),
+      builder: (context, state) { 
+        UserProfile profile = state.extra as UserProfile;
+        return AmicaScaffold(
+          isDetailed: true,
+          hasBlurOnAppBar: false,
+          title: "",
+          scaffoldBody: UserProfileDetailed(
+            profile: profile,
+          ),
+          selectedNavigationItemIndex: 0,
+        );
+      },
     ),
     GoRoute(
       path: 'filter',

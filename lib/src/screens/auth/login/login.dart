@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           ),
           const Gap(horizontalGap: 0, verticalGap: 132.0),
           AmicaButton(
-            onPressed: () => context.go('/search/user'),
+            onPressed: () => context.go('/search/2'),
             text: "Login",
             color: Theme.of(context).colorScheme.onPrimary,
             textColor: Theme.of(context).colorScheme.primary,

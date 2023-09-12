@@ -4,7 +4,7 @@ import 'package:amica/src/screens/profile_view/option_select_view/option_select_
 import 'package:amica/src/screens/profile_view/option_select_view/option_select_view.dart';
 import 'package:amica/src/screens/profile_view/profile_edit_view/profile_edit_view.dart';
 import 'package:amica/src/screens/profile_view/profile_photo_edit_view/profile_photo_edit_view.dart';
-import 'package:amica/src/screens/profile_view/profile_view.dart';
+import 'package:amica/src/screens/profile_view/settings_view.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_detailed_view/user_profile_detailed.dart';
 import 'package:amica/src/shared/interests_list/interests_list.dart';
 import 'package:flutter/src/widgets/basic.dart';

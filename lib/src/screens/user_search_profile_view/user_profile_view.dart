@@ -1,17 +1,26 @@
 import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:amica/src/shared/profile/interests.dart';
 import 'package:amica/src/shared/profile/location.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
-class UserProfileView extends StatelessWidget {
-  final int _sensitivity = 8;
-  final UserProfile profile;
+class UserProfileView extends StatefulWidget {
+  final String profileId;
 
-  const UserProfileView({super.key, required this.profile});
+  const UserProfileView({super.key, required this.profileId});
+
+  @override
+  State<UserProfileView> createState() => _UserProfileViewState();
+}
+
+class _UserProfileViewState extends State<UserProfileView> {
+  final int _sensitivity = 8;
+  UserProfile? _profile;
 
   void _dislikePressed() {}
 
@@ -44,6 +53,16 @@ class UserProfileView extends StatelessWidget {
     }
   }
 
+  Future<void> readMockUserFromJson() async {
+    final int userId = int.parse(widget.profileId);
+    final String response =
+        await rootBundle.loadString('assets/mock_users.json');
+    final List<UserProfile> data = usersFromJson(response);
+    setState(() {
+      _profile = data.firstWhere((element) => element.id == userId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -58,7 +77,7 @@ class UserProfileView extends StatelessWidget {
           children: [
             Center(
               child: ProfilePicture(
-                pictureUrl: 'assets/valery_doe.jpg',
+                pictureUrl: _profile == null ? 'assets/logo/logo.png' : _profile!.photo,
               ),
             ),
             Align(
@@ -77,22 +96,36 @@ class UserProfileView extends StatelessWidget {
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
+    readMockUserFromJson();
+  }
+
   Widget generateProfileInfo(BuildContext context) {
+    int interestsDisplayAmount = 0;
+    if (_profile != null) {
+      if (_profile!.interests.length <= 6) {
+        interestsDisplayAmount = _profile!.interests.length;  
+      } else {
+       interestsDisplayAmount = 6; 
+      }
+    }
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         UserProfileName.fromProfile(
-          profile,
+          _profile ?? UserProfile.empty(),
           padding: const EdgeInsets.only(
             right: 32,
           ),
         ),
-        LocationView(location: profile.location),
+        LocationView(location: _profile == null? Location.empty() : _profile!.location),
         Interests(
-          interests: profile.interests,
-          displayAmount:
-              profile.interests.length <= 6 ? profile.interests.length : 6,
+          interests: _profile == null? [] : _profile!.interests,
+          displayAmount: interestsDisplayAmount,
         ),
       ],
     );
@@ -121,7 +154,7 @@ class UserProfileView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: AmicaRoundIconButton(
-          onTap: () => context.go('/search/user/details'),
+          onTap: () => context.go('/search/${widget.profileId}/details', extra: _profile),
           fillColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
           icon: const Icon(
             Icons.person,
