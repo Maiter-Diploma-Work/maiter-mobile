@@ -1,10 +1,12 @@
-
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/screens/events/event_serach_google-maps.dart';
+import 'package:amica/src/shared/google_maps.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EventSearchView extends StatefulWidget {
   final UserProfile user;
@@ -26,12 +28,21 @@ class _EventSearchViewState extends State<EventSearchView> {
     });
   }
 
+  double _getLastThreeDecimalDigits(double position) {
+    String positionString = position.toString();
+    String lastDigits = positionString.characters
+        .getRange(positionString.length - 2)
+        .toString();
+
+    return double.parse(lastDigits);
+  }
+
   List<Widget> get events {
     return List.from(
       _events.map(
         (e) => Positioned(
-          top: e.location.latitude,
-          left: e.location.longitude,
+          top: _getLastThreeDecimalDigits(e.location.longitude),
+          left: _getLastThreeDecimalDigits(e.location.latitude),
           child: GestureDetector(
             onTap: () => context.go('/events/detailed', extra: e),
             child: Column(
@@ -39,7 +50,7 @@ class _EventSearchViewState extends State<EventSearchView> {
                 ProfilePicture(
                   pictureUrl: e.photo,
                   isRound: true,
-                  radius: 51.5,
+                  radius: 32,
                 ),
                 Text(e.name),
               ],
@@ -58,9 +69,14 @@ class _EventSearchViewState extends State<EventSearchView> {
 
   @override
   Widget build(BuildContext context) {
+    LatLng location = LatLng(
+      widget.user.location.latitude,
+      widget.user.location.longitude,
+    );
     return Stack(
       fit: StackFit.expand,
       children: [
+        // AmicaGoogleMaps(location: location),
         Align(
           alignment: Alignment.center,
           child: GestureDetector(
@@ -68,7 +84,7 @@ class _EventSearchViewState extends State<EventSearchView> {
             child: ProfilePicture(
               pictureUrl: widget.user.photo,
               isRound: true,
-              radius: 51.5,
+              radius: 32,
             ),
           ),
         ),
