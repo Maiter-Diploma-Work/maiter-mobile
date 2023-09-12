@@ -38,9 +38,9 @@ class _ChatViewState extends State<ChatView> {
   void _onDrag(DragUpdateDetails details, BuildContext context) {
     int sensitivity = 8;
     if (details.delta.dx > sensitivity) {
-      // Right Swipe
-      // debugPrint('Right Swipe, $sensitivity');
-      context.go('/chat-list');
+      context.go('/chat');
+    } else if (details.delta.dx < -sensitivity) {
+      context.go('/chat/${widget.userId}/detailed');
     }
   }
 
@@ -49,7 +49,7 @@ class _ChatViewState extends State<ChatView> {
     return GestureDetector(
       onHorizontalDragUpdate: (details) => _onDrag(details, context),
       child: Container(
-        color: Theme.of(context).colorScheme.inverseSurface,
+        color: Theme.of(context).colorScheme.surface,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -36,7 +36,7 @@ class _ChatAppBarTitleState extends State<ChatAppBarTitle> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.go('/chat/'),
+      onTap: () => context.go('/chat/${widget.userId}/detailed'),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

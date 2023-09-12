@@ -5,20 +5,34 @@ typedef ButtonCallback = void Function();
 class AmicaRoundIconButton extends StatelessWidget {
   final ButtonCallback onTap;
   final Widget icon;
-  Color? fillColor;
-  EdgeInsetsGeometry? padding;
+  final Color? fillColor;
+  final EdgeInsetsGeometry? padding;
+  final String? label;
+  final TextStyle? labelStyle;
 
-  AmicaRoundIconButton({
+  const AmicaRoundIconButton({
     Key? key,
     required this.onTap,
     required this.icon,
     this.fillColor,
     this.padding,
+  })  : label = null,
+        labelStyle = null,
+        super(key: key);
+
+  const AmicaRoundIconButton.labeled(
+    this.label, {
+    Key? key,
+    required this.onTap,
+    required this.icon,
+    this.fillColor,
+    this.padding,
+    this.labelStyle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    final Widget button = ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
@@ -26,6 +40,20 @@ class AmicaRoundIconButton extends StatelessWidget {
         padding: padding ?? const EdgeInsets.all(8.0),
       ),
       child: icon,
+    );
+
+    if (label == null) {
+      return button;
+    }
+
+    return Column(
+      children: [
+        button,
+        Text(
+          label!,
+          style: labelStyle,
+        )
+      ],
     );
   }
 }
