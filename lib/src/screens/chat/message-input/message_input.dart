@@ -18,7 +18,7 @@ class MessageInput extends StatelessWidget {
         ),
       ),
       child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.end,
         children: [
           AmicaRoundIconButton(
             icon: const Icon(Icons.attach_file),

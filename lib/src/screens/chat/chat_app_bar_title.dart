@@ -1,6 +1,7 @@
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatAppBarTitle extends StatefulWidget {
   final String userId;
@@ -34,17 +35,20 @@ class _ChatAppBarTitleState extends State<ChatAppBarTitle> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          _user == null ? '' : _user!.name,
-        ),
-        CircleAvatar(
-          // child: Image.network(_user == null ? '' : _user!.photo),
-          backgroundImage: AssetImage(_user == null ? '' : _user!.photo),
-        ),
-      ],
+    return GestureDetector(
+      onTap: () => context.go('/chat/'),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            _user == null ? '' : _user!.name,
+          ),
+          CircleAvatar(
+            // child: Image.network(_user == null ? '' : _user!.photo),
+            backgroundImage: AssetImage(_user == null ? '' : _user!.photo),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -140,7 +140,7 @@ class _ChatListViewState extends State<ChatListView> {
 
   Widget generateContact(UserProfile profile, BuildContext context) {
     return GestureDetector(
-      onTap: () => context.go('/chat-list/${profile.id}'),
+      onTap: () => context.go('/chat/${profile.id}'),
       child: Row(
         children: [
           CircleAvatar(

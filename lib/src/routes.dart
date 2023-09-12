@@ -19,7 +19,7 @@ final router = GoRouter(
         registerRouter,
       ],
     ),
-    chatRouter,
+    ...chatRouter,
     eventsRouter,
     searchUserRouter,
     profileRouter,
