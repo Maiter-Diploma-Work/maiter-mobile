@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   void _onLoginClick(BuildContext context) {
-    context.go('/search/user');
+    context.go('/search');
   }
 
   Form formGenerator(BuildContext context) {
@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           ),
           const Gap(horizontalGap: 0, verticalGap: 132.0),
           AmicaButton(
-            onPressed: () => context.go('/search/2'),
+            onPressed: () => context.go('/search'),
             text: "Login",
             color: Theme.of(context).colorScheme.onPrimary,
             textColor: Theme.of(context).colorScheme.primary,

@@ -1,5 +1,9 @@
+import 'package:amica/src/models/DTO/dislike_dto.dart';
+import 'package:amica/src/models/DTO/like_dto.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/location.dart';
+import 'package:amica/src/services/like/like.service.dart';
+import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:amica/src/shared/profile/interests.dart';
 import 'package:amica/src/shared/profile/location.dart';
@@ -10,9 +14,15 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 class UserProfileView extends StatefulWidget {
-  final String profileId;
+  final UserSearchService userService;
+  final LikeService likeService;
+  final int userId;
 
-  const UserProfileView({super.key, required this.profileId});
+  const UserProfileView(
+      {super.key,
+      required this.userService,
+      required this.likeService,
+      required this.userId});
 
   @override
   State<UserProfileView> createState() => _UserProfileViewState();
@@ -20,95 +30,126 @@ class UserProfileView extends StatefulWidget {
 
 class _UserProfileViewState extends State<UserProfileView> {
   final int _sensitivity = 8;
-  UserProfile? _profile;
+  UserProfile? _currentProfile;
+  List<UserProfile> _profiles = [];
 
-  void _dislikePressed() {}
+  void _dislikePressed() {
+    DislikeDto dislike = DislikeDto(
+      id: -1,
+      firstUserId: widget.userId,
+      secondUserId: _currentProfile != null ? _currentProfile!.id : -1,
+    );
+    widget.likeService.dislikeUser(dislike);
 
-  void _detailsPressed(BuildContext context) {
-    context.go('/search/user/details');
+    if (_profiles.isNotEmpty) {
+      setState(() {
+        _profiles.removeAt(0);
+        _currentProfile = _profiles.isEmpty ? null : _profiles.first;
+      });
+    }
   }
 
-  void _likePressed() {}
+  void _detailsPressed(BuildContext context) {
+    context.go('/search/details', extra: _currentProfile);
+  }
 
-  void _onHorizontalDrag(DragUpdateDetails details) {
-    if (details.delta.dx > _sensitivity) {
-      // Right Swipe
-      debugPrint('Right Swipe, $_sensitivity');
+  void _likePressed() {
+    LikeDto like = LikeDto(
+      id: -1,
+      firstUserId: widget.userId,
+      secondUserId: _currentProfile != null ? _currentProfile!.id : -1,
+    );
+    widget.likeService.likeUser(like);
+
+    if (_profiles.isNotEmpty) {
+      setState(() {
+        _profiles.removeAt(0);
+        _currentProfile = _profiles.isEmpty ? null : _profiles.first;
+      });
+    }
+  }
+
+  void _onHorizontalDrag(DragEndDetails details) {
+    if (details.primaryVelocity! < 0) {
+      debugPrint('swipe left');
       _likePressed();
-    } else if (details.delta.dx < -_sensitivity) {
-      //Left Swipe
-      debugPrint('Left Swipe, $_sensitivity');
+    } else if (details.primaryVelocity! > 0) {
+      debugPrint('swipe right');
       _dislikePressed();
     }
   }
 
-  void _onVerticalDrag(DragUpdateDetails details, BuildContext context) {
-    if (details.delta.dy > _sensitivity) {
-      // Right Swipe
-      debugPrint('Up Swipe, $_sensitivity');
-    } else if (details.delta.dy < -_sensitivity) {
-      //Left Swipe
-      debugPrint('Down Swipe, $_sensitivity');
+  void _onVerticalDrag(DragEndDetails details, BuildContext context) {
+    if (details.primaryVelocity! < 0) {
+      debugPrint('swipe up');
       _detailsPressed(context);
     }
   }
 
-  Future<void> readMockUserFromJson() async {
-    final int userId = int.parse(widget.profileId);
-    final String response =
-        await rootBundle.loadString('assets/mock_users.json');
-    final List<UserProfile> data = usersFromJson(response);
-    setState(() {
-      _profile = data.firstWhere((element) => element.id == userId);
-    });
-  }
+  Future<void> _initState() async {
+    List<UserProfile> tmp = await widget.userService.getRandomUsers(-1);
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onHorizontalDragUpdate: (details) => _onHorizontalDrag(details),
-      onVerticalDragUpdate: (details) => _onVerticalDrag(details, context),
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 6,
-        ),
-        child: Stack(
-          children: [
-            Center(
-              child: ProfilePicture(
-                pictureUrl: _profile == null ? 'assets/logo/logo.png' : _profile!.photo,
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: generateProfileInfo(context),
-              ),
-            ),
-            _dislikeButton(context),
-            _detailsButton(context),
-            _likeButton(context),
-          ],
-        ),
-      ),
-    );
+    setState(() {
+      _profiles = tmp;
+      _currentProfile = tmp.first;
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    readMockUserFromJson();
+    _initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _currentProfile == null
+        ? const Center(
+            child: Text(
+              'That\'s all :(',
+              style: TextStyle(fontSize: 32),
+            ),
+          )
+        : GestureDetector(
+            onHorizontalDragEnd: (details) => _onHorizontalDrag(details),
+            onVerticalDragEnd: (details) => _onVerticalDrag(details, context),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 6,
+              ),
+              child: Stack(
+                children: [
+                  Center(
+                    child: ProfilePicture(
+                      pictureUrl: _currentProfile == null
+                          ? 'assets/logo/logo.png'
+                          : _currentProfile!.photo,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: generateProfileInfo(context),
+                    ),
+                  ),
+                  _dislikeButton(context),
+                  _detailsButton(context),
+                  _likeButton(context),
+                ],
+              ),
+            ),
+          );
   }
 
   Widget generateProfileInfo(BuildContext context) {
     int interestsDisplayAmount = 0;
-    if (_profile != null) {
-      if (_profile!.interests.length <= 6) {
-        interestsDisplayAmount = _profile!.interests.length;  
+    if (_currentProfile != null) {
+      if (_currentProfile!.interests.length <= 6) {
+        interestsDisplayAmount = _currentProfile!.interests.length;
       } else {
-       interestsDisplayAmount = 6; 
+        interestsDisplayAmount = 6;
       }
     }
 
@@ -117,14 +158,17 @@ class _UserProfileViewState extends State<UserProfileView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         UserProfileName.fromProfile(
-          _profile ?? UserProfile.empty(),
+          _currentProfile ?? UserProfile.empty(),
           padding: const EdgeInsets.only(
             right: 32,
           ),
         ),
-        LocationView(location: _profile == null? Location.empty() : _profile!.location),
+        LocationView(
+            location: _currentProfile == null
+                ? Location.empty()
+                : _currentProfile!.location),
         Interests(
-          interests: _profile == null? [] : _profile!.interests,
+          interests: _currentProfile == null ? [] : _currentProfile!.interests,
           displayAmount: interestsDisplayAmount,
         ),
       ],
@@ -137,7 +181,7 @@ class _UserProfileViewState extends State<UserProfileView> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: AmicaRoundIconButton(
-          onTap: () => _dislikePressed,
+          onTap: _dislikePressed,
           fillColor: Theme.of(context).colorScheme.error.withOpacity(0.5),
           icon: const Icon(
             Icons.close,
@@ -154,7 +198,7 @@ class _UserProfileViewState extends State<UserProfileView> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: AmicaRoundIconButton(
-          onTap: () => context.go('/search/${widget.profileId}/details', extra: _profile),
+          onTap: () => _detailsPressed(context),
           fillColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
           icon: const Icon(
             Icons.person,
@@ -171,7 +215,7 @@ class _UserProfileViewState extends State<UserProfileView> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: AmicaRoundIconButton(
-          onTap: () => _likePressed,
+          onTap: _likePressed,
           fillColor: const Color.fromARGB(126, 42, 181, 49),
           icon: const Icon(
             Icons.favorite,

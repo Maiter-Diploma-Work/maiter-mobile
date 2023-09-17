@@ -18,7 +18,7 @@ class _AmicaBottomNavigationBarState extends State<AmicaBottomNavigationBar> {
   void _onDestinationSelected(int idx, BuildContext context) {
     switch (idx) {
       case 0:
-        context.go('/search/2');
+        context.go('/search');
         break;
       case 1:
         context.go('/events');

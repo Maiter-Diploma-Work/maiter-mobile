@@ -44,7 +44,7 @@ final registerRouter = GoRoute(
           selectedInterests: [],
         ),
         onBackTapped: () => context.go('/auth/register/step-2'),
-        onForwardTapped: () => context.go('/search/2'),
+        onForwardTapped: () => context.go('/search'),
         // padding: const EdgeInsets.all(0),
       ),
     ),

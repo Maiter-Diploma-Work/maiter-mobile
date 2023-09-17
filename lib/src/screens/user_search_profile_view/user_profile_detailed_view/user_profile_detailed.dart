@@ -30,23 +30,10 @@ class UserProfileDetailed extends StatefulWidget {
 }
 
 class _UserProfileDetailedState extends State<UserProfileDetailed> {
-  final List<String> assetImages = [
-    'assets/valery_doe.jpg',
-    'assets/valery_doe_1.jpg',
-    'assets/valery_doe_2.jpg',
-    'assets/valery_doe_3.jpg',
-    'assets/valery_doe_4.jpg',
-  ];
-
   void onDrag(DragUpdateDetails details, BuildContext context) {
     int sensitivity = 8;
     if (details.delta.dx > sensitivity) {
-      // Right Swipe
-      debugPrint('Right Swipe, $sensitivity');
-      context.go('/search/user');
-    } else if (details.delta.dx < -sensitivity) {
-      //Left Swipe
-      debugPrint('Left Swipe, $sensitivity');
+      context.go('/search');
     }
   }
 
@@ -128,13 +115,15 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
   Widget _generateBasicInfo() {
     return Stack(
       children: [
-        CarouselSlider(
-          items: _carouselElemenets,
-          options: CarouselOptions(
-            height: 600,
-            enlargeCenterPage: false,
-          ),
-        ),
+        _carouselElemenets.length > 1
+            ? CarouselSlider(
+                items: _carouselElemenets,
+                options: CarouselOptions(
+                  height: 600,
+                  enlargeCenterPage: false,
+                ),
+              )
+            : _photo,
         Positioned.fill(
           bottom: 0,
           left: 72,
@@ -151,6 +140,15 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
           ),
         )
       ],
+    );
+  }
+
+  Widget get _photo {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(30),
+      ),
+      child: Image.asset(widget.profile.photo, fit: BoxFit.contain),
     );
   }
 
@@ -183,14 +181,8 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // location,
-        // const Delimeter(
-        //   bottomMargin: 12,
-        //   topMargin: 2,
-        // ),
         socialNetworks,
         generateDelimeter(widget.profile.socialNetworks != null),
-        //Should it even be?
         education,
         generateDelimeter(widget.profile.education != null),
         ProfileDescription(
@@ -311,13 +303,6 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // const Align(
-          //   alignment: Alignment.centerLeft,
-          //   child: CircleAvatar(
-          //     radius: 75,
-          //     backgroundImage: AssetImage('assets/valery_doe.jpg'),
-          //   ),
-          // ),
           UserProfileName.fromProfile(
             widget.profile,
             padding: const EdgeInsets.symmetric(

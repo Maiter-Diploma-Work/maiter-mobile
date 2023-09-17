@@ -4,35 +4,39 @@ import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_search_filter/user_search_filter.dart';
 import 'package:amica/src/screens/user_search_profile_view/likes_view/likes_view.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_view.dart';
+import 'package:amica/src/services/like/mock_like.service.dart';
+import 'package:amica/src/services/user/mock_user_search.service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'user_profile_detailed_view/user_profile_detailed.dart';
 
 final searchUserRouter = GoRoute(
-  path: '/search/:user_id',
+  path: '/search',
   builder: (context, state) => AmicaScaffold(
     title: "User Search",
     scaffoldBody: UserProfileView(
-      profileId: state.pathParameters['user_id']!,
+      userService: MockedUserSearchService.instance,
+      likeService: MockLikeService.instance,
+      userId: ValeryDoe.id,
     ),
     selectedNavigationItemIndex: 0,
     isDetailed: false,
     actions: [
       IconButton(
         icon: const Icon(Icons.menu),
-        onPressed: () => context.go('/search/user/filter'),
+        onPressed: () => context.go('/search/filter'),
       ),
       IconButton(
         icon: const Icon(Icons.favorite),
-        onPressed: () => context.go('/search/user/liked'),
+        onPressed: () => context.go('/search/liked'),
       ),
     ],
   ),
   routes: [
     GoRoute(
       path: 'details',
-      builder: (context, state) { 
+      builder: (context, state) {
         UserProfile profile = state.extra as UserProfile;
         return AmicaScaffold(
           isDetailed: true,
@@ -70,7 +74,7 @@ final searchUserRouter = GoRoute(
         actions: [
           IconButton(
             icon: const Icon(Icons.menu),
-            onPressed: () => context.go('/search/user/filter'),
+            onPressed: () => context.go('/search/filter'),
           ),
         ],
       ),
