@@ -3,7 +3,6 @@ import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/models/shared/social_network.dart';
 import 'package:amica/src/shared/character_traits/character_traits.dart';
-import 'package:amica/src/shared/title.dart';
 import 'package:amica/src/shared/delimeter.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
@@ -11,9 +10,11 @@ import 'package:amica/src/shared/profile/description.dart';
 import 'package:amica/src/shared/profile/interests.dart';
 import 'package:amica/src/shared/profile/location.dart';
 import 'package:amica/src/shared/profile/user_profile_name.dart';
+import 'package:amica/src/shared/title.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class UserProfileDetailed extends StatefulWidget {
   final UserProfile profile;
@@ -83,8 +84,16 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
                   expectancies,
                   const Gap.cubic(26),
                   CharacterTraits(
-                    characterTraits: widget.profile.characterTraits,
                     isEditable: false,
+                    controller: FormArray(
+                      List.from(
+                        widget.profile.characterTraits.map(
+                          (characterTrait) => FormControl(
+                            value: characterTrait,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

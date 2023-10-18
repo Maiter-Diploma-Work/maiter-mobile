@@ -3,6 +3,7 @@ import 'package:amica/src/screens/auth/login/login.dart';
 import 'package:amica/src/screens/auth/register/steps/interest_step.dart';
 import 'package:amica/src/screens/auth/register/steps/step_1.dart';
 import 'package:amica/src/screens/auth/register/steps/step_2.dart';
+import 'package:amica/src/services/auth/mock_register.service.dart';
 import 'package:go_router/go_router.dart';
 
 import 'register/register.dart';
@@ -20,9 +21,11 @@ final registerRouter = GoRoute(
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 1: Personal Info',
-        body: const RegistrationFirstStep(),
+        body: RegistrationFirstStep(authService: MockRegisterService.instance),
         onBackTapped: () => context.go('/auth/register'),
-        onForwardTapped: () => context.go('/auth/register/step-2'),
+        onForwardTapped: () {
+          context.go('/auth/register/step-2');
+        },
       ),
     ),
     GoRoute(
@@ -30,9 +33,11 @@ final registerRouter = GoRoute(
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 2: Your goal',
-        body: const RegistrationSecondStep(),
+        body: RegistrationSecondStep(authService: MockRegisterService.instance),
         onBackTapped: () => context.go('/auth/register/step-1'),
-        onForwardTapped: () => context.go('/auth/register/step-3'),
+        onForwardTapped: () {
+          context.go('/auth/register/step-3');
+        },
       ),
     ),
     GoRoute(
@@ -40,11 +45,13 @@ final registerRouter = GoRoute(
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 3: Interests',
-        body: const RegistrationInterests(
-          selectedInterests: [],
+        body: RegistrationInterests(
+          authService: MockRegisterService.instance,
         ),
         onBackTapped: () => context.go('/auth/register/step-2'),
-        onForwardTapped: () => context.go('/search'),
+        onForwardTapped: () {
+          context.go('/search');
+        },
         // padding: const EdgeInsets.all(0),
       ),
     ),

@@ -1,13 +1,13 @@
-import 'package:amica/src/models/shared/interest.dart';
+import 'package:amica/src/services/auth/register.service.dart';
 import 'package:amica/src/shared/interests_list/interests_list.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationInterests extends StatefulWidget {
-  final List<Interest> selectedInterests;
+  final RegisterService authService;
 
   const RegistrationInterests({
     super.key,
-    required this.selectedInterests,
+    required this.authService,
   });
 
   @override
@@ -18,7 +18,8 @@ class _RegistrationInterestsState extends State<RegistrationInterests> {
   @override
   Widget build(BuildContext context) {
     return InterestsListSelect(
-      selectedInterests: widget.selectedInterests,
+      selectedInterests: widget.authService.selectedInterests,
+      favoriteSongControl: widget.authService.favoriteSong,
     );
   }
 }

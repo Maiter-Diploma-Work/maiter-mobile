@@ -1,14 +1,15 @@
 import 'package:amica/src/models/profiles/character_trait.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class CharacterTraitView extends StatefulWidget {
-  final CharacterTrait characterTrait;
   final bool isEditable;
+  final FormControl<CharacterTrait> traitControl;
 
   const CharacterTraitView({
     super.key,
-    required this.characterTrait,
     required this.isEditable,
+    required this.traitControl,
   });
 
   @override
@@ -18,33 +19,43 @@ class CharacterTraitView extends StatefulWidget {
 class _CharacterTraitViewState extends State<CharacterTraitView> {
   @override
   Widget build(BuildContext context) {
+    CharacterTrait trait = widget.traitControl.value!;
+    Color color = Theme
+        .of(context)
+        .colorScheme
+        .onBackground;
+
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              widget.characterTrait.bottomName,
+              trait.bottomName,
               style: const TextStyle(fontSize: 16.0),
             ),
             Text(
-              widget.characterTrait.topName,
+              trait.topName,
               style: const TextStyle(fontSize: 16.0),
             )
           ],
         ),
         Slider(
-          value: widget.characterTrait.degree.toDouble(),
-        min: 0,
+          value: trait.degree.toDouble(),
+          min: 0,
           max: 10,
-          activeColor: Theme.of(context).colorScheme.onBackground,
-          thumbColor: Theme.of(context).colorScheme.onBackground,
-          inactiveColor: Theme.of(context).colorScheme.onBackground,
+          activeColor: color,
+          thumbColor: color,
+          inactiveColor: color,
           onChanged: (double val) {
             if (widget.isEditable) {
-              setState(() {
-                widget.characterTrait.degree = val.toInt();
-              });
+              widget.traitControl.value = CharacterTrait(
+                id: trait.id,
+                userId: trait.userId,
+                bottomName: trait.bottomName,
+                topName: trait.topName,
+                degree: val.toInt(),
+              );
             }
           },
         ),

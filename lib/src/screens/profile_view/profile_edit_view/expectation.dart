@@ -1,19 +1,22 @@
-import 'package:amica/src/models/profiles/expectancies.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
-typedef OnRemove = void Function(int index);
 typedef OnAdd = void Function();
+typedef OnRemove = void Function(int id);
 
 class Expectation extends StatelessWidget {
-  final Expectancy expectancy;
+  final int idx;
   final OnRemove? onRemove;
   final OnAdd? onAdd;
+  final FormControl control;
+
   const Expectation({
     super.key,
     required this.onRemove,
     required this.onAdd,
-    required this.expectancy,
+    required this.idx,
+    required this.control,
   });
 
   Widget getRemoveButton(BuildContext context) {
@@ -22,7 +25,7 @@ class Expectation extends StatelessWidget {
     }
 
     return IconButton(
-      onPressed: () => onRemove!(expectancy.id),
+      onPressed: () => onRemove!(idx),
       icon: Icon(
         Icons.remove,
         color: Theme.of(context).colorScheme.inverseSurface,
@@ -53,7 +56,8 @@ class Expectation extends StatelessWidget {
         AmicaTextFormInput.expanded(
           fieldName: '',
           hintText: 'What do you expect?',
-          initialValue: expectancy.text,
+          initialValue: control.value,
+          controller: control,
         ),
         getRemoveButton(context),
         getAddButton(context),

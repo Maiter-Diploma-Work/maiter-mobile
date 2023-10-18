@@ -1,6 +1,8 @@
 import 'package:amica/src/models/chat_message.dart';
 import 'package:amica/src/screens/chat/message-input/message_input.dart';
 import 'package:amica/src/screens/chat/message/message.dart';
+import 'package:amica/src/services/chat/message/message.service.dart';
+import 'package:amica/src/services/profile/profile.service.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
@@ -9,9 +11,14 @@ import 'package:go_router/go_router.dart';
 
 class ChatView extends StatefulWidget {
   final String userId;
+  final MessageService messageService;
+  final String chatRoomId;
+
   const ChatView({
     super.key,
     required this.userId,
+    required this.messageService,
+    required this.chatRoomId,
   });
 
   @override
@@ -19,20 +26,20 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
-  final List<ChatMessage> _chatMessages = [
-    ChatMessage(id: 1, userId: 2, text: 'Привіт))'),
-    ChatMessage(
-      id: 2,
-      userId: 2,
-      text: 'Якщо ти таки прийдеш, то підходь до кінотеатру',
-    ),
-    ChatMessage(id: 3, userId: 1, text: 'Добре)'),
-  ];
+  List<ChatMessage> _chatMessages = [];
+
+  Future<void> initMessages() async {
+    var result = await widget.messageService.getMessagesFor(widget.chatRoomId);
+
+    setState(() {
+      _chatMessages = result;
+    });
+  }
 
   @override
   void initState() {
-    //TODO: Fetch Messages from backend
     super.initState();
+    initMessages();
   }
 
   void _onDrag(DragUpdateDetails details, BuildContext context) {

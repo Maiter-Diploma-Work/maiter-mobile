@@ -5,13 +5,14 @@ import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:amica/src/shared/interest_view.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 typedef OnUpdate = void Function(List<Interest> interests);
 
 class InterestsChipList extends StatefulWidget {
   final OnUpdate onUpdate;
   final List<Interest> interests;
-  final TextEditingController newItemController;
+  final FormControl newItemController;
 
   const InterestsChipList({
     super.key,
@@ -74,11 +75,13 @@ class _InterestsChipListState extends State<InterestsChipList> {
                               1,
                           profileId: 1,
                           category: '',
-                          name: widget.newItemController.text,
+                          name: widget.newItemController.value.toString(),
                         ),
                       ],
                     );
-                    Navigator.of(context).pop(widget.newItemController.text);
+                    Navigator.of(context).pop(
+                      widget.newItemController.value.toString(),
+                    );
                   },
                   text: 'Confirm',
                 ),

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+typedef OnUpdate = void Function(DateTime newDate);
+
 class AmicaDatepicker extends StatefulWidget {
   final DateTime initialDate;
   final String fieldName;
+  final OnUpdate? onUpdate;
 
   const AmicaDatepicker({
     super.key,
     required this.initialDate,
     required this.fieldName,
+    this.onUpdate,
   });
 
   @override
@@ -37,8 +41,8 @@ class _AmicaDatepickerState extends State<AmicaDatepicker> {
       setState(() {
         inputDate = newDate;
       });
+      widget.onUpdate!(newDate);
     }
-    return;
   }
 
   @override

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
+typedef OnUpdate<T> = void Function(T newValue);
+
 class AmicaSelect<T> extends StatefulWidget {
   final Iterable<T> options;
   final T initialValue;
   final String fieldName;
-  
+  final OnUpdate? onUpdate;
 
   const AmicaSelect({
     super.key,
     required this.options,
     required this.initialValue,
     required this.fieldName,
+    this.onUpdate,
   });
 
   @override
@@ -24,6 +27,7 @@ class _AmicaSelectState<T> extends State<AmicaSelect<T>> {
     setState(() {
       _value = value ?? widget.initialValue;
     });
+    widget.onUpdate!(value ?? widget.initialValue);
   }
 
   @override

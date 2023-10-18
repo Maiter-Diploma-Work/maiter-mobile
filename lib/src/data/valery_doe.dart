@@ -154,4 +154,9 @@ final UserProfile ValeryDoe = UserProfile(
     'assets/valery_doe_3.jpg',
     'assets/valery_doe_4.jpg',
   ],
+  goals: {
+    'love': false,
+    'friends': false,
+    'adventures': true,
+  },
 );

@@ -20,6 +20,7 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_launcher_icons: ^0.13.1
   dotted_border: ^2.0.0+3
+  reactive_forms: ^16.1.0
 
 dev_dependencies:
   flutter_test:
@@ -51,5 +52,10 @@ flutter:
     - assets/mock_interests.json
     - assets/mock_likes.json
     - assets/mock_events.json
+    - assets/mock_user_filter.json
+    - assets/mock_event_filter.json
+    - assets/mock_chat_rooms.json
+    - assets/mock_pinned_chat_rooms.json
+    - assets/mock_chat_messages.json
     - assets/logo/logo.png
     - assets/welcome_screen_bg_image.webp

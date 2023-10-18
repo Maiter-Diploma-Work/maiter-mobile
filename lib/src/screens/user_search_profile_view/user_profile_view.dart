@@ -71,10 +71,8 @@ class _UserProfileViewState extends State<UserProfileView> {
 
   void _onHorizontalDrag(DragEndDetails details) {
     if (details.primaryVelocity! < 0) {
-      debugPrint('swipe left');
       _likePressed();
     } else if (details.primaryVelocity! > 0) {
-      debugPrint('swipe right');
       _dislikePressed();
     }
   }

@@ -2,15 +2,16 @@ import 'package:amica/src/models/profiles/character_trait.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_detailed_view/character_trait_view.dart';
 import 'package:amica/src/shared/title.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class CharacterTraits extends StatefulWidget {
-  final List<CharacterTrait> characterTraits;
   final bool isEditable;
+  final FormArray<CharacterTrait> controller;
 
   const CharacterTraits({
     super.key,
-    required this.characterTraits,
     required this.isEditable,
+    required this.controller,
   });
 
   @override
@@ -20,7 +21,7 @@ class CharacterTraits extends StatefulWidget {
 class _CharacterTraitsState extends State<CharacterTraits> {
   @override
   Widget build(BuildContext context) {
-    if (widget.characterTraits.isEmpty) {
+    if (widget.controller.controls.isEmpty) {
       return Container();
     }
 
@@ -29,12 +30,12 @@ class _CharacterTraitsState extends State<CharacterTraits> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const AmicaTitle(text: 'Character'),
-        ...List.from(
-          widget.characterTraits.map(
-            (e) => CharacterTraitView(
-              characterTrait: e,
-              isEditable: widget.isEditable,
-            ),
+        ...List.generate(
+          widget.controller.controls.length,
+          (int index) => CharacterTraitView(
+            isEditable: widget.isEditable,
+            traitControl: widget.controller.controls.elementAt(index)
+                as FormControl<CharacterTrait>,
           ),
         ),
       ],

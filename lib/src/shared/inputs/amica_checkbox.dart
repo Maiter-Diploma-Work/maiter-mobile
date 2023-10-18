@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 typedef OnCheck = void Function(bool isChecked);
 
 class AmicaCheckbox extends StatefulWidget {
   final String label;
   final OnCheck onCheck;
-  const AmicaCheckbox({super.key, required this.label, required this.onCheck});
+  final FormControl<bool> control;
+
+  const AmicaCheckbox(
+      {super.key,
+      required this.label,
+      required this.onCheck,
+      required this.control});
 
   @override
   State<AmicaCheckbox> createState() => _AmicaCheckboxState();
@@ -30,17 +37,11 @@ class _AmicaCheckboxState extends State<AmicaCheckbox> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Checkbox(
+        ReactiveCheckbox(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
           checkColor: Colors.black,
           fillColor: MaterialStateProperty.resolveWith(getColor),
-          value: isChecked,
-          onChanged: (bool? value) {
-            setState(() {
-              isChecked = value!;
-            });
-            widget.onCheck(isChecked);
-          },
+          formControl: widget.control,
         ),
         Text(widget.label),
       ],

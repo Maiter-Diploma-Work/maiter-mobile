@@ -5,13 +5,16 @@ import 'package:amica/src/shared/interests_list/expandable_interest_list.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class InterestsListSelect extends StatefulWidget {
   final List<Interest> selectedInterests;
+  final FormControl<String> favoriteSongControl;
 
   const InterestsListSelect({
     super.key,
     required this.selectedInterests,
+    required this.favoriteSongControl,
   });
 
   @override
@@ -111,10 +114,11 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
               (interestList) => _interestsListGenerator(interestList),
             ),
           ),
-          const AmicaTextFormInput(
+          AmicaTextFormInput(
             fieldName: 'Favorite song',
             hintText: 'your favorite track',
-            padding: EdgeInsets.only(bottom: 64),
+            padding: const EdgeInsets.only(bottom: 64),
+            controller: widget.favoriteSongControl as FormControl<String>,
           ),
         ],
       ),

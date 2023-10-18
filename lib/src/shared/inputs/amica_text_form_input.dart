@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class AmicaTextFormInput extends StatelessWidget {
   final String fieldName;
@@ -7,7 +8,7 @@ class AmicaTextFormInput extends StatelessWidget {
   final EdgeInsets? padding;
   final int? maxLines;
   final TextInputType? textInputType;
-  final TextEditingController? controller;
+  final FormControl? controller;
   final bool? isExpanded;
 
   const AmicaTextFormInput({
@@ -33,9 +34,8 @@ class AmicaTextFormInput extends StatelessWidget {
   }) : isExpanded = true;
 
   Widget get input {
-    final Widget userInput = TextFormField(
+    final Widget userInput = ReactiveTextField(
       keyboardType: textInputType,
-      initialValue: initialValue,
       maxLines: maxLines ?? 1,
       decoration: InputDecoration(
         hintText: hintText,
@@ -55,7 +55,7 @@ class AmicaTextFormInput extends StatelessWidget {
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ),
-      controller: controller,
+      formControl: controller,
       textAlign: TextAlign.center,
     );
 

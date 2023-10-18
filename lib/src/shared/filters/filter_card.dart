@@ -1,8 +1,10 @@
+import 'package:amica/src/models/filters/age_range.dart';
 import 'package:amica/src/models/shared/interest.dart';
-import 'package:amica/src/shared/filters/interests_chip_list.dart';
 import 'package:amica/src/shared/card.dart';
+import 'package:amica/src/shared/filters/interests_chip_list.dart';
 import 'package:amica/src/shared/inputs/amica_switch.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 enum FilterInputs {
   slider,
@@ -17,6 +19,7 @@ class AmicaFilterCard extends StatefulWidget {
   final double min;
   final double max;
   final FilterInputs typeOfInput;
+  final FormControl control;
 
   const AmicaFilterCard({
     super.key,
@@ -26,6 +29,7 @@ class AmicaFilterCard extends StatefulWidget {
     required this.enabledTitle,
     required this.valueTitle,
     required this.typeOfInput,
+    required this.control,
   });
 
   @override
@@ -34,20 +38,12 @@ class AmicaFilterCard extends StatefulWidget {
 
 class _AmicaFilterCardState extends State<AmicaFilterCard> {
   late double value = 1;
-  late RangeValues values = RangeValues(widget.min, widget.max);
+  late RangeValues values = RangeValues(
+    widget.min,
+    widget.max,
+  );
   late bool enabled = false;
-  late List<Interest> interests = [
-    Interest(id: 1, profileId: 1, name: 'a', category: 'b'),
-    Interest(id: 2, profileId: 1, name: 'b', category: 'b'),
-    Interest(id: 3, profileId: 1, name: 'c', category: 'b'),
-    Interest(id: 4, profileId: 1, name: 'd', category: 'b'),
-    Interest(id: 5, profileId: 1, name: 'e', category: 'b'),
-    Interest(id: 6, profileId: 1, name: 'f', category: 'b'),
-    Interest(id: 7, profileId: 1, name: 'g', category: 'b'),
-    Interest(id: 8, profileId: 1, name: 'h', category: 'b'),
-    Interest(id: 9, profileId: 1, name: 'i', category: 'b'),
-    Interest(id: 10, profileId: 1, name: 'j', category: 'b'),
-  ];
+  late List<Interest> interests = [];
 
   Widget get input {
     switch (widget.typeOfInput) {
@@ -65,7 +61,7 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
           },
         );
       case FilterInputs.slider:
-        return Slider.adaptive(
+        return Slider(
           value: value,
           max: widget.max,
           min: widget.min,
@@ -80,7 +76,7 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
           },
         );
       case FilterInputs.interests:
-        final TextEditingController controller = TextEditingController();
+        final FormControl controller = FormControl();
         return Container(
           constraints: BoxConstraints(
             minHeight: 64,
@@ -121,6 +117,41 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
     }
 
     return '';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    switch (widget.control.value.runtimeType) {
+      case AgeRange:
+        AgeRange value = widget.control.value;
+        setState(() {
+          values = RangeValues(value.min.toDouble(), value.max.toDouble());
+        });
+        break;
+      case int:
+      case double:
+        setState(() {
+          value = widget.control.value as double;
+        });
+        break;
+      case List<String>:
+        List<String> list = widget.control.value as List<String>;
+        setState(() {
+          interests = List.generate(
+            list.length,
+            (index) => Interest(
+              id: index,
+              profileId: -1,
+              name: list[index],
+              category: 'category',
+            ),
+          );
+        });
+        break;
+      default:
+        return;
+    }
   }
 
   @override

@@ -1,49 +1,83 @@
-import 'package:amica/src/shared/title.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
+import 'package:amica/src/shared/title.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../layouts/start_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _registerForm = FormGroup(
+    {
+      'login': FormControl<String>(
+        validators: [Validators.required],
+      ),
+      'email': FormControl<String>(
+        validators: [Validators.email, Validators.required],
+      ),
+      'password': FormControl<String>(
+        validators: [
+          Validators.required,
+          Validators.minLength(8),
+        ],
+      ),
+      'confirmPassword': FormControl<String>(),
+    },
+    validators: [
+      const MustMatchValidator('password', 'confirmPassword', false),
+    ],
+  );
 
   void _onRegisterClick(BuildContext context) {
     context.go('/auth/register/step-1');
   }
 
-  Form formGenerator(BuildContext context) {
-    return Form(
+  Widget formGenerator(BuildContext context) {
+    return ReactiveForm(
+      formGroup: _registerForm,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const AmicaTextFormInput(
+          AmicaTextFormInput(
             fieldName: "Email",
             hintText: "Enter your email",
+            controller: _registerForm.control('email') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 30),
-          const AmicaTextFormInput(
+          AmicaTextFormInput(
             fieldName: "Username",
             hintText:
                 "Enter your username (will be displayed with @ at the start)",
+            controller: _registerForm.control('login') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 30),
-          const AmicaTextFormInput(
+          AmicaTextFormInput(
             fieldName: "Password",
             hintText: "Enter your password",
+            controller:
+                _registerForm.control('password') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 30),
-          const AmicaTextFormInput(
-            fieldName: "Password",
+          AmicaTextFormInput(
+            fieldName: "Confirm Password",
             hintText: "Repeat your password",
+            controller:
+                _registerForm.control('confirmPassword') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 70),
           AmicaButton(
             onPressed: () => context.go('/auth/login'),
-            text: "log in",
+            text: "Login",
             color: Theme.of(context).colorScheme.onPrimary,
             textColor: Theme.of(context).colorScheme.primary,
             textStyle: const TextStyle(
@@ -54,14 +88,14 @@ class RegisterScreen extends StatelessWidget {
           const Gap.cubic(40),
           AmicaButton(
             onPressed: () => _onRegisterClick(context),
-            text: "register",
+            text: "Register",
             color: Theme.of(context).colorScheme.onPrimary,
             textColor: Theme.of(context).colorScheme.primary,
             textStyle: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
             ),
-          )
+          ),
         ],
       ),
     );
@@ -70,21 +104,18 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StartScreen(
-      screenBody: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Column(
+      screenBody: Center(
+        child: SingleChildScrollView(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              //TODO: remove the magic strings
               const AmicaTitle(text: "Register"),
               const Gap.cubic(60.0),
               formGenerator(context),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

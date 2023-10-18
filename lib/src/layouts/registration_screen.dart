@@ -1,5 +1,5 @@
-import 'package:amica/src/shared/title.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
+import 'package:amica/src/shared/title.dart';
 import 'package:flutter/material.dart';
 
 typedef OnTap = void Function();
@@ -47,7 +47,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF192142),
-        title: AmicaTitle(text: widget.stepTitle),
+        title: AmicaTitle(
+          text: widget.stepTitle,
+          fontStyle: const TextStyle(fontSize: 32),
+        ),
       ),
       body: Container(
         padding: _paddings,

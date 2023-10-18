@@ -1,6 +1,5 @@
-import 'package:amica/src/models/DTO/User/edit_user_dto.dart';
-import 'package:amica/src/models/DTO/dislike_dto.dart';
-import 'package:amica/src/models/DTO/like_dto.dart';
+import 'package:amica/src/models/filters/age_range.dart';
+import 'package:amica/src/models/filters/user_filter.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +14,8 @@ class MockedUserSearchService extends UserSearchService {
   }
 
   Future<List<UserProfile>> getUserProfiles() async {
-    final List<String> userIds = List.generate(6, (index) => (index + 1).toString());
+    final List<String> userIds =
+        List.generate(6, (index) => (index + 1).toString());
 
     final String response =
         await rootBundle.loadString('assets/mock_users.json');
@@ -25,26 +25,18 @@ class MockedUserSearchService extends UserSearchService {
   }
 
   @override
-  Future<void> deleteUser(String id) {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
-  }
-
-  @override
   Future<UserProfile> getUser(String id) async {
-    return (await getUserProfiles()).firstWhere((element) => element.id == int.parse(id));
+    return (await getUserProfiles())
+        .firstWhere((element) => element.id == int.parse(id));
   }
 
   @override
-  Future<List<UserProfile>> getCertainUsers(List<String> ids) async {
+  Future<List<UserProfile>> getCertainUsers(List<int> ids) async {
     List<UserProfile> response = await getUserProfiles();
     List<UserProfile> result = [];
 
-    for (var user in response) {
-      int id = int.parse(ids.firstWhere((element) => int.parse(element) == user.id));
-      if (user.id == id) {
-        result.add(user);
-      }
+    for (UserProfile user in response) {
+      if (ids.contains(user.id)) {}
     }
 
     return result;
@@ -64,8 +56,20 @@ class MockedUserSearchService extends UserSearchService {
   }
 
   @override
-  Future<void> updateUser(String id, EditUserDto newUser) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<void> initializeFilters(UserProfile profile) async {
+    String response =
+        await rootBundle.loadString('assets/mock_user_filter.json');
+    UserFilter filter = userFiltersFromJson(response).firstWhere(
+      (element) => element.userId == profile.id,
+    );
+
+    for (MapEntry element in filter.toJson().entries) {
+      if (element.key == 'age') {
+        userSearchFilterForm.control('age').value =
+            AgeRange.fromJson(element.value);
+      } else if (userSearchFilterForm.controls.keys.contains(element.key)) {
+        userSearchFilterForm.control(element.key).value = element.value;
+      }
+    }
   }
 }

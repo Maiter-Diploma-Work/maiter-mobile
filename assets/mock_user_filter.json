@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "distance": 5.0,
+    "age": {
+      "min": 25,
+      "max": 30
+    },
+    "lookingFor": "Anyone",
+    "interests": [
+      "League of Legeneds",
+      "Coding",
+      "Valorant",
+      "Dogs",
+      "Sport",
+      "Healthy life-style"
+    ]
+  }
+]

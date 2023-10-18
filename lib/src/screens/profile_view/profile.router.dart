@@ -6,15 +6,18 @@ import 'package:amica/src/screens/profile_view/profile_edit_view/profile_edit_vi
 import 'package:amica/src/screens/profile_view/profile_photo_edit_view/profile_photo_edit_view.dart';
 import 'package:amica/src/screens/profile_view/settings_view.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_detailed_view/user_profile_detailed.dart';
+import 'package:amica/src/services/profile/mock_profile.service.dart';
 import 'package:amica/src/shared/interests_list/interests_list.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 final profileRouter = GoRoute(
   path: '/profile',
   builder: (context, state) => AmicaScaffold(
     title: 'Your Profile',
-    scaffoldBody: UserProfileDetailed(profile: ValeryDoe, isOwnProfile: true),
+    scaffoldBody: UserProfileDetailed(
+        profile: MockProfileService.instance.userProfile!, isOwnProfile: true),
     selectedNavigationItemIndex: 3,
     isDetailed: false,
   ),
@@ -25,7 +28,8 @@ final profileRouter = GoRoute(
         hasBlurOnAppBar: true,
         isDetailed: true,
         title: 'Edit Profile',
-        scaffoldBody: ProfileView(profile: ValeryDoe),
+        scaffoldBody:
+            ProfileView(profile: MockProfileService.instance.userProfile!),
         selectedNavigationItemIndex: 3,
       ),
       routes: profileEdit,
@@ -38,9 +42,12 @@ final profileEdit = <GoRoute>[
     path: 'edit',
     builder: (context, state) => AmicaScaffold(
       hasBlurOnAppBar: true,
-      isDetailed: true,
+      isDetailed: false,
       title: 'Edit Profile',
-      scaffoldBody: ProfileEditView(profile: ValeryDoe),
+      scaffoldBody: ProfileEditView(
+        profile: MockProfileService.instance.userProfile!,
+        profileService: MockProfileService.instance,
+      ),
       selectedNavigationItemIndex: 3,
     ),
   ),
@@ -48,12 +55,13 @@ final profileEdit = <GoRoute>[
     path: 'interests',
     builder: (context, state) => AmicaScaffold(
       hasBlurOnAppBar: true,
-      isDetailed: true,
+      isDetailed: false,
       title: 'Edit interests',
       scaffoldBody: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: InterestsListSelect(
           selectedInterests: ValeryDoe.interests,
+          favoriteSongControl: FormControl(value: ValeryDoe.favoriteSong),
         ),
       ),
       selectedNavigationItemIndex: 3,
@@ -63,9 +71,11 @@ final profileEdit = <GoRoute>[
     path: 'photos',
     builder: (context, state) => AmicaScaffold(
       hasBlurOnAppBar: true,
-      isDetailed: true,
+      isDetailed: false,
       title: 'Edit Profile',
-      scaffoldBody: ProfilePhotoEditView(userProfile: ValeryDoe),
+      scaffoldBody: ProfilePhotoEditView(
+        userProfile: MockProfileService.instance.userProfile!,
+      ),
       selectedNavigationItemIndex: 3,
     ),
   ),
@@ -73,7 +83,7 @@ final profileEdit = <GoRoute>[
     path: 'theme',
     builder: (context, state) => AmicaScaffold(
       hasBlurOnAppBar: true,
-      isDetailed: true,
+      isDetailed: false,
       selectedNavigationItemIndex: 3,
       title: 'Theme selection',
       scaffoldBody: OptionSelect(
@@ -88,7 +98,7 @@ final profileEdit = <GoRoute>[
     path: 'language',
     builder: (context, state) => AmicaScaffold(
       hasBlurOnAppBar: true,
-      isDetailed: true,
+      isDetailed: false,
       selectedNavigationItemIndex: 3,
       title: 'Language selection',
       scaffoldBody: OptionSelect(

@@ -1,40 +1,66 @@
-import 'package:amica/src/models/profiles/profile.dart';
-import 'package:amica/src/models/profiles/user_profile.dart';
-import 'package:amica/src/shared/inputs/maiter_search_bar.dart';
+import 'package:amica/src/models/chat/chat_room.dart';
+import 'package:amica/src/models/chat/chat_user_short_profile.dart';
+import 'package:amica/src/services/chat/room/room.service.dart';
+import 'package:amica/src/services/profile/profile.service.dart';
 import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/inputs/maiter_search_bar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class ChatListView extends StatefulWidget {
-  final List<Profile> chats;
+  final ProfileService profileService;
+  final ChatRoomService chatRoomService;
 
-  const ChatListView({super.key, required this.chats});
+  const ChatListView({
+    super.key,
+    required this.profileService,
+    required this.chatRoomService,
+  });
 
   @override
   State<ChatListView> createState() => _ChatListViewState();
 }
 
 class _ChatListViewState extends State<ChatListView> {
-  final TextEditingController controller = TextEditingController();
-  List<UserProfile> _users = [];
+  TextEditingController controller = TextEditingController();
 
-  final int _maximumQuickChats = 4;
+  List<ChatRoom> _chatRooms = [];
+  List<ChatRoom> _chatRoomsSource = [];
+  List<ChatRoom> _pinnedChatRooms = [];
 
-  Future<void> readMockUsersFromJson() async {
-    final String response =
-        await rootBundle.loadString('assets/mock_users.json');
-    final List<UserProfile> data = usersFromJson(response);
+  Future<void> readMockChatRooms() async {
+    widget.profileService.setUserProfile();
+    final List<ChatRoom> chatRooms =
+        await widget.chatRoomService.getChatRoomsFor(
+      widget.profileService.userProfile!.id.toString(),
+      ChatRoomType.plain,
+    );
+    final List<ChatRoom> pinnedChatRooms =
+        await widget.chatRoomService.getChatRoomsFor(
+      widget.profileService.userProfile!.id.toString(),
+      ChatRoomType.pinned,
+    );
+
     setState(() {
-      _users = data;
+      _chatRooms = chatRooms;
+      _chatRoomsSource = chatRooms;
+      _pinnedChatRooms = pinnedChatRooms;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    readMockUsersFromJson();
+    controller.addListener(_transformChatList);
+    readMockChatRooms();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -49,51 +75,80 @@ class _ChatListViewState extends State<ChatListView> {
     );
   }
 
-  Widget _generateChatList(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(48),
-        topRight: Radius.circular(48),
+  Iterable<ChatRoom> _selectChatRoomsByParticipantsName(List<ChatRoom> rooms) {
+    return rooms.where(
+      (x) => x.participants.any(
+        (element) => element.name.toLowerCase().contains(controller.text),
       ),
-      child: Container(
-        height: MediaQuery.of(context).size.height - 188,
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.only(top: 19),
-        color: Theme.of(context).colorScheme.inverseSurface,
-        child: ListView(
-          children: [
-            _generateQuickChats(context),
-            const Gap(verticalGap: 33.0, horizontalGap: 0),
-            ..._generateContacts(context),
-          ],
+    );
+  }
+
+  void _transformChatList() {
+    print(controller.text);
+    setState(() {
+      _chatRooms = List.from(
+        _selectChatRoomsByParticipantsName(_chatRoomsSource).map(
+          (e) => ChatRoom(
+            id: e.id,
+            participants: e.participants,
+            lastMessageSentAt: e.lastMessageSentAt,
+          ),
+        ),
+      );
+    });
+  }
+
+  String getChatRoomPhoto(ChatRoom e) {
+    return e.participants
+        .firstWhere(
+            (element) => element.id != widget.profileService.userProfile!.id)
+        .photo;
+  }
+
+  Widget _generateChatList(BuildContext context) {
+    return Expanded(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(48),
+          topRight: Radius.circular(48),
+        ),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          color: Theme.of(context).colorScheme.inverseSurface,
+          child: ListView(
+            shrinkWrap: false,
+            children: [
+              const Gap(verticalGap: 16.0, horizontalGap: 0),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: _generateQuickChats(context),
+              ),
+              const Gap(verticalGap: 32.0, horizontalGap: 0),
+              ..._generateContacts(context),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Padding _generateQuickChats(BuildContext context) {
-    //TODO: horizontal scrolling
-    List<UserProfile> users = [];
-    if (_users.isNotEmpty) {
-      users = List.generate(
-        _users.length < 5 ? _users.length : 4,
-        (index) => _users[index],
-      );
-    }
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _addQuickChatButton(context),
+          const Gap(verticalGap: 0, horizontalGap: 16),
           ...List<Widget>.from(
-            users.map(
-              (e) => CircleAvatar(
-                radius: 25,
-                backgroundColor: Theme.of(context).colorScheme.background,
-                backgroundImage: AssetImage(e.photo),
-                // child: Image.network(e.photo),
+            _pinnedChatRooms.map(
+              (e) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundImage: AssetImage(getChatRoomPhoto(e)),
+                ),
               ),
             ),
           )
@@ -104,19 +159,38 @@ class _ChatListViewState extends State<ChatListView> {
 
   List<Widget> _generateContacts(BuildContext context) {
     return List<Widget>.from(
-      _users.map(
-        (e) => Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8,
+      _chatRooms.map(
+        (e) {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 6,
+                ),
+                child: _generateContact(
+                  e.participants.firstWhere((element) =>
+                      element.id != widget.profileService.userProfile!.id),
+                  e,
+                  context,
+                ),
               ),
-              child: generateContact(e, context),
-            ),
-            const Gap(verticalGap: 21.0, horizontalGap: 0)
-          ],
-        ),
+              Container(
+                height: 1,
+                width: MediaQuery.of(context).size.width * 0.90,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onInverseSurface
+                        .withOpacity(0.25),
+                  ),
+                ),
+              ),
+              const Gap(verticalGap: 14.0, horizontalGap: 0)
+            ],
+          );
+        },
       ),
     );
   }
@@ -138,9 +212,13 @@ class _ChatListViewState extends State<ChatListView> {
     );
   }
 
-  Widget generateContact(UserProfile profile, BuildContext context) {
+  Widget _generateContact(
+    ChatUserShortProfile profile,
+    ChatRoom chatRoom,
+    BuildContext context,
+  ) {
     return GestureDetector(
-      onTap: () => context.go('/chat/${profile.id}'),
+      onTap: () => context.go('/chat/${profile.id}/${chatRoom.id}'),
       child: Row(
         children: [
           CircleAvatar(
@@ -150,18 +228,26 @@ class _ChatListViewState extends State<ChatListView> {
             // child: Image.network(profile.photo),
           ),
           const Gap.cubic(16),
-          generateContactName(profile, context),
+          generateContactName(
+            profile.name,
+            chatRoom.lastMessageSentAt,
+            context,
+          ),
         ],
       ),
     );
   }
 
-  Widget generateContactName(UserProfile profile, BuildContext context) {
+  Widget generateContactName(
+    String profileName,
+    DateTime lastMessageSentAt,
+    BuildContext context,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          profile.name,
+          profileName,
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
@@ -169,7 +255,7 @@ class _ChatListViewState extends State<ChatListView> {
           ),
         ),
         Text(
-          '...The last message that been sent by this user',
+          '${lastMessageSentAt.day}.${lastMessageSentAt.day}.${lastMessageSentAt.year}',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,

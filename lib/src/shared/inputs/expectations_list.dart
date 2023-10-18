@@ -1,51 +1,41 @@
-import 'package:amica/src/models/profiles/expectancies.dart';
-import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/screens/profile_view/profile_edit_view/expectation.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class ExpectationsList extends StatefulWidget {
-  final UserProfile profile;
-  const ExpectationsList({super.key, required this.profile});
+  final FormArray<String> expectations;
+
+  const ExpectationsList({super.key, required this.expectations});
 
   @override
   State<ExpectationsList> createState() => _ExpectationsListState();
 }
 
 class _ExpectationsListState extends State<ExpectationsList> {
-  late List<Expectancy> _expectationsSource = widget.profile.expectancies;
-  late int _newExpectancyId;
+  late final FormArray<String> _array;
 
   void addExpectation() {
     setState(() {
-      _expectationsSource = [
-        ..._expectationsSource,
-        Expectancy(
-          id: _newExpectancyId + 1,
-          userId: widget.profile.id,
-          text: '',
-        ),
-      ];
-      _newExpectancyId++;
+      _array.add(FormControl<String>(value: ''));
     });
   }
 
-  void removeExpectations(int expectationId) {
-    //TODO: fix this method. It removes the right item, but the display is incorect unless user reentering this view
+  void removeExpectations(int idx) {
     setState(() {
-      _expectationsSource.removeWhere((element) => element.id == expectationId);
+      _array.removeAt(idx);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _newExpectancyId = _expectationsSource.length;
+    _array = widget.expectations;
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_expectationsSource.isEmpty) {
+    if (_array.controls.isEmpty) {
       return Column(
         children: [
           const Text('Add your expectations!'),
@@ -64,13 +54,14 @@ class _ExpectationsListState extends State<ExpectationsList> {
         const Text('Expectations'),
         const Gap(verticalGap: 16, horizontalGap: 0),
         ...List.from(
-          _expectationsSource.map(
+          _array.controls.map(
             (e) => Column(
               children: [
                 Expectation(
+                  idx: _array.controls.indexOf(e),
                   onRemove: removeExpectations,
                   onAdd: addExpectation,
-                  expectancy: e,
+                  control: e as FormControl<String>,
                 ),
                 const Gap(verticalGap: 16, horizontalGap: 0),
               ],

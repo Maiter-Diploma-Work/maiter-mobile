@@ -1,5 +1,7 @@
 import 'package:amica/src/models/DTO/like_dto.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/services/like/like.service.dart';
+import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:amica/src/shared/profile/location.dart';
 import 'package:amica/src/shared/profile/user_profile_name.dart';
@@ -8,9 +10,14 @@ import 'package:flutter/services.dart';
 
 class AmicaLikesView extends StatefulWidget {
   final int userId;
+  final UserSearchService userService;
+  final LikeService likeService;
+
   const AmicaLikesView({
     super.key,
     required this.userId,
+    required this.userService,
+    required this.likeService,
   });
 
   @override
@@ -110,37 +117,19 @@ class _AmicaLikesViewState extends State<AmicaLikesView> {
   }
 
   Future<void> readMockLikesFromJson() async {
-    // ! I know this is the worst way possible.
-    // ! The logic for this feature will be released on backend,
-    // ! and this method will be nothing more than fetch call
+    List<LikeDto> likes =
+        await widget.likeService.getLikesForUser(widget.userId);
+    List<int> likerIds = List.from(likes.map((e) => e.secondUserId));
 
-    final String likesResponse =
-        await rootBundle.loadString('assets/mock_likes.json');
-    final String usersResponse =
-        await rootBundle.loadString('assets/mock_users.json');
-
-    final List<LikeDto> likes = likesDtoFromJson(likesResponse);
-    final List<UserProfile> users = usersFromJson(usersResponse);
-
-    List<UserProfile> result = [];
-
-    for (var like in likes) {
-      if (like.firstUserId == widget.userId) {
-        result = [
-          ...result,
-          users.firstWhere((element) => element.id == like.secondUserId),
-        ];
-      }
-    }
+    List<UserProfile> tmp = await widget.userService.getCertainUsers(likerIds);
 
     setState(() {
-      likedUsers = result;
+      likedUsers = tmp;
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState to fetch likes
     super.initState();
     readMockLikesFromJson();
   }

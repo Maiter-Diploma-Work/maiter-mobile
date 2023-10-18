@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "participantIds": [
+            1,
+            2
+        ],
+        "lastMessageSentAt": "7/2/2076"
+    },
+    {
+        "id": 2,
+        "participantIds": [
+            1,
+            3
+        ],
+        "lastMessageSentAt": "16/1/2119"
+    },
+    {
+        "id": 3,
+        "participantIds": [
+            2,
+            3
+        ],
+        "lastMessageSentAt": "22/7/2112"
+    }
+]

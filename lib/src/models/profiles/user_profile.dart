@@ -35,6 +35,12 @@ Map<int, String> statuses = {
   3: 'Free relationship',
 };
 
+Map<String, bool> goals = {
+  'love': false,
+  'friends': false,
+  'adventures': false,
+};
+
 class UserProfile extends Profile {
   late String tag;
   late DateTime birthDate;
@@ -48,6 +54,7 @@ class UserProfile extends Profile {
   late int? height;
   late List<SocialNetwork>? socialNetworks;
   late List<String>? photos;
+  late Map<String, bool>? goals;
 
   UserProfile({
     required super.id,
@@ -68,6 +75,7 @@ class UserProfile extends Profile {
     this.education,
     this.socialNetworks,
     this.photos,
+    this.goals,
   });
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
@@ -88,6 +96,7 @@ class UserProfile extends Profile {
         status: json['status'],
         lookingFor: json['lookingFor'],
         photos: List<String>.from(json['photos']),
+        goals: json['goals'],
       );
 
   factory UserProfile.empty() => UserProfile(
@@ -159,35 +168,36 @@ class UserProfile extends Profile {
           ),
         ],
         expectancies: [],
+        goals: {
+          'love': false,
+          'friends': false,
+          'adventures': false,
+        },
       );
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['tag'] = tag;
-    data['name'] = name;
-    data['gender'] = gender;
-    data['birthDate'] = birthDate;
-    data['education'] = education;
-    data['description'] = description;
-    data['status'] = status;
-    data['lookingFor'] = lookingFor;
-    data['location'] = location.toJson();
-    data['photo'] = photo;
-    data['photos'] = photos;
-    data['interests'] = List.generate(
-      interests.length,
-      (index) => interests[index].toJson(),
-    );
-    data['socialNetworks'] = socialNetworks == null
-        ? null
-        : List.generate(
-            socialNetworks!.length,
-            (index) => socialNetworks![index].toJson(),
-          );
-    data['characterTraits'] = characterTraitsToJson(characterTraits);
-    data['expectancies'] = expectanciesToJson(expectancies);
+    return toMap();
+  }
 
-    return data;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'tag': tag,
+      'name': name,
+      'gender': gender,
+      'birthDate': birthDate,
+      'education': education,
+      'description': description,
+      'status': status,
+      'lookingFor': lookingFor,
+      'photo': photo,
+      'photos': photos,
+      'interests': List.from(interests.map((e) => e.toJson())),
+      'socialNetworks':
+          socialNetworks ?? List.from(socialNetworks!.map((e) => e.toJson())),
+      'characterTraits': characterTraitsToJson(characterTraits),
+      'expectancies': expectanciesToJson(expectancies),
+      'goals': goals,
+    };
   }
 }
