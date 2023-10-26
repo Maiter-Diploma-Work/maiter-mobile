@@ -20,7 +20,7 @@ final chatRouter = [
       ),
       selectedNavigationItemIndex: 2,
       isDetailed: false,
-      appBarBackgroundColor: Color(0xFF080D20),
+      appBarBackgroundColor: const Color(0xFF080D20),
     ),
     routes: [
       GoRoute(

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:amica/src/models/DTO/chat/chat_room_dto.dart';
 import 'package:amica/src/models/chat/chat_user_short_profile.dart';
 
 String chatRoomsToJson(List<ChatRoom> data) =>

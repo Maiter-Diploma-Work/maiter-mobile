@@ -10,7 +10,6 @@ import 'package:amica/src/shared/profile/location.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 class UserProfileView extends StatefulWidget {

@@ -118,7 +118,7 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
             fieldName: 'Favorite song',
             hintText: 'your favorite track',
             padding: const EdgeInsets.only(bottom: 64),
-            controller: widget.favoriteSongControl as FormControl<String>,
+            controller: widget.favoriteSongControl,
           ),
         ],
       ),

@@ -2,10 +2,6 @@ import 'package:amica/src/models/chat_message.dart';
 import 'package:amica/src/screens/chat/message-input/message_input.dart';
 import 'package:amica/src/screens/chat/message/message.dart';
 import 'package:amica/src/services/chat/message/message.service.dart';
-import 'package:amica/src/services/profile/profile.service.dart';
-import 'package:amica/src/shared/gap.dart';
-import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
-import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

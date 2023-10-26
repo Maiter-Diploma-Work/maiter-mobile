@@ -7,7 +7,6 @@ import 'package:amica/src/shared/inputs/maiter_search_bar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 
 class ChatListView extends StatefulWidget {
   final ProfileService profileService;

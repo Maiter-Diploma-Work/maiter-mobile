@@ -41,10 +41,8 @@ class _AmicaSliderState extends State<AmicaSlider> {
                 inactiveColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (newValue) {
                   setState(() {
-                    if (widget.control != null) {
-                      widget.control.value = newValue;
-                    }
-                  });
+                    widget.control.value = newValue;
+                                    });
                 },
               ),
             ),

@@ -2,7 +2,6 @@ import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
-import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';

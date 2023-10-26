@@ -1,6 +1,5 @@
 import 'package:amica/src/models/DTO/dislike_dto.dart';
 import 'package:amica/src/models/DTO/like_dto.dart';
-import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/services/like/like.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +7,7 @@ import 'package:flutter/services.dart';
 class MockLikeService extends LikeService {
   static LikeService? _instance;
 
-  List<LikeDto> _likesRepository = [];
+  final List<LikeDto> _likesRepository = [];
 
   @override
   Future<List<LikeDto>> getLikesForUser(int userId) async {

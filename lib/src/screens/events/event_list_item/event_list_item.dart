@@ -64,14 +64,14 @@ class EventListItem extends StatelessWidget {
   }
 
   Widget get _locationGenerator {
-    final DistanceService _distanceService = DistanceService.instance;
+    final DistanceService distanceService = DistanceService.instance;
 
     final LatLng eventLocation = LatLng(
       event.location.latitude,
       event.location.longitude,
     );
 
-    final String distance = _distanceService
+    final String distance = distanceService
         .distanceBetweenLatLngs(eventLocation, location)
         .toStringAsFixed(2);
 
