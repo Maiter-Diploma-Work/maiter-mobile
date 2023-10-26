@@ -1,12 +1,11 @@
-import 'package:amica/src/models/filters/age_range.dart';
+import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
-import 'package:amica/src/models/shared/interest.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 abstract class UserSearchService {
   final FormGroup userSearchFilterForm = FormGroup({
     "distance": FormControl<double>(),
-    "age": FormControl<AgeRange>(),
+    "age": FormControl<Range>(),
     "lookingFor": FormControl<String>(),
     "interests": FormControl<List<String>>(),
   });

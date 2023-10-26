@@ -7,6 +7,7 @@ import 'package:amica/src/screens/user_search_profile_view/user_search_filter/us
 import 'package:amica/src/services/like/mock_like.service.dart';
 import 'package:amica/src/services/profile/mock_profile.service.dart';
 import 'package:amica/src/services/user/mock_user_search.service.dart';
+import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,7 +39,7 @@ final searchUserRouter = GoRoute(
     GoRoute(
       path: 'details',
       builder: (context, state) {
-        UserProfile profile = state.extra as UserProfile;
+        late UserProfile profile = state.extra as UserProfile;
         return AmicaScaffold(
           isDetailed: true,
           hasBlurOnAppBar: false,

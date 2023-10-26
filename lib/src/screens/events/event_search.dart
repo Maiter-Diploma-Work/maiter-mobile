@@ -1,16 +1,20 @@
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
-import 'package:amica/src/screens/events/event_serach_google-maps.dart';
-import 'package:amica/src/shared/google_maps.dart';
-import 'package:amica/src/shared/profile/profile_picture.dart';
+import 'package:amica/src/screens/events/event_list_item/event_list_item.dart';
+import 'package:amica/src/services/event/event.service.dart';
+import 'package:amica/src/shared/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EventSearchView extends StatefulWidget {
   final UserProfile user;
-  const EventSearchView({super.key, required this.user});
+  final EventService eventService;
+
+  const EventSearchView({
+    super.key,
+    required this.user,
+    required this.eventService,
+  });
 
   @override
   State<EventSearchView> createState() => _EventSearchViewState();
@@ -20,45 +24,10 @@ class _EventSearchViewState extends State<EventSearchView> {
   late List<Event> _events = [];
 
   Future<void> _readMockedEvents() async {
-    final String response =
-        await rootBundle.loadString('assets/mock_events.json');
-
+    List<Event> response = await widget.eventService.getRandomEvents(2);
     setState(() {
-      _events = eventsFromJson(response);
+      _events = response;
     });
-  }
-
-  double _getLastThreeDecimalDigits(double position) {
-    String positionString = position.toString();
-    String lastDigits = positionString.characters
-        .getRange(positionString.length - 2)
-        .toString();
-
-    return double.parse(lastDigits);
-  }
-
-  List<Widget> get events {
-    return List.from(
-      _events.map(
-        (e) => Positioned(
-          top: _getLastThreeDecimalDigits(e.location.longitude),
-          left: _getLastThreeDecimalDigits(e.location.latitude),
-          child: GestureDetector(
-            onTap: () => context.go('/events/detailed', extra: e),
-            child: Column(
-              children: [
-                ProfilePicture(
-                  pictureUrl: e.photo,
-                  isRound: true,
-                  radius: 32,
-                ),
-                Text(e.name),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -73,23 +42,22 @@ class _EventSearchViewState extends State<EventSearchView> {
       widget.user.location.latitude,
       widget.user.location.longitude,
     );
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        // AmicaGoogleMaps(location: location),
-        Align(
-          alignment: Alignment.center,
-          child: GestureDetector(
-            onTap: () => context.go('/events/create'),
-            child: ProfilePicture(
-              pictureUrl: widget.user.photo,
-              isRound: true,
-              radius: 32,
+    return SingleChildScrollView(
+      child: Column(
+        children: List.from(
+          _events.map(
+            (e) => Column(
+              children: [
+                EventListItem(
+                  event: e,
+                  location: location,
+                ),
+                const Gap(verticalGap: 32.0, horizontalGap: 8.0),
+              ],
             ),
           ),
         ),
-        ...events,
-      ],
+      ),
     );
   }
 }

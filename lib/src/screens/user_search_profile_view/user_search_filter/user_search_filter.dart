@@ -1,12 +1,10 @@
-import 'package:amica/src/models/filters/age_range.dart';
-import 'package:amica/src/models/filters/user_filter.dart';
+import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:amica/src/shared/filters/filter_card.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_select.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class UserSearchFilter extends StatefulWidget {
@@ -66,7 +64,7 @@ class _UserSearchFilterState extends State<UserSearchFilter> {
               typeOfInput: FilterInputs.range,
               control: _filterForm.control(
                 'age',
-              ) as FormControl<AgeRange>,
+              ) as FormControl<Range>,
             ),
             const Gap(verticalGap: 16, horizontalGap: 0),
             AmicaSelect<String>(

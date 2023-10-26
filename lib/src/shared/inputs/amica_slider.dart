@@ -1,34 +1,25 @@
-import 'package:amica/src/models/filters/range.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AmicaRange extends StatefulWidget {
+class AmicaSlider extends StatefulWidget {
   final double max;
   final double min;
   final String title;
-  final FormControl? control;
+  final FormControl control;
 
-  const AmicaRange({
+  const AmicaSlider({
     super.key,
     required this.max,
     required this.min,
     required this.title,
-    this.control,
+    required this.control,
   });
 
   @override
-  State<AmicaRange> createState() => _AmicaRangeState();
+  State<AmicaSlider> createState() => _AmicaSliderState();
 }
 
-class _AmicaRangeState extends State<AmicaRange> {
-  late RangeValues values;
-
-  @override
-  void initState() {
-    super.initState();
-    values = RangeValues(widget.min, widget.max);
-  }
-
+class _AmicaSliderState extends State<AmicaSlider> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,34 +27,28 @@ class _AmicaRangeState extends State<AmicaRange> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(widget.title),
+        Text('${widget.title} (${widget.control.value.toInt().toString()})'),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.control!.value.min.toString()),
+            Text(widget.min.toInt().toString()),
             Expanded(
-              child: RangeSlider(
-                values: values,
+              child: Slider(
+                value: widget.control.value,
                 max: widget.max,
                 min: widget.min,
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 inactiveColor: Theme.of(context).colorScheme.onBackground,
-                labels:
-                    RangeLabels(values.start.toString(), values.end.toString()),
-                onChanged: (newValues) {
+                onChanged: (newValue) {
                   setState(() {
-                    values = newValues;
                     if (widget.control != null) {
-                      widget.control!.value = Range(
-                        max: newValues.end.toInt(),
-                        min: newValues.start.toInt(),
-                      );
+                      widget.control.value = newValue;
                     }
                   });
                 },
               ),
             ),
-            Text(widget.control!.value.max.toString()),
+            Text(widget.max.toInt().toString()),
           ],
         ),
       ],

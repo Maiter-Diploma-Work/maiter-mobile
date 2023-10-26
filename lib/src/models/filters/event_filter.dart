@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:amica/src/models/filters/age_range.dart';
 import 'package:amica/src/models/filters/filter.dart';
+import 'package:amica/src/models/filters/range.dart';
 
 List<EventFilter> eventFiltersFromJson(String str) => List<EventFilter>.from(
     json.decode(str).map((x) => EventFilter.fromJson(x)));
@@ -27,7 +27,7 @@ class EventFilter extends Filter {
         id: json["id"],
         userId: json["userId"],
         distance: json["distance"],
-        age: AgeRange.fromJson(json["age"]),
+        age: Range.fromJson(json["age"]),
         lookingFor: json["lookingFor"],
       );
 

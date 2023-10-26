@@ -1,10 +1,10 @@
-import 'package:amica/src/models/filters/age_range.dart';
+import 'package:amica/src/models/filters/range.dart';
 
 abstract class Filter {
   final int id;
   final int userId;
   final double distance;
-  final AgeRange age;
+  final Range age;
   final String lookingFor;
 
   Filter({

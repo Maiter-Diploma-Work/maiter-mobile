@@ -1,4 +1,4 @@
-import 'package:amica/src/models/filters/age_range.dart';
+import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/services/event/event.service.dart';
 import 'package:amica/src/shared/filters/filter_card.dart';
@@ -54,7 +54,7 @@ class _EventSearchFilterState extends State<EventSearchFilter> {
               min: 1,
               typeOfInput: FilterInputs.slider,
               control: widget.eventService.eventSearchFilterForm
-                  .control('distance') as FormControl<double>,
+                  .control('distance') as FormControl,
             ),
             const Gap(verticalGap: 16, horizontalGap: 0),
             AmicaFilterCard(
@@ -65,7 +65,7 @@ class _EventSearchFilterState extends State<EventSearchFilter> {
                 min: 18,
                 typeOfInput: FilterInputs.range,
                 control: widget.eventService.eventSearchFilterForm
-                    .control('age') as FormControl<AgeRange>),
+                    .control('age') as FormControl<Range>),
             const Gap(verticalGap: 16, horizontalGap: 0),
             AmicaSelect<String>(
               initialValue: widget.eventService.eventSearchFilterForm

@@ -160,37 +160,35 @@ class _ChatListViewState extends State<ChatListView> {
   List<Widget> _generateContacts(BuildContext context) {
     return List<Widget>.from(
       _chatRooms.map(
-        (e) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 6,
-                ),
-                child: _generateContact(
-                  e.participants.firstWhere((element) =>
-                      element.id != widget.profileService.userProfile!.id),
-                  e,
-                  context,
+        (e) => Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 6,
+              ),
+              child: _generateContact(
+                e.participants.firstWhere((element) =>
+                    element.id != widget.profileService.userProfile!.id),
+                e,
+                context,
+              ),
+            ),
+            Container(
+              height: 1,
+              width: MediaQuery.of(context).size.width * 0.90,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onInverseSurface
+                      .withOpacity(0.25),
                 ),
               ),
-              Container(
-                height: 1,
-                width: MediaQuery.of(context).size.width * 0.90,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onInverseSurface
-                        .withOpacity(0.25),
-                  ),
-                ),
-              ),
-              const Gap(verticalGap: 14.0, horizontalGap: 0)
-            ],
-          );
-        },
+            ),
+            const Gap(verticalGap: 14.0, horizontalGap: 0)
+          ],
+        ),
       ),
     );
   }

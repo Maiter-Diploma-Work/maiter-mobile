@@ -229,13 +229,22 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
           children: List.from(
             expectancies.map(
               (e) => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.chevron_right),
-                  Text(
-                    e.text,
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      height: 2,
+                  Flexible(
+                    child: RichText(
+                      text: TextSpan(children: [
+                        const WidgetSpan(
+                          child: Icon(Icons.chevron_right),
+                        ),
+                        TextSpan(
+                          text: e.text,
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            height: 2,
+                          ),
+                        ),
+                      ]),
                     ),
                   ),
                 ],

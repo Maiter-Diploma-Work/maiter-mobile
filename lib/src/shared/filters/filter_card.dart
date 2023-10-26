@@ -1,4 +1,4 @@
-import 'package:amica/src/models/filters/age_range.dart';
+import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/shared/interest.dart';
 import 'package:amica/src/shared/card.dart';
 import 'package:amica/src/shared/filters/interests_chip_list.dart';
@@ -123,8 +123,8 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
   void initState() {
     super.initState();
     switch (widget.control.value.runtimeType) {
-      case AgeRange:
-        AgeRange value = widget.control.value;
+      case Range:
+        Range value = widget.control.value;
         setState(() {
           values = RangeValues(value.min.toDouble(), value.max.toDouble());
         });

@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:amica/src/models/filters/age_range.dart';
 import 'package:amica/src/models/filters/filter.dart';
-import 'package:amica/src/models/shared/interest.dart';
+import 'package:amica/src/models/filters/range.dart';
 
 List<UserFilter> userFiltersFromJson(String str) =>
     List<UserFilter>.from(json.decode(str).map((x) => UserFilter.fromJson(x)));
@@ -31,7 +30,7 @@ class UserFilter extends Filter {
         id: json["id"],
         userId: json["userId"],
         distance: json["distance"],
-        age: AgeRange.fromJson(json["age"]),
+        age: Range.fromJson(json["age"]),
         lookingFor: json["lookingFor"],
         interests: List<String>.from((json['interests'] as List<dynamic>).map(
           (e) => e.toString(),

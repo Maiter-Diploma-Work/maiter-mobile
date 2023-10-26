@@ -1,4 +1,4 @@
-import 'package:amica/src/models/filters/age_range.dart';
+import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/filters/user_filter.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/services/user/user_search.service.dart';
@@ -66,7 +66,7 @@ class MockedUserSearchService extends UserSearchService {
     for (MapEntry element in filter.toJson().entries) {
       if (element.key == 'age') {
         userSearchFilterForm.control('age').value =
-            AgeRange.fromJson(element.value);
+            Range.fromJson(element.value);
       } else if (userSearchFilterForm.controls.keys.contains(element.key)) {
         userSearchFilterForm.control(element.key).value = element.value;
       }

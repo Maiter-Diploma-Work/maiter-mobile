@@ -23,11 +23,15 @@ class AmicaSelect<T> extends StatefulWidget {
 class _AmicaSelectState<T> extends State<AmicaSelect<T>> {
   T? _value;
 
-  void _selectItem(value) {
+  void _selectItem(T? value) {
+    if (value == null) return;
+
     setState(() {
-      _value = value ?? widget.initialValue;
+      _value = value;
+      if (widget.onUpdate != null) {
+        widget.onUpdate!(value);
+      }
     });
-    widget.onUpdate!(value ?? widget.initialValue);
   }
 
   @override

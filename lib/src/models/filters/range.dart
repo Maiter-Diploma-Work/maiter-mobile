@@ -1,10 +1,10 @@
-class AgeRange {
+class Range {
   final int max;
   final int min;
 
-  AgeRange({required this.max, required this.min});
+  Range({required this.max, required this.min});
 
-  factory AgeRange.fromJson(Map<String, dynamic> json) => AgeRange(
+  factory Range.fromJson(Map<String, dynamic> json) => Range(
         min: json["min"],
         max: json["max"],
       );

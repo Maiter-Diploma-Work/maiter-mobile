@@ -24,6 +24,7 @@ class Event extends Profile {
   final double radius;
   final String lookingFor;
   final DateTime creationDate;
+  final DateTime endDate;
 
   Event({
     required this.creatorId,
@@ -39,6 +40,7 @@ class Event extends Profile {
     required super.name,
     required super.photo,
     required super.interests,
+    required this.endDate,
   });
 
   factory Event.fromJson(Map<String, dynamic> json) => Event(
@@ -55,6 +57,7 @@ class Event extends Profile {
         description: json["description"],
         name: json['name'],
         interests: List<Interest>.from(json['interests']),
+        endDate: DateFormat.yMd().parse(json["end_date"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,5 +69,10 @@ class Event extends Profile {
         "description": description,
         "name": name,
         "interests": interests,
+        'end_date': endDate,
+        'age_constraints': {
+          'max_age': maxAge,
+          'min_age': minAge,
+        }
       };
 }
