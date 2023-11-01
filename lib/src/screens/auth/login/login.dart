@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:amica/src/layouts/start_screen.dart';
+import 'package:amica/src/services/api_url.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:amica/src/shared/title.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -26,8 +30,20 @@ class _LoginScreenState extends State<LoginScreen> {
     ),
   });
 
-  void _onLoginClick(BuildContext context) {
-    context.go('/search');
+  void _onLoginClick(BuildContext context) async {
+    http.Response response = await http.post(
+      Uri.parse('$apiUrl/api/auth/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(_loginForm.value),
+    );
+
+    if (jsonDecode(response.body)['isFilled'] == true) {
+      context.go('/search');
+    } else if (jsonDecode(response.body)['isFilled'] == false) {
+      context.go('/auth/register/step-1');
+    }
   }
 
   Widget formGenerator(BuildContext context) {

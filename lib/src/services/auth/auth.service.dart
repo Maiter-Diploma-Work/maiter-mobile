@@ -1,14 +1,16 @@
 import 'package:amica/src/models/profiles/character_trait.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/interest.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
 import 'package:reactive_forms/reactive_forms.dart';
 
-abstract class RegisterService {
+abstract class AuthService {
   final FormGroup personalInfoForm = FormGroup({
     'name': FormControl<String>(),
     'birthdate': FormControl<DateTime>(),
     'gender': FormControl<String>(value: UserProfile.empty().gender),
-    'location': FormControl<String>(),
+    'location': FormControl<LatLng>(),
     'height': FormControl<int>(),
     'education': FormControl<String>(),
     'bio': FormControl<String>(),
@@ -36,5 +38,7 @@ abstract class RegisterService {
 
   final FormControl<String> favoriteSong = FormControl<String>();
 
-  Future<void> register();
+  Future<http.Response> register();
+
+  Future<http.Response> login();
 }

@@ -1,16 +1,24 @@
-import 'package:amica/src/services/auth/register.service.dart';
+import 'package:amica/src/services/auth/auth.service.dart';
+import 'package:http/src/response.dart';
 
-class MockRegisterService extends RegisterService {
-  static MockRegisterService? _instance;
+class MockAuthService extends AuthService {
+  static MockAuthService? _instance;
 
-  static MockRegisterService get instance {
-    _instance ??= MockRegisterService();
+  static MockAuthService get instance {
+    _instance ??= MockAuthService();
 
     return _instance!;
   }
 
   @override
-  Future<void> register() async {
-    //TODO: Mock HTTP request?
+  Future<Response> login() {
+    // TODO: implement login
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Response> register() {
+    // TODO: implement register
+    throw UnimplementedError();
   }
 }

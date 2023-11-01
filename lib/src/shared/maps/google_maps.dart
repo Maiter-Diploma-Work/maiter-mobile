@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+typedef OnUpdate = void Function(LatLng location);
+
 class AmicaGoogleMaps extends StatefulWidget {
   final LatLng location;
+  final OnUpdate? onUpdate;
 
   const AmicaGoogleMaps({
     super.key,
     required this.location,
+    this.onUpdate,
   });
 
   @override
@@ -87,6 +91,8 @@ class _AmicaGoogleMapsState extends State<AmicaGoogleMaps> {
       ),
       destinationLocation,
     );
+
+    if (widget.onUpdate != null) widget.onUpdate!(destinationLocation);
   }
 
   @override

@@ -20,10 +20,7 @@ class _CharacterTraitViewState extends State<CharacterTraitView> {
   @override
   Widget build(BuildContext context) {
     CharacterTrait trait = widget.traitControl.value!;
-    Color color = Theme
-        .of(context)
-        .colorScheme
-        .onBackground;
+    Color color = Theme.of(context).colorScheme.onBackground;
 
     return Column(
       children: [
@@ -48,15 +45,17 @@ class _CharacterTraitViewState extends State<CharacterTraitView> {
           thumbColor: color,
           inactiveColor: color,
           onChanged: (double val) {
-            if (widget.isEditable) {
-              widget.traitControl.value = CharacterTrait(
-                id: trait.id,
-                userId: trait.userId,
-                bottomName: trait.bottomName,
-                topName: trait.topName,
-                degree: val.toInt(),
-              );
-            }
+            setState(() {
+              if (widget.isEditable) {
+                widget.traitControl.value = CharacterTrait(
+                  id: trait.id,
+                  userId: trait.userId,
+                  bottomName: trait.bottomName,
+                  topName: trait.topName,
+                  degree: val.toInt(),
+                );
+              }
+            });
           },
         ),
       ],

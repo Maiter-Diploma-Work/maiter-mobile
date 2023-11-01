@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:amica/src/services/api_url.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
 import 'package:amica/src/shared/title.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../layouts/start_screen.dart';
@@ -18,7 +22,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _registerForm = FormGroup(
     {
-      'login': FormControl<String>(
+      'username': FormControl<String>(
         validators: [Validators.required],
       ),
       'email': FormControl<String>(
@@ -37,8 +41,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     ],
   );
 
-  void _onRegisterClick(BuildContext context) {
-    context.go('/auth/register/step-1');
+  Future<void> _onRegisterClick(BuildContext context) async {
+    http.Response response = await http.post(
+      Uri.parse('$apiUrl/api/auth/register'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(_registerForm.value),
+    );
+
+    if (response.statusCode == 200) {
+      context.go('/auth/register/step-1');
+    }
   }
 
   Widget formGenerator(BuildContext context) {
@@ -58,7 +72,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             fieldName: "Username",
             hintText:
                 "Enter your username (will be displayed with @ at the start)",
-            controller: _registerForm.control('login') as FormControl<String>,
+            controller:
+                _registerForm.control('username') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 30),
           AmicaTextFormInput(
@@ -76,8 +91,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           const Gap(horizontalGap: 0, verticalGap: 70),
           AmicaButton(
-            onPressed: () => context.go('/auth/login'),
-            text: "Login",
+            onPressed: () => _onRegisterClick(context),
+            text: "Register",
             color: Theme.of(context).colorScheme.onPrimary,
             textColor: Theme.of(context).colorScheme.primary,
             textStyle: const TextStyle(
@@ -87,8 +102,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           const Gap.cubic(40),
           AmicaButton(
-            onPressed: () => _onRegisterClick(context),
-            text: "Register",
+            onPressed: () => context.go('/auth/login'),
+            text: "Login",
             color: Theme.of(context).colorScheme.onPrimary,
             textColor: Theme.of(context).colorScheme.primary,
             textStyle: const TextStyle(

@@ -1,16 +1,19 @@
 import 'package:amica/src/models/profiles/character_trait.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
-import 'package:amica/src/services/auth/register.service.dart';
+import 'package:amica/src/services/auth/auth.service.dart';
 import 'package:amica/src/shared/character_traits/character_traits.dart';
 import 'package:amica/src/shared/gap.dart';
+import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_datepicker.dart';
 import 'package:amica/src/shared/inputs/amica_select.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
+import 'package:amica/src/shared/maps/google_maps.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class RegistrationFirstStep extends StatefulWidget {
-  final RegisterService authService;
+  final AuthService authService;
 
   const RegistrationFirstStep({super.key, required this.authService});
 
@@ -20,6 +23,35 @@ class RegistrationFirstStep extends StatefulWidget {
 
 class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
   late final FormGroup formGroup;
+
+  Future<String?> _dialogBuilder(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: AmicaGoogleMaps(
+              location: const LatLng(
+                0,
+                0,
+              ),
+              onUpdate: (LatLng location) => widget.authService.personalInfoForm
+                  .control('location')
+                  .value = location,
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -80,13 +112,18 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
         ),
         SizedBox(
           width: (MediaQuery.of(context).size.width - 64) * 0.44,
-          child: AmicaTextFormInput(
-            initialValue: '',
-            textInputType: TextInputType.streetAddress,
-            fieldName: 'Location',
-            hintText: 'In case you will disable geolocation',
-            controller: formGroup.control('location') as FormControl<String>,
+          child: AmicaButton(
+            text: 'Location',
+            onPressed: () => _dialogBuilder(context),
+            color: Theme.of(context).colorScheme.primary,
           ),
+          // child: AmicaTextFormInput(
+          //   initialValue: '',
+          //   textInputType: TextInputType.streetAddress,
+          //   fieldName: 'Location',
+          //   hintText: 'In case you will disable geolocation',
+          //   controller: formGroup.control('location') as FormControl<String>,
+          // ),
         ),
       ],
     );

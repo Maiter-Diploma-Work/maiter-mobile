@@ -1,9 +1,9 @@
-import 'package:amica/src/services/auth/register.service.dart';
+import 'package:amica/src/services/auth/auth.service.dart';
 import 'package:amica/src/shared/interests_list/interests_list.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationInterests extends StatefulWidget {
-  final RegisterService authService;
+  final AuthService authService;
 
   const RegistrationInterests({
     super.key,

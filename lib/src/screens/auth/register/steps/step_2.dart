@@ -1,5 +1,5 @@
 import 'package:amica/src/models/profiles/user_profile.dart';
-import 'package:amica/src/services/auth/register.service.dart';
+import 'package:amica/src/services/auth/auth.service.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_checkbox.dart';
 import 'package:amica/src/shared/inputs/amica_select.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class RegistrationSecondStep extends StatefulWidget {
-  final RegisterService authService;
+  final AuthService authService;
 
   const RegistrationSecondStep({super.key, required this.authService});
 
