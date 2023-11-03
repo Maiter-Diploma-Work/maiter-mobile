@@ -29,7 +29,6 @@ class UserProfileView extends StatefulWidget {
 }
 
 class _UserProfileViewState extends State<UserProfileView> {
-  final int _sensitivity = 8;
   UserProfile? _currentProfile;
   List<UserProfile> _profiles = [];
 
@@ -85,11 +84,13 @@ class _UserProfileViewState extends State<UserProfileView> {
   }
 
   Future<void> _initState() async {
-    List<UserProfile> tmp = await widget.userService.getRandomUsers(-1);
+    if (widget.userService.users.isEmpty) {
+      await widget.userService.getRandomUsers(-1);
+    }
 
     setState(() {
-      _profiles = tmp;
-      _currentProfile = tmp.first;
+      _profiles = widget.userService.users;
+      _currentProfile = widget.userService.users.first;
     });
   }
 

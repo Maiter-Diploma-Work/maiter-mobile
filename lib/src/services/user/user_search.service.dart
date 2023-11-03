@@ -10,6 +10,8 @@ abstract class UserSearchService {
     "interests": FormControl<List<String>>(),
   });
 
+  List<UserProfile> users = [];
+
   Future<void> initializeFilters(UserProfile profile);
 
   //Get

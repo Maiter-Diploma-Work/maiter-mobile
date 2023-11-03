@@ -51,6 +51,7 @@ class MockedUserSearchService extends UserSearchService {
       int start = limit > response.length ? response.length : limit;
       response.removeRange(start, response.length);
     }
+    users = response;
 
     return response;
   }

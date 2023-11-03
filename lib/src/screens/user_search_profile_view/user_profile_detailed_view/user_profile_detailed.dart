@@ -286,22 +286,4 @@ class UserProfileDetailed extends StatelessWidget {
       children: networks,
     );
   }
-
-  Widget generateBasicInfo() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 50, right: 50, top: 90, bottom: 40),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          UserProfileName.fromProfile(
-            profile,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 0,
-              vertical: 16.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
