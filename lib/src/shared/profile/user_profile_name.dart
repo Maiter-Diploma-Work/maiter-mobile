@@ -1,7 +1,7 @@
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:flutter/material.dart';
 
-class UserProfileName extends StatefulWidget {
+class UserProfileName extends StatelessWidget {
   final String name;
   final String tag;
   final DateTime birthdate;
@@ -32,29 +32,23 @@ class UserProfileName extends StatefulWidget {
         textColor: textColor,
       );
 
-  @override
-  State<StatefulWidget> createState() => _UserProfileNameState();
-}
-
-class _UserProfileNameState extends State<UserProfileName> {
   List<Widget> getProfileName() {
     return [
       Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          textGenerator(widget.name),
+          textGenerator(name),
           Text(
-            widget.tag,
+            tag,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
             ),
           ),
         ],
       ),
-      textGenerator((DateTime.now().year - widget.birthdate.year).toString()),
+      textGenerator((DateTime.now().year - birthdate.year).toString()),
     ];
   }
 
@@ -64,7 +58,6 @@ class _UserProfileNameState extends State<UserProfileName> {
       style: const TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.w500,
-        color: Colors.white,
       ),
     );
   }
@@ -72,7 +65,7 @@ class _UserProfileNameState extends State<UserProfileName> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.padding ?? const EdgeInsets.all(0),
+      padding: padding ?? const EdgeInsets.all(0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

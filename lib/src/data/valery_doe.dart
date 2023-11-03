@@ -64,6 +64,12 @@ final UserProfile ValeryDoe = UserProfile(
       name: 'dogs',
       category: 'Hobbies',
     ),
+    Interest(
+      id: 11,
+      profileId: 2,
+      name: 'gym',
+      category: 'Sport',
+    ),
   ],
   socialNetworks: [
     SocialNetwork(id: 1, userId: 2, name: "Telegram", userName: "@theonlyv"),

@@ -4,6 +4,7 @@ import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/services/like/like.service.dart';
 import 'package:amica/src/services/user/user_search.service.dart';
+import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:amica/src/shared/profile/interests.dart';
 import 'package:amica/src/shared/profile/location.dart';
@@ -110,33 +111,29 @@ class _UserProfileViewState extends State<UserProfileView> {
         : GestureDetector(
             onHorizontalDragEnd: (details) => _onHorizontalDrag(details),
             onVerticalDragEnd: (details) => _onVerticalDrag(details, context),
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 6,
-              ),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: ProfilePicture(
+            child: Stack(
+              children: [
+                ListView(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  children: [
+                    ProfilePicture(
                       pictureUrl: _currentProfile == null
                           ? 'assets/logo/logo.png'
                           : _currentProfile!.photo,
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
+                    Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: generateProfileInfo(context),
                     ),
-                  ),
-                  _dislikeButton(context),
-                  _detailsButton(context),
-                  _likeButton(context),
-                ],
-              ),
+                  ],
+                ),
+                _dislikeButton(context),
+                _detailsButton(context),
+                _likeButton(context),
+              ],
             ),
           );
   }
@@ -144,10 +141,10 @@ class _UserProfileViewState extends State<UserProfileView> {
   Widget generateProfileInfo(BuildContext context) {
     int interestsDisplayAmount = 0;
     if (_currentProfile != null) {
-      if (_currentProfile!.interests.length <= 6) {
+      if (_currentProfile!.interests.length <= 4) {
         interestsDisplayAmount = _currentProfile!.interests.length;
       } else {
-        interestsDisplayAmount = 6;
+        interestsDisplayAmount = 4;
       }
     }
 
@@ -162,9 +159,16 @@ class _UserProfileViewState extends State<UserProfileView> {
           ),
         ),
         LocationView(
-            location: _currentProfile == null
-                ? Location.empty()
-                : _currentProfile!.location),
+          location: _currentProfile == null
+              ? Location.empty()
+              : _currentProfile!.location,
+        ),
+        Container(
+          color: Theme.of(context).colorScheme.inverseSurface,
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: 1,
+        ),
+        const Gap(verticalGap: 8.0, horizontalGap: 0),
         Interests(
           interests: _currentProfile == null ? [] : _currentProfile!.interests,
           displayAmount: interestsDisplayAmount,

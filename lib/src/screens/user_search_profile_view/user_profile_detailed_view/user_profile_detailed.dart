@@ -9,6 +9,7 @@ import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/profile/description.dart';
 import 'package:amica/src/shared/profile/interests.dart';
 import 'package:amica/src/shared/profile/location.dart';
+import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:amica/src/shared/title.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -16,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class UserProfileDetailed extends StatefulWidget {
+class UserProfileDetailed extends StatelessWidget {
   final UserProfile profile;
   final bool? isOwnProfile;
 
@@ -26,11 +27,6 @@ class UserProfileDetailed extends StatefulWidget {
     this.isOwnProfile,
   });
 
-  @override
-  State<StatefulWidget> createState() => _UserProfileDetailedState();
-}
-
-class _UserProfileDetailedState extends State<UserProfileDetailed> {
   void onDrag(DragUpdateDetails details, BuildContext context) {
     int sensitivity = 8;
     if (details.delta.dx > sensitivity) {
@@ -60,33 +56,47 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
       child: Container(
         color: Theme.of(context).colorScheme.background,
         child: ListView(
-          padding: const EdgeInsets.only(top: 0),
           children: [
-            _generateBasicInfo(),
+            _carouselElemenets.length > 1
+                ? CarouselSlider(
+                    items: _carouselElemenets,
+                    options: CarouselOptions(
+                      height: 512,
+                      enlargeCenterPage: true,
+                    ),
+                  )
+                : ProfilePicture(
+                    pictureUrl: profile.photo,
+                    borderRadius: 16,
+                  ),
             Padding(
               padding: const EdgeInsets.only(
-                top: 24,
                 left: 50,
                 right: 50,
                 bottom: 52,
               ),
               child: Column(
                 children: [
-                  editButton,
-                  const Gap.cubic(26),
+                  UserProfileName.fromProfile(
+                    profile,
+                    padding: const EdgeInsets.symmetric(vertical: 7.0),
+                  ),
+                  LocationView(location: profile.location),
+                  generateDelimeter(profile.socialNetworks != null),
+                  getEditButton(context),
                   Interests(
-                    interests: widget.profile.interests,
+                    interests: profile.interests,
                   ),
                   const Gap.cubic(26),
                   generateAdditionalInfo(context),
                   const Gap.cubic(26),
-                  expectancies,
+                  getExpectancies(context),
                   const Gap.cubic(26),
                   CharacterTraits(
                     isEditable: false,
                     controller: FormArray(
                       List.from(
-                        widget.profile.characterTraits.map(
+                        profile.characterTraits.map(
                           (characterTrait) => FormControl(
                             value: characterTrait,
                           ),
@@ -103,8 +113,8 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
     );
   }
 
-  Widget get editButton {
-    if (widget.isOwnProfile != null && widget.isOwnProfile!) {
+  Widget getEditButton(BuildContext context) {
+    if (isOwnProfile != null && isOwnProfile!) {
       return Column(
         children: [
           const Gap(verticalGap: 16, horizontalGap: 0),
@@ -114,6 +124,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
             onPressed: () => context.go('/profile/edit-menu'),
             text: 'Edit profile',
           ),
+          const Gap.cubic(26),
         ],
       );
     }
@@ -121,65 +132,25 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
     return Container();
   }
 
-  Widget _generateBasicInfo() {
-    return Stack(
-      children: [
-        _carouselElemenets.length > 1
-            ? CarouselSlider(
-                items: _carouselElemenets,
-                options: CarouselOptions(
-                  height: 600,
-                  enlargeCenterPage: true,
-                ),
-              )
-            : _photo,
-        Positioned.fill(
-          bottom: 0,
-          left: 72,
-          right: 72,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              LocationView(location: widget.profile.location),
-              UserProfileName.fromProfile(
-                widget.profile,
-                padding: const EdgeInsets.symmetric(vertical: 7.0),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget get _photo {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(30),
-      ),
-      child: Image.asset(widget.profile.photo, fit: BoxFit.contain),
-    );
-  }
-
   List<Widget> get _carouselElemenets {
-    if (widget.profile.photos == null) {
+    if (profile.photos == null) {
       return [
         ClipRRect(
           borderRadius: const BorderRadius.all(
             Radius.circular(30),
           ),
-          child: Image.asset(widget.profile.photo, fit: BoxFit.contain),
+          child: Image.asset(profile.photo, fit: BoxFit.contain),
         ),
       ];
     }
 
     return List.from(
-      widget.profile.photos!.map(
+      profile.photos!.map(
         (e) => ClipRRect(
           borderRadius: const BorderRadius.all(
             Radius.circular(30),
           ),
-          child: Image.asset(e, fit: BoxFit.contain),
+          child: ProfilePicture(pictureUrl: e, borderRadius: 16),
         ),
       ),
     );
@@ -191,11 +162,11 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         socialNetworks,
-        generateDelimeter(widget.profile.socialNetworks != null),
+        generateDelimeter(profile.socialNetworks != null),
         education,
-        generateDelimeter(widget.profile.education != null),
+        generateDelimeter(profile.education != null),
         ProfileDescription(
-          description: widget.profile.description,
+          description: profile.description,
         ),
         const Gap(
           verticalGap: 46,
@@ -214,8 +185,8 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
     );
   }
 
-  Widget get expectancies {
-    List<Expectancy> expectancies = widget.profile.expectancies;
+  Widget getExpectancies(BuildContext context) {
+    List<Expectancy> expectancies = profile.expectancies;
 
     if (expectancies.isEmpty) {
       return Container();
@@ -258,7 +229,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
   }
 
   Widget get education {
-    String? education = widget.profile.education;
+    String? education = profile.education;
     if (education == null) return Container();
 
     return Column(
@@ -278,7 +249,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
   }
 
   Widget get location {
-    final Location tmp = widget.profile.location;
+    final Location tmp = profile.location;
     String location = "${tmp.countryName}, ${tmp.name}";
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -289,7 +260,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
   }
 
   Widget get socialNetworks {
-    final List<SocialNetwork>? socialNetworks = widget.profile.socialNetworks;
+    final List<SocialNetwork>? socialNetworks = profile.socialNetworks;
     if (socialNetworks == null) return Container();
 
     List<Widget> networks = List.generate(
@@ -323,7 +294,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
         mainAxisSize: MainAxisSize.min,
         children: [
           UserProfileName.fromProfile(
-            widget.profile,
+            profile,
             padding: const EdgeInsets.symmetric(
               horizontal: 0,
               vertical: 16.0,

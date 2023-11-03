@@ -11,12 +11,10 @@ class LocationView extends StatelessWidget {
     return [
       const Icon(
         Icons.place_outlined,
-        color: Colors.white,
       ),
       Text(
         location.name,
         style: const TextStyle(
-          color: Colors.white,
           fontSize: 18.0,
         ),
       ),
@@ -30,6 +28,7 @@ class LocationView extends StatelessWidget {
         vertical: 8.0,
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: textGenerator(context),
       ),
     );

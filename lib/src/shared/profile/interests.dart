@@ -3,21 +3,33 @@ import 'package:flutter/material.dart';
 
 import '../../models/shared/interest.dart';
 
-class Interests extends StatefulWidget {
+class Interests extends StatelessWidget {
   final List<Interest> interests;
+  final List<Interest>? userInterests;
   final int? displayAmount;
 
-  const Interests({
+  Interests({
     super.key,
     required this.interests,
     this.displayAmount,
-  });
+    this.userInterests,
+  }) {
+    interests.sort((a, b) => a.name.length.compareTo(b.name.length));
+  }
 
-  @override
-  State<StatefulWidget> createState() => _InterestsState();
-}
+  Color? getInterestColor(Interest interest, BuildContext context) {
+    if (userInterests == null) {
+      return null;
+    }
 
-class _InterestsState extends State<Interests> {
+    if (userInterests!.any((element) =>
+        element.name.toLowerCase() == interest.name.toLowerCase())) {
+      return Theme.of(context).colorScheme.secondary;
+    }
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -25,12 +37,11 @@ class _InterestsState extends State<Interests> {
       alignment: WrapAlignment.center,
       runSpacing: 7,
       spacing: 10,
-      // alignment: WrapAlignment.spaceBetween,
-      // runAlignment: WrapAlignment.spaceBetween,
       children: List.generate(
-        widget.displayAmount ?? widget.interests.length,
+        displayAmount ?? interests.length,
         (index) => InterestView(
-          interest: widget.interests[index],
+          interest: interests[index],
+          color: getInterestColor(interests[index], context),
         ),
       ),
     );

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ProfilePicture extends StatefulWidget {
+class ProfilePicture extends StatelessWidget {
   final String pictureUrl;
   final double? radius;
+  final double? borderRadius;
   EdgeInsets? padding;
   bool? hasBoxShadow;
   bool? isRound;
@@ -13,13 +14,9 @@ class ProfilePicture extends StatefulWidget {
       this.padding,
       this.hasBoxShadow,
       this.isRound,
-      this.radius});
+      this.radius,
+      this.borderRadius});
 
-  @override
-  State<StatefulWidget> createState() => _ProfilePictureState();
-}
-
-class _ProfilePictureState extends State<ProfilePicture> {
   BoxDecoration boxDecoration = const BoxDecoration(
     boxShadow: [
       BoxShadow(
@@ -35,21 +32,21 @@ class _ProfilePictureState extends State<ProfilePicture> {
     if (!isRound) {
       return Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(68.0),
+          borderRadius: BorderRadius.circular(borderRadius ?? 68.0),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(68.0),
+          borderRadius: BorderRadius.circular(borderRadius ?? 68.0),
           child: Image(
-            image: AssetImage(widget.pictureUrl),
-            height: 600,
+            image: AssetImage(pictureUrl),
+            height: 512,
             fit: BoxFit.cover,
           ),
         ),
       );
     } else {
       return CircleAvatar(
-        radius: widget.radius,
-        backgroundImage: AssetImage(widget.pictureUrl),
+        radius: radius,
+        backgroundImage: AssetImage(pictureUrl),
       );
     }
   }
@@ -57,8 +54,8 @@ class _ProfilePictureState extends State<ProfilePicture> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.padding ?? const EdgeInsets.all(0),
-      child: imageGenerator(widget.isRound ?? false),
+      padding: padding ?? const EdgeInsets.all(0),
+      child: imageGenerator(isRound ?? false),
     );
   }
 }
