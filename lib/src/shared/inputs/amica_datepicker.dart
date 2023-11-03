@@ -57,7 +57,6 @@ class _AmicaDatepickerState extends State<AmicaDatepicker> {
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: Colors.white,
           ),
           textAlign: TextAlign.center,
         ),

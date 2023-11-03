@@ -46,7 +46,7 @@ class _AmicaSelectState<T> extends State<AmicaSelect<T>> {
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: Colors.white,
+            // color: Colors.white,
           ),
           textAlign: TextAlign.center,
         ),
@@ -63,6 +63,9 @@ class _AmicaSelectState<T> extends State<AmicaSelect<T>> {
               value: widget.options.elementAt(index),
               child: Text(
                 widget.options.elementAt(index).toString(),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
             ),
           ),

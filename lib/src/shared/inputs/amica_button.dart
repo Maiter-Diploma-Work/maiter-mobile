@@ -30,7 +30,7 @@ class AmicaButton extends StatelessWidget {
         foregroundColor: textColor ?? Theme.of(context).colorScheme.onError,
         minimumSize: Size(minWidth ?? 145, height ?? 50),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(16),
         ),
         maximumSize: maximumSize,
       ),

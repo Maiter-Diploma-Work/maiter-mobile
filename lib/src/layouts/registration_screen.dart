@@ -46,7 +46,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF192142),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: AmicaTitle(
           text: widget.stepTitle,
           fontStyle: const TextStyle(fontSize: 32),
@@ -55,8 +55,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       body: Container(
         padding: _paddings,
         width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-          color: Color(0xFF192142),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
         ),
         child: Column(
           children: [
@@ -65,7 +65,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: const Color(0xFF192142),
+        color: Theme.of(context).colorScheme.background,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           child: Row(

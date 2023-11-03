@@ -62,4 +62,6 @@ flutter:
     - assets/mock_pinned_chat_rooms.json
     - assets/mock_chat_messages.json
     - assets/logo/logo.png
+    - assets/logo/logo-red.png
+    - assets/logo/logo-red-blue.png
     - assets/welcome_screen_bg_image.webp

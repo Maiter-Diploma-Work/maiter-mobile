@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
   final TextStyle titleTextStyle = const TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.w500,
-    fontSize: 50,
+    fontSize: 32,
   );
 
   const WelcomeScreen({super.key});
@@ -19,18 +19,13 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StartScreen(
       hasBackgroundImage: true,
+      isWelcomeView: true,
       screenBody: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              //TODO: remove the magic strings
-              title.AmicaTitle(
-                text: "Welcome",
-                fontStyle: titleTextStyle,
-              ),
-              const Gap(horizontalGap: 0, verticalGap: 40.0),
               Image.asset(
                 'assets/logo/logo.png',
                 width: 153,
@@ -43,19 +38,8 @@ class WelcomeScreen extends StatelessWidget {
               ),
               const Gap(horizontalGap: 0, verticalGap: 60.0),
               AmicaButton(
-                onPressed: () => context.go('/auth/login'),
-                text: "Login",
-                color: Theme.of(context).colorScheme.onPrimary,
-                textColor: Theme.of(context).colorScheme.primary,
-                textStyle: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Gap(horizontalGap: 0, verticalGap: 40.0),
-              AmicaButton(
-                onPressed: () => context.go('/auth/register'),
-                text: "Register",
+                onPressed: () => context.go('/auth'),
+                text: "Let's get started",
                 color: Theme.of(context).colorScheme.onPrimary,
                 textColor: Theme.of(context).colorScheme.primary,
                 textStyle: const TextStyle(

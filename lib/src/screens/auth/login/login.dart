@@ -68,8 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
           AmicaButton(
             onPressed: () => _onLoginClick(context),
             text: "Login",
-            color: Theme.of(context).colorScheme.onPrimary,
-            textColor: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.primary,
+            textColor: Theme.of(context).colorScheme.onPrimary,
             textStyle: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,

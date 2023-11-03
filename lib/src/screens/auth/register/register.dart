@@ -42,17 +42,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   );
 
   Future<void> _onRegisterClick(BuildContext context) async {
-    http.Response response = await http.post(
-      Uri.parse('$apiUrl/api/auth/register'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(_registerForm.value),
-    );
+    // http.Response response = await http.post(
+    //   Uri.parse('$apiUrl/api/auth/register'),
+    //   headers: <String, String>{
+    //     'Content-Type': 'application/json; charset=UTF-8',
+    //   },
+    //   body: jsonEncode(_registerForm.value),
+    // );
+    //
+    // if (response.statusCode == 200) {
+    //   context.go('/auth/register/step-1');
+    // }
 
-    if (response.statusCode == 200) {
-      context.go('/auth/register/step-1');
-    }
+    context.go('/auth/register/step-1');
   }
 
   Widget formGenerator(BuildContext context) {
@@ -71,30 +73,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
           AmicaTextFormInput(
             fieldName: "Username",
             hintText:
-                "Enter your username (will be displayed with @ at the start)",
+            "Enter your username (will be displayed with @ at the start)",
             controller:
-                _registerForm.control('username') as FormControl<String>,
+            _registerForm.control('username') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 30),
           AmicaTextFormInput(
             fieldName: "Password",
             hintText: "Enter your password",
             controller:
-                _registerForm.control('password') as FormControl<String>,
+            _registerForm.control('password') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 30),
           AmicaTextFormInput(
             fieldName: "Confirm Password",
             hintText: "Repeat your password",
             controller:
-                _registerForm.control('confirmPassword') as FormControl<String>,
+            _registerForm.control('confirmPassword') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 70),
           AmicaButton(
             onPressed: () => _onRegisterClick(context),
             text: "Register",
-            color: Theme.of(context).colorScheme.onPrimary,
-            textColor: Theme.of(context).colorScheme.primary,
+            color: Theme
+                .of(context)
+                .colorScheme
+                .primary,
+            textColor: Theme
+                .of(context)
+                .colorScheme
+                .onPrimary,
             textStyle: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
@@ -104,8 +112,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           AmicaButton(
             onPressed: () => context.go('/auth/login'),
             text: "Login",
-            color: Theme.of(context).colorScheme.onPrimary,
-            textColor: Theme.of(context).colorScheme.primary,
+            color: Theme
+                .of(context)
+                .colorScheme
+                .onPrimary,
+            textColor: Theme
+                .of(context)
+                .colorScheme
+                .primary,
             textStyle: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,

@@ -116,6 +116,7 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
             text: 'Location',
             onPressed: () => _dialogBuilder(context),
             color: Theme.of(context).colorScheme.primary,
+            textColor: Theme.of(context).colorScheme.onPrimary,
           ),
           // child: AmicaTextFormInput(
           //   initialValue: '',

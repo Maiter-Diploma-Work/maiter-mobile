@@ -33,25 +33,29 @@ class AmicaTextFormInput extends StatelessWidget {
     this.controller,
   }) : isExpanded = true;
 
-  Widget get input {
+  Widget getInput(BuildContext context) {
     final Widget userInput = ReactiveTextField(
       keyboardType: textInputType,
       maxLines: maxLines ?? 1,
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,
-        fillColor: Colors.white,
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(30),
+        fillColor: const Color(0xFFFFFFFF),
+        border: UnderlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(16),
+          ),
+          borderSide: BorderSide(
+            width: 4,
+            color: Theme.of(context).colorScheme.onBackground,
           ),
         ),
-        hintStyle: const TextStyle(
-          color: Color(0x99FFFFFF),
+        hintStyle: TextStyle(
+          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
         ),
       ),
-      style: const TextStyle(
-        color: Colors.black,
+      style: TextStyle(
+        color: Theme.of(context).colorScheme.onBackground,
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ),
@@ -66,7 +70,7 @@ class AmicaTextFormInput extends StatelessWidget {
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: Colors.white,
+            // color: Colors.white,
           ),
           textAlign: TextAlign.left,
         ),
@@ -77,19 +81,19 @@ class AmicaTextFormInput extends StatelessWidget {
     return fieldName.isNotEmpty ? userInputWithFieldName : userInput;
   }
 
-  Widget get formField {
+  Widget getFromField(BuildContext context) {
     return Padding(
       padding: padding ?? const EdgeInsets.all(0),
-      child: input,
+      child: getInput(context),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     if (isExpanded == true) {
-      return Expanded(child: formField);
+      return Expanded(child: getFromField(context));
     }
 
-    return formField;
+    return getFromField(context);
   }
 }

@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
 
-class StartScreen extends StatefulWidget {
+class StartScreen extends StatelessWidget {
   final Widget screenBody;
   final bool? hasBackgroundImage;
+  final bool? isWelcomeView;
 
   const StartScreen({
     Key? key,
     required this.screenBody,
     this.hasBackgroundImage,
+    this.isWelcomeView,
   }) : super(key: key);
 
-  @override
-  _StartScreenState createState() => _StartScreenState();
-}
-
-class _StartScreenState extends State<StartScreen> {
   ColorFilter get _imageFilter {
     return const ColorFilter.matrix(<double>[
-      0.2126,
+      0.256,
+      0.7152,
+      0.0722,
+      1,
+      0,
+      0.256,
       0.7152,
       0.0722,
       0,
-      0,
-      0.2126,
-      0.7152,
-      0.0722,
-      0,
-      0,
-      0.2126,
+      1,
+      0.256,
       0.7152,
       0.0722,
       0,
@@ -41,7 +38,7 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   DecorationImage? get _backgroundImage {
-    if (widget.hasBackgroundImage == null || !widget.hasBackgroundImage!) {
+    if (hasBackgroundImage == null || !hasBackgroundImage!) {
       return null;
     }
 
@@ -55,25 +52,34 @@ class _StartScreenState extends State<StartScreen> {
     );
   }
 
+  BoxDecoration? welcomeViewGradientOrSolidColor(BuildContext context) {
+    if (isWelcomeView == null || (isWelcomeView != null && !isWelcomeView!)) {
+      return BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+      );
+    }
+
+    return BoxDecoration(
+      gradient: const LinearGradient(
+        colors: [
+          Color(0xFF4440AD),
+          Color(0xFF222099),
+        ],
+        transform: GradientRotation(1.5),
+      ),
+      // color: const Color(0xFF4440AD),
+      image: _backgroundImage,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: 64, left: 32, right: 32),
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              Color(0xFF303F9F),
-              Color(0xFF3344B0),
-              Color(0xFF7128E9),
-              Color(0xFF7E18FF),
-            ],
-            transform: GradientRotation(1.5),
-          ),
-          image: _backgroundImage,
-        ),
-        child: widget.screenBody,
+        decoration: welcomeViewGradientOrSolidColor(context),
+        child: screenBody,
       ),
     );
   }

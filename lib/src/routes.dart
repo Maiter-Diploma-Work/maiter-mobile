@@ -14,12 +14,9 @@ final router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => const WelcomeScreen(),
-      routes: [
-        loginRouter,
-        registerRouter,
-      ],
     ),
-    ...chatRouter,
+    authRouter,
+    chatRouter,
     eventsRouter,
     searchUserRouter,
     profileRouter,

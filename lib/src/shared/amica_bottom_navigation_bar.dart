@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class AmicaBottomNavigationBar extends StatefulWidget {
+class AmicaBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
 
   const AmicaBottomNavigationBar({
@@ -9,12 +9,6 @@ class AmicaBottomNavigationBar extends StatefulWidget {
     required this.selectedIndex,
   }) : super(key: key);
 
-  @override
-  _AmicaBottomNavigationBarState createState() =>
-      _AmicaBottomNavigationBarState();
-}
-
-class _AmicaBottomNavigationBarState extends State<AmicaBottomNavigationBar> {
   void _onDestinationSelected(int idx, BuildContext context) {
     switch (idx) {
       case 0:
@@ -36,27 +30,50 @@ class _AmicaBottomNavigationBarState extends State<AmicaBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: widget.selectedIndex ?? 0,
-      onTap: (value) => _onDestinationSelected(value, context),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'people',
+    bool isLightTheme =
+        Theme.of(context).colorScheme.brightness == Brightness.light;
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+              secondary: Theme.of(context).colorScheme.primary,
+            ),
+      ),
+      child: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        unselectedItemColor: isLightTheme ? Colors.black87 : Colors.white70,
+        selectedIconTheme: const IconThemeData(shadows: [
+          Shadow(
+            offset: Offset.zero,
+            blurRadius: 32.0,
+            color: Colors.white24,
+          )
+        ]),
+        selectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w800,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.explore),
-          label: 'discover',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.chat),
-          label: 'chat',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'profile',
-        ),
-      ],
+        type: BottomNavigationBarType.fixed,
+        onTap: (value) => _onDestinationSelected(value, context),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'people',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            label: 'discover',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'chat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'profile',
+          ),
+        ],
+      ),
     );
   }
 }

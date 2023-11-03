@@ -16,7 +16,6 @@ class AmicaTitle extends StatelessWidget {
       text,
       style: fontStyle ??
           const TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.w500,
             fontSize: 40.0,
           ),

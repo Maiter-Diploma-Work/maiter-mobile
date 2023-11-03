@@ -32,7 +32,7 @@ class _AmicaSearchBarState extends State<AmicaSearchBar> {
           onChanged: widget.onChanged,
           autocorrect: true,
           style: TextStyle(
-            color: Theme.of(context).colorScheme.onSecondary,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           cursorHeight: 12,
           decoration: InputDecoration(
@@ -42,7 +42,7 @@ class _AmicaSearchBarState extends State<AmicaSearchBar> {
               ),
             ),
             prefixIcon: const Icon(Icons.search),
-            prefixIconColor: Theme.of(context).colorScheme.onSecondary,
+            prefixIconColor: Theme.of(context).colorScheme.onSurface,
             filled: true,
             fillColor: Theme.of(context).colorScheme.onPrimary,
           ),

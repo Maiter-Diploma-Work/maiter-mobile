@@ -1,7 +1,7 @@
 import 'package:amica/src/auth.dart';
+import 'package:amica/src/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:amica/src/routes.dart';
 
 class Amica extends StatefulWidget {
   final String title;
@@ -32,51 +32,46 @@ class _AmicaState extends State<Amica> {
 
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = const Color(0xFF282B67);
-    Color secondaryColor = const Color(0xFF7E18FF);
-    Color tertiaryColor = const Color(0xFFFFBC58);
-    Color errorColor = const Color(0xFFe95184);
-    Color backgroundColor = const Color(0xFF080D20);
-    Color surfaceColor = const Color(0xFF131111);
-    Color inverseSurface = Colors.white;
-    Color onPrimaryColor = Colors.white;
-    Color onBackgroundColor = Colors.white;
-    Color onErrorColor = Colors.white;
-    Color onSurfaceColor = Colors.white;
-    Color onSecondaryColor = Colors.black;
-    Color onInverseSurface = Colors.black;
-
     return AmicaAuthScope(
       notifier: _auth,
       child: MaterialApp.router(
         title: widget.title,
+        themeMode: ThemeMode.system,
         theme: ThemeData(
+            primarySwatch: Colors.red,
+            colorScheme: const ColorScheme(
+              brightness: Brightness.light,
+              primary: Color(0xFFDB3264),
+              secondary: Color(0xFF7E18FF),
+              tertiary: Color(0xFFFFBC58),
+              error: Color(0xFFe95184),
+              background: Color(0xFFEEEEEE),
+              surface: Color(0xFFECEEEE),
+              inverseSurface: Color(0xFF131111),
+              onPrimary: Colors.white,
+              onBackground: Colors.black,
+              onError: Colors.black,
+              onSurface: Colors.black,
+              onSecondary: Colors.white,
+              onInverseSurface: Colors.white,
+            )),
+        darkTheme: ThemeData(
           primarySwatch: Colors.indigo,
-          colorScheme: ColorScheme(
+          colorScheme: const ColorScheme(
             brightness: Brightness.dark,
-            primary: primaryColor,
-            secondary: secondaryColor,
-            tertiary: tertiaryColor,
-            error: errorColor,
-            background: backgroundColor,
-            surface: surfaceColor,
-            inverseSurface: inverseSurface,
-            onPrimary: onPrimaryColor,
-            onBackground: onBackgroundColor,
-            onError: onErrorColor,
-            onSurface: onSurfaceColor,
-            onSecondary: onSecondaryColor,
-            onInverseSurface: onInverseSurface,
-          ),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            backgroundColor: primaryColor,
-            selectedItemColor: tertiaryColor,
-            selectedLabelStyle: TextStyle(
-              color: tertiaryColor,
-              fontWeight: FontWeight.w500,
-            ),
-            unselectedItemColor: onPrimaryColor,
-            type: BottomNavigationBarType.fixed,
+            primary: Color(0xFFDB3264),
+            secondary: Color(0xFF7E18FF),
+            tertiary: Color(0xFFFFBC58),
+            error: Color(0xFFe95184),
+            background: Color(0xFF121212),
+            surface: Color(0xFF212121),
+            inverseSurface: Color(0xFFECEEEE),
+            onPrimary: Colors.white,
+            onBackground: Colors.white,
+            onError: Colors.white,
+            onSurface: Colors.white,
+            onSecondary: Colors.black,
+            onInverseSurface: Colors.black,
           ),
           pageTransitionsTheme: const PageTransitionsTheme(
             builders: {
