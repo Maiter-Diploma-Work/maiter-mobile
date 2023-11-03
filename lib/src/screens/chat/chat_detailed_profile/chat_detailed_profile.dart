@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 
 class ChatDetailedProfileView extends StatefulWidget {
   final String userId;
+
   const ChatDetailedProfileView({super.key, required this.userId});
 
   @override
@@ -69,6 +70,7 @@ class _ChatDetailedProfileViewState extends State<ChatDetailedProfileView> {
                     onPressed: () {},
                     text: "Block user",
                     color: Theme.of(context).colorScheme.error,
+                    textColor: Theme.of(context).colorScheme.onError,
                   )
                 ],
               ),
@@ -111,10 +113,10 @@ class _ChatDetailedProfileViewState extends State<ChatDetailedProfileView> {
           children: [
             Text(
               _user == null ? '' : _user!.name,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
             Text(
@@ -122,7 +124,7 @@ class _ChatDetailedProfileViewState extends State<ChatDetailedProfileView> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
           ],

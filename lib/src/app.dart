@@ -59,7 +59,7 @@ class _AmicaState extends State<Amica> {
           primarySwatch: Colors.indigo,
           colorScheme: const ColorScheme(
             brightness: Brightness.dark,
-            primary: Color(0xFFDB3264),
+            primary: Color(0xFFDE6616),
             secondary: Color(0xFF7E18FF),
             tertiary: Color(0xFFFFBC58),
             error: Color(0xFFe95184),

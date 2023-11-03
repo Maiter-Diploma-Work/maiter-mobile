@@ -13,6 +13,8 @@ class AmicaScaffold extends StatelessWidget {
   final bool? hasBlurOnAppBar;
   final Color? appBarBackgroundColor;
   final Color? appBarForegroundColor;
+  final ShapeBorder? appBarShape;
+  final double? appBarElevation;
 
   const AmicaScaffold({
     super.key,
@@ -25,6 +27,8 @@ class AmicaScaffold extends StatelessWidget {
     this.actions,
     this.appBarForegroundColor,
     this.hasBlurOnAppBar,
+    this.appBarShape,
+    this.appBarElevation,
   });
 
   Widget get _title {
@@ -78,19 +82,21 @@ class AmicaScaffold extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: isDetailed,
       appBar: AppBar(
-          flexibleSpace: _flexibleSpace(context),
-          backgroundColor: _getAppBarBackgroundColor(context),
-          foregroundColor: _getAppBarForegroundColor(context),
-          elevation: 1,
-          actions: actions ?? [],
-          centerTitle: true,
-          title: _title,
-          shape: Border(
-            bottom: BorderSide(
-              width: 2,
-              color: Theme.of(context).colorScheme.background,
+        flexibleSpace: _flexibleSpace(context),
+        backgroundColor: _getAppBarBackgroundColor(context),
+        foregroundColor: _getAppBarForegroundColor(context),
+        elevation: appBarElevation ?? 1,
+        actions: actions ?? [],
+        centerTitle: true,
+        title: _title,
+        shape: appBarShape ??
+            Border(
+              bottom: BorderSide(
+                width: 2,
+                color: Theme.of(context).colorScheme.background,
+              ),
             ),
-          )),
+      ),
       backgroundColor: Theme.of(context).colorScheme.background,
       bottomNavigationBar: AmicaBottomNavigationBar(
         selectedIndex: selectedNavigationItemIndex,

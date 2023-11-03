@@ -40,7 +40,7 @@ class AmicaTextFormInput extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,
-        fillColor: const Color(0xFFFFFFFF),
+        fillColor: Colors.white,
         border: UnderlineInputBorder(
           borderRadius: const BorderRadius.all(
             Radius.circular(16),
@@ -54,8 +54,8 @@ class AmicaTextFormInput extends StatelessWidget {
           color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
         ),
       ),
-      style: TextStyle(
-        color: Theme.of(context).colorScheme.onBackground,
+      style: const TextStyle(
+        color: Colors.black,
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ),

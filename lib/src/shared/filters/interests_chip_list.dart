@@ -113,16 +113,12 @@ class _InterestsChipListState extends State<InterestsChipList> {
         ),
         AmicaRoundIconButton(
           onTap: () => _dialogBuilder(context),
-          icon: const Icon(Icons.add),
-          fillColor: Theme.of(context).colorScheme.primary,
-          shadows: const [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 8,
-              spreadRadius: 2,
-              offset: Offset(0, 2),
-            ),
-          ],
+          icon: Icon(
+            Icons.add,
+            color: Theme.of(context).colorScheme.primary,
+            weight: 900,
+          ),
+          fillColor: Colors.white,
         ),
       ],
     );

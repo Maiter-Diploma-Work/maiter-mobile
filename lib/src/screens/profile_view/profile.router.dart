@@ -8,7 +8,7 @@ import 'package:amica/src/screens/profile_view/settings_view.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_detailed_view/user_profile_detailed.dart';
 import 'package:amica/src/services/profile/mock_profile.service.dart';
 import 'package:amica/src/shared/interests_list/interests_list.dart';
-import 'package:flutter/src/widgets/basic.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -25,12 +25,11 @@ final profileRouter = GoRoute(
     GoRoute(
       path: 'edit-menu',
       builder: (context, state) => AmicaScaffold(
-        hasBlurOnAppBar: true,
-        isDetailed: true,
         title: 'Edit Profile',
         scaffoldBody:
             ProfileView(profile: MockProfileService.instance.userProfile!),
         selectedNavigationItemIndex: 3,
+        isDetailed: false,
       ),
       routes: profileEdit,
     ),
@@ -41,7 +40,6 @@ final profileEdit = <GoRoute>[
   GoRoute(
     path: 'edit',
     builder: (context, state) => AmicaScaffold(
-      hasBlurOnAppBar: true,
       isDetailed: false,
       title: 'Edit Profile',
       scaffoldBody: ProfileEditView(

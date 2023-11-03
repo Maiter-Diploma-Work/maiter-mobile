@@ -19,7 +19,8 @@ final chatRouter = GoRoute(
     ),
     selectedNavigationItemIndex: 2,
     isDetailed: false,
-    appBarBackgroundColor: const Color(0xFF080D20),
+    appBarElevation: 0,
+    appBarShape: const Border(bottom: BorderSide.none),
   ),
   routes: [
     GoRoute(
@@ -28,6 +29,7 @@ final chatRouter = GoRoute(
         title: '',
         scaffoldAppBarTitle: ChatAppBarTitle(
           userId: state.pathParameters['user_id']!,
+          chatRoomId: state.pathParameters['chat_room_id']!,
         ),
         scaffoldBody: ChatView(
           messageService: MockMessageService.instance,
@@ -47,6 +49,9 @@ final chatRouter = GoRoute(
             ),
             selectedNavigationItemIndex: 2,
             isDetailed: true,
+            appBarElevation: 0,
+            appBarShape: const Border(bottom: BorderSide.none),
+            appBarBackgroundColor: Colors.transparent,
           ),
         ),
       ],

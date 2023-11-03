@@ -5,9 +5,12 @@ import 'package:go_router/go_router.dart';
 
 class ChatAppBarTitle extends StatefulWidget {
   final String userId;
+  final String chatRoomId;
+
   const ChatAppBarTitle({
     super.key,
     required this.userId,
+    required this.chatRoomId,
   });
 
   @override
@@ -36,7 +39,8 @@ class _ChatAppBarTitleState extends State<ChatAppBarTitle> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.go('/chat/${widget.userId}/detailed'),
+      onTap: () =>
+          context.go('/chat/${widget.userId}/${widget.chatRoomId}/detailed'),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -117,7 +117,8 @@ class _UserProfileViewState extends State<UserProfileView> {
               ),
               child: Stack(
                 children: [
-                  Center(
+                  Align(
+                    alignment: Alignment.topCenter,
                     child: ProfilePicture(
                       pictureUrl: _currentProfile == null
                           ? 'assets/logo/logo.png'

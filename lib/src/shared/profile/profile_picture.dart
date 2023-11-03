@@ -41,6 +41,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
           borderRadius: BorderRadius.circular(68.0),
           child: Image(
             image: AssetImage(widget.pictureUrl),
+            height: 600,
             fit: BoxFit.cover,
           ),
         ),

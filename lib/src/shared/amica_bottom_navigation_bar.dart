@@ -43,13 +43,15 @@ class AmicaBottomNavigationBar extends StatelessWidget {
         currentIndex: selectedIndex,
         backgroundColor: Theme.of(context).colorScheme.surface,
         unselectedItemColor: isLightTheme ? Colors.black87 : Colors.white70,
-        selectedIconTheme: const IconThemeData(shadows: [
-          Shadow(
-            offset: Offset.zero,
-            blurRadius: 32.0,
-            color: Colors.white24,
-          )
-        ]),
+        selectedIconTheme: IconThemeData(
+          shadows: [
+            Shadow(
+              offset: Offset.zero,
+              blurRadius: 32.0,
+              color: isLightTheme ? Colors.black26 : Colors.white24,
+            )
+          ],
+        ),
         selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w800,
         ),

@@ -60,6 +60,8 @@ final eventsRouter = GoRoute(
           selectedNavigationItemIndex: 1,
           isDetailed: true,
           hasBlurOnAppBar: true,
+          appBarElevation: 0,
+          appBarShape: const Border(bottom: BorderSide.none),
         );
       },
     ),

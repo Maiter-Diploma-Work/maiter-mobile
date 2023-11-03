@@ -46,10 +46,10 @@ class _UserProfileNameState extends State<UserProfileName> {
           textGenerator(widget.name),
           Text(
             widget.tag,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Colors.white,
             ),
           ),
         ],
@@ -61,10 +61,10 @@ class _UserProfileNameState extends State<UserProfileName> {
   Widget textGenerator(String text) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.w500,
-        color: widget.textColor ?? Theme.of(context).colorScheme.onBackground,
+        color: Colors.white,
       ),
     );
   }

@@ -6,48 +6,34 @@ import 'package:flutter/material.dart';
 
 import 'short_profile_overview.dart';
 
-class ProfileView extends StatefulWidget {
+class ProfileView extends StatelessWidget {
   final UserProfile profile;
 
-  const ProfileView({super.key, required this.profile});
+  ProfileView({super.key, required this.profile});
 
-  @override
-  State<ProfileView> createState() => _ProfileViewState();
-}
-
-class _ProfileViewState extends State<ProfileView> {
   final List<LinkButton> interactionOptions = [
     //TODO: dynamic items!
+    const LinkButton(
+      title: 'Edit Profile',
+      location: '/profile/edit-menu/edit',
+    ),
+    const LinkButton(
+      title: 'Edit Photos',
+      location: '/profile/edit-menu/photos',
+    ),
     const LinkButton(
       title: 'Interests',
       location: '/profile/edit-menu/interests',
     ),
     const LinkButton(
-      title: 'Theme',
-      selectedTitle: 'Standart',
-      location: '/profile/edit-menu/theme',
-    ),
-    const LinkButton(
       title: 'Language',
-      selectedTitle: 'English',
       location: '/profile/edit-menu/language',
     ),
-    const LinkButton(
-      title: 'Contacts',
-      location: '/profile/edit-menu',
-    ),
-    const LinkButton(
-      title: 'Devices',
-      location: '/profile/edit-menu',
-    ),
-    const LinkButton(
-      title: 'Status',
-      location: '/profile/edit-menu',
-    ),
-    const LinkButton(
-      title: 'Privacy',
-      location: '/profile/edit-menu',
-    ),
+    // const LinkButton(
+    //   title: 'Theme',
+    //   selectedTitle: 'Standart',
+    //   location: '/profile/edit-menu/theme',
+    // ),
   ];
 
   Widget generateColumnItem(
@@ -67,9 +53,9 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(top: 128, left: 32, right: 32, bottom: 32),
+      padding: const EdgeInsets.all(32),
       children: [
-        ShortProfileOverview(profile: widget.profile),
+        ShortProfileOverview(profile: profile),
         const Gap.cubic(26),
         Column(
           mainAxisSize: MainAxisSize.min,

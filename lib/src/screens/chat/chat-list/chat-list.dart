@@ -64,13 +64,16 @@ class _ChatListViewState extends State<ChatListView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AmicaSearchBar(
-          controller: controller,
-        ),
-        _generateChatList(context),
-      ],
+    return Container(
+      color: Theme.of(context).colorScheme.primary,
+      child: Column(
+        children: [
+          AmicaSearchBar(
+            controller: controller,
+          ),
+          _generateChatList(context),
+        ],
+      ),
     );
   }
 

@@ -1,10 +1,8 @@
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/shared/delimeter.dart';
-import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ShortProfileOverview extends StatelessWidget {
   final TextStyle textStyle = const TextStyle(
@@ -33,23 +31,6 @@ class ShortProfileOverview extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: generateCardBody(),
           ),
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            AmicaButton(
-              onPressed: () => context.go('/profile/edit-menu/edit'),
-              text: 'Edit profile',
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            AmicaButton(
-              onPressed: () => context.go('/profile/edit-menu/photos'),
-              text: 'Edit photos',
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ],
         ),
       ],
     );

@@ -9,12 +9,15 @@ class LocationView extends StatelessWidget {
 
   List<Widget> textGenerator(BuildContext context) {
     return [
-      const Icon(Icons.place_outlined),
+      const Icon(
+        Icons.place_outlined,
+        color: Colors.white,
+      ),
       Text(
         location.name,
-        style: TextStyle(
+        style: const TextStyle(
+          color: Colors.white,
           fontSize: 18.0,
-          color: Theme.of(context).colorScheme.onBackground,
         ),
       ),
     ];

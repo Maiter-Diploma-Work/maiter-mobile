@@ -133,7 +133,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
       formGroup: profileEditForm,
       child: Center(
         child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 50),
+          padding: const EdgeInsets.symmetric(horizontal: 50),
           children: [
             const Gap.cubic(38),
             AmicaTextFormInput(

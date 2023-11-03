@@ -47,6 +47,9 @@ final searchUserRouter = GoRoute(
             profile: profile,
           ),
           selectedNavigationItemIndex: 0,
+          appBarElevation: 0,
+          appBarShape: const Border(bottom: BorderSide.none),
+          appBarBackgroundColor: Colors.transparent,
         );
       },
     ),
