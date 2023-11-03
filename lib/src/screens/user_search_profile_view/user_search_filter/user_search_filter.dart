@@ -39,56 +39,54 @@ class _UserSearchFilterState extends State<UserSearchFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-      child: Align(
-        alignment: Alignment.center,
-        child: ListView(
-          children: [
-            AmicaFilterCard(
-              title: 'Distance',
-              valueTitle: 'up to',
-              enabledTitle: 'Show people only in this range',
-              max: 100,
-              min: 1,
-              typeOfInput: FilterInputs.slider,
-              control: _filterForm.control('distance') as FormControl<double>,
-            ),
-            const Gap(verticalGap: 16, horizontalGap: 0),
-            AmicaFilterCard(
-              title: 'Age',
-              valueTitle: '',
-              enabledTitle: 'Show people only within this range',
-              max: 100,
-              min: 18,
-              typeOfInput: FilterInputs.range,
-              control: _filterForm.control(
-                'age',
-              ) as FormControl<Range>,
-            ),
-            const Gap(verticalGap: 16, horizontalGap: 0),
-            AmicaSelect<String>(
-              initialValue: _filterForm.control('lookingFor').value.toString(),
-              options: lookingFors.values,
-              fieldName: 'Show me',
-              onUpdate: (newValue) {
-                _filterForm.control('lookingFor').value = newValue;
-              },
-            ),
-            const Gap(verticalGap: 16, horizontalGap: 0),
-            AmicaFilterCard(
-              title: 'Interests',
-              valueTitle: '',
-              enabledTitle: 'Show people only with these interests',
-              max: 100,
-              min: 18,
-              typeOfInput: FilterInputs.interests,
-              control: _filterForm.control(
-                'interests',
-              ) as FormControl<List<String>>,
-            ),
-          ],
-        ),
+    return Align(
+      alignment: Alignment.center,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+        children: [
+          AmicaFilterCard(
+            title: 'Distance',
+            valueTitle: 'up to',
+            enabledTitle: 'Show people only in this range',
+            max: 100,
+            min: 1,
+            typeOfInput: FilterInputs.slider,
+            control: _filterForm.control('distance') as FormControl<double>,
+          ),
+          const Gap(verticalGap: 16, horizontalGap: 0),
+          AmicaFilterCard(
+            title: 'Age',
+            valueTitle: '',
+            enabledTitle: 'Show people only within this range',
+            max: 100,
+            min: 18,
+            typeOfInput: FilterInputs.range,
+            control: _filterForm.control(
+              'age',
+            ) as FormControl<Range>,
+          ),
+          const Gap(verticalGap: 16, horizontalGap: 0),
+          AmicaSelect<String>(
+            initialValue: _filterForm.control('lookingFor').value.toString(),
+            options: lookingFors.values,
+            fieldName: 'Show me',
+            onUpdate: (newValue) {
+              _filterForm.control('lookingFor').value = newValue;
+            },
+          ),
+          const Gap(verticalGap: 16, horizontalGap: 0),
+          AmicaFilterCard(
+            title: 'Interests',
+            valueTitle: '',
+            enabledTitle: 'Show people only with these interests',
+            max: 100,
+            min: 18,
+            typeOfInput: FilterInputs.interests,
+            control: _filterForm.control(
+              'interests',
+            ) as FormControl<List<String>>,
+          ),
+        ],
       ),
     );
   }

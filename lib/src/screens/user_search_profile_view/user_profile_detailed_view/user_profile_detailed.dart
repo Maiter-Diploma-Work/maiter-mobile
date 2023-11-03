@@ -48,7 +48,6 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
       style: TextStyle(
         fontSize: fontSize ?? 18.0,
         fontWeight: fontWeight ?? FontWeight.w300,
-        color: Theme.of(context).colorScheme.onPrimary,
       ),
     );
   }
@@ -111,6 +110,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
           const Gap(verticalGap: 16, horizontalGap: 0),
           AmicaButton(
             color: Theme.of(context).colorScheme.primary,
+            textColor: Theme.of(context).colorScheme.onPrimary,
             onPressed: () => context.go('/profile/edit-menu'),
             text: 'Edit profile',
           ),
@@ -129,7 +129,7 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
                 items: _carouselElemenets,
                 options: CarouselOptions(
                   height: 600,
-                  enlargeCenterPage: false,
+                  enlargeCenterPage: true,
                 ),
               )
             : _photo,
@@ -239,9 +239,10 @@ class _UserProfileDetailedState extends State<UserProfileDetailed> {
                         ),
                         TextSpan(
                           text: e.text,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18.0,
                             height: 2,
+                            color: Theme.of(context).colorScheme.onBackground,
                           ),
                         ),
                       ]),

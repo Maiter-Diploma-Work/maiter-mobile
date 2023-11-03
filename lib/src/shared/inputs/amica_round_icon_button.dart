@@ -9,6 +9,7 @@ class AmicaRoundIconButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final String? label;
   final TextStyle? labelStyle;
+  final List<BoxShadow>? shadows;
 
   const AmicaRoundIconButton({
     Key? key,
@@ -16,6 +17,7 @@ class AmicaRoundIconButton extends StatelessWidget {
     required this.icon,
     this.fillColor,
     this.padding,
+    this.shadows,
   })  : label = null,
         labelStyle = null,
         super(key: key);
@@ -28,18 +30,25 @@ class AmicaRoundIconButton extends StatelessWidget {
     this.fillColor,
     this.padding,
     this.labelStyle,
+    this.shadows,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Widget button = ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        shape: const CircleBorder(),
-        backgroundColor: fillColor,
-        padding: padding ?? const EdgeInsets.all(8.0),
+    final Widget button = DecoratedBox(
+      decoration: BoxDecoration(
+        boxShadow: shadows,
+        shape: BoxShape.circle,
       ),
-      child: icon,
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          shape: const CircleBorder(),
+          backgroundColor: fillColor,
+          padding: padding ?? const EdgeInsets.all(8.0),
+        ),
+        child: icon,
+      ),
     );
 
     if (label == null) {

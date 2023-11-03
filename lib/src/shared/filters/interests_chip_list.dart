@@ -101,22 +101,28 @@ class _InterestsChipListState extends State<InterestsChipList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return Wrap(
+      spacing: 5,
+      runSpacing: 5,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Wrap(
-          spacing: 5,
-          runSpacing: 5,
-          children: List.from(
-            widget.interests.map(
-              (Interest e) => listItemGenerator(e),
-            ),
+        ...List.from(
+          widget.interests.map(
+            (Interest e) => listItemGenerator(e),
           ),
         ),
         AmicaRoundIconButton(
           onTap: () => _dialogBuilder(context),
           icon: const Icon(Icons.add),
-          fillColor: Colors.transparent,
+          fillColor: Theme.of(context).colorScheme.primary,
+          shadows: const [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 8,
+              spreadRadius: 2,
+              offset: Offset(0, 2),
+            ),
+          ],
         ),
       ],
     );

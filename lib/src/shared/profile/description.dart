@@ -18,7 +18,7 @@ class _ProfileDescriptionState extends State<ProfileDescription> {
         fontSize: 18.0,
         fontWeight: FontWeight.w300,
         height: 1.25,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Theme.of(context).colorScheme.onBackground,
       ),
     );
   }

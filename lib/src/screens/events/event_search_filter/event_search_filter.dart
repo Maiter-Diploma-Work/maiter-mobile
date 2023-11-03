@@ -43,8 +43,7 @@ class _EventSearchFilterState extends State<EventSearchFilter> {
       child: Align(
         alignment: Alignment.center,
         child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 36),
-          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
           children: [
             AmicaFilterCard(
               title: 'Distance',

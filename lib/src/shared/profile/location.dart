@@ -2,22 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../../models/shared/location.dart';
 
-class LocationView extends StatefulWidget {
+class LocationView extends StatelessWidget {
   final Location location;
 
   const LocationView({super.key, required this.location});
 
-  @override
-  State<StatefulWidget> createState() => _LocationState();
-}
-
-class _LocationState extends State<LocationView> {
-  List<Widget> textGenerator() {
+  List<Widget> textGenerator(BuildContext context) {
     return [
       const Icon(Icons.place_outlined),
       Text(
-        widget.location.name,
-        style: const TextStyle(fontSize: 18.0),
+        location.name,
+        style: TextStyle(
+          fontSize: 18.0,
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
       ),
     ];
   }
@@ -29,7 +27,7 @@ class _LocationState extends State<LocationView> {
         vertical: 8.0,
       ),
       child: Row(
-        children: textGenerator(),
+        children: textGenerator(context),
       ),
     );
   }

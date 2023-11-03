@@ -78,14 +78,19 @@ class AmicaScaffold extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: isDetailed,
       appBar: AppBar(
-        flexibleSpace: _flexibleSpace(context),
-        backgroundColor: _getAppBarBackgroundColor(context),
-        foregroundColor: _getAppBarForegroundColor(context),
-        elevation: 0,
-        actions: actions ?? [],
-        centerTitle: true,
-        title: _title,
-      ),
+          flexibleSpace: _flexibleSpace(context),
+          backgroundColor: _getAppBarBackgroundColor(context),
+          foregroundColor: _getAppBarForegroundColor(context),
+          elevation: 1,
+          actions: actions ?? [],
+          centerTitle: true,
+          title: _title,
+          shape: Border(
+            bottom: BorderSide(
+              width: 2,
+              color: Theme.of(context).colorScheme.background,
+            ),
+          )),
       backgroundColor: Theme.of(context).colorScheme.background,
       bottomNavigationBar: AmicaBottomNavigationBar(
         selectedIndex: selectedNavigationItemIndex,

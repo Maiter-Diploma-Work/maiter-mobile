@@ -49,7 +49,7 @@ class _UserProfileNameState extends State<UserProfileName> {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.onBackground,
             ),
           ),
         ],
@@ -64,7 +64,7 @@ class _UserProfileNameState extends State<UserProfileName> {
       style: TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.w500,
-        color: widget.textColor ?? Colors.white,
+        color: widget.textColor ?? Theme.of(context).colorScheme.onBackground,
       ),
     );
   }

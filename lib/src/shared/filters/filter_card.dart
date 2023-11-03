@@ -51,8 +51,8 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
         return RangeSlider(
           max: widget.max,
           min: widget.min,
-          activeColor: Theme.of(context).colorScheme.onBackground,
-          inactiveColor: Theme.of(context).colorScheme.onBackground,
+          activeColor: Theme.of(context).colorScheme.onPrimary,
+          inactiveColor: Theme.of(context).colorScheme.onPrimary,
           values: values,
           onChanged: (values) {
             setState(() {
@@ -65,9 +65,9 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
           value: value,
           max: widget.max,
           min: widget.min,
-          activeColor: Theme.of(context).colorScheme.onBackground,
-          thumbColor: Theme.of(context).colorScheme.onBackground,
-          inactiveColor: Theme.of(context).colorScheme.onBackground,
+          activeColor: Theme.of(context).colorScheme.onPrimary,
+          thumbColor: Theme.of(context).colorScheme.onPrimary,
+          inactiveColor: Theme.of(context).colorScheme.onPrimary,
           label: '$value',
           onChanged: (value) {
             setState(() {
@@ -84,7 +84,7 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
             minWidth: MediaQuery.of(context).size.width - (38 + 16),
           ),
           decoration: const BoxDecoration(
-            color: Color(0x99515151),
+            // color: Color(0x99515151),
             borderRadius: BorderRadius.all(
               Radius.circular(21),
             ),
@@ -159,30 +159,40 @@ class _AmicaFilterCardState extends State<AmicaFilterCard> {
     return AmicaCard(
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                widget.title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
-              ),
-              Text(
-                valueTitle,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w300,
+                Text(
+                  valueTitle,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           input,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(widget.enabledTitle),
+              Text(
+                widget.enabledTitle,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
               const AmicaSwitch(),
             ],
           ),

@@ -50,27 +50,34 @@ class _AmicaSelectState<T> extends State<AmicaSelect<T>> {
           ),
           textAlign: TextAlign.center,
         ),
-        DropdownButtonFormField<T>(
-          dropdownColor: Theme.of(context).colorScheme.primary,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Theme.of(context).colorScheme.primary,
+        DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Theme.of(context).colorScheme.primary,
           ),
-          isExpanded: true,
-          items: List.generate(
-            widget.options.length,
-            (index) => DropdownMenuItem(
-              value: widget.options.elementAt(index),
-              child: Text(
-                widget.options.elementAt(index).toString(),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
+          child: DropdownButtonFormField<T>(
+            dropdownColor: Theme.of(context).colorScheme.primary,
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            isExpanded: true,
+            icon: Icon(
+              Icons.arrow_drop_down,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            items: List.generate(
+              widget.options.length,
+              (index) => DropdownMenuItem(
+                value: widget.options.elementAt(index),
+                child: Text(
+                  widget.options.elementAt(index).toString(),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
               ),
             ),
+            value: _value ?? widget.initialValue,
+            onChanged: _selectItem,
           ),
-          value: _value ?? widget.initialValue,
-          onChanged: _selectItem,
         ),
       ],
     );

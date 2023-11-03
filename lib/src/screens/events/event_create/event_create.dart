@@ -115,6 +115,7 @@ class _EventCreateState extends State<EventCreate> {
               onPressed: () => _dialogBuilder(context),
               text: 'Choose location',
               color: Theme.of(context).colorScheme.primary,
+              textColor: Theme.of(context).colorScheme.onPrimary,
             ),
           ],
         ),
