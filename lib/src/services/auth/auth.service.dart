@@ -42,9 +42,7 @@ abstract class AuthService {
     'name': FormControl<String>(validators: [Validators.required]),
     'birthdate': FormControl<DateTime>(validators: [Validators.required]),
     'gender': FormControl<String>(
-        value: UserProfile
-            .empty()
-            .gender, validators: [Validators.required]),
+        value: UserProfile.empty().gender, validators: [Validators.required]),
     'location': FormControl<LatLng>(validators: [Validators.required]),
     'height': FormControl<int>(validators: [
       Validators.required,
@@ -55,12 +53,9 @@ abstract class AuthService {
     'bio': FormControl<String>(validators: [Validators.required]),
     'characterTraits': FormArray<CharacterTrait>(
       List.from(
-        UserProfile
-            .empty()
-            .characterTraits
-            .map(
+        UserProfile.empty().characterTraits.map(
               (e) => FormControl<CharacterTrait>(value: e),
-        ),
+            ),
       ),
     ),
   });
@@ -72,7 +67,6 @@ abstract class AuthService {
       'adventure': FormControl<bool>(value: false),
     }, validators: [
       Validators.required,
-      Validators.any((value) => value == true)
     ]),
     'status': FormControl<String>(value: statuses[1]),
     'lookingFor': FormControl<String>(value: lookingFors[1]),
@@ -82,7 +76,6 @@ abstract class AuthService {
   final List<Interest> selectedInterests = [];
 
   final FormControl<String> favoriteSong = FormControl<String>();
-
 
   Future<http.Response> register();
 
