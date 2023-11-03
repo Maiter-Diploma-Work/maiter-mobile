@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:amica/src/layouts/start_screen.dart';
-import 'package:amica/src/services/api_url.dart';
+import 'package:amica/src/services/auth/auth.service.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_button.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
@@ -11,33 +11,15 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:reactive_forms/reactive_forms.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  final AuthService authService;
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final _loginForm = FormGroup({
-    'email': FormControl<String>(
-      value: '',
-      validators: [Validators.email, Validators.required],
-    ),
-    'password': FormControl<String>(
-      value: '',
-      validators: [Validators.required],
-    ),
-  });
+  const LoginScreen({super.key, required this.authService});
 
   void _onLoginClick(BuildContext context) async {
-    http.Response response = await http.post(
-      Uri.parse('$apiUrl/api/auth/login'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(_loginForm.value),
-    );
+    http.Response response = await authService.login();
+
+    if (response.statusCode != 200) return;
 
     if (jsonDecode(response.body)['isFilled'] == true) {
       context.go('/search');
@@ -48,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget formGenerator(BuildContext context) {
     return ReactiveForm(
-      formGroup: _loginForm,
+      formGroup: authService.loginForm,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,13 +38,15 @@ class _LoginScreenState extends State<LoginScreen> {
           AmicaTextFormInput(
             fieldName: "Email",
             hintText: "Enter your email",
-            controller: _loginForm.control('email') as FormControl<String>,
+            controller:
+                authService.loginForm.control('email') as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 30.0),
           AmicaTextFormInput(
             fieldName: "Password",
             hintText: "Enter your password",
-            controller: _loginForm.control('password') as FormControl<String>,
+            controller: authService.loginForm.control('password')
+                as FormControl<String>,
           ),
           const Gap(horizontalGap: 0, verticalGap: 132.0),
           AmicaButton(

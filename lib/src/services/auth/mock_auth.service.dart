@@ -1,4 +1,5 @@
 import 'package:amica/src/services/auth/auth.service.dart';
+import 'package:http/http.dart' as http;
 import 'package:http/src/response.dart';
 
 class MockAuthService extends AuthService {
@@ -11,14 +12,26 @@ class MockAuthService extends AuthService {
   }
 
   @override
-  Future<Response> login() {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<Response> register() async {
+    return http.Response(
+      '',
+      200,
+    );
   }
 
   @override
-  Future<Response> register() {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<Response> fillInfo() async {
+    return http.Response(
+      '',
+      200,
+    );
+  }
+
+  @override
+  Future<Response> login() async {
+    return http.Response(
+      '{ isFilled: true }',
+      200,
+    );
   }
 }

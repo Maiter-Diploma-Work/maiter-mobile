@@ -4,8 +4,9 @@ import 'package:amica/src/screens/auth/register/steps/interest_step.dart';
 import 'package:amica/src/screens/auth/register/steps/step_1.dart';
 import 'package:amica/src/screens/auth/register/steps/step_2.dart';
 import 'package:amica/src/screens/welcome_view/auth_method_choise.dart';
-import 'package:amica/src/services/auth/mock_auth.service.dart';
+import 'package:amica/src/services/auth/ngrok_auth.service.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 import 'register/register.dart';
 
@@ -19,18 +20,22 @@ final authRouter = GoRoute(
 
 final loginRouter = GoRoute(
   path: 'login',
-  builder: (context, state) => const LoginScreen(),
+  builder: (context, state) => LoginScreen(
+    authService: NgrokAuthService.instance,
+  ),
 );
 final registerRouter = GoRoute(
   path: 'register',
-  builder: (context, state) => const RegisterScreen(),
+  builder: (context, state) => RegisterScreen(
+    authService: NgrokAuthService.instance,
+  ),
   routes: [
     GoRoute(
       path: 'step-1',
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 1: Personal Info',
-        body: RegistrationFirstStep(authService: MockAuthService.instance),
+        body: RegistrationFirstStep(authService: NgrokAuthService.instance),
         onBackTapped: () => context.go('/auth/register'),
         onForwardTapped: () => context.go('/auth/register/step-2'),
       ),
@@ -40,10 +45,9 @@ final registerRouter = GoRoute(
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 2: Your goal',
-        body: RegistrationSecondStep(authService: MockAuthService.instance),
+        body: RegistrationSecondStep(authService: NgrokAuthService.instance),
         onBackTapped: () => context.go('/auth/register/step-1'),
         onForwardTapped: () {
-          // print(MockAuthService.instance.goalForm.value.toString());
           context.go('/auth/register/step-3');
         },
       ),
@@ -54,43 +58,14 @@ final registerRouter = GoRoute(
         title: 'Fill your profile',
         stepTitle: 'Step 3: Interests',
         body: RegistrationInterests(
-          authService: MockAuthService.instance,
+          authService: NgrokAuthService.instance,
         ),
         onBackTapped: () => context.go('/auth/register/step-2'),
         onForwardTapped: () async {
-          // LatLng location = MockAuthService.instance.personalInfoForm
-          //     .control('location')
-          //     .value as LatLng;
-          // JsonEncoder encoder = const JsonEncoder.withIndent("    ");
-          // Map<String, Object?> body = {
-          //   ...MockAuthService.instance.personalInfoForm.value,
-          //   'location': [
-          //     location.latitude,
-          //     location.longitude,
-          //   ],
-          //   'birthdate': MockAuthService.instance.personalInfoForm
-          //       .control('birthdate')
-          //       .value
-          //       .toString(),
-          //   ...MockAuthService.instance.goalForm.value,
-          //   'interests': List.from(
-          //     MockAuthService.instance.selectedInterests.map((e) => e.name),
-          //   ),
-          //   'favoriteSong':
-          //       MockAuthService.instance.favoriteSong.value.toString(),
-          // };
-          // debugPrint(encoder.convert(body));
-          // http.Response response = await http.post(
-          //   Uri.parse('$apiUrl/api/auth/registerPersonalInfo'),
-          //   headers: <String, String>{
-          //     'Content-Type': 'application/json; charset=UTF-8',
-          //   },
-          //   body: jsonEncode(body),
-          // );
-          //
-          // debugPrint(response.body);
-
-          context.go('/search');
+          http.Response response = await NgrokAuthService.instance.fillInfo();
+          if (response.statusCode == 200) {
+            context.go('/search');
+          }
         },
         // padding: const EdgeInsets.all(0),
       ),
