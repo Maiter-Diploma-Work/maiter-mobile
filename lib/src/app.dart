@@ -2,6 +2,7 @@ import 'package:amica/src/auth.dart';
 import 'package:amica/src/routes.dart';
 import 'package:amica/src/shared/theme.service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -40,6 +41,15 @@ class _AmicaState extends State<Amica> {
         create: (context) => ThemeService(),
         builder: (context, child) => MaterialApp.router(
           title: widget.title,
+          localizationsDelegates: const [
+            GlobalWidgetsLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale("en"),
+            Locale("ukr"),
+          ],
           themeMode: Provider.of<ThemeService>(context).themeMode,
           theme: ThemeData(
               primarySwatch: Colors.red,

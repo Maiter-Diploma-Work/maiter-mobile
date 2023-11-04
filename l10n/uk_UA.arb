@@ -1,0 +1,17 @@
+{
+  "@@locale": "uk_ua",
+  "appTitle": "Amica",
+  "welcomeMessage": "Почнемо"
+  "signInMessage": "Увйідіть щоб прожовжити",
+  "logInButton": "Увійти",
+  "signUpButton": "Зареєструватись",
+  "loginScreenTitle": "Вхід",
+  "emailFieldName": "Email",
+  "emailFieldHint": "example@example.com",
+  "usernameFieldName": "Ім'я користувача",
+  "usernameFieldHint": "ivan-franko-123",
+  "passwordFieldName": "Пароль",
+  "passwordFieldHint": "Введіть пароль",
+  "confirmPasswordFieldName": "Підтвердження пароля",
+  "confirmPasswordFieldHint": "Повторіть пароль",
+}

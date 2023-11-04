@@ -1,0 +1,17 @@
+{
+  "@@locale": "en_US",
+  "appTitle": "Amica",
+  "welcomeMessage": "Let's get started"
+  "signInMessage": "Sign in to continue",
+  "logInButton": "Log in",
+  "signUpButton": "Sign up",
+  "loginScreenTitle": "Login",
+  "emailFieldName": "Email",
+  "emailFieldHint": "example@example.com",
+  "usernameFieldName": "Username",
+  "usernameFieldHint": "john-doe-123",
+  "passwordFieldName": "Password",
+  "passwordFieldHint": "Enter your password",
+  "confirmPasswordFieldName": "Confirm Password",
+  "confirmPasswordFieldHint": "Repeat your password",
+}
