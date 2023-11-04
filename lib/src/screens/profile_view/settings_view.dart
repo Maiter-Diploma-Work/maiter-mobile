@@ -29,20 +29,17 @@ class ProfileView extends StatelessWidget {
       title: 'Language',
       location: '/profile/edit-menu/language',
     ),
-    // const LinkButton(
-    //   title: 'Theme',
-    //   selectedTitle: 'Standart',
-    //   location: '/profile/edit-menu/theme',
-    // ),
+    const LinkButton(
+      title: 'Theme',
+      location: '/profile/edit-menu/theme',
+    ),
   ];
 
-  Widget generateColumnItem(
-      String title, String? selectedTitle, String location) {
+  Widget generateColumnItem(String title, String location) {
     return Column(
       children: [
         LinkButton(
           title: title,
-          selectedTitle: selectedTitle,
           location: location,
         ),
         const Gap.cubic(26),
@@ -65,7 +62,6 @@ class ProfileView extends StatelessWidget {
             interactionOptions.length,
             (index) => generateColumnItem(
               interactionOptions[index].title,
-              interactionOptions[index].selectedTitle,
               interactionOptions[index].location,
             ),
           ),

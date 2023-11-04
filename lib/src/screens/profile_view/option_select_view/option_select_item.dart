@@ -1,5 +1,6 @@
 class OptionSelectItem {
   final String title;
+  final Object extraData;
 
-  OptionSelectItem(this.title);
+  OptionSelectItem(this.title, this.extraData);
 }

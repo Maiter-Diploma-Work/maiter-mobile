@@ -6,23 +6,12 @@ typedef OnPressed = void Function(BuildContext context);
 class LinkButton extends StatelessWidget {
   final String title;
   final String location;
-  final String? selectedTitle;
 
   const LinkButton({
     super.key,
     required this.title,
-    this.selectedTitle,
     required this.location,
   });
-
-  Widget get selectedItem {
-    if (selectedTitle == null) return Container();
-
-    return Text(
-      selectedTitle!,
-      style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +41,7 @@ class LinkButton extends StatelessWidget {
               fontSize: 16,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              selectedItem,
-              const Icon(Icons.chevron_right),
-            ],
-          )
+          const Icon(Icons.chevron_right),
         ],
       ),
     );

@@ -25,6 +25,7 @@ dependencies:
   path_provider: ^2.1.1
   rx_redux: ^2.5.0
   rxdart: ^0.27.7
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

@@ -4,19 +4,18 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/gap.dart';
 
-class OptionSelect<T extends OptionSelectItem> extends StatefulWidget {
+typedef OnOptionSelect = void Function(Object data);
+
+class OptionSelect<T extends OptionSelectItem> extends StatelessWidget {
   final List<T> options;
+  final OnOptionSelect onOptionSelect;
+
   const OptionSelect({
     super.key,
     required this.options,
+    required this.onOptionSelect,
   });
 
-  @override
-  State<OptionSelect> createState() => _OptionSelectState<T>();
-}
-
-class _OptionSelectState<T extends OptionSelectItem>
-    extends State<OptionSelect<T>> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,21 +25,21 @@ class _OptionSelectState<T extends OptionSelectItem>
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.max,
-            children: List.generate(
-              widget.options.length,
-              (index) => Column(
+            children: List.from(options.map(
+              (e) => Column(
                 children: [
                   AmicaButton(
                     color: Theme.of(context).colorScheme.primary,
-                    text: widget.options.elementAt(index).title,
+                    textColor: Theme.of(context).colorScheme.onPrimary,
+                    text: e.title,
                     minWidth: double.infinity,
                     height: 50,
-                    onPressed: () {},
+                    onPressed: () => onOptionSelect(e.extraData),
                   ),
                   const Gap(verticalGap: 24, horizontalGap: 0),
                 ],
               ),
-            ),
+            )),
           ),
         ],
       ),

@@ -8,8 +8,10 @@ import 'package:amica/src/screens/profile_view/settings_view.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_detailed_view/user_profile_detailed.dart';
 import 'package:amica/src/services/profile/mock_profile.service.dart';
 import 'package:amica/src/shared/interests_list/interests_list.dart';
+import 'package:amica/src/shared/theme.service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 final profileRouter = GoRoute(
@@ -86,9 +88,15 @@ final profileEdit = <GoRoute>[
       title: 'Theme selection',
       scaffoldBody: OptionSelect(
         options: [
-          OptionSelectItem("light"),
-          OptionSelectItem("dark"),
+          OptionSelectItem("light", ThemeMode.light),
+          OptionSelectItem("dark", ThemeMode.dark),
+          OptionSelectItem("system", ThemeMode.system),
         ],
+        onOptionSelect: (Object data) {
+          final themeService =
+              Provider.of<ThemeService>(context, listen: false);
+          themeService.setThemeMode(data as ThemeMode);
+        },
       ),
     ),
   ),
@@ -101,9 +109,10 @@ final profileEdit = <GoRoute>[
       title: 'Language selection',
       scaffoldBody: OptionSelect(
         options: [
-          OptionSelectItem("English"),
-          OptionSelectItem("Українська"),
+          OptionSelectItem("English", "en-us"),
+          OptionSelectItem("Українська", "ua-ua"),
         ],
+        onOptionSelect: (Object data) {},
       ),
     ),
   ),
