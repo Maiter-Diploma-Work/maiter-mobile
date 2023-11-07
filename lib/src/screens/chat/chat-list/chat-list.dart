@@ -116,7 +116,7 @@ class _ChatListViewState extends State<ChatListView> {
         ),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          color: Theme.of(context).colorScheme.inverseSurface,
+          color: Theme.of(context).colorScheme.surface,
           child: ListView(
             shrinkWrap: false,
             children: [
@@ -181,10 +181,8 @@ class _ChatListViewState extends State<ChatListView> {
               width: MediaQuery.of(context).size.width * 0.90,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onInverseSurface
-                      .withOpacity(0.25),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.25),
                 ),
               ),
             ),
@@ -200,7 +198,7 @@ class _ChatListViewState extends State<ChatListView> {
       borderType: BorderType.Circle,
       // padding: const EdgeInsets.all(13),
       strokeWidth: 1.0,
-      color: Theme.of(context).colorScheme.onInverseSurface,
+      color: Theme.of(context).colorScheme.onSurface,
       child: IconButton(
         onPressed: () {},
         icon: Icon(
@@ -251,7 +249,7 @@ class _ChatListViewState extends State<ChatListView> {
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         Text(
@@ -259,7 +257,7 @@ class _ChatListViewState extends State<ChatListView> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ],

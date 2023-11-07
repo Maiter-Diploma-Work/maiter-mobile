@@ -1,0 +1,488 @@
+[
+  {
+    "id": 1,
+    "tag": "@theonlyv",
+    "name": "Valery Doe",
+    "height": 175,
+    "gender": "Female",
+    "birthDate": "1/1/2000",
+    "education": "unknown",
+    "description": "You could tell me what to say, you could tell where to go\nBut I doubt that I would care and my heart would never know",
+    "location": {
+      "postcode": "10000",
+      "name": "Night City",
+      "id": 1,
+      "countryName": "Night City",
+      "longitude": 35.12875298380615,
+      "latitude": 47.84575719126775
+    },
+    "status": "Free",
+    "lookingFor": "Anyone",
+    "photo": "assets/mock-profiles/valery-doe.jpg",
+    "interests": [
+      {
+        "id": 1,
+        "profileId": 1,
+        "name": "programming",
+        "category": "Hobbies"
+      },
+      {
+        "id": 2,
+        "profileId": 1,
+        "name": "true crime",
+        "category": "Hobbies"
+      },
+      {
+        "id": 3,
+        "profileId": 1,
+        "name": "electronics",
+        "category": "Music"
+      },
+      {
+        "id": 4,
+        "profileId": 1,
+        "name": "rock",
+        "category": "Musics"
+      },
+      {
+        "id": 5,
+        "profileId": 1,
+        "name": "valorant",
+        "category": "Games"
+      },
+      {
+        "id": 6,
+        "profileId": 1,
+        "name": "dogs",
+        "category": "Hobbies"
+      },
+      {
+        "id": 7,
+        "profileId": 1,
+        "name": "gym",
+        "category": "Sport"
+      }
+    ],
+    "socialNetworks": [
+      {
+        "id": 1,
+        "userId": 2,
+        "name": "telegram",
+        "username": "@theonlyv"
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "name": "instagram",
+        "username": "@theonlyv"
+      }
+    ],
+    "characterTraits": [
+      {
+        "id": 1,
+        "userId": 1,
+        "bottomName": "Introvert",
+        "topName": "Extravert",
+        "degree": 8
+      },
+      {
+        "id": 2,
+        "userId": 1,
+        "bottomName": "Analytic",
+        "topName": "Creative",
+        "degree": 5
+      },
+      {
+        "id": 3,
+        "userId": 1,
+        "bottomName": "Busy",
+        "topName": "Time rich",
+        "degree": 1
+      },
+      {
+        "id": 4,
+        "userId": 1,
+        "bottomName": "Messy",
+        "topName": "Organized",
+        "degree": 5
+      },
+      {
+        "id": 5,
+        "userId": 1,
+        "bottomName": "Independent",
+        "topName": "Team Player",
+        "degree": 5
+      },
+      {
+        "id": 6,
+        "userId": 1,
+        "bottomName": "Passive",
+        "topName": "Active",
+        "degree": 5
+      },
+      {
+        "id": 7,
+        "userId": 1,
+        "bottomName": "Safe",
+        "topName": "Risky",
+        "degree": 10
+      }
+    ],
+    "expectancies": [
+      {
+        "id": 1,
+        "userId": 1,
+        "text": "Respect me and my time"
+      },
+      {
+        "id": 2,
+        "userId": 1,
+        "text": "No separation anxiety"
+      },
+      {
+        "id": 3,
+        "userId": 1,
+        "text": "Be quite"
+      },
+      {
+        "id": 4,
+        "userId": 1,
+        "text": "Similar interests"
+      },
+      {
+        "id": 5,
+        "userId": 1,
+        "text": "Adequate reaction to critisism}"
+      }
+    ],
+    "photos": [
+      "assets/mock-profiles/valery_doe.jpg",
+      "assets/mock-profiles/valery_doe_1.jpg",
+      "assets/mock-profiles/valery_doe_2.jpg",
+      "assets/mock-profiles/valery_doe_3.jpg",
+      "assets/mock-profiles/valery_doe_4.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "tag": "@theonlyvim",
+    "name": "Vinsent Smith",
+    "height": 175,
+    "gender": "Male",
+    "birthDate": "1/1/2000",
+    "education": "unknown",
+    "description": "You could tell me what to say, you could tell where to go\nBut I doubt that I would care and my heart would never know",
+    "location": {
+      "postcode": "10000",
+      "name": "Night City",
+      "id": 1,
+      "countryName": "Night City",
+      "longitude": 35.12875298380615,
+      "latitude": 47.84575719126775
+    },
+    "status": "Free",
+    "lookingFor": "Anyone",
+    "photo": "assets/mock-profiles/vinsent-smith.jpg",
+    "interests": [
+      {
+        "id": 1,
+        "profileId": 1,
+        "name": "programming",
+        "category": "Hobbies"
+      },
+      {
+        "id": 2,
+        "profileId": 1,
+        "name": "true crime",
+        "category": "Hobbies"
+      },
+      {
+        "id": 3,
+        "profileId": 1,
+        "name": "electronics",
+        "category": "Music"
+      },
+      {
+        "id": 4,
+        "profileId": 1,
+        "name": "rock",
+        "category": "Musics"
+      },
+      {
+        "id": 5,
+        "profileId": 1,
+        "name": "valorant",
+        "category": "Games"
+      },
+      {
+        "id": 6,
+        "profileId": 1,
+        "name": "dogs",
+        "category": "Hobbies"
+      },
+      {
+        "id": 7,
+        "profileId": 1,
+        "name": "gym",
+        "category": "Sport"
+      }
+    ],
+    "socialNetworks": [
+      {
+        "id": 1,
+        "userId": 2,
+        "name": "telegram",
+        "username": "@theonlyvim"
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "name": "instagram",
+        "username": "@theonlyvim"
+      }
+    ],
+    "characterTraits": [
+      {
+        "id": 1,
+        "userId": 2,
+        "bottomName": "Introvert",
+        "topName": "Extravert",
+        "degree": 8
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "bottomName": "Analytic",
+        "topName": "Creative",
+        "degree": 5
+      },
+      {
+        "id": 3,
+        "userId": 2,
+        "bottomName": "Busy",
+        "topName": "Time rich",
+        "degree": 1
+      },
+      {
+        "id": 4,
+        "userId": 2,
+        "bottomName": "Messy",
+        "topName": "Organized",
+        "degree": 5
+      },
+      {
+        "id": 5,
+        "userId": 2,
+        "bottomName": "Independent",
+        "topName": "Team Player",
+        "degree": 5
+      },
+      {
+        "id": 6,
+        "userId": 2,
+        "bottomName": "Passive",
+        "topName": "Active",
+        "degree": 5
+      },
+      {
+        "id": 7,
+        "userId": 2,
+        "bottomName": "Safe",
+        "topName": "Risky",
+        "degree": 10
+      }
+    ],
+    "expectancies": [
+      {
+        "id": 1,
+        "userId": 2,
+        "text": "Respect me and my time"
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "text": "No separation anxiety"
+      },
+      {
+        "id": 3,
+        "userId": 2,
+        "text": "Be quite"
+      },
+      {
+        "id": 4,
+        "userId": 2,
+        "text": "Similar interests"
+      },
+      {
+        "id": 5,
+        "userId": 2,
+        "text": "Adequate reaction to critisism}"
+      }
+    ],
+    "photos": [
+      "assets/mock-profiles/vinsent-smith.jpg",
+      "assets/mock-profiles/vinsent-smith_1.jpg",
+      "assets/mock-profiles/vinsent-smith_2.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "tag": "@ghingardner",
+    "name": "Ghin Shevchenko",
+    "height": 180,
+    "gender": "Male",
+    "birthDate": "1/1/2000",
+    "education": "Battle Academy",
+    "description": "Just take a sit, I've got it",
+    "location": {
+      "postcode": "10000",
+      "name": "Ukraine",
+      "id": 1,
+      "countryName": "Ukraine",
+      "longitude": 35.12875298380615,
+      "latitude": 47.84575719126775
+    },
+    "status": "Free",
+    "lookingFor": "Female",
+    "photo": "assets/mock-profiles/ghin-shevchenko.jpg",
+    "interests": [
+      {
+        "id": 1,
+        "profileId": 1,
+        "name": "karate",
+        "category": "Sport"
+      },
+      {
+        "id": 2,
+        "profileId": 1,
+        "name": "counter strike",
+        "category": "Games"
+      },
+      {
+        "id": 3,
+        "profileId": 1,
+        "name": "sci-fi",
+        "category": "Hobbies"
+      },
+      {
+        "id": 4,
+        "profileId": 1,
+        "name": "fantasy",
+        "category": "Hobbies"
+      },
+      {
+        "id": 5,
+        "profileId": 1,
+        "name": "science",
+        "category": "Hobbies"
+      },
+      {
+        "id": 6,
+        "profileId": 1,
+        "name": "plants",
+        "category": "Hobbies"
+      },
+      {
+        "id": 7,
+        "profileId": 1,
+        "name": "medicine",
+        "category": "Sport"
+      }
+    ],
+    "socialNetworks": [
+      {
+        "id": 1,
+        "userId": 3,
+        "name": "telegram",
+        "username": "@theonlyvim"
+      },
+      {
+        "id": 2,
+        "userId": 3,
+        "name": "instagram",
+        "username": "@theonlyvim"
+      }
+    ],
+    "characterTraits": [
+      {
+        "id": 1,
+        "userId": 3,
+        "bottomName": "Introvert",
+        "topName": "Extravert",
+        "degree": 4
+      },
+      {
+        "id": 2,
+        "userId": 3,
+        "bottomName": "Analytic",
+        "topName": "Creative",
+        "degree": 2
+      },
+      {
+        "id": 3,
+        "userId": 3,
+        "bottomName": "Busy",
+        "topName": "Time rich",
+        "degree": 10
+      },
+      {
+        "id": 4,
+        "userId": 3,
+        "bottomName": "Messy",
+        "topName": "Organized",
+        "degree": 1
+      },
+      {
+        "id": 5,
+        "userId": 3,
+        "bottomName": "Independent",
+        "topName": "Team Player",
+        "degree": 5
+      },
+      {
+        "id": 6,
+        "userId": 3,
+        "bottomName": "Passive",
+        "topName": "Active",
+        "degree": 5
+      },
+      {
+        "id": 7,
+        "userId": 3,
+        "bottomName": "Safe",
+        "topName": "Risky",
+        "degree": 1
+      }
+    ],
+    "expectancies": [
+      {
+        "id": 1,
+        "userId": 3,
+        "text": "Be ready for belladonna"
+      },
+      {
+        "id": 2,
+        "userId": 3,
+        "text": "I like chemistry"
+      },
+      {
+        "id": 3,
+        "userId": 3,
+        "text": "Don't die"
+      },
+      {
+        "id": 4,
+        "userId": 3,
+        "text": "Similar interests"
+      },
+      {
+        "id": 5,
+        "userId": 3,
+        "text": "Please, don't die, I cant resurrect everyone"
+      }
+    ],
+    "photos": [
+      "assets/mock-profiles/ghin-shevchenko.jpg"
+    ]
+  }
+]

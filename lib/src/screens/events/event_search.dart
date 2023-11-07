@@ -24,7 +24,7 @@ class _EventSearchViewState extends State<EventSearchView> {
   late List<Event> _events = [];
 
   Future<void> _readMockedEvents() async {
-    List<Event> response = await widget.eventService.getRandomEvents(2);
+    List<Event> response = await widget.eventService.getRandomEvents(2, null);
     setState(() {
       _events = response;
     });

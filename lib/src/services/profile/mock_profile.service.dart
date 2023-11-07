@@ -1,4 +1,3 @@
-
 import 'package:amica/src/data/valery_doe.dart';
 import 'package:amica/src/models/DTO/User/edit_user_dto.dart';
 import 'package:amica/src/models/profiles/character_trait.dart';
@@ -19,7 +18,7 @@ class MockProfileService extends ProfileService {
 
   void _initialiseCharacterTraits(List<CharacterTrait> characterTraits) {
     FormArray<CharacterTrait> traits =
-        profileEditForm.control('characterTraits') as FormArray<CharacterTrait>;
+    profileEditForm.control('characterTraits') as FormArray<CharacterTrait>;
 
     traits.clear();
     for (CharacterTrait trait in characterTraits) {
@@ -29,12 +28,16 @@ class MockProfileService extends ProfileService {
 
   void _initialiseExpectations(List<Expectancy> expectancies) {
     FormArray<String> expectations =
-        profileEditForm.control('expectations') as FormArray<String>;
+    profileEditForm.control('expectations') as FormArray<String>;
 
     expectations.clear();
     for (Expectancy expectation in expectancies) {
       expectations.add(FormControl<String>(value: expectation.text));
     }
+  }
+
+  void setMockUserProfile(UserProfile profile) {
+    userProfile = profile;
   }
 
   @override
@@ -56,7 +59,9 @@ class MockProfileService extends ProfileService {
       } else if (element == 'characterTraits') {
         _initialiseCharacterTraits(profile.characterTraits);
       } else {
-        profileEditForm.control(element).value = profile.toMap()[element];
+        profileEditForm
+            .control(element)
+            .value = profile.toMap()[element];
       }
     }
   }

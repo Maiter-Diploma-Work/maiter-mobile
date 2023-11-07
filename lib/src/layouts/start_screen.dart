@@ -60,10 +60,10 @@ class StartScreen extends StatelessWidget {
     }
 
     return BoxDecoration(
-      gradient: const LinearGradient(
+      gradient: LinearGradient(
         colors: [
-          Color(0xFF4440AD),
-          Color(0xFF222099),
+          Theme.of(context).colorScheme.primary,
+          Theme.of(context).colorScheme.primary.withRed(150),
         ],
         transform: GradientRotation(1.5),
       ),

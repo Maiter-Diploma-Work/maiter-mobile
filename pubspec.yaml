@@ -36,11 +36,15 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/valery_doe.jpg
-    - assets/valery_doe_1.jpg
-    - assets/valery_doe_2.jpg
-    - assets/valery_doe_3.jpg
-    - assets/valery_doe_4.jpg
+    - assets/mock-profiles/valery_doe.jpg
+    - assets/mock-profiles/valery_doe_1.jpg
+    - assets/mock-profiles/valery_doe_2.jpg
+    - assets/mock-profiles/valery_doe_3.jpg
+    - assets/mock-profiles/valery_doe_4.jpg
+    - assets/mock-profiles/vinsent-smith.jpg
+    - assets/mock-profiles/vinsent-smith_1.jpg
+    - assets/mock-profiles/vinsent-smith_2.jpg
+    - assets/mock-profiles/ghin-shevchenko.jpg
     - assets/girl_1.jpeg
     - assets/girl_1.1.jpeg
     - assets/girl_1.2.jpeg
@@ -62,6 +66,8 @@ flutter:
     - assets/mock_chat_rooms.json
     - assets/mock_pinned_chat_rooms.json
     - assets/mock_chat_messages.json
+    - assets/mock_logins.json
+    - assets/mock_profiles.json
     - assets/logo/logo.png
     - assets/logo/logo-red.png
     - assets/logo/logo-red-blue.png

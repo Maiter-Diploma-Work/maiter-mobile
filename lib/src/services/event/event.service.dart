@@ -1,3 +1,4 @@
+import 'package:amica/src/models/filters/event_filter.dart';
 import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
@@ -29,5 +30,8 @@ abstract class EventService {
 
   Future<List<Event>> getCertainEvents(List<int> ids);
 
-  Future<List<Event>> getRandomEvents(int limit);
+  Future<List<Event>> getRandomEvents(int limit, EventFilter? filter);
+
+  //Post
+  Future<Event> createEvent();
 }

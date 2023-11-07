@@ -2,11 +2,17 @@ import 'package:amica/src/models/filters/event_filter.dart';
 import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/models/shared/location.dart';
+import 'package:amica/src/services/distance.service.dart';
 import 'package:amica/src/services/event/event.service.dart';
+import 'package:amica/src/services/profile/mock_profile.service.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MockEventService extends EventService {
   static MockEventService? _instance;
+
+  static int _mockEventId = 32;
 
   static MockEventService get instance {
     _instance ??= MockEventService();
@@ -17,7 +23,7 @@ class MockEventService extends EventService {
   @override
   Future<List<Event>> getCertainEvents(List<int> ids) async {
     final String response =
-        await rootBundle.loadString('assets/mock_events.json');
+    await rootBundle.loadString('assets/mock_events.json');
 
     List<Event> eventSource = eventsFromJson(response);
 
@@ -32,7 +38,7 @@ class MockEventService extends EventService {
   @override
   Future<Event> getEvent(String id) async {
     final String response =
-        await rootBundle.loadString('assets/mock_events.json');
+    await rootBundle.loadString('assets/mock_events.json');
 
     List<Event> eventSource = eventsFromJson(response);
 
@@ -40,29 +46,118 @@ class MockEventService extends EventService {
   }
 
   @override
-  Future<List<Event>> getRandomEvents(int limit) async {
+  Future<List<Event>> getRandomEvents(int limit, EventFilter? filter) async {
     final String response =
-        await rootBundle.loadString('assets/mock_events.json');
+    await rootBundle.loadString('assets/mock_events.json');
 
     List<Event> eventSource = eventsFromJson(response);
 
-    return eventSource;
+    if (filter != null) {
+      List<Event> tmp = eventSource;
+      if (filter.lookingFor != '') {
+        tmp = tmp
+            .where((element) => element.lookingFor == filter.lookingFor)
+            .toList();
+      }
+      if (filter.age.min != -1) {
+        tmp = tmp.where((element) => element.minAge == filter.age.min).toList();
+      }
+      if (filter.age.max != -1) {
+        tmp = tmp.where((element) => element.maxAge == filter.age.max).toList();
+      }
+      if (filter.distance != -1) {}
+
+      return tmp;
+    }
+
+    if (limit == -1) {
+      return eventSource;
+    }
+
+    return eventSource.getRange(0, limit).toList();
   }
 
   @override
   Future<void> initializeFilters(UserProfile profile) async {
     String response =
-        await rootBundle.loadString('assets/mock_event_filter.json');
+    await rootBundle.loadString('assets/mock_event_filter.json');
     EventFilter filter = eventFiltersFromJson(response)
         .firstWhere((element) => element.userId == profile.id);
 
-    for (MapEntry element in filter.toJson().entries) {
+    for (MapEntry element in filter
+        .toJson()
+        .entries) {
       if (element.key == 'age') {
-        eventSearchFilterForm.control('age').value =
+        eventSearchFilterForm
+            .control('age')
+            .value =
             Range.fromJson(element.value);
       } else if (eventSearchFilterForm.controls.keys.contains(element.key)) {
-        eventSearchFilterForm.control(element.key).value = element.value;
+        eventSearchFilterForm
+            .control(element.key)
+            .value = element.value;
       }
     }
+  }
+
+  @override
+  Future<Event> createEvent() {
+    _mockEventId++;
+
+    UserProfile user = MockProfileService.instance.userProfile!;
+
+    return Future.delayed(
+      const Duration(milliseconds: 250),
+          () =>
+          Event(
+            creatorId: user.id,
+            creationDate: DateTime.now(),
+            amountOfPeople: createEventForm
+                .control('amountOfPeople')
+                .value,
+            lookingFor: createEventForm
+                .control('lookingFor')
+                .value,
+            minAge: createEventForm
+                .control('ageConstraints')
+                .value
+                .min,
+            maxAge: createEventForm
+                .control('ageConstraints')
+                .value
+                .max,
+            radius: DistanceService.instance.distanceBetweenLatLngs(
+              createEventForm
+                  .control('location')
+                  .value,
+              LatLng(
+                user.location.latitude,
+                user.location.longitude,
+              ),
+            ),
+            id: _mockEventId,
+            location: Location(
+              countryName: 'Ukraine',
+              id: _mockEventId,
+              latitude: createEventForm
+                  .control('location')
+                  .value
+                  .latitude,
+              longitude: createEventForm
+                  .control('location')
+                  .value
+                  .longitude,
+              name: 'Zaporizhzhia',
+              postcode: '69019',
+            ),
+            description: createEventForm
+                .control('description')
+                .value,
+            name: user.name,
+            photo: user.photo,
+            interests: user.interests,
+            endDate: DateTime.utc(2073),
+          ),
+    );
   }
 }

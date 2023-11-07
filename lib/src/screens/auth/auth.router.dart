@@ -4,7 +4,7 @@ import 'package:amica/src/screens/auth/register/steps/interest_step.dart';
 import 'package:amica/src/screens/auth/register/steps/step_1.dart';
 import 'package:amica/src/screens/auth/register/steps/step_2.dart';
 import 'package:amica/src/screens/welcome_view/auth_method_choise.dart';
-import 'package:amica/src/services/auth/ngrok_auth.service.dart';
+import 'package:amica/src/services/auth/mock_auth.service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,13 +21,13 @@ final authRouter = GoRoute(
 final loginRouter = GoRoute(
   path: 'login',
   builder: (context, state) => LoginScreen(
-    authService: NgrokAuthService.instance,
+    authService: MockAuthService.instance,
   ),
 );
 final registerRouter = GoRoute(
   path: 'register',
   builder: (context, state) => RegisterScreen(
-    authService: NgrokAuthService.instance,
+    authService: MockAuthService.instance,
   ),
   routes: [
     GoRoute(
@@ -35,7 +35,7 @@ final registerRouter = GoRoute(
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 1: Personal Info',
-        body: RegistrationFirstStep(authService: NgrokAuthService.instance),
+        body: RegistrationFirstStep(authService: MockAuthService.instance),
         onBackTapped: () => context.go('/auth/register'),
         onForwardTapped: () => context.go('/auth/register/step-2'),
       ),
@@ -45,7 +45,7 @@ final registerRouter = GoRoute(
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 2: Your goal',
-        body: RegistrationSecondStep(authService: NgrokAuthService.instance),
+        body: RegistrationSecondStep(authService: MockAuthService.instance),
         onBackTapped: () => context.go('/auth/register/step-1'),
         onForwardTapped: () {
           context.go('/auth/register/step-3');
@@ -58,11 +58,11 @@ final registerRouter = GoRoute(
         title: 'Fill your profile',
         stepTitle: 'Step 3: Interests',
         body: RegistrationInterests(
-          authService: NgrokAuthService.instance,
+          authService: MockAuthService.instance,
         ),
         onBackTapped: () => context.go('/auth/register/step-2'),
         onForwardTapped: () async {
-          http.Response response = await NgrokAuthService.instance.fillInfo();
+          http.Response response = await MockAuthService.instance.fillInfo();
           if (response.statusCode == 200) {
             context.go('/search');
           }
