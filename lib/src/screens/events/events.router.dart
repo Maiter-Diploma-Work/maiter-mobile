@@ -27,7 +27,7 @@ final eventsRouter = GoRoute(
     title: 'Events',
     isDetailed: false,
     scaffoldBody: EventSearchView(
-      user: ValeryDoe,
+      user: MockProfileService.instance.userProfile!,
       eventService: MockEventService.instance,
     ),
     selectedNavigationItemIndex: 1,

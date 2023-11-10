@@ -5,7 +5,7 @@
     "tag": "@ikik0",
     "name": "Inessa Kik",
     "gender": "Female",
-    "birthDate": "8/22/2004",
+    "birthDate": "8/22/2000",
     "education": "Palacky University",
     "description": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.",
     "location": {
@@ -13,8 +13,8 @@
       "name": "Vysočany",
       "id": 1,
       "countryName": "Czech Republic",
-      "longitude": 15.6896923,
-      "latitude": 48.9410561
+      "longitude": 35.12875298380615,
+      "latitude": 47.84575719126775
     },
     "photo": "assets/girl_2.jpeg",
     "photos": [
@@ -141,7 +141,7 @@
     "tag": "@rstringer1",
     "name": "Richie Stringer",
     "gender": "Man",
-    "birthDate": "3/12/1990",
+    "birthDate": "3/12/1999",
     "education": "University of Economics Prague",
     "description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
     "location": {
@@ -149,8 +149,8 @@
       "name": "Dobrá",
       "id": 2,
       "countryName": "Czech Republic",
-      "longitude": 18.413937,
-      "latitude": 49.6738269
+      "longitude": 35.12875298380615,
+      "latitude": 47.84575719126775
     },
     "photo": "assets/guy_1.jpeg",
     "photos": [
@@ -407,7 +407,7 @@
         "degree": 1
       }
     ],
-    "lookingFor": "Non-binary",
+    "lookingFor": "Anyone",
     "status": "Free relationship"
   },
   {
@@ -416,7 +416,7 @@
     "tag": "@bromanet3",
     "name": "Bern Romanet",
     "gender": "Woman",
-    "birthDate": "8/12/1995",
+    "birthDate": "8/12/2000",
     "education": "Ivano-Frankivsk National University of Oli and Gas",
     "description": "Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
     "location": {
@@ -424,8 +424,8 @@
       "name": "Lisovi Sorochyntsi",
       "id": 4,
       "countryName": "Ukraine",
-      "longitude": 32.3370869,
-      "latitude": 50.6881144
+      "longitude": 35.12875298380615,
+      "latitude": 47.84575719126775
     },
     "photo": "assets/girl_1.jpeg",
     "photos": [
@@ -552,7 +552,7 @@
     "tag": "@caskham4",
     "name": "Carry Askham",
     "gender": "Man",
-    "birthDate": "1/31/1966",
+    "birthDate": "1/31/2000",
     "education": "Université Vincennes Saint-Denis (Paris VIII)",
     "description": "Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.",
     "location": {
@@ -560,11 +560,13 @@
       "name": "Meylan",
       "id": 5,
       "countryName": "France",
-      "longitude": 5.764182,
-      "latitude": 45.203406
+      "longitude": -118.3841777,
+      "latitude": 34.050751
     },
     "photo": "assets/guy_2.jpeg",
-    "photos": ["assets/guy_2.jpeg"],
+    "photos": [
+      "assets/guy_2.jpeg"
+    ],
     "interests": [
       {
         "id": 1,
@@ -683,7 +685,7 @@
     "tag": "@sbunning5",
     "name": "Jane Bunning",
     "gender": "Woman",
-    "birthDate": "10/8/2042",
+    "birthDate": "10/8/2000",
     "education": "University of Pardubice",
     "description": "Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
     "location": {
@@ -691,11 +693,14 @@
       "name": "Údlice",
       "id": 6,
       "countryName": "Czech Republic",
-      "longitude": 13.4626848,
-      "latitude": 50.4448562
+      "longitude": -118.3841777,
+      "latitude": 34.050751
     },
     "photo": "assets/girl_3.jpeg",
-    "photos": ["assets/girl_3.jpeg", "assets/girl_3.1.jpeg"],
+    "photos": [
+      "assets/girl_3.jpeg",
+      "assets/girl_3.1.jpeg"
+    ],
     "interests": [
       {
         "id": 1,
@@ -828,7 +833,135 @@
         "degree": 7
       }
     ],
-    "lookingFor": "Female",
+    "lookingFor": "Anyone",
     "status": "Have relationshp"
+  },
+  {
+    "id": 8,
+    "age": 20,
+    "tag": "@smcmurty0",
+    "name": "Stephan McMurty",
+    "gender": "Male",
+    "birthDate": "5/8/1999",
+    "education": "Uzhgorod National University",
+    "description": "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
+    "location": {
+      "postcode": null,
+      "name": "Illintsi",
+      "id": 1,
+      "countryName": "Ukraine",
+      "longitude": 35.12875298380615,
+      "latitude": 47.84575719126775
+    },
+    "photo": "assets/guy_4.jpg",
+    "photos": [
+      "assets/guy_4.jpg",
+      "assets/guy_4.1.jpg"
+    ],
+    "interests": [
+      {
+        "id": 1,
+        "profileId": 1,
+        "name": "traveling",
+        "category": "cooking"
+      },
+      {
+        "id": 2,
+        "profileId": 2,
+        "name": "watching movies",
+        "category": "movies"
+      },
+      {
+        "id": 3,
+        "profileId": 3,
+        "name": "photography",
+        "category": "art"
+      }
+    ],
+    "socialNetworks": [
+      {
+        "name": "viber",
+        "username": "sollerhad0",
+        "id": 1,
+        "userId": 1
+      }
+    ],
+    "height": 171,
+    "favoriteSong": "Synchronised methodical core",
+    "expectancies": [
+      {
+        "id": 1,
+        "userId": 1,
+        "text": "Multi-layered incremental moderator"
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "text": "Optimized neutral artificial intelligence"
+      },
+      {
+        "id": 3,
+        "userId": 3,
+        "text": "Right-sized exuding approach"
+      },
+      {
+        "id": 4,
+        "userId": 4,
+        "text": "Advanced bi-directional middleware"
+      }
+    ],
+    "characterTraits": [
+      {
+        "id": 1,
+        "userId": 1,
+        "bottomName": "Introvert",
+        "topName": "Extravert",
+        "degree": 6
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "bottomName": "Analytical",
+        "topName": "Creative",
+        "degree": 7
+      },
+      {
+        "id": 3,
+        "userId": 3,
+        "bottomName": "Busy",
+        "topName": "Time Rich",
+        "degree": 0
+      },
+      {
+        "id": 4,
+        "userId": 4,
+        "bottomName": "Messy",
+        "topName": "Organized",
+        "degree": 5
+      },
+      {
+        "id": 5,
+        "userId": 5,
+        "bottomName": "Independent",
+        "topName": "Team Player",
+        "degree": 5
+      },
+      {
+        "id": 6,
+        "userId": 6,
+        "bottomName": "Passive",
+        "topName": "Active",
+        "degree": 5
+      },
+      {
+        "id": 7,
+        "userId": 7,
+        "bottomName": "Safe",
+        "topName": "Risky",
+        "degree": 3
+      }
+    ],
+    "lookingFor": "Female",
+    "status": "Free"
   }
 ]

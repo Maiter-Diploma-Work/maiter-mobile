@@ -4,7 +4,7 @@
     "userId": 1,
     "distance": 5.0,
     "age": {
-      "min": 25,
+      "min": 18,
       "max": 30
     },
     "lookingFor": "Anyone",
@@ -16,5 +16,34 @@
       "Sport",
       "Healthy life-style"
     ]
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "distance": 5.0,
+    "age": {
+      "min": 18,
+      "max": 30
+    },
+    "lookingFor": "Anyone",
+    "interests": [
+      "League of Legeneds",
+      "Coding",
+      "Valorant",
+      "Dogs",
+      "Sport",
+      "Healthy life-style"
+    ]
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "distance": 8.0,
+    "age": {
+      "min": 18,
+      "max": 30
+    },
+    "lookingFor": "Anyone",
+    "interests": []
   }
 ]

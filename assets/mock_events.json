@@ -1,52 +1,102 @@
 [
-    {
-        "id": 1,
-        "creator_id": 2,
-        "amount_of_people": 1,
-        "looking_for": "Anyone",
-        "age_constraints": {
-            "min_age": 20,
-            "max_age": 25
-        },
-        "radius": 2.4,
-        "creation_date": "31/08/2023",
-        "creator_photo": "assets/girl_2.jpeg",
-        "location": {
-            "id": 1,
-            "postcode": "69001",
-            "name": "ТЦ Україна",
-            "countryName": "Ukraine",
-            "longitude": 35.13119597498678,
-            "latitude": 47.84269503381282
-        },
-        "description": "Привіт, якщо ти не проти зустрітися і випити кави, то я чекаю тебе біля ТЦ “Україна”  :) ",
-        "name": "Inessa",
-        "interests": [],
-        "end_date": "31/08/2023"
+  {
+    "id": 1,
+    "creator_id": 2,
+    "amount_of_people": 1,
+    "looking_for": "Anyone",
+    "age_constraints": {
+      "min_age": 20,
+      "max_age": 25
     },
-    {
-        "id": 2,
-        "creator_id": 3,
-        "amount_of_people": 1,
-        "looking_for": "Anyone",
-        "age_constraints": {
-            "min_age": 20,
-            "max_age": 25
-        },
-        "radius": 2.4,
-        "creation_date": "31/08/2023",
-        "creator_photo": "assets/guy_1.jpeg",
-        "location": {
-            "id": 2,
-            "postcode": "69001",
-            "name": "Кінотеатр ім. довженка",
-            "countryName": "Ukraine",
-            "longitude": 35.133115629294075,
-            "latitude": 47.842444351009455
-        },
-        "description": "Привіт, хотів би сходити в кіно та не маю з ким. Приєднуйся, буду радий познайомитись",
-        "name": "Richie",
-        "interests": [],
-        "end_date": "31/08/2023"
-    }
+    "radius": 2.4,
+    "creation_date": "31/08/2023",
+    "creator_photo": "assets/girl_2.jpeg",
+    "location": {
+      "id": 1,
+      "postcode": "69001",
+      "name": "ТЦ Україна",
+      "countryName": "Ukraine",
+      "longitude": 35.13119597498678,
+      "latitude": 47.84269503381282
+    },
+    "description": "Привіт, якщо ти не проти зустрітися і випити кави, то я чекаю тебе біля ТЦ “Україна”  :) ",
+    "name": "Inessa",
+    "interests": [],
+    "end_date": "31/08/2023"
+  },
+  {
+    "id": 2,
+    "creator_id": 3,
+    "amount_of_people": 1,
+    "looking_for": "Anyone",
+    "age_constraints": {
+      "min_age": 20,
+      "max_age": 25
+    },
+    "radius": 2.4,
+    "creation_date": "31/08/2023",
+    "creator_photo": "assets/guy_1.jpeg",
+    "location": {
+      "id": 2,
+      "postcode": "69001",
+      "name": "Кінотеатр ім. довженка",
+      "countryName": "Ukraine",
+      "longitude": 35.133115629294075,
+      "latitude": 47.842444351009455
+    },
+    "description": "Привіт, хотів би сходити в кіно та не маю з ким. Приєднуйся, буду радий познайомитись",
+    "name": "Richie",
+    "interests": [],
+    "end_date": "31/08/2023"
+  },
+  {
+    "id": 3,
+    "creator_id": 3,
+    "amount_of_people": 3,
+    "looking_for": "Anyone",
+    "age_constraints": {
+      "min_age": 20,
+      "max_age": 25
+    },
+    "radius": 6.0,
+    "creation_date": "31/08/2023",
+    "creator_photo": "assets/guy_2.jpeg",
+    "location": {
+      "id": 3,
+      "postcode": "000",
+      "name": "Rancho Park",
+      "countryName": "USA",
+      "longitude": -118.41653129185265,
+      "latitude": 34.04209531132013
+    },
+    "description": "Hi, I'd want to play Golf w/ anybody",
+    "name": "Carry",
+    "interests": [],
+    "end_date": "31/08/2023"
+  },
+  {
+    "id": 4,
+    "creator_id": 7,
+    "amount_of_people": 1,
+    "looking_for": "Anyone",
+    "age_constraints": {
+      "min_age": 20,
+      "max_age": 25
+    },
+    "radius": 6.0,
+    "creation_date": "31/08/2023",
+    "creator_photo": "assets/girl_3.jpeg",
+    "location": {
+      "id": 4,
+      "postcode": "000",
+      "name": "Rancho Park",
+      "countryName": "USA",
+      "longitude": -118.4021399955299,
+      "latitude": 34.050881953762406
+    },
+    "description": "Hi, I'd want to walk my dawg with someone out here, and have a nice little convo",
+    "name": "Jane",
+    "interests": [],
+    "end_date": "31/08/2023"
+  }
 ]

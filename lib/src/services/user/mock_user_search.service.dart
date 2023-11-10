@@ -1,8 +1,11 @@
 import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/filters/user_filter.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
+import 'package:amica/src/services/distance.service.dart';
+import 'package:amica/src/services/profile/mock_profile.service.dart';
 import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MockedUserSearchService extends UserSearchService {
   static UserSearchService? _instance;
@@ -13,13 +16,17 @@ class MockedUserSearchService extends UserSearchService {
     return _instance!;
   }
 
+  MockedUserSearchService() {
+    initializeFilters(MockProfileService.instance.userProfile!);
+  }
+
   Future<List<UserProfile>> getUserProfiles() async {
     final List<String> userIds =
         List.generate(6, (index) => (index + 1).toString());
 
     final String response =
         await rootBundle.loadString('assets/mock_users.json');
-    final List<UserProfile> data = usersFromJson(response);
+    List<UserProfile> data = usersFromJson(response);
 
     return data;
   }
@@ -43,16 +50,67 @@ class MockedUserSearchService extends UserSearchService {
   }
 
   @override
-  Future<List<UserProfile>> getRandomUsers(int limit) async {
+  Future<List<UserProfile>> getRandomUsers(
+    UserProfile profile, {
+    int limit = -1,
+    UserFilter? filter,
+  }) async {
     List<UserProfile> response = await getUserProfiles();
     response.shuffle();
 
     if (limit != -1) {
-      int start = limit > response.length ? response.length : limit;
-      response.removeRange(start, response.length);
+      int end = limit > response.length ? response.length : limit;
+      response = response.getRange(0, end).toList();
     }
-    users = response;
 
+    filter ??= UserFilter.fromJson({
+      "id": -1,
+      "userId": profile.id,
+      "distance": userSearchFilterForm.value['distance'] as double,
+      "age": {
+        "min": (userSearchFilterForm.value['age'] as Range).min,
+        "max": (userSearchFilterForm.value['age'] as Range).max,
+      },
+      "lookingFor": userSearchFilterForm.value['lookingFor'] as String,
+      "interests": [],
+    });
+
+    if (filter.lookingFor != 'Anyone') {
+      response = response
+          .where((element) => element.gender == filter!.lookingFor)
+          .toList();
+    }
+    response = List.from(response.where(
+      (user) => user.lookingFor == "Anyone"
+          ? true
+          : user.lookingFor == profile.gender,
+    ));
+
+    response = response.where((user) {
+      LatLng userLocation = LatLng(
+        user.location.latitude,
+        user.location.longitude,
+      );
+      LatLng profileLocation = LatLng(
+        profile.location.latitude,
+        profile.location.longitude,
+      );
+
+      double deltaDistance = DistanceService.instance.distanceBetweenLatLngs(
+        userLocation,
+        profileLocation,
+      );
+      return deltaDistance <= filter!.distance;
+    }).toList();
+
+    response = List.from(response.where(
+      (user) {
+        int userAge = (DateTime.now().year - user.birthDate.year).abs();
+        return userAge <= filter!.age.max && userAge >= filter.age.min;
+      },
+    ));
+
+    users = response;
     return response;
   }
 

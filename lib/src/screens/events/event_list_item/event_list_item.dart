@@ -71,6 +71,8 @@ class EventListItem extends StatelessWidget {
       event.location.longitude,
     );
 
+    print({eventLocation.toJson(), location.toJson()});
+
     final String distance = distanceService
         .distanceBetweenLatLngs(eventLocation, location)
         .toStringAsFixed(2);

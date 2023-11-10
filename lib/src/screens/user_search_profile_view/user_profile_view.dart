@@ -3,6 +3,8 @@ import 'package:amica/src/models/DTO/like_dto.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/services/like/like.service.dart';
+import 'package:amica/src/services/profile/mock_profile.service.dart';
+import 'package:amica/src/services/profile/profile.service.dart';
 import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
@@ -11,18 +13,22 @@ import 'package:amica/src/shared/profile/location.dart';
 import 'package:amica/src/shared/profile/profile_picture.dart';
 import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 
 class UserProfileView extends StatefulWidget {
   final UserSearchService userService;
+  final ProfileService profileService;
   final LikeService likeService;
   final int userId;
 
-  const UserProfileView(
-      {super.key,
-      required this.userService,
-      required this.likeService,
-      required this.userId});
+  const UserProfileView({
+    super.key,
+    required this.userService,
+    required this.likeService,
+    required this.userId,
+    required this.profileService,
+  });
 
   @override
   State<UserProfileView> createState() => _UserProfileViewState();
@@ -85,12 +91,16 @@ class _UserProfileViewState extends State<UserProfileView> {
 
   Future<void> _initState() async {
     if (widget.userService.users.isEmpty) {
-      await widget.userService.getRandomUsers(-1);
+      await widget.userService.getRandomUsers(
+        widget.profileService.userProfile!,
+      );
     }
 
     setState(() {
       _profiles = widget.userService.users;
-      _currentProfile = widget.userService.users.first;
+      if (_profiles.isNotEmpty) {
+        _currentProfile = widget.userService.users.first;
+      }
     });
   }
 
@@ -102,6 +112,7 @@ class _UserProfileViewState extends State<UserProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    const double maxImageHeight = 512;
     return _currentProfile == null
         ? const Center(
             child: Text(
@@ -116,24 +127,34 @@ class _UserProfileViewState extends State<UserProfileView> {
               children: [
                 ListView(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
                     vertical: 4,
                   ),
                   children: [
-                    ProfilePicture(
-                      pictureUrl: _currentProfile == null
-                          ? 'assets/logo/logo.png'
-                          : _currentProfile!.photo,
+                    SizedBox(
+                      height: maxImageHeight,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ProfilePicture(
+                            pictureUrl: _currentProfile == null
+                                ? 'assets/logo/logo.png'
+                                : _currentProfile!.photo,
+                          ),
+                          _detailsButton(context),
+                          _likeButton(context),
+                          _dislikeButton(context),
+                        ],
+                      ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32.0,
+                        vertical: 16.0,
+                      ),
                       child: generateProfileInfo(context),
                     ),
                   ],
                 ),
-                _dislikeButton(context),
-                _detailsButton(context),
-                _likeButton(context),
               ],
             ),
           );

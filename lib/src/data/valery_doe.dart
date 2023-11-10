@@ -26,7 +26,7 @@ final UserProfile ValeryDoe = UserProfile(
   ),
   status: 'Free',
   lookingFor: 'Anyone',
-  photo: "assets/valery_doe.jpg",
+  photo: "assets/mock-profiles/valery_doe.jpg",
   interests: [
     Interest(
       id: 5,
@@ -154,11 +154,11 @@ final UserProfile ValeryDoe = UserProfile(
     ),
   ],
   photos: [
-    'assets/valery_doe.jpg',
-    'assets/valery_doe_1.jpg',
-    'assets/valery_doe_2.jpg',
-    'assets/valery_doe_3.jpg',
-    'assets/valery_doe_4.jpg',
+    "assets/mock-profiles/valery_doe.jpg",
+    "assets/mock-profiles/valery_doe_1.jpg",
+    "assets/mock-profiles/valery_doe_2.jpg",
+    "assets/mock-profiles/valery_doe_3.jpg",
+    "assets/mock-profiles/valery_doe_4.jpg",
   ],
   goals: {
     'love': false,

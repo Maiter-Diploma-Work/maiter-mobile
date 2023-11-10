@@ -1,6 +1,8 @@
 import 'package:amica/src/models/profiles/character_trait.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/interest.dart';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:reactive_forms/reactive_forms.dart';
@@ -42,7 +44,9 @@ abstract class AuthService {
     'name': FormControl<String>(validators: [Validators.required]),
     'birthdate': FormControl<DateTime>(validators: [Validators.required]),
     'gender': FormControl<String>(
-        value: UserProfile.empty().gender, validators: [Validators.required]),
+        value: UserProfile
+            .empty()
+            .gender, validators: [Validators.required]),
     'location': FormControl<LatLng>(validators: [Validators.required]),
     'height': FormControl<int>(validators: [
       Validators.required,
@@ -53,9 +57,12 @@ abstract class AuthService {
     'bio': FormControl<String>(validators: [Validators.required]),
     'characterTraits': FormArray<CharacterTrait>(
       List.from(
-        UserProfile.empty().characterTraits.map(
+        UserProfile
+            .empty()
+            .characterTraits
+            .map(
               (e) => FormControl<CharacterTrait>(value: e),
-            ),
+        ),
       ),
     ),
   });

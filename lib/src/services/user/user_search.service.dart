@@ -1,4 +1,5 @@
 import 'package:amica/src/models/filters/range.dart';
+import 'package:amica/src/models/filters/user_filter.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -19,5 +20,9 @@ abstract class UserSearchService {
 
   Future<List<UserProfile>> getCertainUsers(List<int> ids);
 
-  Future<List<UserProfile>> getRandomUsers(int limit);
+  Future<List<UserProfile>> getRandomUsers(
+    UserProfile profile, {
+    int limit = -1,
+    UserFilter? filter,
+  });
 }

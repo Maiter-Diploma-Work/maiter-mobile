@@ -4,7 +4,27 @@
     "userId": 1,
     "distance": 5.0,
     "age": {
-      "min": 25,
+      "min": 18,
+      "max": 30
+    },
+    "lookingFor": "Anyone"
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "distance": 15.0,
+    "age": {
+      "min": 18,
+      "max": 30
+    },
+    "lookingFor": "Anyone"
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "distance": 15.0,
+    "age": {
+      "min": 18,
       "max": 30
     },
     "lookingFor": "Anyone"

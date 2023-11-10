@@ -19,6 +19,7 @@ final searchUserRouter = GoRoute(
     scaffoldBody: UserProfileView(
       userService: MockedUserSearchService.instance,
       likeService: MockLikeService.instance,
+      profileService: MockProfileService.instance,
       userId: ValeryDoe.id,
     ),
     selectedNavigationItemIndex: 0,
@@ -41,7 +42,7 @@ final searchUserRouter = GoRoute(
         late UserProfile profile = state.extra as UserProfile;
         return AmicaScaffold(
           isDetailed: true,
-          hasBlurOnAppBar: false,
+          hasBlurOnAppBar: true,
           title: "",
           scaffoldBody: UserProfileDetailed(
             profile: profile,

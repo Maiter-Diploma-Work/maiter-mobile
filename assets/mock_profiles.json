@@ -18,7 +18,7 @@
     },
     "status": "Free",
     "lookingFor": "Anyone",
-    "photo": "assets/mock-profiles/valery-doe.jpg",
+    "photo": "assets/mock-profiles/valery_doe.jpg",
     "interests": [
       {
         "id": 1,
@@ -339,11 +339,11 @@
       "name": "Ukraine",
       "id": 1,
       "countryName": "Ukraine",
-      "longitude": 35.12875298380615,
-      "latitude": 47.84575719126775
+      "longitude": -118.3841777,
+      "latitude": 34.050751
     },
     "status": "Free",
-    "lookingFor": "Female",
+    "lookingFor": "Anyone",
     "photo": "assets/mock-profiles/ghin-shevchenko.jpg",
     "interests": [
       {

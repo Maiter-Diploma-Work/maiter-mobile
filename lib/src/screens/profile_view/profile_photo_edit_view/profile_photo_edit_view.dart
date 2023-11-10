@@ -50,6 +50,8 @@ class ProfilePhotoEditView extends StatelessWidget {
         ),
         children: [
           AmicaButton(
+            textColor: Theme.of(context).colorScheme.onPrimary,
+            color: Theme.of(context).colorScheme.primary,
             onPressed: () async {
               var picked = await FilePicker.platform.pickFiles();
 
@@ -58,7 +60,6 @@ class ProfilePhotoEditView extends StatelessWidget {
               }
             },
             text: 'Upload new Photo',
-            color: Theme.of(context).colorScheme.secondary,
           ),
           const Gap(
             verticalGap: 30,
@@ -71,7 +72,6 @@ class ProfilePhotoEditView extends StatelessWidget {
             alignment: WrapAlignment.spaceEvenly,
             children: photos(context),
           )
-          //todo: wrap with photos
         ],
       ),
     );

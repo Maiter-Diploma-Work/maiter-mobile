@@ -30,7 +30,11 @@ abstract class EventService {
 
   Future<List<Event>> getCertainEvents(List<int> ids);
 
-  Future<List<Event>> getRandomEvents(int limit, EventFilter? filter);
+  Future<List<Event>> getRandomEvents(
+    UserProfile profile, {
+    int limit = -1,
+    EventFilter? filter,
+  });
 
   //Post
   Future<Event> createEvent();

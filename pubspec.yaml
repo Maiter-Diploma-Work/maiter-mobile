@@ -26,6 +26,8 @@ dependencies:
   rx_redux: ^2.5.0
   rxdart: ^0.27.7
   provider: ^6.0.5
+  geolocator: ^10.1.0
+  geocoding: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +59,8 @@ flutter:
     - assets/guy_3.1.jpeg
     - assets/guy_3.2.jpeg
     - assets/guy_3.3.jpeg
+    - assets/guy_4.jpg
+    - assets/guy_4.1.jpg
     - assets/mock_users.json
     - assets/mock_interests.json
     - assets/mock_likes.json

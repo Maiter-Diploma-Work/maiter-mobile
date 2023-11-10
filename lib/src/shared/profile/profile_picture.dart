@@ -29,26 +29,21 @@ class ProfilePicture extends StatelessWidget {
   );
 
   Widget imageGenerator(bool isRound) {
-    if (!isRound) {
-      return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 68.0),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius ?? 68.0),
-          child: Image(
-            image: AssetImage(pictureUrl),
-            height: 512,
-            fit: BoxFit.cover,
-          ),
-        ),
-      );
-    } else {
+    if (isRound) {
       return CircleAvatar(
         radius: radius,
         backgroundImage: AssetImage(pictureUrl),
       );
     }
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius ?? 68.0),
+      child: Image(
+        image: AssetImage(pictureUrl),
+        height: 512,
+        fit: BoxFit.cover,
+      ),
+    );
   }
 
   @override
