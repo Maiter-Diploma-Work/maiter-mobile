@@ -25,7 +25,7 @@ class MockedUserSearchService extends UserSearchService {
         List.generate(6, (index) => (index + 1).toString());
 
     final String response =
-        await rootBundle.loadString('assets/mock_users.json');
+        await rootBundle.loadString('assets/mock-data/mock_users.json');
     List<UserProfile> data = usersFromJson(response);
 
     return data;
@@ -55,6 +55,8 @@ class MockedUserSearchService extends UserSearchService {
     int limit = -1,
     UserFilter? filter,
   }) async {
+    await initializeFilters(profile);
+
     List<UserProfile> response = await getUserProfiles();
     response.shuffle();
 
@@ -117,7 +119,7 @@ class MockedUserSearchService extends UserSearchService {
   @override
   Future<void> initializeFilters(UserProfile profile) async {
     String response =
-        await rootBundle.loadString('assets/mock_user_filter.json');
+        await rootBundle.loadString('assets/mock-data/mock_user_filter.json');
     UserFilter filter = userFiltersFromJson(response).firstWhere(
       (element) => element.userId == profile.id,
     );

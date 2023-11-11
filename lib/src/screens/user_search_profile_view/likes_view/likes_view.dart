@@ -1,6 +1,7 @@
 import 'package:amica/src/models/DTO/like_dto.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/services/like/like.service.dart';
+import 'package:amica/src/services/profile/profile.service.dart';
 import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:amica/src/shared/profile/location.dart';
@@ -8,13 +9,13 @@ import 'package:amica/src/shared/profile/user_profile_name.dart';
 import 'package:flutter/material.dart';
 
 class AmicaLikesView extends StatefulWidget {
-  final int userId;
+  final ProfileService profileService;
   final UserSearchService userService;
   final LikeService likeService;
 
   const AmicaLikesView({
     super.key,
-    required this.userId,
+    required this.profileService,
     required this.userService,
     required this.likeService,
   });
@@ -38,9 +39,7 @@ class _AmicaLikesViewState extends State<AmicaLikesView> {
     });
   }
 
-  void _onProfileTap(UserProfile userProfile) {
-    debugPrint(' --> ${userProfile.id} was clicked');
-  }
+  void _onProfileTap(UserProfile userProfile) {}
 
   Widget _dislikeButton(BuildContext context, int userId) {
     return Padding(
@@ -116,8 +115,8 @@ class _AmicaLikesViewState extends State<AmicaLikesView> {
   }
 
   Future<void> readMockLikesFromJson() async {
-    List<LikeDto> likes =
-        await widget.likeService.getLikesForUser(widget.userId);
+    List<LikeDto> likes = await widget.likeService
+        .getLikesForUser(widget.profileService.userProfile!.id);
     List<int> likerIds = List.from(likes.map((e) => e.secondUserId));
 
     List<UserProfile> tmp = await widget.userService.getCertainUsers(likerIds);

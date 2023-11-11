@@ -46,9 +46,15 @@ class EventListItem extends StatelessWidget {
         ),
       ),
       Container(
-        width: MediaQuery.of(context).size.width * 0.90,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * 0.90,
         height: 1,
-        color: Theme.of(context).colorScheme.inverseSurface,
+        color: Theme
+            .of(context)
+            .colorScheme
+            .inverseSurface,
       ),
     ]);
   }
@@ -70,8 +76,6 @@ class EventListItem extends StatelessWidget {
       event.location.latitude,
       event.location.longitude,
     );
-
-    print({eventLocation.toJson(), location.toJson()});
 
     final String distance = distanceService
         .distanceBetweenLatLngs(eventLocation, location)

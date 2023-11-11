@@ -30,7 +30,6 @@ class _ChatListViewState extends State<ChatListView> {
   List<ChatRoom> _pinnedChatRooms = [];
 
   Future<void> readMockChatRooms() async {
-    widget.profileService.setUserProfile();
     final List<ChatRoom> chatRooms =
         await widget.chatRoomService.getChatRoomsFor(
       widget.profileService.userProfile!.id.toString(),
@@ -86,7 +85,6 @@ class _ChatListViewState extends State<ChatListView> {
   }
 
   void _transformChatList() {
-    print(controller.text);
     setState(() {
       _chatRooms = List.from(
         _selectChatRoomsByParticipantsName(_chatRoomsSource).map(

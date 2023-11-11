@@ -4,7 +4,8 @@ import 'package:amica/src/screens/auth/register/steps/interest_step.dart';
 import 'package:amica/src/screens/auth/register/steps/step_1.dart';
 import 'package:amica/src/screens/auth/register/steps/step_2.dart';
 import 'package:amica/src/screens/welcome_view/auth_method_choise.dart';
-import 'package:amica/src/services/auth/mock_auth.service.dart';
+import 'package:amica/src/services/profile/mock_profile.service.dart';
+import 'package:amica/src/services/service_factory.service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,13 +22,13 @@ final authRouter = GoRoute(
 final loginRouter = GoRoute(
   path: 'login',
   builder: (context, state) => LoginScreen(
-    authService: MockAuthService.instance,
+    authService: ServiceFactory.provideAuthService(),
   ),
 );
 final registerRouter = GoRoute(
   path: 'register',
   builder: (context, state) => RegisterScreen(
-    authService: MockAuthService.instance,
+    authService: ServiceFactory.provideAuthService(),
   ),
   routes: [
     GoRoute(
@@ -35,7 +36,9 @@ final registerRouter = GoRoute(
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 1: Personal Info',
-        body: RegistrationFirstStep(authService: MockAuthService.instance),
+        body: RegistrationFirstStep(
+          authService: ServiceFactory.provideAuthService(),
+        ),
         onBackTapped: () => context.go('/auth/register'),
         onForwardTapped: () => context.go('/auth/register/step-2'),
       ),
@@ -45,7 +48,9 @@ final registerRouter = GoRoute(
       builder: (context, state) => RegistrationScreen(
         title: 'Fill your profile',
         stepTitle: 'Step 2: Your goal',
-        body: RegistrationSecondStep(authService: MockAuthService.instance),
+        body: RegistrationSecondStep(
+          authService: ServiceFactory.provideAuthService(),
+        ),
         onBackTapped: () => context.go('/auth/register/step-1'),
         onForwardTapped: () {
           context.go('/auth/register/step-3');
@@ -58,11 +63,12 @@ final registerRouter = GoRoute(
         title: 'Fill your profile',
         stepTitle: 'Step 3: Interests',
         body: RegistrationInterests(
-          authService: MockAuthService.instance,
+          profileService: MockProfileService.instance,
         ),
         onBackTapped: () => context.go('/auth/register/step-2'),
         onForwardTapped: () async {
-          http.Response response = await MockAuthService.instance.fillInfo();
+          http.Response response =
+              await ServiceFactory.provideAuthService().fillInfo();
           if (response.statusCode == 200) {
             context.go('/search');
           }

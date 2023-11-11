@@ -38,15 +38,15 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/mock-profiles/valery_doe.jpg
-    - assets/mock-profiles/valery_doe_1.jpg
-    - assets/mock-profiles/valery_doe_2.jpg
-    - assets/mock-profiles/valery_doe_3.jpg
-    - assets/mock-profiles/valery_doe_4.jpg
-    - assets/mock-profiles/vinsent-smith.jpg
-    - assets/mock-profiles/vinsent-smith_1.jpg
-    - assets/mock-profiles/vinsent-smith_2.jpg
-    - assets/mock-profiles/ghin-shevchenko.jpg
+    - assets/mock-profiles-pictures/valery_doe.jpg
+    - assets/mock-profiles-pictures/valery_doe_1.jpg
+    - assets/mock-profiles-pictures/valery_doe_2.jpg
+    - assets/mock-profiles-pictures/valery_doe_3.jpg
+    - assets/mock-profiles-pictures/valery_doe_4.jpg
+    - assets/mock-profiles-pictures/vinsent-smith.jpg
+    - assets/mock-profiles-pictures/vinsent-smith_1.jpg
+    - assets/mock-profiles-pictures/vinsent-smith_2.jpg
+    - assets/mock-profiles-pictures/ghin-shevchenko.jpg
     - assets/girl_1.jpeg
     - assets/girl_1.1.jpeg
     - assets/girl_1.2.jpeg
@@ -61,17 +61,16 @@ flutter:
     - assets/guy_3.3.jpeg
     - assets/guy_4.jpg
     - assets/guy_4.1.jpg
-    - assets/mock_users.json
-    - assets/mock_interests.json
-    - assets/mock_likes.json
-    - assets/mock_events.json
-    - assets/mock_user_filter.json
-    - assets/mock_event_filter.json
-    - assets/mock_chat_rooms.json
-    - assets/mock_pinned_chat_rooms.json
-    - assets/mock_chat_messages.json
-    - assets/mock_logins.json
-    - assets/mock_profiles.json
+    - assets/mock-data/mock_users.json
+    - assets/mock-data/mock_interests.json
+    - assets/mock-data/mock_likes.json
+    - assets/mock-data/mock_events.json
+    - assets/mock-data/mock_user_filter.json
+    - assets/mock-data/mock_event_filter.json
+    - assets/mock-data/mock_chat_rooms.json
+    - assets/mock-data/mock_pinned_chat_rooms.json
+    - assets/mock-data/mock_chat_messages.json
+    - assets/mock-data/mock_logins.json
     - assets/logo/logo.png
     - assets/logo/logo-red.png
     - assets/logo/logo-red-blue.png

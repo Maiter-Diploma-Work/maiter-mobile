@@ -1,4 +1,3 @@
-import 'package:amica/src/data/valery_doe.dart';
 import 'package:amica/src/layouts/scaffold.dart';
 import 'package:amica/src/screens/profile_view/option_select_view/option_select_item.dart';
 import 'package:amica/src/screens/profile_view/option_select_view/option_select_view.dart';
@@ -6,20 +5,21 @@ import 'package:amica/src/screens/profile_view/profile_edit_view/profile_edit_vi
 import 'package:amica/src/screens/profile_view/profile_photo_edit_view/profile_photo_edit_view.dart';
 import 'package:amica/src/screens/profile_view/settings_view.dart';
 import 'package:amica/src/screens/user_search_profile_view/user_profile_detailed_view/user_profile_detailed.dart';
-import 'package:amica/src/services/profile/mock_profile.service.dart';
+import 'package:amica/src/services/service_factory.service.dart';
 import 'package:amica/src/shared/interests_list/interests_list.dart';
 import 'package:amica/src/shared/theme.service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 
 final profileRouter = GoRoute(
   path: '/profile',
   builder: (context, state) => AmicaScaffold(
     title: 'Your Profile',
     scaffoldBody: UserProfileDetailed(
-        profile: MockProfileService.instance.userProfile!, isOwnProfile: true),
+      profile: ServiceFactory.provideProfileService().userProfile!,
+      isOwnProfile: true,
+    ),
     selectedNavigationItemIndex: 3,
     isDetailed: false,
   ),
@@ -28,8 +28,9 @@ final profileRouter = GoRoute(
       path: 'edit-menu',
       builder: (context, state) => AmicaScaffold(
         title: 'Edit Profile',
-        scaffoldBody:
-            ProfileView(profile: MockProfileService.instance.userProfile!),
+        scaffoldBody: ProfileView(
+          profile: ServiceFactory.provideProfileService().userProfile!,
+        ),
         selectedNavigationItemIndex: 3,
         isDetailed: false,
       ),
@@ -45,8 +46,8 @@ final profileEdit = <GoRoute>[
       isDetailed: false,
       title: 'Edit Profile',
       scaffoldBody: ProfileEditView(
-        profile: MockProfileService.instance.userProfile!,
-        profileService: MockProfileService.instance,
+        profile: ServiceFactory.provideProfileService().userProfile!,
+        profileService: ServiceFactory.provideProfileService(),
       ),
       selectedNavigationItemIndex: 3,
     ),
@@ -60,8 +61,7 @@ final profileEdit = <GoRoute>[
       scaffoldBody: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: InterestsListSelect(
-          selectedInterests: ValeryDoe.interests,
-          favoriteSongControl: FormControl(value: ValeryDoe.favoriteSong),
+          profileService: ServiceFactory.provideProfileService(),
         ),
       ),
       selectedNavigationItemIndex: 3,
@@ -74,7 +74,7 @@ final profileEdit = <GoRoute>[
       isDetailed: false,
       title: 'Edit Profile',
       scaffoldBody: ProfilePhotoEditView(
-        userProfile: MockProfileService.instance.userProfile!,
+        userProfile: ServiceFactory.provideProfileService().userProfile!,
       ),
       selectedNavigationItemIndex: 3,
     ),

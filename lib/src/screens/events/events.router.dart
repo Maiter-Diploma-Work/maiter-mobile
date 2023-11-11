@@ -1,4 +1,3 @@
-import 'package:amica/src/data/valery_doe.dart';
 import 'package:amica/src/layouts/scaffold.dart';
 import 'package:amica/src/models/profiles/event.dart';
 import 'package:amica/src/screens/events/event_create/event_create.dart';
@@ -7,6 +6,7 @@ import 'package:amica/src/screens/events/event_search.dart';
 import 'package:amica/src/screens/events/event_search_filter/event_search_filter.dart';
 import 'package:amica/src/services/event/mock_event.service.dart';
 import 'package:amica/src/services/profile/mock_profile.service.dart';
+import 'package:amica/src/services/service_factory.service.dart';
 import 'package:amica/src/services/user/mock_user_search.service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -27,8 +27,8 @@ final eventsRouter = GoRoute(
     title: 'Events',
     isDetailed: false,
     scaffoldBody: EventSearchView(
-      user: MockProfileService.instance.userProfile!,
-      eventService: MockEventService.instance,
+      user: ServiceFactory.provideProfileService().userProfile!,
+      eventService: ServiceFactory.provideEventService(),
     ),
     selectedNavigationItemIndex: 1,
   ),
@@ -38,8 +38,8 @@ final eventsRouter = GoRoute(
       builder: (context, state) => AmicaScaffold(
         title: 'events filter',
         scaffoldBody: EventSearchFilter(
-          profile: MockProfileService.instance.userProfile!,
-          eventService: MockEventService.instance,
+          profile: ServiceFactory.provideProfileService().userProfile!,
+          eventService: ServiceFactory.provideEventService(),
         ),
         selectedNavigationItemIndex: 1,
         isDetailed: false,
@@ -54,8 +54,8 @@ final eventsRouter = GoRoute(
           title: event.name,
           scaffoldBody: EventDetailsView(
             event: event,
-            profileService: MockProfileService.instance,
-            userSearchService: MockedUserSearchService.instance,
+            profileService: ServiceFactory.provideProfileService(),
+            userSearchService: ServiceFactory.provideUserSearchService(),
           ),
           selectedNavigationItemIndex: 1,
           isDetailed: true,
@@ -70,8 +70,8 @@ final eventsRouter = GoRoute(
       builder: (context, state) => AmicaScaffold(
         title: 'Create event',
         scaffoldBody: EventCreate(
-          profileService: MockProfileService.instance,
-          eventService: MockEventService.instance,
+          profileService: ServiceFactory.provideProfileService(),
+          eventService: ServiceFactory.provideEventService(),
         ),
         selectedNavigationItemIndex: 1,
         isDetailed: false,

@@ -52,8 +52,8 @@ class ProfileView extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(32),
       children: [
-        ShortProfileOverview(profile: profile),
-        const Gap.cubic(26),
+        // ShortProfileOverview(profile: profile),
+        // const Gap.cubic(26),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,

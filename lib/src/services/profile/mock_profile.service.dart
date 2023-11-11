@@ -18,7 +18,7 @@ class MockProfileService extends ProfileService {
 
   void _initialiseCharacterTraits(List<CharacterTrait> characterTraits) {
     FormArray<CharacterTrait> traits =
-    profileEditForm.control('characterTraits') as FormArray<CharacterTrait>;
+        profileEditForm.control('characterTraits') as FormArray<CharacterTrait>;
 
     traits.clear();
     for (CharacterTrait trait in characterTraits) {
@@ -28,7 +28,7 @@ class MockProfileService extends ProfileService {
 
   void _initialiseExpectations(List<Expectancy> expectancies) {
     FormArray<String> expectations =
-    profileEditForm.control('expectations') as FormArray<String>;
+        profileEditForm.control('expectations') as FormArray<String>;
 
     expectations.clear();
     for (Expectancy expectation in expectancies) {
@@ -36,14 +36,10 @@ class MockProfileService extends ProfileService {
     }
   }
 
-  void setMockUserProfile(UserProfile profile) {
-    userProfile = profile;
-  }
-
   @override
-  void setUserProfile() {
+  void setUserProfile(UserProfile profile) {
     //* this should be an API call in normal service
-    userProfile = ValeryDoe;
+    userProfile = profile;
   }
 
   @override
@@ -59,9 +55,7 @@ class MockProfileService extends ProfileService {
       } else if (element == 'characterTraits') {
         _initialiseCharacterTraits(profile.characterTraits);
       } else {
-        profileEditForm
-            .control(element)
-            .value = profile.toMap()[element];
+        profileEditForm.control(element).value = profile.toMap()[element];
       }
     }
   }

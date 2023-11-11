@@ -27,7 +27,7 @@ class MockEventService extends EventService {
   @override
   Future<List<Event>> getCertainEvents(List<int> ids) async {
     final String response =
-        await rootBundle.loadString('assets/mock_events.json');
+        await rootBundle.loadString('assets/mock-data/mock_events.json');
 
     List<Event> eventSource = eventsFromJson(response);
 
@@ -42,7 +42,7 @@ class MockEventService extends EventService {
   @override
   Future<Event> getEvent(String id) async {
     final String response =
-        await rootBundle.loadString('assets/mock_events.json');
+        await rootBundle.loadString('assets/mock-data/mock_events.json');
 
     List<Event> eventSource = eventsFromJson(response);
 
@@ -56,7 +56,7 @@ class MockEventService extends EventService {
     EventFilter? filter,
   }) async {
     final String response =
-        await rootBundle.loadString('assets/mock_events.json');
+        await rootBundle.loadString('assets/mock-data/mock_events.json');
 
     List<Event> eventSource = eventsFromJson(response);
 
@@ -124,8 +124,7 @@ class MockEventService extends EventService {
   @override
   Future<void> initializeFilters(UserProfile profile) async {
     String response =
-        await rootBundle.loadString('assets/mock_event_filter.json');
-    print({response, profile.id});
+        await rootBundle.loadString('assets/mock-data/mock_event_filter.json');
     EventFilter filter = eventFiltersFromJson(response)
         .firstWhere((element) => element.userId == profile.id);
 

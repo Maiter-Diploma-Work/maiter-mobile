@@ -36,7 +36,8 @@ class MockAuthService extends AuthService {
 
   @override
   Future<http.Response> register() async {
-    String response = await rootBundle.loadString('assets/mock_logins.json');
+    String response =
+        await rootBundle.loadString('assets/mock-data/mock_logins.json');
     List<MockLogin> logins = List.from(
       json.decode(response).map(
             (element) => MockLogin.fromJson(element),
@@ -52,7 +53,7 @@ class MockAuthService extends AuthService {
         ),
       );
     }
-    MockProfileService.instance.setMockUserProfile(UserProfile.empty());
+    MockProfileService.instance.setUserProfile(UserProfile.empty());
     String tag = registerForm.control('username').value;
     MockProfileService.instance.userProfile!.tag = '@$tag';
 
@@ -127,7 +128,8 @@ class MockAuthService extends AuthService {
       );
     }
 
-    String response = await rootBundle.loadString('assets/mock_logins.json');
+    String response =
+        await rootBundle.loadString('assets/mock-data/mock_logins.json');
     List<MockLogin> logins = List.from(
       json.decode(response).map(
             (element) => MockLogin.fromJson(element),
@@ -167,13 +169,13 @@ class MockAuthService extends AuthService {
       (login) => login.password == password && login.email == email,
     );
     String profileResponse =
-        await rootBundle.loadString('assets/mock_profiles.json');
+        await rootBundle.loadString('assets/mock-data/mock_users.json');
 
     UserProfile profile = usersFromJson(profileResponse).firstWhere(
       (user) => user.id == login.userId,
     );
 
-    MockProfileService.instance.setMockUserProfile(profile);
+    MockProfileService.instance.setUserProfile(profile);
 
     return Future.delayed(
       const Duration(milliseconds: 250),

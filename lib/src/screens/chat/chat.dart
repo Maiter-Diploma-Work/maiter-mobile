@@ -2,12 +2,14 @@ import 'package:amica/src/models/chat_message.dart';
 import 'package:amica/src/screens/chat/message-input/message_input.dart';
 import 'package:amica/src/screens/chat/message/message.dart';
 import 'package:amica/src/services/chat/message/message.service.dart';
+import 'package:amica/src/services/profile/profile.service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ChatView extends StatefulWidget {
   final String userId;
   final MessageService messageService;
+  final ProfileService profileService;
   final String chatRoomId;
 
   const ChatView({
@@ -15,6 +17,7 @@ class ChatView extends StatefulWidget {
     required this.userId,
     required this.messageService,
     required this.chatRoomId,
+    required this.profileService,
   });
 
   @override
@@ -22,6 +25,7 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
+  static int newMockMessageId = 31;
   List<ChatMessage> _chatMessages = [];
 
   Future<void> initMessages() async {
@@ -54,19 +58,34 @@ class _ChatViewState extends State<ChatView> {
       child: Container(
         color: Theme.of(context).colorScheme.surface,
         child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ListView(
-              shrinkWrap: true,
-              children: List.from(
-                _chatMessages.map(
-                  (e) => generateMessage(context, e),
-                ),
+            Expanded(
+              child: ListView(
+                children: [
+                  ...List.from(
+                    _chatMessages.map(
+                      (e) => generateMessage(context, e),
+                    ),
+                  ),
+                ],
               ),
             ),
-            MessageInput(control: TextEditingController()),
+            MessageInput(
+              control: TextEditingController(),
+              messageInputSend: (value) {
+                setState(() {
+                  _chatMessages.add(ChatMessage(
+                    id: newMockMessageId,
+                    chatroomId: int.parse(widget.chatRoomId),
+                    creatorId: widget.profileService.userProfile!.id,
+                    content: value.trim(),
+                    beenRedacted: false,
+                    messageType: MessageType.plain,
+                    sentAt: DateTime.now(),
+                  ));
+                });
+              },
+            ),
           ],
         ),
       ),

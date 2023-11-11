@@ -25,7 +25,7 @@ abstract class ProfileService {
 
   void setEditForm(UserProfile profile);
 
-  void setUserProfile();
+  void setUserProfile(UserProfile profile);
 
   //Put
   Future<void> updateUser(String id, EditUserDto newUser);

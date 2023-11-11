@@ -22,7 +22,7 @@ class _ChatDetailedProfileViewState extends State<ChatDetailedProfileView> {
   Future<void> readMockUserFromJson() async {
     final int userId = int.parse(widget.userId);
     final String response =
-        await rootBundle.loadString('assets/mock_users.json');
+        await rootBundle.loadString('assets/mock-data/mock_users.json');
     final List<UserProfile> data = usersFromJson(response);
     setState(() {
       _user = data.firstWhere((element) => element.id == userId);

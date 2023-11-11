@@ -3,9 +3,7 @@ import 'package:amica/src/screens/chat/chat-list/chat-list.dart';
 import 'package:amica/src/screens/chat/chat.dart';
 import 'package:amica/src/screens/chat/chat_app_bar_title.dart';
 import 'package:amica/src/screens/chat/chat_detailed_profile/chat_detailed_profile.dart';
-import 'package:amica/src/services/chat/message/mock_message.service.dart';
-import 'package:amica/src/services/chat/room/mock_room.service.dart';
-import 'package:amica/src/services/profile/mock_profile.service.dart';
+import 'package:amica/src/services/service_factory.service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,8 +12,8 @@ final chatRouter = GoRoute(
   builder: (context, state) => AmicaScaffold(
     title: 'Chats',
     scaffoldBody: ChatListView(
-      profileService: MockProfileService.instance,
-      chatRoomService: MockChatRoomService.instance,
+      profileService: ServiceFactory.provideProfileService(),
+      chatRoomService: ServiceFactory.provideChatRoomService(),
     ),
     selectedNavigationItemIndex: 2,
     isDetailed: false,
@@ -32,7 +30,8 @@ final chatRouter = GoRoute(
           chatRoomId: state.pathParameters['chat_room_id']!,
         ),
         scaffoldBody: ChatView(
-          messageService: MockMessageService.instance,
+          messageService: ServiceFactory.provideMessageService(),
+          profileService: ServiceFactory.provideProfileService(),
           userId: state.pathParameters['user_id']!,
           chatRoomId: state.pathParameters['chat_room_id']!,
         ),

@@ -18,9 +18,6 @@ class LoginScreen extends StatelessWidget {
 
   void _onLoginClick(BuildContext context) async {
     http.Response response = await authService.login();
-    print(response.body);
-    print(response.statusCode);
-
     if (response.statusCode != 200) return;
 
     if (jsonDecode(response.body)['isFilled'] == true) {

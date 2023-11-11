@@ -20,13 +20,11 @@ class UserProfileView extends StatefulWidget {
   final UserSearchService userService;
   final ProfileService profileService;
   final LikeService likeService;
-  final int userId;
 
   const UserProfileView({
     super.key,
     required this.userService,
     required this.likeService,
-    required this.userId,
     required this.profileService,
   });
 
@@ -37,11 +35,12 @@ class UserProfileView extends StatefulWidget {
 class _UserProfileViewState extends State<UserProfileView> {
   UserProfile? _currentProfile;
   List<UserProfile> _profiles = [];
+  late final int userId;
 
   void _dislikePressed() {
     DislikeDto dislike = DislikeDto(
       id: -1,
-      firstUserId: widget.userId,
+      firstUserId: userId,
       secondUserId: _currentProfile != null ? _currentProfile!.id : -1,
     );
     widget.likeService.dislikeUser(dislike);
@@ -50,6 +49,7 @@ class _UserProfileViewState extends State<UserProfileView> {
       setState(() {
         _profiles.removeAt(0);
         _currentProfile = _profiles.isEmpty ? null : _profiles.first;
+        if (_currentProfile!.id == userId) _currentProfile = null;
       });
     }
   }
@@ -61,7 +61,7 @@ class _UserProfileViewState extends State<UserProfileView> {
   void _likePressed() {
     LikeDto like = LikeDto(
       id: -1,
-      firstUserId: widget.userId,
+      firstUserId: userId,
       secondUserId: _currentProfile != null ? _currentProfile!.id : -1,
     );
     widget.likeService.likeUser(like);
@@ -70,6 +70,7 @@ class _UserProfileViewState extends State<UserProfileView> {
       setState(() {
         _profiles.removeAt(0);
         _currentProfile = _profiles.isEmpty ? null : _profiles.first;
+        if (_currentProfile!.id == userId) _currentProfile = null;
       });
     }
   }
@@ -79,13 +80,6 @@ class _UserProfileViewState extends State<UserProfileView> {
       _likePressed();
     } else if (details.primaryVelocity! > 0) {
       _dislikePressed();
-    }
-  }
-
-  void _onVerticalDrag(DragEndDetails details, BuildContext context) {
-    if (details.primaryVelocity! < 0) {
-      debugPrint('swipe up');
-      _detailsPressed(context);
     }
   }
 
@@ -107,6 +101,7 @@ class _UserProfileViewState extends State<UserProfileView> {
   @override
   void initState() {
     super.initState();
+    userId = widget.profileService.userProfile!.id;
     _initState();
   }
 
@@ -122,7 +117,6 @@ class _UserProfileViewState extends State<UserProfileView> {
           )
         : GestureDetector(
             onHorizontalDragEnd: (details) => _onHorizontalDrag(details),
-            onVerticalDragEnd: (details) => _onVerticalDrag(details, context),
             child: Stack(
               children: [
                 ListView(

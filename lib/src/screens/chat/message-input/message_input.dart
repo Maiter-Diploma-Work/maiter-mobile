@@ -2,9 +2,14 @@ import 'package:amica/src/shared/gap.dart';
 import 'package:amica/src/shared/inputs/amica_round_icon_button.dart';
 import 'package:flutter/material.dart';
 
+typedef MessageInputSend = void Function(String value);
+
 class MessageInput extends StatelessWidget {
   final TextEditingController control;
-  const MessageInput({super.key, required this.control});
+  final MessageInputSend messageInputSend;
+
+  const MessageInput(
+      {super.key, required this.control, required this.messageInputSend});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,10 @@ class MessageInput extends StatelessWidget {
                 padding: const EdgeInsets.all(4.0),
                 child: AmicaRoundIconButton(
                   icon: const Icon(Icons.send),
-                  onTap: () {},
+                  onTap: () {
+                    messageInputSend(control.value.text);
+                    control.clear();
+                  },
                 ),
               ),
             ),

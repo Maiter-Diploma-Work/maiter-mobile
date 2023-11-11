@@ -16,14 +16,12 @@ class MockLikeService extends LikeService {
     // ! and this method will be nothing more than fetch call
 
     final String likesResponse =
-        await rootBundle.loadString('assets/mock_likes.json');
+        await rootBundle.loadString('assets/mock-data/mock_likes.json');
 
     List<LikeDto> likes = likesDtoFromJson(likesResponse);
     List<LikeDto> result = [];
 
     for (LikeDto like in likes) {
-      debugPrint(
-          'like: ${like.id} : ${like.firstUserId} : ${like.secondUserId}; userId $userId');
       if (like.firstUserId == userId) {
         result.add(like);
       }
@@ -39,14 +37,8 @@ class MockLikeService extends LikeService {
   }
 
   @override
-  Future<void> dislikeUser(DislikeDto like) async {
-    print(
-        'A user with Id ${like.firstUserId} liked one with Id ${like.secondUserId}');
-  }
+  Future<void> dislikeUser(DislikeDto like) async {}
 
   @override
-  Future<void> likeUser(LikeDto like) async {
-    print(
-        'A user with Id ${like.firstUserId} disliked one with Id ${like.secondUserId}');
-  }
+  Future<void> likeUser(LikeDto like) async {}
 }

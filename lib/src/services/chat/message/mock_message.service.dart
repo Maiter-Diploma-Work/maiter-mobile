@@ -14,7 +14,7 @@ class MockMessageService extends MessageService {
   @override
   Future<List<ChatMessage>> getMessagesFor(String chatRoomId) async {
     String response =
-        await rootBundle.loadString('assets/mock_chat_messages.json');
+        await rootBundle.loadString('assets/mock-data/mock_chat_messages.json');
 
     return List.from(chatMessagesFromJson(response).where(
       (element) => element.chatroomId == int.parse(chatRoomId),

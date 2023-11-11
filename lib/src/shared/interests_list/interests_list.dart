@@ -1,5 +1,7 @@
+import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/models/shared/interest.dart';
 import 'package:amica/src/models/shared/interest_list.dart';
+import 'package:amica/src/services/profile/profile.service.dart';
 import 'package:amica/src/shared/inputs/maiter_search_bar.dart';
 import 'package:amica/src/shared/interests_list/expandable_interest_list.dart';
 import 'package:amica/src/shared/inputs/amica_text_form_input.dart';
@@ -8,13 +10,11 @@ import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class InterestsListSelect extends StatefulWidget {
-  final List<Interest> selectedInterests;
-  final FormControl<String> favoriteSongControl;
+  final ProfileService profileService;
 
   const InterestsListSelect({
     super.key,
-    required this.selectedInterests,
-    required this.favoriteSongControl,
+    required this.profileService,
   });
 
   @override
@@ -22,13 +22,15 @@ class InterestsListSelect extends StatefulWidget {
 }
 
 class _InterestsListSelectState extends State<InterestsListSelect> {
-  TextEditingController controller = TextEditingController();
+  late UserProfile profile;
   late List<InterestList> _interestListsSource = [];
+  late FormControl favoriteSongControl;
+  TextEditingController controller = TextEditingController();
   List<InterestList> _interestLists = [];
 
   Future<void> readMockInterestsFromJson() async {
     final String response =
-        await rootBundle.loadString('assets/mock_interests.json');
+        await rootBundle.loadString('assets/mock-data/mock_interests.json');
 
     setState(() {
       _interestListsSource = interestListsFromMockJson(response);
@@ -38,13 +40,13 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
 
   void _toggleInterest(Interest interest) {
     final List<String> interests =
-        widget.selectedInterests.map((e) => e.name).toList();
+        profile.interests.map((e) => e.name).toList();
 
     setState(() {
       if (!interests.contains(interest.name)) {
-        widget.selectedInterests.add(interest);
+        profile.interests.add(interest);
       } else {
-        widget.selectedInterests.removeWhere(
+        profile.interests.removeWhere(
           (element) => element.name == interest.name,
         );
       }
@@ -60,7 +62,7 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
           ),
           child: ExpandableInterestList(
             interestList: interestList,
-            selectedInterests: widget.selectedInterests,
+            selectedInterests: profile.interests,
             interestTap: _toggleInterest,
           ),
         ),
@@ -88,6 +90,9 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
   @override
   void initState() {
     super.initState();
+    profile = widget.profileService.userProfile!;
+    favoriteSongControl = FormControl(value: profile.favoriteSong);
+
     readMockInterestsFromJson();
     controller.addListener(_transformInterestsList);
   }
@@ -118,7 +123,7 @@ class _InterestsListSelectState extends State<InterestsListSelect> {
             fieldName: 'Favorite song',
             hintText: 'your favorite track',
             padding: const EdgeInsets.only(bottom: 64),
-            controller: widget.favoriteSongControl,
+            controller: favoriteSongControl,
           ),
         ],
       ),

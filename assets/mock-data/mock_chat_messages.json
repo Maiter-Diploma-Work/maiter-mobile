@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "chatroomId": 1,
+    "creatorId": 3,
+    "content": "Привіт))",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  },
+  {
+    "id": 2,
+    "chatroomId": 1,
+    "creatorId": 3,
+    "content": "Якщо таки прийдеш, то підходь до кінотеатру",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  },
+  {
+    "id": 3,
+    "chatroomId": 1,
+    "creatorId": 1,
+    "content": "Добре)",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  },
+  {
+    "id": 4,
+    "chatroomId": 2,
+    "creatorId": 1,
+    "content": "Привіт?",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  },
+  {
+    "id": 5,
+    "chatroomId": 2,
+    "creatorId": 5,
+    "content": "Я люблю потяги)",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  },
+  {
+    "id": 6,
+    "chatroomId": 2,
+    "creatorId": 1,
+    "content": "О НІ😵😵",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  },
+  {
+    "id": 7,
+    "chatroomId": 2,
+    "creatorId": 5,
+    "content": "🚂🚂🚂🚂🚂🚂",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  },
+  {
+    "id": 8,
+    "chatroomId": 3,
+    "creatorId": 3,
+    "content": "Would you mind a coffee while walking the dogs?",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  },
+  {
+    "id": 9,
+    "chatroomId": 3,
+    "creatorId": 9,
+    "content": "Sure!",
+    "beenRedacted": false,
+    "type": "plain",
+    "sentAt": "10/11/2023"
+  }
+]

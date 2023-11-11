@@ -27,9 +27,6 @@ class _EventSearchViewState extends State<EventSearchView> {
     List<Event> response = await widget.eventService.getRandomEvents(
       widget.user,
     );
-    for (var shit in response) {
-      print(shit.toJson());
-    }
     setState(() {
       _events = response;
     });
@@ -47,7 +44,6 @@ class _EventSearchViewState extends State<EventSearchView> {
       widget.user.location.latitude,
       widget.user.location.longitude,
     );
-    print(widget.user.name);
     return SingleChildScrollView(
       child: Column(
         children: List.from(
