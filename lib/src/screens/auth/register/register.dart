@@ -50,6 +50,7 @@ class RegisterScreen extends StatelessWidget {
             hintText: "Enter your password",
             controller: authService.registerForm.control('password')
                 as FormControl<String>,
+            isPassword: true,
           ),
           const Gap(horizontalGap: 0, verticalGap: 30),
           AmicaTextFormInput(
@@ -57,6 +58,7 @@ class RegisterScreen extends StatelessWidget {
             hintText: "Repeat your password",
             controller: authService.registerForm.control('confirmPassword')
                 as FormControl<String>,
+            isPassword: true,
           ),
           const Gap(horizontalGap: 0, verticalGap: 70),
           AmicaButton(

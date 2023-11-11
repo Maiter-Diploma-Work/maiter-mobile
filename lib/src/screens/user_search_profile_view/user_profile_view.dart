@@ -49,7 +49,6 @@ class _UserProfileViewState extends State<UserProfileView> {
       setState(() {
         _profiles.removeAt(0);
         _currentProfile = _profiles.isEmpty ? null : _profiles.first;
-        if (_currentProfile!.id == userId) _currentProfile = null;
       });
     }
   }
@@ -70,7 +69,6 @@ class _UserProfileViewState extends State<UserProfileView> {
       setState(() {
         _profiles.removeAt(0);
         _currentProfile = _profiles.isEmpty ? null : _profiles.first;
-        if (_currentProfile!.id == userId) _currentProfile = null;
       });
     }
   }

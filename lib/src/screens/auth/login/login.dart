@@ -46,6 +46,7 @@ class LoginScreen extends StatelessWidget {
             hintText: "Enter your password",
             controller: authService.loginForm.control('password')
                 as FormControl<String>,
+            isPassword: true,
           ),
           const Gap(horizontalGap: 0, verticalGap: 132.0),
           AmicaButton(

@@ -10,6 +10,7 @@ class AmicaTextFormInput extends StatelessWidget {
   final TextInputType? textInputType;
   final FormControl? controller;
   final bool? isExpanded;
+  final bool? isPassword;
 
   const AmicaTextFormInput({
     super.key,
@@ -20,6 +21,7 @@ class AmicaTextFormInput extends StatelessWidget {
     this.initialValue,
     this.textInputType,
     this.controller,
+    this.isPassword,
   }) : isExpanded = false;
 
   const AmicaTextFormInput.expanded({
@@ -31,12 +33,14 @@ class AmicaTextFormInput extends StatelessWidget {
     this.initialValue,
     this.textInputType,
     this.controller,
+    this.isPassword,
   }) : isExpanded = true;
 
   Widget getInput(BuildContext context) {
     final Widget userInput = ReactiveTextField(
       keyboardType: textInputType,
       maxLines: maxLines ?? 1,
+      obscureText: isPassword ?? false,
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,
