@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:amica/src/models/filters/event_filter.dart';
 import 'package:amica/src/models/filters/range.dart';
 import 'package:amica/src/models/profiles/event.dart';
@@ -6,6 +8,7 @@ import 'package:amica/src/models/shared/location.dart';
 import 'package:amica/src/services/distance.service.dart';
 import 'package:amica/src/services/event/event.service.dart';
 import 'package:amica/src/services/profile/mock_profile.service.dart';
+import 'package:amica/src/services/service_factory.service.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -55,15 +58,22 @@ class MockEventService extends EventService {
     int limit = -1,
     EventFilter? filter,
   }) async {
+    initializeFilters(profile);
+
     final String response =
         await rootBundle.loadString('assets/mock-data/mock_events.json');
 
     List<Event> eventSource = eventsFromJson(response);
 
+    if (ServiceFactory.envProfile == EnvironmentProfile.presentation) {
+      events = eventSource;
+      return eventSource;
+    }
+
     filter ??= EventFilter.fromJson({
       'id': -1,
       'userId': profile.id,
-      'distance': eventSearchFilterForm.value['distance'] as double,
+      'distance': eventSearchFilterForm.value['distance'],
       'age': {
         "min": (eventSearchFilterForm.value['age'] as Range).min,
         "max": (eventSearchFilterForm.value['age'] as Range).max,
@@ -125,8 +135,9 @@ class MockEventService extends EventService {
   Future<void> initializeFilters(UserProfile profile) async {
     String response =
         await rootBundle.loadString('assets/mock-data/mock_event_filter.json');
+
     EventFilter filter = eventFiltersFromJson(response)
-        .firstWhere((element) => element.userId == profile.id);
+        .firstWhere((element) => element.userId.abs() == profile.id.abs());
 
     for (MapEntry element in filter.toJson().entries) {
       if (element.key == 'age') {
@@ -143,38 +154,45 @@ class MockEventService extends EventService {
     _mockEventId++;
 
     UserProfile user = MockProfileService.instance.userProfile!;
+    Event newEvent = Event(
+      id: _mockEventId,
+      creatorId: user.id,
+      creationDate: DateTime.now(),
+      amountOfPeople: createEventForm.control('amountOfPeople').value.toInt(),
+      lookingFor: createEventForm.control('lookingFor').value,
+      minAge: createEventForm.control('ageConstraints').value.min,
+      maxAge: createEventForm.control('ageConstraints').value.max,
+      radius: ServiceFactory.envProfile == EnvironmentProfile.presentation
+          ? createEventForm.control('location').value ?? 0
+          : DistanceService.instance.distanceBetweenLatLngs(
+              createEventForm.control('location').value,
+              LatLng(
+                user.location.latitude,
+                user.location.longitude,
+              ),
+            ),
+      location: ServiceFactory.envProfile == EnvironmentProfile.presentation
+          ? ServiceFactory.provideProfileService().userProfile!.location
+          : Location(
+              countryName: 'Ukraine',
+              id: _mockEventId,
+              latitude: createEventForm.control('location').value.latitude,
+              longitude: createEventForm.control('location').value.longitude,
+              name: 'Zaporizhzhia',
+              postcode: '69019',
+            ),
+      description: createEventForm.control('description').value,
+      name: user.name,
+      photo: user.photo,
+      interests: user.interests,
+      endDate: DateTime.utc(2073),
+    );
+
+    events.add(newEvent);
 
     return Future.delayed(
       const Duration(milliseconds: 250),
-      () => Event(
-        creatorId: user.id,
-        creationDate: DateTime.now(),
-        amountOfPeople: createEventForm.control('amountOfPeople').value,
-        lookingFor: createEventForm.control('lookingFor').value,
-        minAge: createEventForm.control('ageConstraints').value.min,
-        maxAge: createEventForm.control('ageConstraints').value.max,
-        radius: DistanceService.instance.distanceBetweenLatLngs(
-          createEventForm.control('location').value,
-          LatLng(
-            user.location.latitude,
-            user.location.longitude,
-          ),
-        ),
-        id: _mockEventId,
-        location: Location(
-          countryName: 'Ukraine',
-          id: _mockEventId,
-          latitude: createEventForm.control('location').value.latitude,
-          longitude: createEventForm.control('location').value.longitude,
-          name: 'Zaporizhzhia',
-          postcode: '69019',
-        ),
-        description: createEventForm.control('description').value,
-        name: user.name,
-        photo: user.photo,
-        interests: user.interests,
-        endDate: DateTime.utc(2073),
-      ),
+      () => newEvent,
     );
   }
 }

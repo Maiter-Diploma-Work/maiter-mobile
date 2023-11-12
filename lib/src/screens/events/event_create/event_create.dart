@@ -117,6 +117,13 @@ class _EventCreateState extends State<EventCreate> {
               color: Theme.of(context).colorScheme.primary,
               textColor: Theme.of(context).colorScheme.onPrimary,
             ),
+            const Gap(verticalGap: 32, horizontalGap: 0),
+            AmicaButton(
+              onPressed: () => widget.eventService.createEvent(),
+              text: 'Create',
+              color: Theme.of(context).colorScheme.primary,
+              textColor: Theme.of(context).colorScheme.onPrimary,
+            ),
           ],
         ),
       ),

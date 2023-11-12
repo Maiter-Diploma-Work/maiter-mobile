@@ -58,13 +58,16 @@ improvement
 
 Here is some things I could suggest to improve this project further:
 
+- [ ] Web version for the app (because why not?)
 - [ ] Tabs for chat to identify who is who and how they were connected (Either by subscribing to
   event or by match)
 - [ ] Push notifications
 - [ ] Match notifications
-- [ ] Rework toolbar to look more interesting like the following: ![app_bar_image_2](https://media.geeksforgeeks.org/wp-content/uploads/20201029125034/HowtoAddaFloatingActionButtontoBottomNavigationBarinAndroid.png)
+- [ ] Rework toolbar to look more interesting like the
+  following: ![app_bar_image_2](https://media.geeksforgeeks.org/wp-content/uploads/20201029125034/HowtoAddaFloatingActionButtontoBottomNavigationBarinAndroid.png)
 - [ ] It would be nice to add animations
-- [ ] Of course it is always nice to have a #*!@ing backend to process data on remote device. This could be done in three months, but something went wrong 
+- [ ] Of course it is always nice to have a #*!@ing backend to process data on remote device. This
+  could be done in three months, but something went wrong
 - [ ] It would be nice to have a dedicated page to edit events, remove them, etc
 - [ ] A system to pin chats, as were suggested by Andriy (The designer)
 - [ ] Somehow manage user's social networks, and add them in registration

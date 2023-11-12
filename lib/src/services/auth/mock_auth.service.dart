@@ -1,10 +1,13 @@
+import 'dart:collection';
 import 'dart:convert';
 
+import 'package:amica/src/models/profiles/character_trait.dart';
 import 'package:amica/src/models/profiles/expectancies.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/services/auth/auth.service.dart';
 import 'package:amica/src/services/profile/mock_profile.service.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class MockLogin {
@@ -44,7 +47,7 @@ class MockAuthService extends AuthService {
           ),
     );
 
-    if (!logins.any((x) => x.email == registerForm.control('email').value)) {
+    if (logins.any((x) => x.email == registerForm.control('email').value)) {
       return Future.delayed(
         const Duration(milliseconds: 250),
         () => http.Response(
@@ -68,43 +71,58 @@ class MockAuthService extends AuthService {
 
   @override
   Future<http.Response> fillInfo() async {
-    if (personalInfoForm.invalid ||
-        goalForm.invalid ||
-        MockAuthService.instance.selectedInterests.length < 3) {
-      return Future.delayed(
-        const Duration(milliseconds: 250),
-        () => http.Response(
-          '',
-          403,
-        ),
-      );
-    }
+    // if (personalInfoForm.invalid ||
+    //     goalForm.invalid ||
+    //     MockAuthService.instance.selectedInterests.length < 3) {
+    //   return Future.delayed(
+    //     const Duration(milliseconds: 250),
+    //     () => http.Response(
+    //       '',
+    //       403,
+    //     ),
+    //   );
+    // }
 
     var profile = MockProfileService.instance.userProfile!;
 
     profile.name = personalInfoForm.control('name').value;
-    profile.birthDate = personalInfoForm.control('birthDate').value;
+    profile.birthDate = personalInfoForm.control('birthdate').value;
     profile.gender = personalInfoForm.control('gender').value;
-    profile.location.latitude =
-        personalInfoForm.control('location').value.latitude;
-    profile.location.longitude =
-        personalInfoForm.control('location').value.longitude;
+
+    LatLng latLng = personalInfoForm.control('location').value ??
+        const LatLng(
+          35.12875298380615,
+          47.84575719126775,
+        );
+    profile.location.latitude = latLng.latitude;
+    profile.location.longitude = latLng.longitude;
     profile.height = personalInfoForm.control('height').value;
     profile.education = personalInfoForm.control('education').value;
     profile.description = personalInfoForm.control('bio').value;
-    profile.characterTraits = personalInfoForm.control('characterTraits').value;
+    profile.characterTraits = List<CharacterTrait>.from(
+      (personalInfoForm.control('characterTraits').value
+              as List<CharacterTrait?>)
+          .map((e) => e!),
+    );
 
-    profile.goals = goalForm.control('goals').value;
+    Iterable<MapEntry<String, Object?>> goalsEntries = (goalForm
+            .control('goals')
+            .value as UnmodifiableMapView<String, Object?>)
+        .entries;
+    profile.goals = Map.fromEntries(
+      goalsEntries.map((e) => MapEntry(e.key, e.value as bool)),
+    );
+
     profile.status = goalForm.control('status').value;
     profile.lookingFor = goalForm.control('lookingFor').value;
 
-    List<String> expectations = goalForm.control('expectations').value;
+    List<String?> expectations = goalForm.control('expectations').value;
     profile.expectancies = List.generate(
       expectations.length,
       (index) => Expectancy(
         id: index,
         userId: profile.id,
-        text: expectations[index],
+        text: expectations[index]!,
       ),
     );
     profile.interests = MockAuthService.instance.selectedInterests;

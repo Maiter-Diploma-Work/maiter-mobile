@@ -71,6 +71,7 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
             initialDate: DateTime.now(),
             fieldName: 'Birthdate',
             onUpdate: (newDate) {
+              print(newDate.toString());
               setState(() {
                 formGroup.control('birthdate').value = newDate;
               });

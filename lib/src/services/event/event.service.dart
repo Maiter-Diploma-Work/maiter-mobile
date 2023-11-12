@@ -22,6 +22,7 @@ abstract class EventService {
   });
 
   late UserProfile _profile;
+  List<Event> events = [];
 
   Future<void> initializeFilters(UserProfile profile);
 
@@ -30,8 +31,7 @@ abstract class EventService {
 
   Future<List<Event>> getCertainEvents(List<int> ids);
 
-  Future<List<Event>> getRandomEvents(
-    UserProfile profile, {
+  Future<List<Event>> getRandomEvents(UserProfile profile, {
     int limit = -1,
     EventFilter? filter,
   });

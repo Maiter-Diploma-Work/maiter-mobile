@@ -3,6 +3,7 @@ import 'package:amica/src/models/filters/user_filter.dart';
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/services/distance.service.dart';
 import 'package:amica/src/services/profile/mock_profile.service.dart';
+import 'package:amica/src/services/service_factory.service.dart';
 import 'package:amica/src/services/user/user_search.service.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -22,10 +23,10 @@ class MockedUserSearchService extends UserSearchService {
 
   Future<List<UserProfile>> getUserProfiles() async {
     final List<String> userIds =
-    List.generate(6, (index) => (index + 1).toString());
+        List.generate(6, (index) => (index + 1).toString());
 
     final String response =
-    await rootBundle.loadString('assets/mock-data/mock_users.json');
+        await rootBundle.loadString('assets/mock-data/mock_users.json');
     List<UserProfile> data = usersFromJson(response);
 
     return data;
@@ -50,20 +51,26 @@ class MockedUserSearchService extends UserSearchService {
   }
 
   @override
-  Future<List<UserProfile>> getRandomUsers(UserProfile profile, {
+  Future<List<UserProfile>> getRandomUsers(
+    UserProfile profile, {
     int limit = -1,
     UserFilter? filter,
   }) async {
     await initializeFilters(profile);
 
     List<UserProfile> response = await getUserProfiles();
-    response.removeWhere((element) => element.id == profile.id);
+    response.removeWhere((element) => element.id.abs() == profile.id.abs());
 
     response.shuffle();
 
     if (limit != -1) {
       int end = limit > response.length ? response.length : limit;
       response = response.getRange(0, end).toList();
+    }
+
+    if (ServiceFactory.envProfile == EnvironmentProfile.presentation) {
+      users = response;
+      return response;
     }
 
     filter ??= UserFilter.fromJson({
@@ -84,8 +91,7 @@ class MockedUserSearchService extends UserSearchService {
           .toList();
     }
     response = List.from(response.where(
-          (user) =>
-      user.lookingFor == "Anyone"
+      (user) => user.lookingFor == "Anyone"
           ? true
           : user.lookingFor == profile.gender,
     ));
@@ -95,6 +101,7 @@ class MockedUserSearchService extends UserSearchService {
         user.location.latitude,
         user.location.longitude,
       );
+
       LatLng profileLocation = LatLng(
         profile.location.latitude,
         profile.location.longitude,
@@ -107,14 +114,12 @@ class MockedUserSearchService extends UserSearchService {
       return deltaDistance <= filter!.distance;
     }).toList();
 
-    response = List.from(response.where(
-          (user) {
-        int userAge = (DateTime
-            .now()
-            .year - user.birthDate.year).abs();
+    response = response.where(
+      (user) {
+        int userAge = (DateTime.now().year - user.birthDate.year).abs();
         return userAge <= filter!.age.max && userAge >= filter.age.min;
       },
-    ));
+    ).toList();
 
     users = response;
     return response;
@@ -123,23 +128,17 @@ class MockedUserSearchService extends UserSearchService {
   @override
   Future<void> initializeFilters(UserProfile profile) async {
     String response =
-    await rootBundle.loadString('assets/mock-data/mock_user_filter.json');
+        await rootBundle.loadString('assets/mock-data/mock_user_filter.json');
     UserFilter filter = userFiltersFromJson(response).firstWhere(
-          (element) => element.userId == profile.id,
+      (element) => element.userId.abs() == profile.id.abs(),
     );
 
-    for (MapEntry element in filter
-        .toJson()
-        .entries) {
+    for (MapEntry element in filter.toJson().entries) {
       if (element.key == 'age') {
-        userSearchFilterForm
-            .control('age')
-            .value =
+        userSearchFilterForm.control('age').value =
             Range.fromJson(element.value);
       } else if (userSearchFilterForm.controls.keys.contains(element.key)) {
-        userSearchFilterForm
-            .control(element.key)
-            .value = element.value;
+        userSearchFilterForm.control(element.key).value = element.value;
       }
     }
   }
