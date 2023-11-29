@@ -115,18 +115,26 @@ class _ChatListViewState extends State<ChatListView> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           color: Theme.of(context).colorScheme.surface,
-          child: ListView(
-            shrinkWrap: false,
-            children: [
-              const Gap(verticalGap: 16.0, horizontalGap: 0),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: _generateQuickChats(context),
-              ),
-              const Gap(verticalGap: 32.0, horizontalGap: 0),
-              ..._generateContacts(context),
-            ],
-          ),
+          child: _chatRoomsSource.isEmpty
+              ? const Center(
+                  child: Text(
+                    'Suddenly this list is empty\n...just yet',
+                    style: TextStyle(fontSize: 32),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              : ListView(
+                  shrinkWrap: false,
+                  children: [
+                    const Gap(verticalGap: 16.0, horizontalGap: 0),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _generateQuickChats(context),
+                    ),
+                    const Gap(verticalGap: 32.0, horizontalGap: 0),
+                    ..._generateContacts(context),
+                  ],
+                ),
         ),
       ),
     );

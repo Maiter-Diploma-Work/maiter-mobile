@@ -27,6 +27,7 @@ class LinkButton extends StatelessWidget {
           ),
         ),
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       onPressed: () => context.go(location),
       child: Row(

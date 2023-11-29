@@ -47,6 +47,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: AmicaTitle(
           text: widget.stepTitle,
           fontStyle: const TextStyle(fontSize: 32),

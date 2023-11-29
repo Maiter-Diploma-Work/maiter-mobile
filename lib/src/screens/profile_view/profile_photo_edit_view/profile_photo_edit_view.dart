@@ -1,18 +1,30 @@
+import 'dart:io';
+
 import 'package:amica/src/models/profiles/user_profile.dart';
 import 'package:amica/src/shared/gap.dart';
-import 'package:amica/src/shared/inputs/amica_button.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:amica/src/shared/inputs/file_picker/amica_file_picker.dart';
+import 'package:amica/src/shared/inputs/file_picker/strategies/PresentationStrategy.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ProfilePhotoEditView extends StatelessWidget {
   final UserProfile userProfile;
+
   const ProfilePhotoEditView({super.key, required this.userProfile});
 
-  List<Widget> photos(BuildContext context) {
-    bool photosExist = userProfile.photos == null;
-    bool photosIsEmpty = (photosExist && userProfile.photos!.isEmpty);
+  Future<Widget> fetchImage(String path) async {
+    try {
+      Uint8List asset = Uint8List.sublistView(await rootBundle.load(path));
+      return Image.memory(asset);
+    } catch (_) {
+      Uint8List file = await File(path).readAsBytes();
+      return Image.memory(file);
+    }
+  }
 
-    if (photosExist || photosIsEmpty) {
+  List<Widget> photos(BuildContext context) {
+    bool photosDoesNotExist = userProfile.photos == null;
+    if (photosDoesNotExist) {
       return List.empty();
     }
 
@@ -20,16 +32,19 @@ class ProfilePhotoEditView extends StatelessWidget {
       userProfile.photos!.map(
         (e) => SizedBox(
           width: (MediaQuery.of(context).size.width * 0.4) - 64,
-          // width: 105,
-          // height: (MediaQuery.of(context).size.height * 0.25),
           child: ClipRRect(
             borderRadius: const BorderRadius.all(
               Radius.circular(18),
             ),
-            //TODO: non-asset photos!
-            child: Image.asset(
-              e,
-            ),
+            //TODO: non-mocked photos!
+            child: Image.asset(e),
+            // child: FutureBuilder(
+            //   future: fetchImage(e),
+            //   builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+            //     if (snapshot.hasData) return snapshot.requireData;
+            //     return Container();
+            //   },
+            // ),
           ),
         ),
       ),
@@ -49,17 +64,10 @@ class ProfilePhotoEditView extends StatelessWidget {
           vertical: 128,
         ),
         children: [
-          AmicaButton(
-            textColor: Theme.of(context).colorScheme.onPrimary,
-            color: Theme.of(context).colorScheme.primary,
-            onPressed: () async {
-              var picked = await FilePicker.platform.pickFiles();
-
-              if (picked != null) {
-                debugPrint(picked.files.first.name);
-              }
-            },
-            text: 'Upload new Photo',
+          AmicaFilePicker(
+            filePickerStrategy: AmicaPresentationFileStrategy(
+              profile: userProfile,
+            ),
           ),
           const Gap(
             verticalGap: 30,

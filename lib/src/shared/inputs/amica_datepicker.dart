@@ -67,6 +67,13 @@ class _AmicaDatepickerState extends State<AmicaDatepicker> {
             textStyle: const TextStyle(
               fontSize: 16,
             ),
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
           ),
           child: Text(date),
         ),

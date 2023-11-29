@@ -40,6 +40,18 @@ class _EventSearchViewState extends State<EventSearchView> {
 
   @override
   Widget build(BuildContext context) {
+    if (_events.isEmpty) {
+      return const Center(
+        child: Text(
+          'There is no events found in the area...',
+          style: TextStyle(
+            fontSize: 32,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+
     LatLng location = LatLng(
       widget.user.location.latitude,
       widget.user.location.longitude,

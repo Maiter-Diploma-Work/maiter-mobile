@@ -43,9 +43,11 @@ class AmicaRoundIconButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
           shape: const CircleBorder(),
-          backgroundColor: fillColor,
-          padding: padding ?? const EdgeInsets.all(8.0),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          alignment: Alignment.center,
+          padding: padding ?? const EdgeInsets.all(0.0),
         ),
         child: icon,
       ),

@@ -134,6 +134,16 @@ class _AmicaLikesViewState extends State<AmicaLikesView> {
 
   @override
   Widget build(BuildContext context) {
+    if (likedUsers.isEmpty) {
+      return const Center(
+        child: Text(
+          'No one liked you...\n just yet sucks :(',
+          style: TextStyle(fontSize: 32),
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Wrap(
