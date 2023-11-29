@@ -87,7 +87,8 @@ Here is some things I could suggest to improve this project further:
   event or by match)
 - [ ] Push notifications
 - [ ] Match notifications
-- [ ] Rework toolbar to look more interesting like one here: https://media.geeksforgeeks.org/wp-content/uploads/20201029125034/HowtoAddaFloatingActionButtontoBottomNavigationBarinAndroid.png
+- [ ] Rework toolbar to look more interesting like one
+  here: https://media.geeksforgeeks.org/wp-content/uploads/20201029125034/HowtoAddaFloatingActionButtontoBottomNavigationBarinAndroid.png
 - [ ] It would be nice to add animations
 - [ ] Of course it is always nice !!to have a backend!! to process data on remote device and not
   bother the client side. This could be done in six months before the deadline, but something went
@@ -97,4 +98,5 @@ Here is some things I could suggest to improve this project further:
 - [ ] A system to pin chats, as were suggested by the Designer
 - [ ] Somehow manage user's social networks, and add them in registration
 - [ ] Somehow manage user images, idk, like upload them, store, and get, delete and so on
+- [ ] State made with Redux pattern. It would be **really useful** addition
 - List is yet to be completed, but I asserted my point
